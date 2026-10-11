@@ -30,7 +30,7 @@ body = (SRC / 'body.html').read_text().replace('{{OWL}}', owl.strip()).replace('
 # 3D-Globus: d3-array und d3-geo (ISC-Lizenz, siehe src/vendor/LICENSE-D3-WORLD-ATLAS.txt) und Landflächen von Natural Earth (gemeinfrei)
 vendor = '\n'.join((SRC / 'vendor' / f).read_text().strip() for f in ('d3-array.min.js', 'd3-geo.min.js'))
 land = 'const LAND=' + (SRC / 'land110.json').read_text().strip() + ';'
-js = '\n'.join([(SRC / 'data.js').read_text(), (SRC / 'ui.js').read_text(), land, (SRC / 'globe.js').read_text(), (SRC / 'mystery.js').read_text()])
+js = '\n'.join([(SRC / 'data.js').read_text(), (SRC / 'ui.js').read_text(), (SRC / 'links.js').read_text(), land, (SRC / 'globe.js').read_text(), (SRC / 'mystery.js').read_text()])
 
 title = '<title>Terra Vergo</title>'
 style = f'<style>\n{fontcss}</style>\n<style>\n{css}\n</style>'
@@ -46,7 +46,7 @@ full = head + f'{title}\n{style}\n</head>\n<body>\n{sprite}\n{body}\n<script>\n{
 print('index.html', len(full) // 1024, 'KB')
 
 # ---------- Begleitheft ----------
-bh_body = (SRC / 'begleitheft_body.html').read_text().replace('{{ELEMENTS}}', (SRC / 'bh_elements.html').read_text())
+bh_body = (SRC / 'begleitheft_body.html').read_text().replace('{{ELEMENTS}}', (SRC / 'bh_elements.html').read_text()).replace('{{LINKS}}', (SRC / 'bh_links.html').read_text())
 bh_sprite = f'<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{pat}{geo_symbol}</defs></svg>'
 bh_css = (SRC / 'bh.css').read_text()
 bh = (head.replace('Terra Vergo: ein kybernetisches Klimaspiel', 'Begleitheft zu Terra Vergo, einem kybernetischen Klimaspiel')

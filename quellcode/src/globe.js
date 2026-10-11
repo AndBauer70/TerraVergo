@@ -34,7 +34,8 @@ function buildGlobe(){
     <radialGradient id="g-shade" cx="40%" cy="34%" r="72%"><stop offset=".55" stop-color="#1B1B2F" stop-opacity="0"/><stop offset="1" stop-color="#1B1B2F" stop-opacity=".2"/></radialGradient>
     <marker id="gk-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1B1B2F"/></marker>
     <marker id="gk-arrow-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E0393B"/></marker>
-    <marker id="gk-arrow-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C2408F"/></marker></defs>
+    <marker id="gk-arrow-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E6FD0"/></marker>
+    <marker id="gk-arrow-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7A8194"/></marker></defs>
     <g id="gstars" aria-hidden="true">${gStars()}</g>
     <circle id="gshadow" fill="#000" opacity=".45"/>
     <circle id="gatmo" class="gatmo" fill="none" tabindex="0" role="button" aria-label="Atmosphäre, global"/>
@@ -43,21 +44,22 @@ function buildGlobe(){
     <g id="glinks"></g><g id="gmarkers"></g>
     <g id="gatmlbl" class="gatmlbl" pointer-events="none"><use href="#i-ATM" width="30" height="30" x="-15" y="-34"/><text class="ml" text-anchor="middle" y="12">Atmosphäre</text><text class="ml" id="gatmv" text-anchor="middle" y="27"></text></g>`;
   const lk=document.getElementById('glinks');
-  for(const [a,b] of LINKS)el('path',{class:'link glink'+(a==='ATM'||b==='ATM'?' alink':''),'data-a':a,'data-b':b},lk);
+  LINKS.forEach(([a,b,,sg],i)=>el('path',{class:'link glink '+LSIGN[sg]+(a==='ATM'||b==='ATM'?' alink':''),'data-i':i,'data-a':a,'data-b':b},lk));
+  GL.ex=makeLinkExtras(svg,lk,document.getElementById('gmarkers'));GL.hits=[...GL.ex.hits.querySelectorAll('.lhit')];
   const g=document.getElementById('gmarkers');
   for(const e of EL){const s=SK[e.sph];
     const mk=el('g',{class:'mk gmk',tabindex:'0',role:'button','aria-label':e.name,'data-k':e.k},g);
-    el('circle',{class:'halo',r:'21'},mk);el('circle',{r:'21',fill:'none',stroke:'#E3E7EE','stroke-width':'5'},mk);
+    el('circle',{class:'pingc',r:'21'},mk);el('circle',{class:'halo',r:'21'},mk);el('circle',{r:'21',fill:'none',stroke:'#E3E7EE','stroke-width':'5'},mk);
     el('circle',{class:'arc',r:'21',transform:'rotate(-90)',pathLength:'100','stroke-dasharray':'0 100'},mk);
     el('circle',{r:'15',fill:s.tint,stroke:'#1B1B2F','stroke-width':'1.5'},mk);
     el('use',{class:'mi',href:'#i-'+e.k,x:-12,y:-12,width:24,height:24},mk);
     const lp=LP[e.lab];txt(mk,lp[0],lp[1],e.short,{class:'ml','text-anchor':lp[2]});el('g',{class:'kippg'},mk);
-    const pick=()=>{selected=e.k;renderMap();renderInfo();renderCards();if(d3.geoDistance(LL[e.k],gcenter())>0.6)centerOn(e.k);};
+    const pick=()=>{selectEl(e.k);if(d3.geoDistance(LL[e.k],gcenter())>0.6)centerOn(e.k);};
     mk.addEventListener('click',pick);mk.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick();}});}
-  const atm=document.getElementById('gatmo');const pickA=()=>{selected='ATM';renderMap();renderInfo();renderCards();};
+  const atm=document.getElementById('gatmo');const pickA=()=>selectEl('ATM');
   atm.addEventListener('click',pickA);atm.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pickA();}});
   // Drehen mit Maus, Stift oder Finger
-  svg.addEventListener('pointerdown',ev=>{if(ev.target.closest('.mk')||ev.target.closest('.gatmo'))return;stopSpin();cancelAnimationFrame(GL.anim);
+  svg.addEventListener('pointerdown',ev=>{if(ev.target.closest('.mk')||ev.target.closest('.gatmo')||ev.target.closest('.lhit'))return;stopSpin();cancelAnimationFrame(GL.anim);
     GL.drag={x:ev.clientX,y:ev.clientY,r:[...GL.rot],id:ev.pointerId};svg.setPointerCapture(ev.pointerId);svg.classList.add('dragging');});
   svg.addEventListener('pointermove',ev=>{const d=GL.drag;if(!d||ev.pointerId!==d.id)return;const k=(180/Math.PI)/GL.R*(GL.W/svg.clientWidth);
     GL.rot=[d.r[0]+(ev.clientX-d.x)*k,clamp(d.r[1]-(ev.clientY-d.y)*k,-89,89),0];queueGlobe();});
@@ -90,7 +92,7 @@ function drawGlobe(){
   document.getElementById('ggrat').setAttribute('d',path(d3.geoGraticule10())||'');
   document.getElementById('gatmlbl').setAttribute('transform',`translate(${cx+R*0.83},${cy-R*0.83-6})`);
   document.getElementById('gatmv').textContent=`${fmt(G.T,2)} °C`;
-  document.getElementById('gatmo').classList.toggle('sel',selected==='ATM');
+  document.getElementById('gatmo').classList.toggle('sel',selected==='ATM'&&LX.sel<0);
 
   const items=[];
   for(const mk of document.querySelectorAll('#gmarkers .mk')){const k=mk.dataset.k;
@@ -99,7 +101,7 @@ function drawGlobe(){
     items.push({x,y,s,t,pref:EK[k].lab,n:t.textContent.length});
     mk.style.display='';mk.setAttribute('transform',`translate(${x.toFixed(1)},${y.toFixed(1)}) scale(${s.toFixed(3)})`);}
   placeLabels(items);
-  for(const l of document.querySelectorAll('#glinks .link')){const a=l.dataset.a,b=l.dataset.b;let d='',end=false;
+  for(const l of document.querySelectorAll('#glinks .link')){const i=+l.dataset.i,a=l.dataset.a,b=l.dataset.b;let d='',end=false;
     if(a==='ATM'||b==='ATM'){ // kurzer Pfeil nach außen zur Lufthülle (bzw. von ihr herein)
       const o=a==='ATM'?b:a;if(gvis(o)){const [x,y]=p(LL[o]);let vx=x-cx,vy=y-cy;const L=Math.hypot(vx,vy);
         if(L<25){vx=0;vy=-1;}else{vx/=L;vy/=L;}
@@ -107,13 +109,14 @@ function drawGlobe(){
         if(len-r0>12){const m=[x+vx*r0,y+vy*r0].map(v=>v.toFixed(1)),q=[x+vx*len,y+vy*len].map(v=>v.toFixed(1));
           d=a==='ATM'?`M${q}L${m}`:`M${m}L${q}`;end=true;}}}
     else if(gvis(a)||gvis(b)){d=path({type:'LineString',coordinates:arcPts(LL[a],LL[b])})||'';end=gvis(b);}
-    l.setAttribute('d',d);const act=linkActive(a,b);
-    if(d&&end)l.setAttribute('marker-end',act?'url(#gk-arrow-r)':l.classList.contains('alink')?'url(#gk-arrow-a)':'url(#gk-arrow)');else l.removeAttribute('marker-end');}
+    l.setAttribute('d',d);if(GL.hits)GL.hits[i].setAttribute('d',d);
+    if(d&&end)l.setAttribute('marker-end',`url(#gk-arrow${arrowSuffix(i)})`);else l.removeAttribute('marker-end');}
+  placeBadges('globe');
 }
 function setView(v){GL.view=v;prefView(v);
   document.getElementById('mapscroll').hidden=v!=='map';document.getElementById('globebox').hidden=v!=='globe';
   for(const b of document.querySelectorAll('#viewtoggle button'))b.setAttribute('aria-pressed',String(b.dataset.view===v));
-  if(v==='globe'){buildGlobe();globeSize();if(G)renderMap();}else stopSpin();}
+  if(v==='globe'){buildGlobe();globeSize();if(G)renderMap();}else{stopSpin();if(G)applyLinks();}}
 function initViewToggle(){
   document.getElementById('viewtoggle').addEventListener('click',ev=>{const b=ev.target.closest('button[data-view]');if(b)setView(b.dataset.view);});
   addEventListener('resize',()=>{if(GL.view==='globe'){globeSize();drawGlobe();}});

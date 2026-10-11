@@ -26,7 +26,7 @@ Idee, Konzept und Spieldesign: Andreas Bauer. Technische Umsetzung mit Unterstü
 
 Der 3D-Globus lässt sich mit Maus, Finger oder Pfeiltasten drehen und per Knopf auf Kontinente, Arktis oder Antarktis ausrichten. Dort sind die Polargebiete ohne die Verzerrung der flachen Karte zu sehen.
 
-Dazu: Fieberkurve mit Thermometer und Folgekosten, 25 Dominoeffekte, Klimafonds mit Einnahmen und Förderprogrammen, Klimaschutz, Naturschutz und Anpassung, ein Comic nach jeder Runde und ein Bereich für Lehrkräfte.
+Dazu: Fieberkurve mit Thermometer und Folgekosten, 46 Wechselwirkungen (verstärkend, bremsend oder unklar, mit Kettenreaktionen und Rückkopplungen), Klimafonds mit Einnahmen und Förderprogrammen, Klimaschutz, Naturschutz und Anpassung, ein Comic nach jeder Runde und ein Bereich für Lehrkräfte.
 
 ## Material
 

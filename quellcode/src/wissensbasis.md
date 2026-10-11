@@ -286,6 +286,64 @@ Für das Spielmodell eignen sich folgende Pfeile. Vorzeichen und Richtung sind i
 | El Niño (Ereignis) → Korallen, Amazonas | Bleiche, Dürre, Feuer | jeder starke El Niño seit 1998 fiel mit globaler Bleiche zusammen | [NOAA](https://www.nesdis.noaa.gov/news/worlds-fourth-mass-coral-bleaching-event-likely-ended-2025) |
 | Boreale Wälder → Atmosphäre | Kohlenstoff gegen Albedo | netto −0,18 °C (Gegenbeispiel) | [AMK22](https://en.wikipedia.org/wiki/Tipping_points_in_the_climate_system) |
 
+### Alle 46 Wechselwirkungen im Spiel (Erweiterung Oktober 2026)
+
+Für die animierte Darstellung auf Weltkarte und 3D-Globus wurde das Netz von 25 auf 46 Wechselwirkungen erweitert, sodass jedes der 24 Elemente mindestens eine Verbindung hat. Vorzeichen und Richtung folgen vor allem dem Netzwerk von Wunderling et al. (2021) und dessen Übersicht ([Wunderling et al. 2021](https://esd.copernicus.org/articles/12/601/2021/); [Wunderling et al. 2024](https://esd.copernicus.org/articles/15/41/2024/)): Grönland → AMOC destabilisierend, AMOC → Grönland stabilisierend (Abkühlung des Nordatlantiks), AMOC → Westantarktis destabilisierend (Erwärmung des Südpolarmeers), Grönland ↔ Westantarktis destabilisierend über den Meeresspiegel, Westantarktis → AMOC und AMOC → Amazonas unklar. Die Übersicht von 2024 ergänzt Meereis → AMOC (destabilisierend, Modellstudien) sowie Meereis → Grönland und Permafrost (regional 0,3–0,5 °C Erwärmung; Küstenerosion 2- bis 4-mal schneller). Der GTPR 2025 beschreibt einen Teufelskreis Permafrost ↔ Meereis und Kaskaden vom Permafrost zu den borealen Wäldern; die AMOC ist an etwa 45 % der über 20 bewerteten Wechselwirkungen beteiligt ([GTPR 2025](https://global-tipping-points.org/earth-system-tipping-points/)). Ein AMOC-Kollaps verschiebt den tropischen Regengürtel nach Süden und schwächt den afrikanischen und den asiatischen Monsun ([WGI SPM C.3.4](https://www.ipcc.ch/report/ar6/wg1/chapter/summary-for-policymakers/)).
+
+Weitere neu belegte Verbindungen: Waldbrände wirken über 30 Jahre auf das Tauen von Permafrost-Torfmooren und erklären in Nordwestkanada etwa 25 % der Ausdehnung von Thermokarst-Mooren ([Gibson et al. 2018](https://www.nature.com/articles/s41467-018-05457-1)). Gebirgsgletscher lieferten 2000–2019 rund 21 % (±3 %) des Meeresspiegelanstiegs, etwa 267 Gt pro Jahr ([Hugonnet et al. 2021](https://www.nature.com/articles/s41586-021-03436-z)). Korallenriffe brechen im Mittel 97 % der Wellenenergie ([Ferrario et al. 2014](https://pubs.usgs.gov/publication/70121533)). Nach Hurrikanen ging die Korallenbedeckung in der Karibik im Folgejahr um bis zu 17 % zurück ([Gardner et al. 2005](https://reefresilience.org/pdf/Gardner_et_al._2005_Ecology.pdf)). In Monteverde (Costa Rica) wurde Nebel seltener, als warme, trockene Phasen, verstärkt durch El Niño, die Wolkenbasis anhoben ([Pounds et al. 1999](https://ideas.repec.org/a/nat/nature/v398y1999i6728d10.1038_19297.html)). Bodenfeuchte-Rückkopplungen verstärken regional Hitzeextreme, und gleichzeitige Hitzewellen und Dürren sind häufiger geworden (**hohes Vertrauen**) ([WGI Kap. 11](https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-11/)). Wechselwirkende Folgen treiben Lebensmittelpreise, und Risiken wandern über Lieferketten und Märkte über Grenzen (**hohes Vertrauen**) ([WGII SPM B.5.1, B.5.3](https://www.ipcc.ch/report/ar6/wg2/chapter/summary-for-policymakers/)).
+
+Von den 46 Verbindungen sind 41 verstärkend, 2 bremsend (AMOC → Grönland, AMOC → Atmosphäre) und 3 unklar (Westantarktis → AMOC, AMOC → Amazonas, boreale Wälder → Atmosphäre). 30 davon rechnet das Spielmodell als Kopplung; die übrigen werden zur Erklärung gezeigt. Die Stärken im Modell sind Größenordnungen, keine Messwerte.
+
+| Von → nach | Wirkung | Mechanismus (wie im Spiel erklärt) | Vertrauen | im Spielmodell | Quelle |
+|---|---|---|---|---|---|
+| Gletscher → Indus-Tal | + verstärkt | Schrumpfende Gletscher liefern im Sommer weniger Wasser für den Indus. | hoch | ja | IPCC AR6 WGII |
+| Gletscher → Meeresspiegel | + verstärkt | Gebirgsgletscher lieferten 2000–2019 rund ein Fünftel des weltweiten Meeresspiegelanstiegs (0,74 mm pro Jahr). | hoch | nein | Hugonnet u. a. 2021 |
+| Grönland → Golfstrom-System | + verstärkt | Süßes Schmelzwasser ist leichter als Salzwasser und bremst das Absinken im Nordatlantik. | mittel | ja | Wunderling u. a. 2021, 2024; IPCC AR6 WGI |
+| Grönland → Meeresspiegel | + verstärkt | Grönland-Eis lässt den Meeresspiegel steigen, an der Nordsee aber nur zu etwa einem Fünftel. | hoch | ja | IPCC AR6 WGI; Slangen 2023 |
+| Grönland → Westantarktis | + verstärkt | Grönlands Schmelzwasser hebt den Meeresspiegel auch vor der Westantarktis. Ihr Eis liegt auf Felsen unter dem Meer und verliert Halt. | mittel | ja | Wunderling u. a. 2021, 2024 |
+| Meereis → Grönland | + verstärkt | Ohne Meereis heizt sich die Arktis stärker auf. Über Grönland wird es regional etwa 0,3–0,5 °C wärmer, das Eis schmilzt schneller. | mittel | ja | Wunderling u. a. 2024; Rantanen u. a. 2022 |
+| Meereis → Permafrost | + verstärkt | Ohne Meereis wird es auch an Land wärmer. Der Permafrost taut schneller, und höhere Wellen tragen Steilküsten 2- bis 4-mal schneller ab. | mittel | ja | Wunderling u. a. 2024 |
+| Meereis → Golfstrom-System | + verstärkt | Warmes, süßes Schmelzwasser aus der Arktis kann nach Süden treiben und das Absinken im Nordatlantik schwächen. | gering | nein | Wunderling u. a. 2024 (Modellstudien) |
+| Westantarktis → Meeresspiegel | + verstärkt | Antarktis-Eis lässt den Meeresspiegel steigen, auch an der Nordsee. | hoch | ja | IPCC AR6 WGI |
+| Westantarktis → Südpolarmeer | + verstärkt | Schmelzwasser der Antarktis bremst die Umwälzung im Südpolarmeer. | mittel | ja | Li u. a. 2023 |
+| Westantarktis → Golfstrom-System | ± unklar | Schmelzwasser aus der Antarktis kann die Umwälzung im Atlantik stärken oder schwächen. Die Forschung ist sich hier noch nicht einig. | gering | nein | Wunderling u. a. 2021, 2024; GTPR 2025 |
+| Great Plains → Sahel | + verstärkt | Missernten in großen Kornkammern wie den Great Plains treiben die Weltmarktpreise für Getreide. Im Sahel wird Essen teurer. | mittel | ja | IPCC AR6 WGII SPM B.5.1 und B.5.3 |
+| Kongo-Torf → Atmosphäre | + verstärkt | Austrocknender Torf zersetzt sich und gibt CO₂ ab. | mittel | ja | Crezee u. a. 2022 |
+| Mittelmeer-Böden → Hitzewellen | + verstärkt | Trockene Böden kühlen nicht mehr durch Verdunstung. Die Sonne heizt die Luft direkt auf, Hitzewellen werden heißer. | mittel | nein | IPCC AR6 WGI Kap. 11 |
+| Permafrost → Atmosphäre | + verstärkt | Tauender Permafrost setzt CO₂ und Methan frei. | hoch | ja | IPCC SROCC; Armstrong McKay u. a. 2022 |
+| Permafrost → Meereis | + verstärkt | Tauender Permafrost heizt die Arktis über zusätzliche Treibhausgase weiter auf. Das Meereis schwindet, der Boden taut weiter: ein Teufelskreis. | gering | nein | GTPR 2025 |
+| Permafrost → Nordwälder | + verstärkt | Tauender Boden sackt ab, vernässt oder trocknet aus. Das schwächt die Nordwälder und macht Brände wahrscheinlicher. | gering | nein | GTPR 2025 |
+| El Niño → Amazonas | + verstärkt | In El-Niño-Jahren bleibt im Amazonas der Regen aus. Dürre und Brände schwächen den Regenwald. | hoch | ja | IPCC AR6; Flores u. a. 2024 |
+| El Niño → Korallen | + verstärkt | Jeder starke El Niño seit 1998 fiel mit einer weltweiten Korallenbleiche zusammen. | hoch | nein | NOAA 2025 |
+| El Niño → Nebelwald | + verstärkt | In El-Niño-Jahren wird es in Costa Rica wärmer und trockener. Die Wolken steigen höher, der Nebelwald bekommt weniger Nebel. | mittel | ja | Pounds u. a. 1999 |
+| El Niño → Monsun-Regen | + verstärkt | El-Niño-Jahre bringen in Indien und Pakistan oft einen schwachen Monsun mit Dürre. Der Regen wird unberechenbarer. | mittel | nein | IPCC AR6 WGI Annex IV |
+| Golfstrom-System → Westafr. Monsun | + verstärkt | Eine schwächere Umwälzströmung verschiebt den tropischen Regengürtel nach Süden und stört den Westafrikanischen Monsun. | mittel | ja | IPCC AR6 WGI SPM C.3.4 |
+| Golfstrom-System → Monsun-Regen | + verstärkt | Bricht die Umwälzströmung ein, wandert der Regengürtel nach Süden. Der Monsun in Asien würde schwächer und unzuverlässiger. | mittel | nein | IPCC AR6 WGI SPM C.3.4 |
+| Golfstrom-System → Nordseeküste | + verstärkt | Eine stark geschwächte Umwälzströmung würde das Meer an Europas Küsten zusätzlich anheben. | mittel | ja | van Westen u. a. 2026 |
+| Golfstrom-System → Grönland | − bremst | Bremst die Umwälzströmung, kommt weniger Wärme in den Norden. Rund um Grönland wird es kühler, das Schmelzen verlangsamt sich. | mittel | ja | Wunderling u. a. 2021, 2024 |
+| Golfstrom-System → Westantarktis | + verstärkt | Wärme, die nicht mehr nach Norden fließt, staut sich im Süden. Das Südpolarmeer wird wärmer und greift das Eis der Westantarktis an. | mittel | ja | Wunderling u. a. 2021, 2024 |
+| Golfstrom-System → Amazonas | ± unklar | Der Regengürtel verschiebt sich nach Süden: Im Norden des Amazonas wird es trockener, im Süden eher feuchter. | gering | nein | Wunderling u. a. 2021; GTPR 2025 |
+| Golfstrom-System → Atmosphäre | − bremst | Ein Kollaps kühlt die Nordhalbkugel. Weltweit dämpft das die Erwärmung etwas (rund −0,5 °C), für Europa wäre er trotzdem dramatisch. | mittel | nein | Armstrong McKay u. a. 2022 |
+| Meeresspiegel → Nordseeküste | + verstärkt | Steigt das Meer, startet jede Sturmflut von einem höheren Wasserstand. Der Deich muss mitwachsen. | hoch | ja | IPCC AR6 WGI; Generalplan Küstenschutz 2020 |
+| Südpolarmeer → Westantarktis | + verstärkt | Ist die Umwälzung schwach, erreicht warmes Wasser die Eisschelfe der Westantarktis. | mittel | ja | Li u. a. 2023 |
+| Südpolarmeer → Atmosphäre | + verstärkt | Eine schwache Umwälzung im Südpolarmeer nimmt weniger CO₂ und Wärme auf. | mittel | ja | Li u. a. 2023; IPCC AR6 WGI |
+| Atmosphäre → Korallen | + verstärkt | Wärmere Luft heizt die Meere auf. Korallen bleichen aus. | hoch | ja | IPCC AR6 WGII; GTPR 2025 |
+| Atmosphäre → Hitzewellen | + verstärkt | Wärmere Luft bringt häufigere und heißere Hitzewellen. | hoch | ja | IPCC AR6 WGI SPM |
+| Atmosphäre → Hitze | + verstärkt | Wärmere Luft bringt mehr gefährlich feuchte Hitze. | hoch | ja | IPCC AR6 WGI; Vecellio u. a. 2022 |
+| Atmosphäre → Nebelwald | + verstärkt | Wärmere Luft hebt die Wolkengrenze an. Nebelwälder trocknen aus. | mittel | ja | Pounds u. a. 1999; IPCC AR6 WGII |
+| Atmosphäre → Wirbelstürme | + verstärkt | Wärmeres Meer und wärmere Luft liefern Energie für stärkere Wirbelstürme. | hoch | ja | IPCC AR6 WGI Kap. 11 |
+| Atmosphäre → Monsun-Regen | + verstärkt | Wärmere Luft hält mehr Wasserdampf: etwa 7 % mehr Starkregen pro Grad. | hoch | ja | IPCC AR6 WGI SPM |
+| Atmosphäre → Great Plains | + verstärkt | Wärmere Luft verdunstet mehr Wasser. Dürren trocknen die Ackerböden aus, der Wind trägt sie ab. | mittel | ja | IPCC AR6 WGI SPM A.3.2 |
+| Hitzewellen → Mittelmeer-Böden | + verstärkt | Hitzewellen trocknen die Böden aus. Hitze und Dürre treten immer öfter gleichzeitig auf. | hoch | nein | IPCC AR6 WGI Kap. 11 |
+| Monsun-Regen → Indus-Tal | + verstärkt | Extremer Monsunregen lässt Flüsse über die Ufer treten, wie 2022 in Pakistan. | mittel | nein | World Weather Attribution 2022 |
+| Westafr. Monsun → Sahel | + verstärkt | Bleibt der Monsunregen aus oder verschiebt er sich, fallen im Sahel Ernten aus. | mittel | ja | IPCC AR6 WGII |
+| Wirbelstürme → Korallen | + verstärkt | Wirbelstürme zerschlagen Riffe. In der Karibik ging die Korallenbedeckung im Jahr nach einem Hurrikan um bis zu 17 % zurück. | hoch | nein | Gardner u. a. 2005 |
+| Amazonas → Atmosphäre | + verstärkt | Ein sterbender Amazonas gibt CO₂ ab, statt es zu speichern. | mittel | ja | Armstrong McKay u. a. 2022; IPCC AR6 WGII |
+| Korallen → Meeresspiegel | + verstärkt | Gesunde Riffe brechen im Mittel 97 % der Wellenenergie. Sterben sie, treffen Fluten und Erosion die Malediven bei steigendem Meer härter. | hoch | nein | Ferrario u. a. 2014 |
+| Nordwälder → Permafrost | + verstärkt | Waldbrände verbrennen die isolierende Moos- und Torfschicht. Der Boden taut danach rund 30 Jahre lang schneller; in Nordwestkanada geht etwa ein Viertel der neuen Tauflächen auf Brände zurück. | mittel | ja | Gibson u. a. 2018 |
+| Nordwälder → Atmosphäre | ± unklar | Brände setzen CO₂ frei (wärmt). Ohne Wald wirft die helle, oft verschneite Landschaft mehr Sonnenlicht zurück (kühlt). Unterm Strich leicht kühlend. | mittel | nein | Armstrong McKay u. a. 2022 |
+
+
 Ein lehrreicher Befund dämpft die Untergangsrhetorik. Die meisten Kipppunkte verstärken die Erwärmung kurzfristig nicht wesentlich, deshalb sei es „not ‚game over‘“ ([Erklärtext zu AMK22](https://climatetippingpoints.info/2022/09/09/climate-tipping-points-reassessment-explainer/)). Permafrost wirkt „stark, aber nicht galoppierend“.
 
 ## Terra Vergo trifft die Temperatur, muss aber 21 Aussagen korrigieren

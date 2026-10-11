@@ -123,66 +123,71 @@ function renderTiles(){
 
 /* ===================== Karte ===================== */
 let selected='ATM';
-function linkActive(a,b){if(a==='ATM'||b==='ATM')return false;const e=EK[a];if(G.tipped[a]&&!(a==='KR'))return true;
-  if(e.type==='level')return G.SL>10;if(e.type==='arctic')return G.T>=1.8;if(e.type==='enso')return ENSO[G.r]===1&&!G.over;if(e.type==='extreme')return G.T>=2;return (G.S[a]||0)>=25;}
 const LP={up:[0,-30,'middle'],down:[0,38,'middle'],left:[-28,5,'end'],right:[28,5,'start']};
+/* Bogen zwischen zwei Punkten der Weltkarte; El-Niño-Fernwirkungen nach Westen über den Kartenrand (ein Pfad mit zwei Teilen) */
+function mapLinkPath(a,b){
+  const [x1,y1]=MAPPTS[a],[x2,y2]=MAPPTS[b];
+  if(a==='NI'&&b==='KR')return `M${x1-24},${y1+8} Q${(x1+14)/2},${y1+40} 14,${y1+30} M986,${y1+30} Q${(986+x2)/2},${y2+30} ${x2+27},${y2+6}`;
+  if(a==='NI'&&b==='IM')return `M${x1-22},${y1-10} Q${(x1+14)/2},${y1-32} 14,${y1-24} M986,${y1-24} Q${(986+x2)/2},${(y1+y2)/2-36} ${x2+26},${y2+9}`;
+  const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy);const ux=dx/len,uy=dy/len;
+  const ra=a==='ATM'?30:24,rb=b==='ATM'?34:28;
+  const sx=x1+ux*ra,sy=y1+uy*ra,ex=x2-ux*rb,ey=y2-uy*rb;const bend=len>300?.12:.2;const mx=(sx+ex)/2-uy*len*bend,my=(sy+ey)/2+ux*len*bend;
+  return `M${sx.toFixed(1)},${sy.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}`;
+}
 function buildMap(){
   const map=document.getElementById('map');
   const defs=el('defs',{},map);
-  for(const [id,c] of [['mk-arrow','#1B1B2F'],['mk-arrow-r','#E0393B']]){const m=el('marker',{id,viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'5',markerHeight:'5',orient:'auto-start-reverse'},defs);el('path',{d:'M0,0 L10,5 L0,10 z',fill:c},m);}
+  for(const [id,c] of [['mk-arrow','#1B1B2F'],['mk-arrow-r','#E0393B'],['mk-arrow-b','#1E6FD0'],['mk-arrow-g','#7A8194']]){const m=el('marker',{id,viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'5',markerHeight:'5',orient:'auto-start-reverse'},defs);el('path',{d:'M0,0 L10,5 L0,10 z',fill:c},m);}
   const lk=document.getElementById('links');
-  for(const [a,b] of LINKS){
-    if(a==='NI'&&b==='KR'){ // über den Pazifik nach Westen, über den Kartenrand hinweg
-      const [x1,y1]=MAPPTS.NI,[x2,y2]=MAPPTS.KR;
-      el('path',{class:'link','data-a':a,'data-b':b,d:`M${x1-24},${y1+8} Q${(x1+14)/2},${y1+40} 14,${y1+30}`},lk);
-      el('path',{class:'link','data-a':a,'data-b':b,d:`M986,${y1+30} Q${(986+x2)/2},${y2+30} ${x2+27},${y2+6}`,'marker-end':'url(#mk-arrow)'},lk);
-      continue;}
-    const [x1,y1]=MAPPTS[a],[x2,y2]=MAPPTS[b];const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy);const ux=dx/len,uy=dy/len;
-    const ra=a==='ATM'?30:24,rb=b==='ATM'?34:28;
-    const sx=x1+ux*ra,sy=y1+uy*ra,ex=x2-ux*rb,ey=y2-uy*rb;const bend=len>300?.12:.2;const mx=(sx+ex)/2-uy*len*bend,my=(sy+ey)/2+ux*len*bend;
-    el('path',{class:'link','data-a':a,'data-b':b,d:`M${sx},${sy} Q${mx},${my} ${ex},${ey}`,'marker-end':'url(#mk-arrow)'},lk);}
+  LINKS.forEach(([a,b,,sg],i)=>{const d=mapLinkPath(a,b);const atm=a==='ATM'||b==='ATM';
+    el('path',{class:'link '+LSIGN[sg]+(atm?' alink':''),'data-i':i,'data-a':a,'data-b':b,d,'marker-end':'url(#mk-arrow)'},lk);});
+  const ex=makeLinkExtras(map,lk,document.getElementById('markers'));
+  for(const h of ex.hits.querySelectorAll('.lhit'))h.setAttribute('d',lk.querySelector(`path[data-i="${h.dataset.i}"]`).getAttribute('d'));
   const g=document.getElementById('markers');
-  const pickers=(mk,k)=>{const pick=()=>{selected=k;renderMap();renderInfo();renderCards();};mk.addEventListener('click',pick);mk.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick();}});};
+  const pickers=(mk,k)=>{const pick=()=>selectEl(k);mk.addEventListener('click',pick);mk.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick();}});};
   {const [x,y]=MAPPTS.ATM;const mk=el('g',{class:'mk hub',transform:`translate(${x},${y})`,tabindex:'0',role:'button','aria-label':'Atmosphäre, global','data-k':'ATM'},g);
-   el('circle',{class:'halo',r:'28'},mk);el('use',{href:'#i-ATM',x:-22,y:-22,width:44,height:44},mk);
+   el('circle',{class:'pingc',r:'28'},mk);el('circle',{class:'halo',r:'28'},mk);el('use',{href:'#i-ATM',x:-22,y:-22,width:44,height:44},mk);
    txt(mk,0,-36,'Atmosphäre',{class:'ml','text-anchor':'middle'});txt(mk,0,46,'',{class:'ml hubv','text-anchor':'middle'});pickers(mk,'ATM');}
   for(const e of EL){const [x,y]=MAPPTS[e.k];const s=SK[e.sph];
     const mk=el('g',{class:'mk',transform:`translate(${x},${y})`,tabindex:'0',role:'button','aria-label':e.name,'data-k':e.k},g);
-    el('circle',{class:'halo',r:'21'},mk);
+    el('circle',{class:'pingc',r:'21'},mk);el('circle',{class:'halo',r:'21'},mk);
     el('circle',{r:'21',fill:'none',stroke:'#E3E7EE','stroke-width':'5'},mk);
     el('circle',{class:'arc',r:'21',transform:'rotate(-90)',pathLength:'100','stroke-dasharray':'0 100'},mk);
     el('circle',{r:'15',fill:s.tint,stroke:'#1B1B2F','stroke-width':'1.5'},mk);
     el('use',{class:'mi',href:'#i-'+e.k,x:-12,y:-12,width:24,height:24},mk);
     const lp=LP[e.lab];txt(mk,lp[0],lp[1],e.short,{class:'ml','text-anchor':lp[2]});
     el('g',{class:'kippg'},mk);pickers(mk,e.k);}
-  document.getElementById('maplegend').innerHTML=SPH.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('')+
-    `<span><b class="dash"></b>aktiver Dominoeffekt</span><label class="switch"><input type="checkbox" id="showlinks"> Alle Dominoeffekte zeigen</label>`;
-  document.getElementById('showlinks').addEventListener('change',e=>{for(const id of ['map','globe'])document.getElementById(id).classList.toggle('showlinks',e.target.checked);});
+  const key=(cls,label,extra='')=>`<span class="lkey"><svg width="38" height="12" aria-hidden="true"><line x1="2" y1="6" x2="36" y2="6" class="k ${cls}"/>${extra}</svg>${label}</span>`;
+  document.getElementById('maplegend').innerHTML=`<div class="lrow">${SPH.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('')}</div>
+    <div class="lrow lkeys"><b>Wechselwirkungen:</b>${key('pos','+ verstärkt')}${key('neg','− bremst')}${key('amb','± unklar')}${key('act','wirkt gerade','<circle cx="22" cy="6" r="3.4" class="p-act"/>')}${key('cas','Kettenreaktion')}
+    <label class="switch"><input type="checkbox" id="showlinks"> Alle ${LINKS.length} Wechselwirkungen zeigen</label></div>
+    <div class="sm muted lhint">Tippt auf eine Linie, um die Wechselwirkung zu erklären. Die Punkte laufen von der Ursache zur Wirkung.</div>`;
+  document.getElementById('showlinks').addEventListener('change',e=>{for(const id of ['map','globe'])document.getElementById(id).classList.toggle('showlinks',e.target.checked);applyLinks();});
 }
 function renderMap(){
   for(const mk of document.querySelectorAll('.mk:not(.hub)')){const k=mk.dataset.k;const s=elState(k);
     const a=mk.querySelector('.arc');a.setAttribute('stroke-dasharray',`${s.p} 100`);a.setAttribute('stroke',STCOL[s.st]);
-    mk.classList.toggle('tipped',s.st==='tip');mk.classList.toggle('danger',s.st==='bad'&&EK[k].type!=='extreme');mk.classList.toggle('sel',selected===k);
+    mk.classList.toggle('tipped',s.st==='tip');mk.classList.toggle('danger',s.st==='bad'&&EK[k].type!=='extreme');mk.classList.toggle('sel',LX.sel<0?selected===k:(LINKS[LX.sel][0]===k||LINKS[LX.sel][1]===k));
     const kg=mk.querySelector('.kippg');kg.innerHTML='';
     if(s.st==='tip'){el('polygon',{points:star(16,-18,15,9,10),fill:'#E0393B',stroke:'#1B1B2F','stroke-width':'2'},kg);txt(kg,16,-13,'KIPP!',{class:'kipp','text-anchor':'middle',fill:'#fff'});}
   }
-  for(const l of document.querySelectorAll('.link')){const act=linkActive(l.dataset.a,l.dataset.b);
-    l.classList.toggle('on',l.dataset.a===selected||l.dataset.b===selected||act);l.classList.toggle('act',act);
-    if(!l.classList.contains('glink')&&l.hasAttribute('marker-end'))l.setAttribute('marker-end',act?'url(#mk-arrow-r)':'url(#mk-arrow)');}
   const hv=document.querySelector('.hubv');if(hv)hv.textContent=`${fmt(G.T,2)} °C`;
-  document.querySelector('.mk.hub')?.classList.toggle('sel',selected==='ATM');
-  if(typeof drawGlobe==='function')drawGlobe();
+  document.querySelector('.mk.hub')?.classList.toggle('sel',selected==='ATM'&&LX.sel<0);
+  applyLinks();
 }
 function renderInfo(){
   const box=document.getElementById('info');
+  if(LX.sel>=0){renderLinkInfo(box);return;}
+  const chip=(i,o)=>{const l=LINKS[i];return `<button type="button" class="fxchip lkchip ${srcActive(l[0])&&l[3]===1?'b':''}" data-li="${i}" title="${l[2]}"><span class="sg ${LSIGN[l[3]]}">${SIGNSYM[l[3]]}</span>${ic('i-'+o)}${EK[o].short}</button>`;};
   if(selected==='ATM'){
-    const inn=LINKS.filter(l=>l[1]==='ATM'),out=LINKS.filter(l=>l[0]==='ATM');
+    const inn=LINKS.map((l,i)=>[l,i]).filter(([l])=>l[1]==='ATM'),out=LINKS.map((l,i)=>[l,i]).filter(([l])=>l[0]==='ATM');
     box.innerHTML=`<div class="ih"><div class="ic" style="background:${SK.atmo.tint}">${ic('i-ATM')}</div><div><h3>Atmosphäre (global)</h3><div class="place">verbindet alle Sphären</div></div></div>
       <div>Die Luft verteilt die Wärme über den ganzen Planeten. Jede Tonne CO₂ macht sie wärmer, egal wo sie ausgestoßen wird: Pro 1.000 Gt CO₂ wird es etwa 0,5 °C wärmer. Einige Kipp-Elemente geben selbst CO₂ ab und heizen die Atmosphäre zusätzlich auf.</div>
       <dl class="facts"><dt>Jetzt</dt><dd>${fmt(G.T,2)} °C über 1850–1900</dd><dt>Ausstoß</dt><dd>${fmt(G.E,0)} Gt CO₂ pro Jahr</dd><dt>CO₂ in der Luft</dt><dd>2025: rund 426 ppm, über 50 % mehr als vor der Industrialisierung</dd></dl>
-      <div><b class="sm">Heizen die Atmosphäre zusätzlich auf:</b><div class="fx">${inn.map(l=>`<span class="fxchip ${(G.tipped[l[0]]||(G.S[l[0]]||0)>=25)?'b':''}" title="${l[2]}">${ic('i-'+l[0])}${EK[l[0]].short}</span>`).join(' ')}</div></div>
-      <div><b class="sm">Trifft besonders schnell:</b><div class="fx">${out.map(l=>`<span class="fxchip" title="${l[2]}">${ic('i-'+l[1])}${EK[l[1]].short}</span>`).join(' ')}</div></div>
-      <div class="sm muted">Tippt auf einen Punkt der Karte, um mehr über ihn zu erfahren.</div>`;
+      <div><b class="sm">Wirken auf die Atmosphäre zurück:</b><div class="fx">${inn.map(([l,i])=>chip(i,l[0])).join(' ')}</div></div>
+      <div><b class="sm">Trifft besonders schnell:</b><div class="fx">${out.map(([l,i])=>chip(i,l[1])).join(' ')}</div></div>
+      <div class="sm muted">Die Erwärmung erreicht alle Elemente; die Pfeile zeigen, wo sie am direktesten wirkt. + verstärkt, − bremst, ± unklar. Tippt auf ein Kästchen für die Erklärung.</div>
+      ${cascadeHtml('ATM')}`;
     return;}
   const e=EK[selected],s=elState(selected),sp=SK[e.sph];
   let facts=`<dt>Sphäre</dt><dd>${sp.name} (${sp.sub})</dd>`,barL='Kipp-Druck';
@@ -192,16 +197,15 @@ function renderInfo(){
   else if(e.type==='arctic'){barL='Eisverlust';facts+=`<dt>Kipppunkt?</dt><dd>${e.range}</dd><dt>Eisfreier September</dt><dd>wahrscheinlich mindestens einmal vor 2050, in jedem Szenario; je wärmer, desto häufiger (IPCC AR6). Bei 2 °C etwa einmal pro Jahrzehnt (IPCC 2018).</dd>`;}
   else if(e.type==='enso'){barL='Zustand';const nn=nextNino();facts+=`<dt>Kipppunkt?</dt><dd>${e.range}</dd><dt>Nächster El Niño</dt><dd>${nn?nn+' (Spielannahme)':'bis 2075 keiner mehr angesagt'}</dd>`;}
   else if(e.type==='extreme'){barL='Stärke der Extreme';const x=s.x;facts+=e.k==='TS'?`<dt>${x.lbl}</dt><dd>${x.txt} als 1850–1900, dazu mehr Regen</dd><dt>Kipppunkt?</dt><dd>${e.range}</dd>`:`<dt>${x.lbl}</dt><dd>${x.txt} wie 1850–1900, ${x.inl}</dd><dt>Kipppunkt?</dt><dd>${e.range}</dd>`;}
-  const outL=LINKS.filter(l=>l[0]===e.k),inL=LINKS.filter(l=>l[1]===e.k);
-  const lk=l=>`<div class="lk">${ic('i-'+l)}`;
-  const links=outL.map(l=>`${lk(l[1])}<span><b>${EK[l[1]].short}:</b> ${l[2]}</span></div>`).join('');
-  const from=inL.map(l=>`${lk(l[0])}<span><b>${EK[l[0]].short}:</b> ${l[2]}</span></div>`).join('');
+  const outL=[],inL=[];LINKS.forEach((l,i)=>{if(l[0]===e.k)outL.push(i);if(l[1]===e.k)inL.push(i);});
   box.innerHTML=`<div class="ih"><div class="ic" style="background:${sp.tint}">${ic('i-'+e.k)}</div><div><h3>${e.name}</h3><div class="place">📍 ${e.place}</div></div></div>
     <div><div class="pbh"><span>${barL}</span><span class="chip ${s.st}">${s.lbl}</span></div>
     <div class="pbar"><b style="width:${s.p}%;background:${STCOL[s.st]}"></b></div></div>
     <div>${e.why}</div><dl class="facts">${facts}</dl>
-    ${links?`<div><b class="sm">Dominoeffekt auf:</b>${links}</div>`:''}
-    ${from?`<div><b class="sm">Wird angestoßen von:</b>${from}</div>`:''}
+    ${cascadeHtml(e.k)}
+    ${loopsHtml(e.k)}
+    ${outL.length?`<div><b class="sm">Wirkt auf (Dominoeffekt):</b>${outL.map(i=>lkButton(i,'out')).join('')}</div>`:''}
+    ${inL.length?`<div><b class="sm">Wird beeinflusst von:</b>${inL.map(i=>lkButton(i,'in')).join('')}</div>`:''}
     <div class="src">Quelle: ${e.src}</div>`;
 }
 
@@ -211,7 +215,7 @@ function buildCards(){
   document.getElementById('spheres').innerHTML=SPH.map(s=>`<section class="sph" aria-label="${s.name}"><div class="sphhead ${s.light?'':'dark'}" style="background:${s.color}"><h3>${s.name}</h3><span>${s.sub}</span></div><div class="cards">${
     EL.filter(e=>e.sph===s.k).map(e=>`<button class="ecard" id="card-${e.k}" data-k="${e.k}" title="${e.name}" aria-label="${e.name}"><div class="row"><div class="ic" style="background:${s.tint}">${ic('i-'+e.k)}</div><div><div class="nm">${SHY[e.k]||e.short}</div><div class="pl">${e.place}</div></div></div>
       <div class="st"><span class="lab"></span><span class="chip"></span></div><div class="pbar"><b></b></div></button>`).join('')}</div></section>`).join('');
-  document.getElementById('spheres').addEventListener('click',ev=>{const c=ev.target.closest('.ecard');if(!c)return;selected=c.dataset.k;renderMap();renderInfo();renderCards();
+  document.getElementById('spheres').addEventListener('click',ev=>{const c=ev.target.closest('.ecard');if(!c)return;selectEl(c.dataset.k);
     document.getElementById('maph').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
     if(GL.view==='globe')centerOn(selected);});
 }
@@ -401,12 +405,13 @@ function endRound(){
   G.invHist.push(inv);G.prev=inv;G.last=res;G.inv={...NOINV,co2:inv.co2,kg:inv.kg,fs:inv.fs,ee:inv.ee,bau:inv.bau};trim();
   if(G.r>=ROUNDS)G.over=true;
   if(res.newly[0])selected=res.newly[0];
+  LX.sel=-1;stopCascade();
   render();if(res.newly[0]&&GL.view==='globe')centerOn(selected);showComic(res,inv);
 }
-function restart(){G=initState();selected='ATM';render();window.scrollTo(0,0);}
+function restart(){G=initState();selected='ATM';LX.sel=-1;stopCascade();render();window.scrollTo(0,0);}
 let gameBuilt=false;
 function buildGame(){if(gameBuilt)return;gameBuilt=true;
-  buildMap();buildCards();buildPult();renderFolgen();initViewToggle();
+  buildMap();buildCards();buildPult();renderFolgen();initViewToggle();initInfoClicks();initLinkObservers();
   document.getElementById('go').addEventListener('click',endRound);
   document.getElementById('restart').addEventListener('click',restart);
   document.getElementById('verdict').addEventListener('click',e=>{if(e.target.closest('[data-restart]'))restart();});

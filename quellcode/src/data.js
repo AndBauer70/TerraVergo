@@ -73,32 +73,55 @@ EK.ATM={k:'ATM',sph:'atmo',name:'Atmosphäre (global)',short:'Atmosphäre'};
 const TIPK=EL.filter(e=>e.type==='tip').map(e=>e.k);
 const HUMK=EL.filter(e=>e.type==='human').map(e=>e.k);
 // Dominoeffekte: [von, nach, Erklärung]
+/* Wechselwirkungen: [von, nach, Erklärung, Vorzeichen (1 verstärkt, -1 bremst, 0 unklar/beides), Vertrauen, Quelle, im Spielmodell gerechnet (1/0)]
+   „verstärkt“ heißt: erhöht den Kipp-Druck bzw. das Risiko beim Ziel. ATM = Atmosphäre (globale Erwärmung). */
 const LINKS=[
- ['AS','GR','Ohne Meereis heizt sich die Arktis stärker auf. Grönland schmilzt schneller.'],
- ['AS','PF','Ohne Meereis wird es auch an Land wärmer. Der Permafrost taut schneller.'],
- ['GR','AM','Süßes Schmelzwasser ist leichter als Salzwasser und bremst das Absinken im Nordatlantik.'],
- ['GR','MS','Grönland-Eis lässt den Meeresspiegel steigen, an der Nordsee aber nur zu etwa einem Fünftel.'],
- ['WA','MS','Antarktis-Eis lässt den Meeresspiegel steigen, auch an der Nordsee.'],
- ['WA','SO','Schmelzwasser der Antarktis bremst die Umwälzung im Südpolarmeer.'],
- ['SO','WA','Ist die Umwälzung schwach, erreicht warmes Wasser die Eisschelfe der Westantarktis.'],
- ['NI','AZ','In El-Niño-Jahren bleibt im Amazonas der Regen aus. Dürre und Brände schwächen den Regenwald.'],
- ['NI','KR','Jeder starke El Niño seit 1998 fiel mit einer weltweiten Korallenbleiche zusammen.'],
- ['AM','WM','Eine schwächere Umwälzströmung verschiebt den tropischen Regengürtel nach Süden und stört den Westafrikanischen Monsun.'],
- ['WM','ER','Bleibt der Monsunregen aus oder verschiebt er sich, fallen im Sahel Ernten aus.'],
- ['GL','SA','Schrumpfende Gletscher liefern im Sommer weniger Wasser für den Indus.'],
- ['IM','SA','Extremer Monsunregen lässt Flüsse über die Ufer treten, wie 2022 in Pakistan.'],
- ['MS','NK','Steigt das Meer, startet jede Sturmflut von einem höheren Wasserstand. Der Deich muss mitwachsen.'],
- ['AM','NK','Eine stark geschwächte Umwälzströmung würde das Meer an Europas Küsten zusätzlich anheben.'],
- ['PF','ATM','Tauender Permafrost setzt CO₂ und Methan frei.'],
- ['AZ','ATM','Ein sterbender Amazonas gibt CO₂ ab, statt es zu speichern.'],
- ['KT','ATM','Austrocknender Torf zersetzt sich und gibt CO₂ ab.'],
- ['SO','ATM','Eine schwache Umwälzung im Südpolarmeer nimmt weniger CO₂ und Wärme auf.'],
- ['ATM','KR','Wärmere Luft heizt die Meere auf. Korallen bleichen aus.'],
- ['ATM','HW','Wärmere Luft bringt häufigere und heißere Hitzewellen.'],
- ['ATM','HI','Wärmere Luft bringt mehr gefährlich feuchte Hitze.'],
- ['ATM','NW','Wärmere Luft hebt die Wolkengrenze an. Nebelwälder trocknen aus.'],
- ['ATM','TS','Wärmeres Meer und wärmere Luft liefern Energie für stärkere Wirbelstürme.'],
- ['ATM','IM','Wärmere Luft hält mehr Wasserdampf: etwa 7 % mehr Starkregen pro Grad.'],
+ ['AS','GR','Ohne Meereis heizt sich die Arktis stärker auf. Über Grönland wird es regional etwa 0,3–0,5 °C wärmer, das Eis schmilzt schneller.',1,'mittel','Wunderling u. a. 2024; Rantanen u. a. 2022',1],
+ ['AS','PF','Ohne Meereis wird es auch an Land wärmer. Der Permafrost taut schneller, und höhere Wellen tragen Steilküsten 2- bis 4-mal schneller ab.',1,'mittel','Wunderling u. a. 2024',1],
+ ['AS','AM','Warmes, süßes Schmelzwasser aus der Arktis kann nach Süden treiben und das Absinken im Nordatlantik schwächen.',1,'gering','Wunderling u. a. 2024 (Modellstudien)',0],
+ ['GR','AM','Süßes Schmelzwasser ist leichter als Salzwasser und bremst das Absinken im Nordatlantik.',1,'mittel','Wunderling u. a. 2021, 2024; IPCC AR6 WGI',1],
+ ['GR','MS','Grönland-Eis lässt den Meeresspiegel steigen, an der Nordsee aber nur zu etwa einem Fünftel.',1,'hoch','IPCC AR6 WGI; Slangen 2023',1],
+ ['GR','WA','Grönlands Schmelzwasser hebt den Meeresspiegel auch vor der Westantarktis. Ihr Eis liegt auf Felsen unter dem Meer und verliert Halt.',1,'mittel','Wunderling u. a. 2021, 2024',1],
+ ['WA','MS','Antarktis-Eis lässt den Meeresspiegel steigen, auch an der Nordsee.',1,'hoch','IPCC AR6 WGI',1],
+ ['WA','SO','Schmelzwasser der Antarktis bremst die Umwälzung im Südpolarmeer.',1,'mittel','Li u. a. 2023',1],
+ ['WA','AM','Schmelzwasser aus der Antarktis kann die Umwälzung im Atlantik stärken oder schwächen. Die Forschung ist sich hier noch nicht einig.',0,'gering','Wunderling u. a. 2021, 2024; GTPR 2025',0],
+ ['SO','WA','Ist die Umwälzung schwach, erreicht warmes Wasser die Eisschelfe der Westantarktis.',1,'mittel','Li u. a. 2023',1],
+ ['SO','ATM','Eine schwache Umwälzung im Südpolarmeer nimmt weniger CO₂ und Wärme auf.',1,'mittel','Li u. a. 2023; IPCC AR6 WGI',1],
+ ['GL','SA','Schrumpfende Gletscher liefern im Sommer weniger Wasser für den Indus.',1,'hoch','IPCC AR6 WGII',1],
+ ['GL','MS','Gebirgsgletscher lieferten 2000–2019 rund ein Fünftel des weltweiten Meeresspiegelanstiegs (0,74 mm pro Jahr).',1,'hoch','Hugonnet u. a. 2021',0],
+ ['PF','ATM','Tauender Permafrost setzt CO₂ und Methan frei.',1,'hoch','IPCC SROCC; Armstrong McKay u. a. 2022',1],
+ ['PF','AS','Tauender Permafrost heizt die Arktis über zusätzliche Treibhausgase weiter auf. Das Meereis schwindet, der Boden taut weiter: ein Teufelskreis.',1,'gering','GTPR 2025',0],
+ ['PF','BW','Tauender Boden sackt ab, vernässt oder trocknet aus. Das schwächt die Nordwälder und macht Brände wahrscheinlicher.',1,'gering','GTPR 2025',0],
+ ['KT','ATM','Austrocknender Torf zersetzt sich und gibt CO₂ ab.',1,'mittel','Crezee u. a. 2022',1],
+ ['BD','HW','Trockene Böden kühlen nicht mehr durch Verdunstung. Die Sonne heizt die Luft direkt auf, Hitzewellen werden heißer.',1,'mittel','IPCC AR6 WGI Kap. 11',0],
+ ['GP','ER','Missernten in großen Kornkammern wie den Great Plains treiben die Weltmarktpreise für Getreide. Im Sahel wird Essen teurer.',1,'mittel','IPCC AR6 WGII SPM B.5.1 und B.5.3',1],
+ ['AM','WM','Eine schwächere Umwälzströmung verschiebt den tropischen Regengürtel nach Süden und stört den Westafrikanischen Monsun.',1,'mittel','IPCC AR6 WGI SPM C.3.4',1],
+ ['AM','IM','Bricht die Umwälzströmung ein, wandert der Regengürtel nach Süden. Der Monsun in Asien würde schwächer und unzuverlässiger.',1,'mittel','IPCC AR6 WGI SPM C.3.4',0],
+ ['AM','NK','Eine stark geschwächte Umwälzströmung würde das Meer an Europas Küsten zusätzlich anheben.',1,'mittel','van Westen u. a. 2026',1],
+ ['AM','GR','Bremst die Umwälzströmung, kommt weniger Wärme in den Norden. Rund um Grönland wird es kühler, das Schmelzen verlangsamt sich.',-1,'mittel','Wunderling u. a. 2021, 2024',1],
+ ['AM','WA','Wärme, die nicht mehr nach Norden fließt, staut sich im Süden. Das Südpolarmeer wird wärmer und greift das Eis der Westantarktis an.',1,'mittel','Wunderling u. a. 2021, 2024',1],
+ ['AM','AZ','Der Regengürtel verschiebt sich nach Süden: Im Norden des Amazonas wird es trockener, im Süden eher feuchter.',0,'gering','Wunderling u. a. 2021; GTPR 2025',0],
+ ['AM','ATM','Ein Kollaps kühlt die Nordhalbkugel. Weltweit dämpft das die Erwärmung etwas (rund −0,5 °C), für Europa wäre er trotzdem dramatisch.',-1,'mittel','Armstrong McKay u. a. 2022',0],
+ ['MS','NK','Steigt das Meer, startet jede Sturmflut von einem höheren Wasserstand. Der Deich muss mitwachsen.',1,'hoch','IPCC AR6 WGI; Generalplan Küstenschutz 2020',1],
+ ['NI','AZ','In El-Niño-Jahren bleibt im Amazonas der Regen aus. Dürre und Brände schwächen den Regenwald.',1,'hoch','IPCC AR6; Flores u. a. 2024',1],
+ ['NI','KR','Jeder starke El Niño seit 1998 fiel mit einer weltweiten Korallenbleiche zusammen.',1,'hoch','NOAA 2025',0],
+ ['NI','NW','In El-Niño-Jahren wird es in Costa Rica wärmer und trockener. Die Wolken steigen höher, der Nebelwald bekommt weniger Nebel.',1,'mittel','Pounds u. a. 1999',1],
+ ['NI','IM','El-Niño-Jahre bringen in Indien und Pakistan oft einen schwachen Monsun mit Dürre. Der Regen wird unberechenbarer.',1,'mittel','IPCC AR6 WGI Annex IV',0],
+ ['ATM','KR','Wärmere Luft heizt die Meere auf. Korallen bleichen aus.',1,'hoch','IPCC AR6 WGII; GTPR 2025',1],
+ ['ATM','HW','Wärmere Luft bringt häufigere und heißere Hitzewellen.',1,'hoch','IPCC AR6 WGI SPM',1],
+ ['ATM','HI','Wärmere Luft bringt mehr gefährlich feuchte Hitze.',1,'hoch','IPCC AR6 WGI; Vecellio u. a. 2022',1],
+ ['ATM','NW','Wärmere Luft hebt die Wolkengrenze an. Nebelwälder trocknen aus.',1,'mittel','Pounds u. a. 1999; IPCC AR6 WGII',1],
+ ['ATM','TS','Wärmeres Meer und wärmere Luft liefern Energie für stärkere Wirbelstürme.',1,'hoch','IPCC AR6 WGI Kap. 11',1],
+ ['ATM','IM','Wärmere Luft hält mehr Wasserdampf: etwa 7 % mehr Starkregen pro Grad.',1,'hoch','IPCC AR6 WGI SPM',1],
+ ['ATM','GP','Wärmere Luft verdunstet mehr Wasser. Dürren trocknen die Ackerböden aus, der Wind trägt sie ab.',1,'mittel','IPCC AR6 WGI SPM A.3.2',1],
+ ['HW','BD','Hitzewellen trocknen die Böden aus. Hitze und Dürre treten immer öfter gleichzeitig auf.',1,'hoch','IPCC AR6 WGI Kap. 11',0],
+ ['IM','SA','Extremer Monsunregen lässt Flüsse über die Ufer treten, wie 2022 in Pakistan.',1,'mittel','World Weather Attribution 2022',0],
+ ['TS','KR','Wirbelstürme zerschlagen Riffe. In der Karibik ging die Korallenbedeckung im Jahr nach einem Hurrikan um bis zu 17 % zurück.',1,'hoch','Gardner u. a. 2005',0],
+ ['WM','ER','Bleibt der Monsunregen aus oder verschiebt er sich, fallen im Sahel Ernten aus.',1,'mittel','IPCC AR6 WGII',1],
+ ['AZ','ATM','Ein sterbender Amazonas gibt CO₂ ab, statt es zu speichern.',1,'mittel','Armstrong McKay u. a. 2022; IPCC AR6 WGII',1],
+ ['BW','PF','Waldbrände verbrennen die isolierende Moos- und Torfschicht. Der Boden taut danach rund 30 Jahre lang schneller; in Nordwestkanada geht etwa ein Viertel der neuen Tauflächen auf Brände zurück.',1,'mittel','Gibson u. a. 2018',1],
+ ['BW','ATM','Brände setzen CO₂ frei (wärmt). Ohne Wald wirft die helle, oft verschneite Landschaft mehr Sonnenlicht zurück (kühlt). Unterm Strich leicht kühlend.',0,'mittel','Armstrong McKay u. a. 2022',0],
+ ['KR','MS','Gesunde Riffe brechen im Mittel 97 % der Wellenenergie. Sterben sie, treffen Fluten und Erosion die Malediven bei steigendem Meer härter.',1,'hoch','Ferrario u. a. 2014',0],
 ];
 const LEVERS=[
  {k:'VE',grp:'Klimaschutz',col:'var(--hydro)',icon:'i-VE',name:'Verkehr & Industrie',hint:'Bahn, Busse, E-Autos und grüner Stahl. Verkehr und Industrie verursachen zusammen rund 39 % der direkten Emissionen. Jede Münze senkt den Ausstoß dauerhaft um etwa 2,5 %.',fx:[['co2','▼',1]]},
@@ -148,17 +171,19 @@ function effTc(k,st){
   let t=EK[k].Tc;const nino=ENSO[st.r]===1;
   if(k==='AZ'){t=Math.max(1.5,t-0.225*(st.D-17))+st.forest;if(nino)t-=0.2;}
   if(k==='KT')t+=Math.min(0.3,0.04*st.wet);
-  if(k==='AM')t-=0.004*st.S.GR;
+  if(k==='AM')t-=0.004*st.S.GR;                         // Grönland-Schmelzwasser schwächt die AMOC
+  if(k==='GR')t+=0.002*st.S.AM;                         // schwächere AMOC kühlt Grönland (bremst)
   if(k==='SO')t-=0.004*st.S.WA;
-  if(k==='WA')t-=0.002*st.S.SO;
+  if(k==='WA')t-=0.002*st.S.SO+0.0015*st.S.GR+0.0015*st.S.AM; // Südpolarmeer, Meeresspiegel aus Grönland, Wärmestau bei schwacher AMOC
   if(k==='WM')t-=0.006*st.S.AM;
-  if(k==='NW')t+=st.forest;
+  if(k==='PF')t-=0.002*st.S.BW;                         // Waldbrände legen den Permafrost frei
+  if(k==='NW'){t+=st.forest;if(nino)t-=0.1;}            // El Niño trocknet den Nebelwald aus
   return t;
 }
 function protMult(T){return Math.max(0.55,1-0.12*pos(T-1.5));} // Anpassung wirkt schwächer, je wärmer es wird (IPCC SYR B.4.1)
 function hazards(st){
   return {HI:35+40*(st.T-1.2),
-    ER:30+30*(st.T-1.2)+0.08*st.S.AM+(st.tipped.WM?15:0.12*st.S.WM),
+    ER:30+30*(st.T-1.2)+0.08*st.S.AM+(st.tipped.WM?15:0.12*st.S.WM)+(st.tipped.GP?8:0.06*st.S.GP),
     SA:28+30*(st.T-1.2)+(st.tipped.GL?12:0.18*st.S.GL),
     NK:22+1.3*st.SL+(st.tipped.AM?10:0)};
 }
