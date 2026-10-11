@@ -66,14 +66,23 @@
   <div id="verdict" hidden></div>
 
   <section class="box" aria-labelledby="maph">
-    <h2 class="comic-h" id="maph">Weltkarte der Kipppunkte</h2>
-    <p class="sub">Jeder Punkt ist ein verwundbarer Teil des Erdsystems, dort eingezeichnet, wo er wirklich liegt. Der Ring zeigt den Kipp-Druck oder das Risiko. Ist er voll, kippt das Element und lässt sich nicht mehr zurückholen. Tippt auf einen Punkt!</p>
+    <div class="maphead">
+      <h2 class="comic-h" id="maph">Weltkarte der Kipppunkte</h2>
+      <div class="viewtoggle" id="viewtoggle" role="group" aria-label="Darstellung wählen">
+        <button type="button" data-view="map" aria-pressed="true">Weltkarte</button><button type="button" data-view="globe" aria-pressed="false">3D-Globus</button>
+      </div>
+    </div>
+    <p class="sub">Jeder Punkt ist ein verwundbarer Teil des Erdsystems, dort eingezeichnet, wo er wirklich liegt. Der Ring zeigt den Kipp-Druck oder das Risiko. Ist er voll, kippt das Element und lässt sich nicht mehr zurückholen. Tippt auf einen Punkt! Auf dem 3D-Globus seht ihr Arktis und Antarktis ohne die Verzerrung der flachen Karte.</p>
     <div class="mapwrap">
       <div>
-        <div class="mapscroll"><div class="mapbox"><svg id="map" viewBox="0 0 1000 520" role="img" aria-label="Weltkarte mit 24 verwundbaren Elementen des Erdsystems">
+        <div class="mapscroll" id="mapscroll"><div class="mapbox"><svg id="map" viewBox="0 0 1000 520" role="group" aria-label="Weltkarte mit 24 verwundbaren Elementen des Erdsystems">
           {{MAPBASE}}
           <g id="links"></g><g id="markers"></g>
         </svg></div></div>
+        <div class="globebox" id="globebox" hidden>
+          <svg id="globe" viewBox="0 0 1000 520" tabindex="0" role="group" aria-label="3D-Globus mit den verwundbaren Elementen des Erdsystems. Mit Ziehen oder den Pfeiltasten drehen."></svg>
+          <div class="globebar"><span class="ghint" aria-hidden="true"><span class="mouse">✋ Ziehen oder Pfeiltasten zum Drehen</span><span class="touch">✋ Zum Drehen seitlich wischen oder Knöpfe nutzen</span></span><div class="gviews" id="gviews" role="group" aria-label="Globus ausrichten"></div></div>
+        </div>
         <div class="maplegend" id="maplegend"></div>
       </div>
       <aside class="info" id="info" aria-live="polite"></aside>
@@ -150,13 +159,15 @@
         <li><b>Artenverlust:</b> obere Werte der IPCC-Spannen für Landarten mit sehr hohem Aussterberisiko: bis 14 % bei 1,5 °C, 18 % bei 2 °C, 29 % bei 3 °C, 39 % bei 4 °C. Die Mittelwerte liegen bei etwa 9–13 %.</li>
         <li><b>Todesfälle:</b> Ausgangspunkt ist die WHO-Schätzung von rund 250.000 zusätzlichen Toten pro Jahr (2030–2050) durch Mangelernährung, Malaria, Durchfall und Hitze, skaliert mit der Erwärmung und gemindert durch Anpassung und Frühwarnung. Eine grobe Schätzung; nach 2050 ist sie hochgerechnet.</li>
       </ul>
-      <p><b>Datenschutz:</b> Das Spiel lädt nichts aus dem Internet nach, setzt keine Cookies und speichert nur den Mystery-Fortschritt in diesem Browser.</p>
+      <p><b>Datenschutz:</b> Das Spiel lädt nichts aus dem Internet nach, setzt keine Cookies und speichert nur den Mystery-Fortschritt und die gewählte Kartenansicht in diesem Browser.</p>
+      <p><b>Urheberrecht:</b> © 2026 Andreas Bauer. Für Unterricht und andere nicht-kommerzielle Bildungszwecke frei nutzbar mit Quellenangabe; alles Weitere im <a href="impressum.html" target="_blank" rel="noopener">Impressum</a>.</p>
       <p><b>Quellen (Auswahl):</b> IPCC AR6 Synthesebericht (2023), WGI und WGII (2021/2022), SROCC (2019), SR1.5 (2018); Armstrong McKay u. a. (2022), Science 377; Global Tipping Points Report (2025); Forster u. a. (2026), Indicators of Global Climate Change; Li u. a. (2023), Nature 615; Crezee u. a. (2022), Nature Geoscience 15; Vecellio u. a. (2022); WHO (2023); Lancet Countdown (2025); IMF (2025), Fossil Fuel Subsidies; Barrage &amp; Nordhaus (2024), PNAS; Generalplan Küstenschutz Niedersachsen/Bremen (2020).</p>
       </div>
     </details>
   </section>
 </div>
 </div>
+<footer class="sitefoot"><b>Terra Vergo</b> · Idee, Konzept und Spieldesign: Andreas Bauer · © 2026 Andreas Bauer · <a href="impressum.html" target="_blank" rel="noopener">Impressum</a></footer>
 </div>
 
 <div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"></div>

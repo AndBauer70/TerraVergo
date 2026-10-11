@@ -157,7 +157,7 @@ function buildMap(){
     el('g',{class:'kippg'},mk);pickers(mk,e.k);}
   document.getElementById('maplegend').innerHTML=SPH.map(s=>`<span><i style="background:${s.color}"></i>${s.name}</span>`).join('')+
     `<span><b class="dash"></b>aktiver Dominoeffekt</span><label class="switch"><input type="checkbox" id="showlinks"> Alle Dominoeffekte zeigen</label>`;
-  document.getElementById('showlinks').addEventListener('change',e=>document.getElementById('map').classList.toggle('showlinks',e.target.checked));
+  document.getElementById('showlinks').addEventListener('change',e=>{for(const id of ['map','globe'])document.getElementById(id).classList.toggle('showlinks',e.target.checked);});
 }
 function renderMap(){
   for(const mk of document.querySelectorAll('.mk:not(.hub)')){const k=mk.dataset.k;const s=elState(k);
@@ -168,9 +168,10 @@ function renderMap(){
   }
   for(const l of document.querySelectorAll('.link')){const act=linkActive(l.dataset.a,l.dataset.b);
     l.classList.toggle('on',l.dataset.a===selected||l.dataset.b===selected||act);l.classList.toggle('act',act);
-    if(l.hasAttribute('marker-end'))l.setAttribute('marker-end',act?'url(#mk-arrow-r)':'url(#mk-arrow)');}
+    if(!l.classList.contains('glink')&&l.hasAttribute('marker-end'))l.setAttribute('marker-end',act?'url(#mk-arrow-r)':'url(#mk-arrow)');}
   const hv=document.querySelector('.hubv');if(hv)hv.textContent=`${fmt(G.T,2)} °C`;
   document.querySelector('.mk.hub')?.classList.toggle('sel',selected==='ATM');
+  if(typeof drawGlobe==='function')drawGlobe();
 }
 function renderInfo(){
   const box=document.getElementById('info');
@@ -211,7 +212,8 @@ function buildCards(){
     EL.filter(e=>e.sph===s.k).map(e=>`<button class="ecard" id="card-${e.k}" data-k="${e.k}" title="${e.name}" aria-label="${e.name}"><div class="row"><div class="ic" style="background:${s.tint}">${ic('i-'+e.k)}</div><div><div class="nm">${SHY[e.k]||e.short}</div><div class="pl">${e.place}</div></div></div>
       <div class="st"><span class="lab"></span><span class="chip"></span></div><div class="pbar"><b></b></div></button>`).join('')}</div></section>`).join('');
   document.getElementById('spheres').addEventListener('click',ev=>{const c=ev.target.closest('.ecard');if(!c)return;selected=c.dataset.k;renderMap();renderInfo();renderCards();
-    document.getElementById('maph').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});
+    document.getElementById('maph').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+    if(GL.view==='globe')centerOn(selected);});
 }
 function cardLabel(e,s){
   if(e.type==='tip')return G.tipped[e.k]?'Nicht mehr aufzuhalten':`Kipp-Druck ${fint(s.p)} von 100\n${e.game?'Spiel-':''}Schwelle ca. ${fmt(effTc(e.k,G),1)} °C`;
@@ -399,12 +401,12 @@ function endRound(){
   G.invHist.push(inv);G.prev=inv;G.last=res;G.inv={...NOINV,co2:inv.co2,kg:inv.kg,fs:inv.fs,ee:inv.ee,bau:inv.bau};trim();
   if(G.r>=ROUNDS)G.over=true;
   if(res.newly[0])selected=res.newly[0];
-  render();showComic(res,inv);
+  render();if(res.newly[0]&&GL.view==='globe')centerOn(selected);showComic(res,inv);
 }
 function restart(){G=initState();selected='ATM';render();window.scrollTo(0,0);}
 let gameBuilt=false;
 function buildGame(){if(gameBuilt)return;gameBuilt=true;
-  buildMap();buildCards();buildPult();renderFolgen();
+  buildMap();buildCards();buildPult();renderFolgen();initViewToggle();
   document.getElementById('go').addEventListener('click',endRound);
   document.getElementById('restart').addEventListener('click',restart);
   document.getElementById('verdict').addEventListener('click',e=>{if(e.target.closest('[data-restart]'))restart();});

@@ -71,3 +71,4 @@ ul.src li{font-size:.86rem;margin-bottom:4px}
   .logo{text-shadow:2px 2px 0 var(--ink)}
 }
 @page{size:A4;margin:16mm 15mm}
+.foot{margin-top:18px;text-align:center}
