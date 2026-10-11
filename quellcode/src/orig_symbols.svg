@@ -1,0 +1,198 @@
+ <defs>
+  <!-- Kryosphäre -->
+  <symbol id="i-GR" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="34" width="44" height="10" fill="#7AA7D9"/>
+   <path d="M4 36C7 20 16 11 25 11s16 8 19 25Z" fill="#F2FAFF"/>
+   <path d="M16 22c3-3 8-4 12-3" fill="none" stroke="#9CCFF0"/>
+   <path d="M33 30c2 3 3 4 3 6a3 3 0 0 1-6 0c0-2 1-3 3-6Z" fill="#4FB6E8"/>
+   <path d="M12 31c1.5 2 2 3 2 4.5a2 2 0 0 1-4 0c0-1.5.5-2.5 2-4.5Z" fill="#4FB6E8"/></g></symbol>
+  <symbol id="i-WA" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="30" width="44" height="15" fill="#3D8FD6"/>
+   <path d="M2 18h24l3 4 4-1 1 9H2Z" fill="#F2FAFF"/>
+   <path d="M38 26l7-2 1 8h-9Z" fill="#E3F5FD"/>
+   <path d="M20 18l-2 5 3 3-2 4" fill="none" stroke="#7AA7D9" stroke-width="2"/>
+   <ellipse cx="11" cy="13" rx="3.5" ry="5" fill="#1B1B2F"/><ellipse cx="11" cy="14" rx="2" ry="3.3" fill="#fff" stroke="none"/><path d="M11 9.5l2 1-2 .5" fill="#FFB020" stroke-width="1"/></g></symbol>
+  <symbol id="i-AS" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="16" width="44" height="29" rx="3" fill="#3D8FD6"/>
+   <path d="M6 22h14l3 5-4 4H8Z" fill="#F2FAFF"/><path d="M27 29h10l3 4-3 4H28l-3-4Z" fill="#E3F5FD"/><path d="M12 37h7l2 3-2 2h-7Z" fill="#F2FAFF"/>
+   <circle cx="38" cy="8" r="5" fill="#FFD23F"/>
+   <path d="M30 6h-3M38 1v-0M44 8h2" fill="none" stroke="#F2A900"/></g></symbol>
+  <symbol id="i-GL" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M2 42 18 12l8 12 6-8 14 26Z" fill="#9AA3B2"/>
+   <path d="M13 22l5-10 5 8-3 3-3-3Z" fill="#F2FAFF"/><path d="M29 20l3-4 5 9-3 2-2-3Z" fill="#F2FAFF"/>
+   <path d="M18 30c2 4 0 7 3 12" fill="none" stroke="#4FB6E8" stroke-width="3"/></g></symbol>
+  <!-- Pedosphäre -->
+  <symbol id="i-PF" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="3" y="18" width="42" height="27" rx="2" fill="#8B5A33"/>
+   <path d="M3 18c6-3 12 2 18-1s12 2 24-1" fill="none"/>
+   <path d="M3 28h42" stroke="#C99A6B" stroke-width="1.5"/>
+   <path d="M12 33v8M8 37h8M9.5 34.5l5 5M14.5 34.5l-5 5M32 31v8M28 35h8" stroke="#E3F5FD" stroke-width="2"/>
+   <circle cx="22" cy="12" r="3" fill="#C7CED8"/><circle cx="28" cy="6" r="2.2" fill="#C7CED8"/><circle cx="17" cy="5" r="1.8" fill="#C7CED8"/></g></symbol>
+  <symbol id="i-BD" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <circle cx="37" cy="10" r="6" fill="#FFB020"/>
+   <path d="M3 22h42v22H3Z" fill="#D9A86C"/>
+   <path d="M10 22l3 7-5 5 4 10M24 22l-2 8 6 4-3 10M36 22l3 6-4 6 6 10" fill="none" stroke-width="2"/>
+   <path d="M17 22c0-4 1-7 2-8M17 18c-2-1-4-1-5 1M19 15c1-2 3-2 4-1" fill="none" stroke="#7A5A2E" stroke-width="2"/></g></symbol>
+  <!-- Hydrosphäre -->
+  <symbol id="i-AM" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" fill="none">
+   <rect x="2" y="4" width="44" height="40" rx="5" fill="#CBE9FF"/>
+   <path d="M10 36C8 22 14 12 30 10" stroke="#E0393B" stroke-width="4"/><path d="M26 6l5 4-5 4" stroke="#E0393B" stroke-width="3.5"/>
+   <path d="M38 14c2 12-3 21-18 24" stroke="#1E6FD0" stroke-width="4"/><path d="M23 34l-5 4 5 4" stroke="#1E6FD0" stroke-width="3.5"/></g></symbol>
+  <symbol id="i-MS" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="20" y="3" width="9" height="40" fill="#fff"/>
+   <path d="M20 9h4M20 15h6M20 21h4M20 27h6M20 33h4" stroke-width="2"/>
+   <path d="M2 30c4-3 7-3 11 0s7 3 11 0 7-3 11 0 7 3 11 0V46H2Z" fill="#3D8FD6"/>
+   <path d="M33 14l4-6 4 6M37 8v12" fill="none" stroke="#E0393B" stroke-width="2.5"/></g></symbol>
+  <!-- Biosphäre -->
+  <symbol id="i-AZ" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M2 40c10-4 20 2 44-3v9H2Z" fill="#3D8FD6"/>
+   <path d="M11 38V26M24 36V20M37 37V25" stroke-width="3" stroke="#7A4B2A"/>
+   <circle cx="11" cy="21" r="8" fill="#1F8A3A"/><circle cx="24" cy="14" r="10" fill="#2FB24C"/><circle cx="37" cy="20" r="8" fill="#1F8A3A"/>
+   <path d="M30 6c2 0 3 1 3 3" fill="none" stroke="#FF6B8A" stroke-width="2"/></g></symbol>
+  <symbol id="i-KR" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="2" width="44" height="44" rx="6" fill="#BFE6FF"/>
+   <path d="M14 44V30M14 34l-6-6M14 30l5-8M19 22v-5M19 22l5-2" fill="none" stroke="#FF6B8A" stroke-width="4"/>
+   <path d="M32 44V32M32 36l6-6M32 32l-4-6M38 30v-5" fill="none" stroke="#FFB020" stroke-width="4"/>
+   <path d="M28 12c4-4 10-4 12 0-2 4-8 4-12 0Zm0 0-4-3v6Z" fill="#FFD23F" stroke-width="2"/></g></symbol>
+  <!-- Mensch -->
+  <symbol id="i-HI" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <circle cx="36" cy="12" r="7" fill="#FFB020"/>
+   <path d="M36 1v2M47 12h-2M44 4l-1.5 1.5M44 20l-1.5-1.5" fill="none" stroke="#F2A900"/>
+   <path d="M14 6a5 5 0 0 1 10 0v22a8 8 0 1 1-10 0Z" fill="#fff"/>
+   <circle cx="19" cy="35" r="5" fill="#E0393B"/><path d="M19 30V12" stroke="#E0393B" stroke-width="4"/></g></symbol>
+  <symbol id="i-ER" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M16 44V12" fill="none" stroke-width="3"/>
+   <ellipse cx="12" cy="20" rx="3.5" ry="5.5" fill="#F2A900" transform="rotate(-25 12 20)"/><ellipse cx="20" cy="20" rx="3.5" ry="5.5" fill="#F2A900" transform="rotate(25 20 20)"/>
+   <ellipse cx="12" cy="30" rx="3.5" ry="5.5" fill="#F2A900" transform="rotate(-25 12 30)"/><ellipse cx="20" cy="30" rx="3.5" ry="5.5" fill="#F2A900" transform="rotate(25 20 30)"/>
+   <ellipse cx="16" cy="9" rx="3" ry="5" fill="#FFC21A"/>
+   <path d="M35 16c5 7 7 11 7 15a7 7 0 0 1-14 0c0-4 2-8 7-15Z" fill="#4FB6E8"/></g></symbol>
+  <symbol id="i-KU" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="6" y="14" width="9" height="24" fill="#C7CED8"/><rect x="17" y="6" width="11" height="32" fill="#E5E7EB"/><rect x="30" y="18" width="10" height="20" fill="#C7CED8"/>
+   <path d="M20 11h5M20 16h5M20 21h5M9 19h3M33 23h4" stroke-width="2"/>
+   <path d="M2 36c4-3 7-3 11 0s7 3 11 0 7-3 11 0 7 3 11 0V46H2Z" fill="#3D8FD6"/></g></symbol>
+  <!-- Bilanz -->
+  <symbol id="i-co2" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round">
+   <path d="M12 38c-6 0-9-6-5-10-2-7 6-11 11-7 2-7 13-8 16-1 6-2 11 3 9 9 4 4 1 9-4 9Z" fill="#9AA3B2"/>
+   <text x="24" y="33" font-family="Lexend, sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#fff" stroke="none">CO₂</text></g></symbol>
+  <symbol id="i-money" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="4" y="14" width="40" height="22" rx="3" fill="#9BE7A8"/><circle cx="24" cy="25" r="6" fill="#fff"/>
+   <text x="24" y="29" font-family="Lexend, sans-serif" font-weight="800" font-size="10" text-anchor="middle" fill="#1B1B2F" stroke="none">$</text>
+   <path d="M36 4l2 6 6-2-4 6" fill="#FF8A7A" stroke-width="2"/><path d="M8 40l6 4 4-5 6 5 4-5 6 5 6-4" fill="none" stroke="#E0393B" stroke-width="2.5"/></g></symbol>
+  <symbol id="i-species" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M8 38c0-12 7-20 18-20 8 0 14 5 14 12 0 5-3 8-8 8Z" fill="#FFB86B"/>
+   <path d="M30 18c2-6 7-9 12-8-1 5-5 8-12 8Z" fill="#2FB24C"/>
+   <circle cx="31" cy="27" r="2" fill="#1B1B2F" stroke="none"/>
+   <path d="M12 38v6M24 38v6" fill="none"/><path d="M4 8l8 8M12 8l-8 8" stroke="#E0393B" stroke-width="3"/></g></symbol>
+  <symbol id="i-dead" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M24 44C11 36 5 28 7 19c2-8 12-10 17-3 5-7 15-5 17 3 2 9-4 17-17 25Z" fill="#8FA3C7"/>
+   <path d="M24 16v20M18 24h12" fill="none" stroke="#fff" stroke-width="3.5"/></g></symbol>
+  <symbol id="i-thermo" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round">
+   <path d="M19 6a5 5 0 0 1 10 0v22a9 9 0 1 1-10 0Z" fill="#fff"/><circle cx="24" cy="35" r="5.5" fill="#E0393B"/><path d="M24 30V14" stroke="#E0393B" stroke-width="4" stroke-linecap="round"/></g></symbol>
+  <!-- Hebel -->
+  <symbol id="i-EN" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <circle cx="10" cy="10" r="6" fill="#FFD23F"/>
+   <path d="M6 40l6-16h30l-6 16Z" fill="#3D6FD0"/><path d="M9 32h30M22 24l-3 16M32 24l-3 16" stroke="#9CC9EC" stroke-width="1.8"/>
+   <path d="M24 40v6M18 46h12" fill="none"/></g></symbol>
+  <symbol id="i-VE" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="8" y="6" width="32" height="32" rx="7" fill="#2FB24C"/><rect x="13" y="11" width="22" height="11" rx="2" fill="#DCEFFF"/>
+   <circle cx="16" cy="30" r="2.5" fill="#FFD23F"/><circle cx="32" cy="30" r="2.5" fill="#FFD23F"/>
+   <path d="M14 38l-4 7M34 38l4 7M10 45h28" fill="none"/></g></symbol>
+  <symbol id="i-WD" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M21 28h6v15h-6Z" fill="#A0673A"/>
+   <path d="M24 4c8 0 13 6 12 12 5 2 6 10 0 13-3 3-8 2-12 0-4 2-9 3-12 0-6-3-5-11 0-13-1-6 4-12 12-12Z" fill="#2FB24C"/>
+   <path d="M6 43h36" fill="none"/><path d="M33 34l4 4 7-8" fill="none" stroke="#1F9D45" stroke-width="3"/></g></symbol>
+  <symbol id="i-FO" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="6" y="18" width="36" height="24" rx="3" fill="#C7CED8"/>
+   <circle cx="17" cy="30" r="7" fill="#fff"/><circle cx="31" cy="30" r="7" fill="#fff"/>
+   <path d="M17 24v12M11 30h12M31 24v12M25 30h12" stroke-width="1.8"/>
+   <path d="M14 13c3-5 9-5 10 0M24 8l2 5-5 0" fill="none" stroke="#2FB24C"/>
+   <text x="35" y="12" font-family="Lexend, sans-serif" font-weight="800" font-size="8" text-anchor="middle" fill="#1B1B2F" stroke="none">CO₂</text></g></symbol>
+  <symbol id="i-ME" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M8 24c6-9 18-10 26 0-8 10-20 9-26 0Z" fill="#4FB6E8"/><path d="M34 24l8-7v14Z" fill="#4FB6E8"/>
+   <circle cx="15" cy="22" r="1.8" fill="#1B1B2F" stroke="none"/>
+   <path d="M4 40c4-3 7-3 11 0s7 3 11 0 7-3 11 0" fill="none" stroke="#1E6FD0"/>
+   <path d="M38 4l2 4 4 .5-3 3 .8 4-3.8-2-3.8 2 .8-4-3-3 4-.5Z" fill="#FFD23F" stroke-width="1.8"/></g></symbol>
+  <symbol id="i-HS" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M4 22C6 10 16 5 24 5s18 5 20 17c-3-3-7-3-10 0-3-3-7-3-10 0-3-3-7-3-10 0-3-3-7-3-10 0Z" fill="#FF6B3D"/>
+   <path d="M24 22v18c0 3-5 3-5 0" fill="none" stroke-width="3"/>
+   <path d="M36 30c3 4 4 6 4 8a4 4 0 0 1-8 0c0-2 1-4 4-8Z" fill="#4FB6E8"/></g></symbol>
+  <symbol id="i-LW" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M8 18h20v16a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4Z" fill="#4FB6E8"/>
+   <path d="M28 22l12-10 3 3-11 11" fill="#7CC4FF"/><path d="M8 22c-5 0-5 8 0 8" fill="none"/>
+   <path d="M44 20v3M41 24v3M45 26v3" fill="none" stroke="#1E6FD0"/>
+   <path d="M34 44V34M34 38c-3-3-6-3-6 0 3 2 6 2 6 0Zm0-2c3-3 6-3 6 0-3 2-6 2-6 0Z" fill="#2FB24C" stroke-width="2"/></g></symbol>
+  <symbol id="i-KS" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M20 44l6-28h8l6 28Z" fill="#9BE7A8"/><path d="M26 16h8" stroke-width="3"/>
+   <path d="M2 30c3-6 9-8 14-4-4 0-6 3-4 6 3 2 7 0 8-2v14H2Z" fill="#3D8FD6"/>
+   <rect x="34" y="6" width="8" height="10" fill="#E5E7EB"/><path d="M33 6l5-4 5 4" fill="#FF8A7A"/></g></symbol>
+  <symbol id="i-coin" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5">
+   <circle cx="24" cy="24" r="19" fill="#FFD23F"/><circle cx="24" cy="24" r="13" fill="#FFC21A" stroke-width="2"/>
+   <text x="24" y="31" font-family="Lexend, sans-serif" font-weight="800" font-size="19" text-anchor="middle" fill="#1B1B2F" stroke="none">€</text></g></symbol>
+  <symbol id="i-tag" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M4 10V4h17l23 23-17 17L4 21Z" fill="#9BE7A8"/><circle cx="11" cy="11" r="3" fill="#fff"/>
+   <text x="25" y="31" font-family="Lexend, sans-serif" font-weight="800" font-size="11" text-anchor="middle" fill="#1B1B2F" stroke="none" transform="rotate(45 25 27)">CO₂</text></g></symbol>
+  <symbol id="i-bolt" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"><path d="M28 2 8 28h13l-4 18 23-28H27Z" fill="#FFD23F"/></g></symbol>
+
+  <symbol id="i-KT" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="3" y="26" width="42" height="19" rx="2" fill="#5A3A22"/>
+   <path d="M3 26c6-3 12 2 18-1s14 2 24-1" fill="none"/>
+   <ellipse cx="16" cy="27" rx="7" ry="2.5" fill="#4FB6E8"/><ellipse cx="34" cy="28" rx="6" ry="2" fill="#4FB6E8"/>
+   <path d="M8 26V12M11 26V8M26 26V10M29 26V14M40 26V9" fill="none" stroke="#2FB24C" stroke-width="2.5"/>
+   <path d="M11 8c-2-2-2-4 0-5 2 1 2 3 0 5ZM40 9c-2-2-2-4 0-5 2 1 2 3 0 5Z" fill="#8B5A33" stroke-width="1.5"/>
+   <path d="M12 36h4M24 39h5M33 35h4" stroke="#8B5A33" stroke-width="2"/></g></symbol>
+  <symbol id="i-GP" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M2 30h44v15H2Z" fill="#D9A86C"/>
+   <path d="M9 30l3 6-4 4 3 5M26 30l-2 7 5 3-2 5M38 30l3 5-4 4 4 6" fill="none" stroke-width="1.8"/>
+   <path d="M8 30V18M16 30V16M24 30V19" fill="none" stroke="#C99A2B" stroke-width="2.5"/>
+   <path d="M8 18l-3-3M8 18l3-3M16 16l-3-3M16 16l3-3M24 19l-3-3M24 19l3-3" fill="none" stroke="#C99A2B" stroke-width="2"/>
+   <path d="M30 14c4-3 8-3 12 0M32 20c3-2 7-2 11 0M34 8c3-2 6-2 9 0" fill="none" stroke="#B9A07A" stroke-width="2.5"/></g></symbol>
+  <symbol id="i-HU" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="2" width="44" height="44" rx="6" fill="#7FB8E0"/>
+   <path d="M8 30c5-7 14-8 20 0-6 8-15 7-20 0Z" fill="#C7CED8"/><path d="M28 30l7-6v12Z" fill="#C7CED8"/>
+   <path d="M12 28l2 2M14 28l-2 2" stroke-width="1.8"/>
+   <circle cx="34" cy="12" r="6" fill="#fff"/><text x="34" y="15.5" font-family="Lexend, sans-serif" font-weight="800" font-size="8" text-anchor="middle" fill="#E0393B" stroke="none">O₂</text>
+   <path d="M30 18l8-8" stroke="#E0393B" stroke-width="2"/></g></symbol>
+  <symbol id="i-SO" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="2" width="44" height="44" rx="6" fill="#CBE9FF"/>
+   <path d="M4 10h18l3 4H4Z" fill="#F2FAFF"/>
+   <path d="M16 18c0 12 4 20 14 22M30 40c8-2 12-10 10-22" fill="none" stroke="#1E6FD0" stroke-width="3.5"/>
+   <path d="M26 36l4 4-4 4" fill="none" stroke="#1E6FD0" stroke-width="3"/><path d="M36 22l4-4 4 4" fill="none" stroke="#1E6FD0" stroke-width="3"/>
+   <path d="M12 18v8" stroke="#1E6FD0" stroke-width="3"/><path d="M9 23l3 4 3-4" fill="none" stroke="#1E6FD0" stroke-width="2.5"/></g></symbol>
+  <symbol id="i-BW" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M12 4l9 16h-5l7 12H1l7-12H3Z" fill="#1F7A44"/><path d="M12 32v12" stroke-width="3"/>
+   <path d="M32 10l8 14h-4l6 10H22l6-10h-4Z" fill="#2FB24C"/><path d="M32 34v10" stroke-width="3"/>
+   <path d="M40 44c-6 0-8-5-5-9 0 3 2 4 3 3-1-4 2-7 5-8-1 4 3 6 2 10-1 3-3 4-5 4Z" fill="#FF6B3D" stroke-width="2"/></g></symbol>
+  <symbol id="i-NW" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M2 44l14-24 10 12 6-8 14 20Z" fill="#2FB24C"/>
+   <path d="M6 16c-4 0-4-6 1-6 1-5 9-6 11-1 4-2 9 1 8 5 4 0 4 6-1 6H7Z" fill="#F2FAFF"/>
+   <ellipse cx="34" cy="38" rx="6" ry="4" fill="#FFB020"/><circle cx="31" cy="34" r="2.2" fill="#FFB020"/><circle cx="37" cy="34" r="2.2" fill="#FFB020"/>
+   <circle cx="31" cy="34" r=".8" fill="#1B1B2F" stroke="none"/><circle cx="37" cy="34" r=".8" fill="#1B1B2F" stroke="none"/></g></symbol>
+  <symbol id="i-SA" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M2 18 14 4l8 10 6-6 18 10Z" fill="#E3F5FD"/>
+   <path d="M2 18h44v27H2Z" fill="#9BE7A8"/>
+   <path d="M20 18c-4 6 6 10 0 16s4 8 2 11" fill="none" stroke="#3D8FD6" stroke-width="5"/>
+   <path d="M32 40V28M32 32l-4-3M32 32l4-3M38 40V30M38 34l-3-3M38 34l3-3M8 40V30M8 34l3-3" fill="none" stroke="#1F7A44" stroke-width="2"/></g></symbol>
+  <symbol id="i-ATM" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <circle cx="24" cy="24" r="21" fill="#BFE6FF"/>
+   <path d="M7 30c-4 0-4-6 1-6 1-5 9-6 11-1 4-2 9 1 8 5 4 0 4 6-1 6H8Z" fill="#fff"/>
+   <path d="M30 8a4 4 0 0 1 8 0v16a7 7 0 1 1-8 0Z" fill="#fff"/><circle cx="34" cy="29" r="4" fill="#E0393B"/><path d="M34 25V12" stroke="#E0393B" stroke-width="3"/></g></symbol>
+  <symbol id="i-fs" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="12" y="8" width="24" height="34" rx="3" fill="#3A3F4B"/><path d="M12 17h24M12 33h24" stroke="#9AA3B2"/>
+   <path d="M24 20c3 4 4 6 4 8a4 4 0 0 1-8 0c0-2 1-4 4-8Z" fill="#9AA3B2"/>
+   <path d="M5 44 43 6" stroke="#E0393B" stroke-width="4"/></g></symbol>
+  <symbol id="i-gb" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M8 4h24l8 8v32H8Z" fill="#fff"/><path d="M32 4v8h8" fill="#E5E7EB"/>
+   <path d="M14 18h14M14 24h20M14 30h10" stroke-width="2"/>
+   <path d="M28 40c0-8 6-12 12-12 0 7-4 12-12 12Zm0 0 7-7" fill="#2FB24C" stroke-width="2"/></g></symbol>
+  <symbol id="i-bau" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <path d="M6 22 24 6l18 16" fill="#FF8A7A"/><path d="M10 20v24h28V20" fill="#FFF3A6"/>
+   <path d="M14 26h7v7h-7ZM27 26h7v7h-7Z" fill="#BFE6FF" stroke-width="2"/><path d="M21 44v-8h6v8" fill="#A0673A" stroke-width="2"/>
+   <path d="M30 12l10-5v6Z" fill="#3D6FD0" stroke-width="2"/>
+   <path d="M8 44c0-6 4-9 9-9 0 5-3 9-9 9Z" fill="#2FB24C" stroke-width="2"/></g></symbol>
+  <symbol id="i-NI" viewBox="0 0 48 48"><g stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+   <rect x="2" y="14" width="44" height="31" rx="4" fill="#3D8FD6"/>
+   <ellipse cx="30" cy="30" rx="13" ry="8" fill="#FF6B3D"/><ellipse cx="32" cy="30" rx="6" ry="4" fill="#E0393B" stroke-width="1.5"/>
+   <path d="M6 22c4-2 7-2 10 0" fill="none" stroke="#fff" stroke-width="2"/>
+   <circle cx="38" cy="8" r="5" fill="#FFD23F"/>
+   <path d="M5 9c-3 0-3-4 1-4 1-3 6-3 7 0 3 0 3 4 0 4Z" fill="#fff"/><path d="M7 12v3M11 12v3" stroke="#1E6FD0" stroke-width="2"/>
+   <path d="M18 8h10M24 4l4 4-4 4" fill="none" stroke-width="2"/></g></symbol>

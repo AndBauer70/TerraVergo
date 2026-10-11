@@ -1,48 +1,47 @@
 # Terra Vergo
 
-Ein kybernetisches Planspiel zum Klimawandel für die Klassen 7 bis 10.
+Ein kybernetisches Klimaspiel mit Mystery-Einstieg für die Klassen 7 bis 10 am Gymnasium, mit Erweiterungen für die Oberstufe.
 
-Die Spielerinnen und Spieler steuern die Erde von 2025 bis 2075 in zehn Runden zu je fünf Jahren. Ziel ist es, keinen Kipppunkt im Erdsystem zu überschreiten und die Menschen vor den Grenzen der Anpassung zu bewahren. Ohne Klimaschutz folgt das Spiel einem RCP8.5-/SSP5-8.5-ähnlichen Pfad (rund 2,4 °C im Jahr 2050, knapp 4 °C im Jahr 2075).
+**Spielen:** `index.html` im Browser öffnen oder über GitHub Pages aufrufen. Es wird nichts installiert, und das Spiel läuft auch offline.
 
-## Spielen
+## Ablauf
 
-`index.html` im Browser öffnen. Es wird nichts installiert.
+1. **Mystery „Das Rätsel vom Deich“.** Prof. Geo, Jannes aus Ostfriesland und Aputsiaq aus Grönland stellen die Leitfrage: *Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?* Die Gruppen verbinden 21 Karten zu einem Wirkungsgefüge. Jede gefundene Kernidee verrät einen Buchstaben des Codeworts für den Kontrollraum.
+2. **Spiel im Kontrollraum.** Die Gruppen steuern die Erde von 2025 bis 2075 in zehn Runden zu je fünf Jahren. Ziel: Kein weiteres Element des Erdsystems kippt, und die Menschen bleiben unter den Grenzen der Anpassung. Ohne Klimaschutz folgt das Spiel dem Stresstest SSP5-8.5 (früher RCP8.5) und erreicht 2075 rund 3,7 °C.
 
 ## Inhalte
 
-20 verwundbare Elemente, vier je Sphäre, auf einer Weltkarte verortet:
+24 verwundbare Elemente, vier je Sphäre, an ihrem realen Ort auf einer Weltkarte:
 
-| Sphäre | Raumbeispiele |
+| Sphäre | Elemente |
 |---|---|
-| Kryosphäre | Grönländischer Eisschild, Westantarktischer Eisschild, Arktisches Meereis (Barentssee), Himalaya-Gletscher |
-| Pedosphäre | Permafrost (Sibirien), Böden im Mittelmeerraum, Torfmoore im Kongobecken, Great Plains (USA) |
-| Hydrosphäre | Nordatlantik-Strömung (Golfstromsystem), Meeresspiegel (Malediven), El Niño (Äquatorialer Pazifik), Umwälzung im Südpolarmeer |
-| Biosphäre | Amazonas-Regenwald, Korallenriffe (Great Barrier Reef), Boreale Wälder (Kanada), Nebelwälder (Costa Rica) |
-| Mensch | Hitze (Persischer Golf), Ernährung im Sahel, Küstenstädte (Jakarta), Wasser und Ernährung im Indus-Tal |
+| Kryosphäre | Grönländischer Eisschild, Westantarktischer Eisschild, Arktisches Sommermeereis, Gebirgsgletscher im Himalaya |
+| Pedosphäre | Permafrost in Jakutien, Böden im Mittelmeerraum, Torfmoore im Kongobecken, Ackerböden der Great Plains |
+| Hydrosphäre | Atlantische Umwälzströmung (AMOC), Meeresspiegel (Malediven), El Niño, Umwälzung im Südpolarmeer |
+| Atmosphäre | Westafrikanischer Monsun, Hitzewellen in Europa, Indischer Monsun und Starkregen, Tropische Wirbelstürme |
+| Biosphäre | Amazonas-Regenwald, Korallenriffe, Boreale Wälder, Nebelwälder in Costa Rica |
+| Mensch | Hitze am Persischen Golf, Ernährung im Sahel, Wasser im Indus-Tal, Küstenschutz an der Nordsee |
 
-- 19 animierte Dominoeffekte zwischen den Elementen und der Atmosphäre
-- Klimafonds mit Einnahmen (CO₂-Abgabe, Abbau fossiler Subventionen, grüne Anleihen) und Förderprogrammen (Erneuerbare, klimafreundliches Bauen)
-- Maßnahmen für Klimaschutz, Naturschutz und Anpassung
-- Bilanz: Klimaschäden, Artenverlust, zusätzliche Todesfälle
-- Comic-Strip nach jeder Runde, Tipps vom Avatar Prof. Geo
-- Bereich für Lehrkräfte mit Zusammenstellung der Klimafolgen, Modellannahmen und Quellen
+Dazu: Fieberkurve mit Thermometer und Folgekosten, 25 Dominoeffekte, Klimafonds mit Einnahmen und Förderprogrammen, Klimaschutz, Naturschutz und Anpassung, ein Comic nach jeder Runde und ein Bereich für Lehrkräfte.
 
-Das Modell ist stark vereinfacht. Elemente ohne wissenschaftlich belegten globalen Kipppunkt haben eine geschätzte Spiel-Schwelle, die im Spiel gekennzeichnet ist.
+## Material
 
-## Auf GitHub Pages veröffentlichen
+- `begleitheft.html` und `begleitheft.pdf`: Begleitheft für Lehrkräfte und Eltern (Ablauf, Didaktik, Kerncurriculum, Klimagefühle, Datenschutz)
+- `wissensbasis.html` und `docs/wissensbasis.md`: die Recherche hinter dem Spiel mit allen Zahlen, Spannen, Vertrauensgraden und Quellen
+- Das Lösungsblatt mit Lösungsskizze und Codes ist bewusst nicht veröffentlicht, damit das Mystery ein Rätsel bleibt.
 
-1. Neues Repository anlegen und alle Dateien dieses Ordners hochladen.
-2. **Settings → Pages** öffnen.
-3. Unter **Build and deployment** „Deploy from a branch“ wählen, Branch `main`, Ordner `/ (root)`, speichern.
-4. Nach etwa einer Minute ist das Spiel unter `https://<benutzername>.github.io/<repository>/` erreichbar.
+## Fachliche Grundlage
 
-## Quellen
+IPCC-Synthesebericht 2023 (AR6), Berichte der Arbeitsgruppen I und II, Sonderbericht Ozean und Kryosphäre; Armstrong McKay u. a. (2022), Science 377; Global Tipping Points Report 2025; Forster u. a. (2026), Indicators of Global Climate Change. Stand: Oktober 2026. Das Spiel ist ein vereinfachtes Lernmodell: Es zeigt Richtungen und Größenordnungen, keine Vorhersagen.
 
-IPCC AR6 WGI und WGII (2021/2022); IPCC SROCC (2019); Armstrong McKay et al. (2022), Science 377; Ritchie et al. (2021), Nature 592; Wunderling et al. (2021), Earth System Dynamics; Li et al. (2023), Nature 615; Dargie et al. (2017), Nature 542; WHO (2023); Swiss Re Institute (2021); IMF (2023), Fossil Fuel Subsidies.
+## Datenschutz
 
-Kartendaten: Natural Earth über world-atlas (gemeinfrei).
+Das Spiel stellt keine Anfragen an fremde Server, setzt keine Cookies und sammelt keine Daten. Nur der Fortschritt im Mystery wird lokal im Browser gespeichert.
 
-## Hinweise
+## Weiterentwickeln
 
-- Schriften werden von Google Fonts geladen. Ohne Internet erscheinen Ersatzschriften.
-- Es werden keine Daten gesammelt.
+Der Ordner `quellcode/` enthält die Quelldateien. `python3 build.py` (Python 3 mit dem Paket `markdown`) baut daraus `index.html`, `begleitheft.html` und `wissensbasis.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
+
+## Lizenzen
+
+Schriften Bangers und Lexend: SIL Open Font License 1.1, siehe `LICENSE-SCHRIFTEN.txt`. Kartendaten: Natural Earth (gemeinfrei).

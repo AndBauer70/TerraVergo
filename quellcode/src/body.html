@@ -1,0 +1,162 @@
+<div class="wrap">
+
+<!-- ===================== Mystery ===================== -->
+<section id="mystery" class="mys" hidden aria-labelledby="mtitle">
+  <header class="box mhead">
+    <div><p class="logo">Terra Vergo</p><h1 class="mt" id="mtitle">Das Rätsel vom Deich</h1></div>
+    <div class="hbtns"><button class="ghost" id="mback" type="button" hidden>Zurück zum Kontrollraum</button><a class="ghost" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a></div>
+  </header>
+  <div class="story" id="story"></div>
+  <div class="lq"><div class="k">Leitfrage des Mysterys</div><h2>Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?</h2></div>
+  <ol class="steps">
+    <li>Lest alle Karten in Ruhe. Manche helfen euch, manche lenken ab.</li>
+    <li>Verbindet Ursache und Wirkung: Tippt bei einer Karte auf ➜ und dann auf die Karte, auf die sie wirkt. Karten lassen sich verschieben.</li>
+    <li>Lasst Prof. Geo euer Netz prüfen. Jede gefundene Kernidee verrät einen Buchstaben des Codeworts.</li>
+    <li>Vervollständigt den Lösungssatz und gebt das Codewort an der Tür ein.</li>
+  </ol>
+  <section class="box" aria-labelledby="bh">
+    <div class="bhead"><h2 class="comic-h" id="bh">Euer Wirkungsgefüge</h2><div class="mmode" id="mmode" aria-live="polite"></div><button class="ghost sm" id="mreset" type="button">Karten neu ordnen</button></div>
+    <div class="boardwrap" id="boardwrap"><div class="board" id="board"><svg id="wires" aria-hidden="true"></svg></div></div>
+  </section>
+  <div class="mtools">
+    <section class="box" aria-labelledby="lh">
+      <h2 class="comic-h" id="lh">Eure Pfeile (<span id="mcount">0</span>)</h2>
+      <p class="sub">Ohne Ziehen geht es auch hier: Ursache und Wirkung wählen, dann verbinden.</p>
+      <div class="madd"><select id="mfrom" aria-label="Ursache"></select><select id="mto" aria-label="Wirkung"></select><button class="ghost" id="madd" type="button">Verbinden</button></div>
+      <ul class="mlist" id="mlist"></ul>
+    </section>
+    <section class="box" aria-labelledby="ch">
+      <h2 class="comic-h" id="ch">Prof. Geos Prüfung</h2>
+      <button class="go" id="mcheck" type="button" style="margin-top:4px">Prüft unser Netz!</button>
+      <div class="mfb" id="mfb" aria-live="polite"></div>
+      <div class="slots" id="mslots" aria-label="Codewort mit zehn Buchstaben"></div>
+      <div class="kassesec">Lösungssatz</div>
+      <p class="sent">Der Deich an der Nordsee muss wachsen, weil das Meer <select id="s1" aria-label="Lücke 1"></select> und weltweit <select id="s2" aria-label="Lücke 2"></select>. Grönlands Schmelzwasser <select id="s3" aria-label="Lücke 3"></select>.</p>
+      <div class="dooropen"><label for="mcode" class="nm">Codewort:</label><input type="text" id="mcode" autocomplete="off" spellcheck="false" maxlength="12" placeholder="?"><button class="go" id="mopen" type="button">Tür öffnen</button></div>
+      <div class="mmsg" id="mmsg" aria-live="polite"></div>
+    </section>
+  </div>
+  <p class="mfoot">Für Lehrkräfte: Ablauf und Hintergründe stehen im <a href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a>. Lösung und Code zum Überspringen enthält das Lösungsblatt für Lehrkräfte.</p>
+</section>
+
+<!-- ===================== Spiel ===================== -->
+<div id="game" hidden>
+<div style="display:grid;gap:18px">
+  <div class="top">
+    <section class="box hero" aria-label="Terra Vergo">
+      {{OWL}}
+      <div class="htitle">
+        <h1 class="logo">Terra Vergo</h1>
+        <div class="tagline">Steuert die Erde von 2025 bis 2075 in 5-Jahres-Schritten. Ziel: kein weiterer Kipppunkt, und die Menschen schützen.</div>
+      </div>
+      <div class="bubble" id="tip" aria-live="polite"></div>
+      <div class="years" id="years" aria-label="Spieljahre; blau unterstrichen: El-Niño-Runden"></div>
+      <div class="hbtns"><button class="ghost" id="restart" type="button">Neues Spiel</button><button class="ghost" id="tomystery" type="button">Mystery ansehen</button><a class="ghost" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a></div>
+    </section>
+    <section class="box fever" aria-labelledby="fh">
+      <div class="fhead"><div><h2 class="comic-h" id="fh">Fieberkurve der Erde</h2><div class="tl">Thermometer, Temperaturverlauf und Folgekosten</div></div><div style="text-align:right"><div class="tbig" id="tbig"></div><div class="tl" id="tnote"></div></div></div>
+      <div class="fwrap"><svg id="fever" viewBox="0 0 720 330" role="img" aria-label="Fieberkurve: Temperatur von 2025 bis 2075 im Vergleich zum Stresstest und zur heutigen Politik, dazu Klimaschäden pro Jahr als Säulen"></svg><div class="ftt" id="fever-tt" hidden></div></div>
+      <div class="series"><span><b style="border-color:#E0393B"></b>Euer Weg</span><span><b style="border-color:#1B1B2F;border-top-style:dashed"></b>Stresstest ohne Klimaschutz (SSP5-8.5)</span><span><b style="border-color:#7D8597;border-top-style:dotted"></b>Heutige Politik</span><span><b style="border-color:#1F9D45;border-top-style:dotted"></b>Paris: 1,5 °C und 2 °C</span><span><i class="bar" style="background:#F2A900"></i>Klimaschäden, euer Weg</span><span><i class="bar" style="background:#fff;border-style:dashed"></i>Klimaschäden im Stresstest</span></div>
+      <details class="ftbl"><summary>Werte als Tabelle</summary><div class="tbl"><table id="fever-tbl"></table></div><p class="fsrc">Temperatur: an IPCC AR6 angepasste Interpolation. Hintergrundfarben: Kipprisiko nach IPCC-Synthesebericht 2023 (hoch ab 1,5 °C, sehr hoch ab 2,5 °C). Schäden: Spielfunktion, Spanne der Studien beim Darüberfahren. Der Stresstest ist ein Worst-Case-Pfad, keine Vorhersage.</p></details>
+    </section>
+  </div>
+
+  <div class="tiles" id="tiles" aria-label="Bilanz"></div>
+
+  <div id="verdict" hidden></div>
+
+  <section class="box" aria-labelledby="maph">
+    <h2 class="comic-h" id="maph">Weltkarte der Kipppunkte</h2>
+    <p class="sub">Jeder Punkt ist ein verwundbarer Teil des Erdsystems, dort eingezeichnet, wo er wirklich liegt. Der Ring zeigt den Kipp-Druck oder das Risiko. Ist er voll, kippt das Element und lässt sich nicht mehr zurückholen. Tippt auf einen Punkt!</p>
+    <div class="mapwrap">
+      <div>
+        <div class="mapscroll"><div class="mapbox"><svg id="map" viewBox="0 0 1000 520" role="img" aria-label="Weltkarte mit 24 verwundbaren Elementen des Erdsystems">
+          {{MAPBASE}}
+          <g id="links"></g><g id="markers"></g>
+        </svg></div></div>
+        <div class="maplegend" id="maplegend"></div>
+      </div>
+      <aside class="info" id="info" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <div class="main">
+    <div class="spheres" id="spheres"></div>
+    <section class="box" aria-labelledby="ctl">
+      <h2 class="comic-h" id="ctl">Weltklima-Steuerpult</h2>
+      <div class="kasse">
+        <div class="kassehead"><svg aria-hidden="true"><use href="#i-coin"/></svg><h3>Klimafonds</h3><span>Münzen für die nächsten 5 Jahre</span></div>
+        <div class="kassebody">
+          <div class="bline"><div><div class="bnote">Freie Münzen</div><div class="big" id="free">0</div></div><div class="bnote" id="bnote"></div></div>
+          <div class="coins" id="coins" aria-hidden="true"></div>
+          <div class="kassesec">Einnahmen</div>
+          <div class="kasserule">
+            <div class="lic"><svg><use href="#i-tag"/></svg></div>
+            <div><div class="nm">Abgabe auf Kohle, Öl &amp; Gas</div><div class="hint" id="co2hint"></div></div>
+            <div class="seg" id="co2" role="group" aria-label="CO₂-Abgabe Stufe"></div>
+            <div class="fx" id="co2fx"></div>
+            <label class="switch" style="grid-column:2/-1"><input type="checkbox" id="kg"> Einnahmen an ärmere Länder (Klimagerechtigkeit)</label>
+          </div>
+          <div class="kasserule">
+            <div class="lic"><svg><use href="#i-fs"/></svg></div>
+            <div><div class="nm">Fossile Subventionen abbauen</div><div class="hint">2022 zahlten Staaten rund 1,3 Bio. US-$ direkte Subventionen für Kohle, Öl und Gas, 2024 noch rund 725 Mrd. US-$. Das Geld wird frei, aber Energie und Dünger werden teurer.</div></div>
+            <div class="seg" id="fs" role="group" aria-label="Abbau fossiler Subventionen"></div>
+            <div class="fx" id="fsfx"></div>
+          </div>
+          <div class="kasserule">
+            <div class="lic"><svg><use href="#i-gb"/></svg></div>
+            <div><div class="nm">Grüne Anleihen</div><div class="hint">Geld von Banken und Sparern für Klimaprojekte (weltweit bisher über 4 Bio. US-$). Bringt sofort Münzen, muss aber mit Zinsen zurückgezahlt werden.</div></div>
+            <div class="seg" id="gb" role="group" aria-label="Grüne Anleihen"></div>
+            <div class="fx" id="gbfx"></div>
+          </div>
+          <div class="kassesec">Förderprogramme <small>(laufen weiter und kosten jede Runde)</small></div>
+          <div class="kasserule">
+            <div class="lic"><svg><use href="#i-EN"/></svg></div>
+            <div><div class="nm">Subventionen für Erneuerbare</div><div class="hint">Zuschüsse für Sonne, Wind und Speicher. 2024 waren 91 % der neuen Projekte günstiger als fossile Kraftwerke. Jede Münze lockt private Investitionen an.</div></div>
+            <div class="seg" id="ee" role="group" aria-label="Subventionen Erneuerbare"></div>
+            <div class="fx" id="eefx"></div>
+          </div>
+          <div class="kasserule">
+            <div class="lic"><svg><use href="#i-bau"/></svg></div>
+            <div><div class="nm">Klimafreundliches Bauen</div><div class="hint">Förderung für Dämmung, Wärmepumpen und kühle Häuser. Gebäude verursachen mit Strom und Wärme rund ein Fünftel der Treibhausgase.</div></div>
+            <div class="seg" id="bau" role="group" aria-label="Förderprogramm klimafreundliches Bauen"></div>
+            <div class="fx" id="baufx"></div>
+          </div>
+        </div>
+      </div>
+      <div class="spendhead"><span>Münzen einsetzen</span><small>Klimaschutz bremst die Erwärmung. Anpassung schützt die Menschen.</small></div>
+      <div id="levers"></div>
+      <button class="go" id="go" type="button">Weiter nach 2030!</button>
+    </section>
+  </div>
+
+  <section class="box">
+    <details>
+      <summary>Für Lehrkräfte: Klimafolgen, Auswahl &amp; Modell</summary>
+      <div class="teach">
+      <p>Die Tabelle stellt die wichtigsten Klimafolgen je Sphäre zusammen. Mit <span class="tag">im Spiel</span> markiert sind die 24 verwundbaren Kennzeichen (vier je Sphäre), die auf der Weltkarte verortet sind. „Spiel-Schwelle“ heißt: Hier gibt es keinen wissenschaftlich belegten Kipppunkt, das Spiel setzt eine Schwelle aus IPCC-Aussagen. Ausführlich mit allen Quellen: Begleitheft und Wissensbasis.</p>
+      <div class="links"><a class="ghost" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft für Lehrkräfte und Eltern</a><a class="ghost" href="wissensbasis.html" target="_blank" rel="noopener">Wissensbasis (Recherche)</a></div>
+      <div class="tbl"><table id="ftable"></table></div>
+      <p><b>Modell (stark vereinfacht):</b></p>
+      <ul>
+        <li><b>Stresstest:</b> Ohne Klimaschutz folgt das Spiel SSP5-8.5 (früher RCP8.5): CO₂-Ausstoß von 49,5 auf 123 Gt pro Jahr plus Rückkopplungen, Erwärmung von 1,4 °C (2025) über 2,4 °C (2050) auf rund 3,6 °C (2075), an IPCC AR6 angepasst; mit den Rückkopplungen im Spiel werden es rund 3,7 °C. Das ist ein Worst-Case-Pfad: Die gemessenen Emissionen 2025 (rund 42 Gt CO₂) liegen schon etwa 15 % darunter, mit heutiger Politik läuft die Welt eher auf 2,6–2,8 °C bis 2100 zu (graue Linie, Interpolation).</li>
+        <li><b>Temperatur:</b> Weniger Ausstoß als im Stresstest senkt die Temperatur über die kumulierten Emissionen: 0,5 °C je 1.000 Gt CO₂ (IPCC: wahrscheinlich 0,27–0,63, Bestwert 0,45; entlang SSP5-8.5 wirken andere Gase mit). Bei netto null bleibt die Temperatur etwa stabil. Die letzten Prozente Minderung sind schwerer als die ersten.</li>
+        <li><b>Kipp-Druck:</b> Liegt die Erwärmung über der Schwelle eines Elements, sammelt sich Druck an, abhängig von Höhe und Dauer der Überschreitung. Diese Überschreitungs-Logik ist eine Spielannahme, die in der Forschung diskutiert wird: Ein kurzes Überschießen muss nicht sofort zum Kippen führen. Schnelle Systeme kippen nach kurzer Zeit, Eisschilde erst nach Jahrzehnten. In der Wirklichkeit liegen die Bestwerte für Grönland, Westantarktis und Permafrost schon bei etwa 1,5 °C. Bei 100 gilt das Element als gekippt, also festgelegt; die Folgen können Jahrhunderte dauern. Die Korallenriffe starten als gekippt (Global Tipping Points Report 2025).</li>
+        <li><b>Rückkopplungen:</b> Grönland-Schmelzwasser schwächt die AMOC, die AMOC den Westafrikanischen Monsun und den Sahel. Antarktis und Südpolarmeer verstärken sich gegenseitig. Permafrost, Amazonas, Kongo-Torf und Südpolarmeer geben CO₂ ab. Bei den Nordwäldern gleichen sich CO₂ aus Bränden und die kühlende hellere Oberfläche etwa aus. Über 2 °C (häufig eisfreie Arktis) tauen Permafrost und Grönland schneller. Abholzung senkt die Amazonas-Schwelle von 3,5 °C bis auf etwa 1,5 °C. In vier Runden kommt ein starker El Niño (Spielannahme) und setzt Amazonas und Korallen zusätzlich unter Stress.</li>
+        <li><b>Meeresspiegel:</b> Anstieg (0,08 + 0,28·T) cm pro Jahr, im Stresstest rund 40 cm von 2025 bis 2075, nahe am IPCC-Median.</li>
+        <li><b>Klimafonds:</b> Grundbudget 7 Münzen je Runde, minus Klimaschäden. Einnahmen aus CO₂-Abgabe (nächste Runde), Abbau fossiler Subventionen und grünen Anleihen (Rückzahlung mit Zinsen). Förderprogramme kosten jede Runde Münzen, wirken aber stark.</li>
+        <li><b>Mensch:</b> Risiko = Gefahr × (1 − Schutz durch Anpassung). Je wärmer es wird, desto schwächer wirkt Anpassung (IPCC-Synthesebericht B.4.1). Ab 100 ist die Anpassungsgrenze überschritten. Die Nordseeküste startet mit hohem Schutz, Sahel, Indus-Tal und Golfregion mit wenig.</li>
+        <li><b>Kosten:</b> Schäden in % der Weltwirtschaft = 1,2·(T−1)² + 0,6·(T−1), gemindert durch Anpassung (bei 3 °C rund 6 %; Annahme: Welt-BIP 2025 rund 110 Bio. US-$, +2,5 % pro Jahr). Der IPCC nennt bewusst keine Einzelzahl. Vergleich: DICE-2023 rund 3 % bei 3 °C, Studien mit historischen Wirtschaftsdaten deutlich mehr. Die oft zitierte Studie Kotz u. a. (2024) wurde 2025 zurückgezogen und wird nicht verwendet.</li>
+        <li><b>Artenverlust:</b> obere Werte der IPCC-Spannen für Landarten mit sehr hohem Aussterberisiko: bis 14 % bei 1,5 °C, 18 % bei 2 °C, 29 % bei 3 °C, 39 % bei 4 °C. Die Mittelwerte liegen bei etwa 9–13 %.</li>
+        <li><b>Todesfälle:</b> Ausgangspunkt ist die WHO-Schätzung von rund 250.000 zusätzlichen Toten pro Jahr (2030–2050) durch Mangelernährung, Malaria, Durchfall und Hitze, skaliert mit der Erwärmung und gemindert durch Anpassung und Frühwarnung. Eine grobe Schätzung; nach 2050 ist sie hochgerechnet.</li>
+      </ul>
+      <p><b>Datenschutz:</b> Das Spiel lädt nichts aus dem Internet nach, setzt keine Cookies und speichert nur den Mystery-Fortschritt in diesem Browser.</p>
+      <p><b>Quellen (Auswahl):</b> IPCC AR6 Synthesebericht (2023), WGI und WGII (2021/2022), SROCC (2019), SR1.5 (2018); Armstrong McKay u. a. (2022), Science 377; Global Tipping Points Report (2025); Forster u. a. (2026), Indicators of Global Climate Change; Li u. a. (2023), Nature 615; Crezee u. a. (2022), Nature Geoscience 15; Vecellio u. a. (2022); WHO (2023); Lancet Countdown (2025); IMF (2025), Fossil Fuel Subsidies; Barrage &amp; Nordhaus (2024), PNAS; Generalplan Küstenschutz Niedersachsen/Bremen (2020).</p>
+      </div>
+    </details>
+  </section>
+</div>
+</div>
+</div>
+
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"></div>

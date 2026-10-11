@@ -1,0 +1,73 @@
+/* Begleitheft: Dokument im Stil von Terra Vergo, druckfreundlich */
+:root{--ink:#1B1B2F;--muted:#4A5266;--line:#D4D9E3;--paper:#fff;--sky:#B9E2FF;--action:#FFD23F;--narr:#FFF3A6;
+  --kryo:#4FB6E8;--pedo:#A0673A;--hydro:#1E6FD0;--atmo:#C2408F;--bio:#2FB24C;--mensch:#FF6B3D;
+  --f-comic:"Bangers","Impact","Arial Black",sans-serif;--f-body:"Lexend","Segoe UI",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{background:var(--sky)}
+body{margin:0;background:var(--sky);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.6;
+  background-image:radial-gradient(rgba(27,27,47,.08) 1.3px,transparent 1.6px);background-size:11px 11px}
+.doc{max-width:920px;margin:24px auto;padding:28px clamp(16px,4vw,48px) 40px;background:var(--paper);border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink)}
+@media (max-width:700px){.doc{margin:12px 12px;border-radius:14px}}
+.cover{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:20px;align-items:center;border-bottom:3px dashed var(--ink);padding-bottom:18px}
+@media (max-width:560px){.cover{grid-template-columns:1fr}.covgeo{display:none}}
+.covgeo{width:140px;height:auto;background:#DCEFFF;border:3px solid var(--ink);border-radius:18px;box-shadow:3px 3px 0 var(--ink)}
+.logo{font-family:var(--f-comic);font-size:clamp(2.6rem,7vw,4rem);line-height:.9;letter-spacing:.03em;color:#FF5A3C;-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink);transform:rotate(-2deg);display:inline-block;margin:0 0 10px}
+h1{font-family:var(--f-comic);font-weight:400;font-size:clamp(1.6rem,4vw,2.3rem);letter-spacing:.04em;line-height:1.1;margin:0 0 8px}
+.lead{font-size:1.08rem;font-weight:600;margin:0 0 6px;max-width:62ch}
+.meta{font-size:.85rem;color:var(--muted);margin:0}
+h2{font-family:var(--f-comic);font-weight:400;font-size:1.9rem;letter-spacing:.04em;line-height:1.1;margin:34px 0 10px;padding-top:6px}
+h3{font-size:1.08rem;margin:22px 0 6px}
+p,li{max-width:72ch}
+a{color:var(--hydro)}
+.glance{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
+@media (max-width:760px){.glance{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.glance div{border:2.5px solid var(--ink);border-radius:12px;padding:8px 10px;background:var(--narr);display:grid;gap:2px;font-size:.85rem;line-height:1.35}
+.glance b{font-size:.78rem}
+.toc{border:2.5px solid var(--ink);border-radius:12px;padding:10px 16px;margin:10px 0}
+.toc ol{columns:2;column-gap:28px;margin:6px 0 0;padding-left:20px}
+@media (max-width:560px){.toc ol{columns:1}}
+.toc li{font-size:.92rem}
+.note{border:3px solid var(--ink);border-radius:14px;background:#FFF6D6;padding:12px 16px;margin:14px 0;box-shadow:4px 4px 0 var(--ink);max-width:none}
+.tblw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.84rem;line-height:1.4}
+th{text-align:left;font-size:.74rem;color:var(--muted);padding:6px;border-bottom:2.5px solid var(--ink);vertical-align:bottom}
+td{padding:6px;border-bottom:1px solid var(--line);vertical-align:top}
+table.num td{font-variant-numeric:tabular-nums}
+table.el{min-width:720px}
+table.el .co{font-size:.76rem;color:var(--muted);white-space:nowrap}
+table.el td.q{font-size:.74rem;color:var(--muted)}
+td.lt{font-family:var(--f-comic);font-size:1.4rem;text-align:center;width:3.2em}
+.codes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+@media (max-width:560px){.codes{grid-template-columns:1fr}}
+.codes div{border:3px solid var(--ink);border-radius:12px;padding:10px 12px;display:grid;gap:2px;background:#fff}
+.codes .code{font-family:var(--f-comic);font-size:1.8rem;letter-spacing:.12em}
+.codes small{color:var(--muted);font-size:.78rem;line-height:1.3}
+.diag{margin:12px 0;border:2.5px solid var(--ink);border-radius:14px;padding:12px;background:#FFFDF2}
+.diag svg{width:100%;max-width:620px;height:auto;display:block;margin:auto}
+.diag figcaption{font-size:.78rem;color:var(--muted);text-align:center;margin-top:6px}
+.diag .edges path{fill:none;stroke:var(--ink);stroke-width:2.5;marker-end:url(#ah)}
+.diag .nodes rect{stroke:var(--ink);stroke-width:2.5}
+.diag .nodes text{font-family:var(--f-body);font-size:13.5px;font-weight:700;text-anchor:middle;fill:var(--ink)}
+.diag .atmo rect{fill:#F9E3F0}.diag .hydro rect{fill:#DDEBFB}.diag .kryo rect{fill:#E3F5FD}.diag .pedo rect{fill:#F3E6DA}.diag .bio rect{fill:#DDF6E3}.diag .mensch rect{fill:#FFE2D7}
+.diag .badges circle{fill:var(--action);stroke:var(--ink);stroke-width:2}
+.diag .badges text{font-family:var(--f-comic);font-size:14px;text-anchor:middle;fill:var(--ink)}
+.parents{border:3px solid var(--ink);border-radius:16px;padding:4px 20px 12px;background:#EEF8FF;margin-top:30px}
+.parents h2{margin-top:16px}
+ul.src li{font-size:.86rem;margin-bottom:4px}
+.small{font-size:.8rem;color:var(--muted)}
+@media print{
+  html,body{background:#fff}
+  body{font-size:10.5pt}
+  .doc{border:none;box-shadow:none;margin:0;max-width:none;padding:0}
+  .toc a{color:var(--ink);text-decoration:none}
+  a{color:var(--ink)}
+  h2{break-after:avoid;page-break-after:avoid}
+  h3{break-after:avoid}
+  #mystery,#spiel,#eltern{break-before:page;page-break-before:always}
+  table,figure,.note,.codes,.glance{break-inside:avoid}
+  tr{break-inside:avoid}
+  .tblw{overflow:visible}
+  table.el{min-width:0;font-size:7.6pt}
+  .logo{text-shadow:2px 2px 0 var(--ink)}
+}
+@page{size:A4;margin:16mm 15mm}
