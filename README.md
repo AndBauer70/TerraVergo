@@ -1,54 +1,55 @@
-# Terra Vergo
+# Prof. Geos Erdlabor
 
-Ein kybernetisches Klimaspiel mit Mystery-Einstieg für die Klassen 7 bis 10 am Gymnasium, mit Erweiterungen für die Oberstufe.
+Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkundeunterricht:
 
-Idee, Konzept und Spieldesign: Andreas Bauer. Technische Umsetzung mit Unterstützung von Claude.ai (Anthropic).
-
-**Spielen:** `index.html` im Browser öffnen oder über GitHub Pages aufrufen. Es wird nichts installiert, und das Spiel läuft auch offline.
-
-## Ablauf
-
-1. **Mystery „Das Rätsel vom Deich“.** Prof. Geo, Jannes aus Ostfriesland und Aputsiaq aus Grönland stellen die Leitfrage: *Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?* Die Gruppen verbinden 21 Karten zu einem Wirkungsgefüge. Jede gefundene Kernidee verrät einen Buchstaben des Codeworts für den Kontrollraum.
-2. **Spiel im Kontrollraum.** Die Gruppen steuern die Erde von 2025 bis 2075 in zehn Runden zu je fünf Jahren. Ziel: Kein weiteres Element des Erdsystems kippt, und die Menschen bleiben unter den Grenzen der Anpassung. Ohne Klimaschutz folgt das Spiel dem Stresstest SSP5-8.5 (früher RCP8.5) und erreicht 2075 rund 3,7 °C.
-
-## Inhalte
-
-24 verwundbare Elemente, vier je Sphäre, an ihrem realen Ort auf einer Weltkarte oder wahlweise auf einem drehbaren 3D-Globus:
-
-| Sphäre | Elemente |
+| Ordner | Anwendung |
 |---|---|
-| Kryosphäre | Grönländischer Eisschild, Westantarktischer Eisschild, Arktisches Sommermeereis, Gebirgsgletscher im Himalaya |
-| Pedosphäre | Permafrost in Jakutien, Böden im Mittelmeerraum, Torfmoore im Kongobecken, Ackerböden der Great Plains |
-| Hydrosphäre | Atlantische Umwälzströmung (AMOC), Meeresspiegel (Malediven), El Niño, Umwälzung im Südpolarmeer |
-| Atmosphäre | Westafrikanischer Monsun, Hitzewellen in Europa, Indischer Monsun und Starkregen, Tropische Wirbelstürme |
-| Biosphäre | Amazonas-Regenwald, Korallenriffe, Boreale Wälder, Nebelwälder in Costa Rica |
-| Mensch | Hitze am Persischen Golf, Ernährung im Sahel, Wasser im Indus-Tal, Küstenschutz an der Nordsee |
+| `klimasimulation/` | **Terra Vergo – Das Rätsel vom Deich**: Mystery und kybernetisches Klimaspiel 2025–2075, mit Begleitheft und Wissensbasis |
+| `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
 
-Der 3D-Globus lässt sich mit Maus, Finger oder Pfeiltasten drehen und per Knopf auf Kontinente, Arktis oder Antarktis ausrichten. Dort sind die Polargebiete ohne die Verzerrung der flachen Karte zu sehen.
+Beide Anwendungen liegen unverändert in ihren Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
-Dazu: Fieberkurve mit Thermometer und Folgekosten, 46 Wechselwirkungen (verstärkend, bremsend oder unklar, mit Kettenreaktionen und Rückkopplungen), Klimafonds mit Einnahmen und Förderprogrammen, Klimaschutz, Naturschutz und Anpassung, ein Comic nach jeder Runde und ein Bereich für Lehrkräfte.
+## Inhalt des Pakets
 
-## Material
+```
+index.html                     Startseite mit drehendem Globus und den Links zu den Anwendungen
+assets/fonts/                  Schriften Bangers und Lexend (lokal, SIL Open Font License)
+assets/vendor/                 d3-array und d3-geo (ISC-Lizenz) für den Globus
+assets/land110.js              Landflächen (Natural Earth, gemeinfrei)
+klimasimulation/               Terra Vergo
+erdbeben/                      Erdbeben-Globus
+.github/workflows/             tägliche Aktualisierung der Erdbebendaten
+.nojekyll                      GitHub Pages liefert alle Dateien unverändert aus
+.gitattributes                 einheitliche Zeilenenden
+```
 
-- `begleitheft.html`, `begleitheft.pdf` und `begleitheft.docx` (Word): Begleitheft für Lehrkräfte und Eltern mit Ablauf, Basiskonzepten der Geographie, Bezug zum Kerncurriculum, Schülerschwierigkeiten und Hilfen, Aufgaben, Klimagefühlen, Datenschutz, Glossar und Register
-- `wissensbasis.html` und `docs/wissensbasis.md`: die Recherche hinter dem Spiel mit allen Zahlen, Spannen, Vertrauensgraden und Quellen
-- `impressum.html`: Impressum, Urheberrecht und Datenschutzhinweise
-- Das Lösungsblatt mit Lösungsskizze und Codes ist bewusst nicht veröffentlicht, damit das Mystery ein Rätsel bleibt.
+## Auf GitHub hochladen (ohne Git)
 
-## Fachliche Grundlage
+1. Auf github.com ein neues, **öffentliches** Repository anlegen, zum Beispiel `erdlabor`.
+2. **Add file → Upload files**: den *Inhalt* dieses Ordners (nicht den Ordner selbst) in das Fenster ziehen und mit **Commit changes** bestätigen.
+   - Auf dem Mac sind die Dateien `.nojekyll`, `.gitattributes` und der Ordner `.github` versteckt. Im Finder mit **⌘ + ⇧ + .** einblenden, dann mit hochziehen.
+   - Falls `.github` beim Hochladen fehlt: **Add file → Create new file**, als Namen `.github/workflows/erdbebendaten-aktualisieren.yml` eintippen und den Inhalt der gleichnamigen Datei aus dem Paket hineinkopieren.
+3. **Settings → Pages**: unter „Build and deployment“ als Quelle **Deploy from a branch**, Branch `main`, Ordner `/ (root)` wählen und speichern.
+4. **Settings → Actions → General**: unter „Workflow permissions“ **Read and write permissions** wählen und speichern. Damit darf die tägliche Aktualisierung die Erdbebendaten speichern.
+5. Einmal von Hand starten: Reiter **Actions → Erdbebendaten aktualisieren → Run workflow**.
 
-IPCC-Synthesebericht 2023 (AR6), Berichte der Arbeitsgruppen I und II, Sonderbericht Ozean und Kryosphäre; Armstrong McKay u. a. (2022), Science 377; Global Tipping Points Report 2025; Forster u. a. (2026), Indicators of Global Climate Change. Stand: Oktober 2026. Das Spiel ist ein vereinfachtes Lernmodell: Es zeigt Richtungen und Größenordnungen, keine Vorhersagen.
+Nach wenigen Minuten ist alles erreichbar:
+
+- Startseite: `https://<benutzername>.github.io/erdlabor/`
+- Terra Vergo: `https://<benutzername>.github.io/erdlabor/klimasimulation/`
+- Erdbeben-Globus: `https://<benutzername>.github.io/erdlabor/erdbeben/`
+
+Hinweis: GitHub pausiert zeitgesteuerte Actions in Repositorys, in denen 60 Tage lang nichts passiert ist. Falls die Aktualisierung einmal stoppt, genügt im Reiter Actions ein Klick auf „Enable workflow“.
+
+## Weitere Anwendungen ergänzen
+
+1. Die neue Anwendung in einen eigenen Ordner legen, z. B. `vulkane/`, mit einer `index.html` darin.
+2. In der Startseite `index.html` eine der beiden Karten (`<a class="app" …>…</a>`) kopieren und `href`, Bild, Etikett, Titel und Text anpassen. Die Stelle ist mit einem Kommentar markiert. Die Karten ordnen sich von selbst in Spalten an.
 
 ## Datenschutz
 
-Das Spiel stellt keine Anfragen an fremde Server, setzt keine Cookies und sammelt keine Daten. Nur der Fortschritt im Mystery und die gewählte Kartenansicht werden lokal im Browser gespeichert. Beim Aufruf über GitHub Pages protokolliert GitHub die IP-Adresse der Besucher; Einzelheiten im Impressum.
-
-## Quellcode
-
-Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit den Paketen `markdown` und `beautifulsoup4`; für die Word-Datei zusätzlich Node.js mit dem npm-Paket `docx`) baut daraus `index.html`, `begleitheft.html`, `begleitheft.docx`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
+Die Startseite lädt ausschließlich eigene Dateien: keine fremden Schriften, keine CDNs, keine Cookies, kein Tracking. Das gilt auch für beide Anwendungen. Die Erdbebendaten holt die GitHub-Action ab, nicht der Browser der Schülerinnen und Schüler. Beim Aufruf über GitHub Pages protokolliert GitHub die IP-Adresse der Besucher; Einzelheiten im Impressum (`klimasimulation/impressum.html`, `erdbeben/impressum.html`).
 
 ## Urheberrecht
 
-© 2026 Andreas Bauer. Für Unterricht und andere nicht-kommerzielle Bildungszwecke darf Terra Vergo mit Quellenangabe frei genutzt werden. Für Vervielfältigung, Bearbeitung, Verbreitung oder kommerzielle Nutzung außerhalb der Grenzen des Urheberrechts ist die vorherige schriftliche Zustimmung nötig. Den vollständigen Wortlaut und einen Vorschlag für die Quellenangabe enthält `LICENSE.md`, die Anschrift `impressum.html`.
-
-Eingebettete Fremdinhalte behalten ihre eigenen, freien Lizenzen: Schriften Bangers und Lexend (SIL Open Font License 1.1, `LICENSE-SCHRIFTEN.txt`), d3-array 3.2.4, d3-geo 3.1.1 und world-atlas 2.0.2 (ISC-Lizenz, `LICENSE-D3-WORLD-ATLAS.txt`), Kartendaten von Natural Earth (gemeinfrei).
+© 2026 Andreas Bauer. Idee, Konzept und Gestaltung. Technische Umsetzung mit Unterstützung von Claude.ai (Anthropic). Für Unterricht und andere nicht-kommerzielle Bildungszwecke frei nutzbar mit Quellenangabe; Näheres in `klimasimulation/LICENSE.md` und in den Impressen. Eingebettete Fremdinhalte behalten ihre eigenen freien Lizenzen (siehe `assets/fonts/LICENSE-SCHRIFTEN.txt`, `assets/vendor/LICENSE-D3-WORLD-ATLAS.txt`).
