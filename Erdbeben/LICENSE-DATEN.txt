@@ -1,0 +1,42 @@
+Daten im Erdbeben-Globus
+========================
+
+Erdbebendaten (index.html, data/erdbeben.json)
+----------------------------------------------
+Quelle: U.S. Geological Survey (USGS), Earthquake Hazards Program,
+Echtzeit-Feeds und FDSN-Ereignisdienst (ANSS Comprehensive Catalog).
+https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+
+Von USGS erstellte Daten sind in den USA gemeinfrei (Public Domain).
+Der USGS bittet um die Nennung "U.S. Geological Survey".
+https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits
+
+Wer selbst Daten von GEOFON importiert: GEOFON-Datenzentrum des
+GFZ Helmholtz-Zentrums für Geoforschung, Lizenz CC BY 4.0.
+https://geofon.gfz.de/eqinfo/faq/
+
+
+Plattengrenzen und Achsen der Tiefseegräben (eingebettet in index.html)
+------------------------------------------------------------------------
+Bird, P. (2003): An updated digital model of plate boundaries.
+Geochemistry, Geophysics, Geosystems 4(3), 1027. doi:10.1029/2001GC000252
+
+Aufbereitet von Hugo Ahlenius, Nordpil, mit GeoJSON-Daten von csterling:
+https://github.com/fraxen/tectonicplates
+
+Lizenz: Open Data Commons Attribution License (ODC-BY 1.0)
+http://opendatacommons.org/licenses/by/1.0/
+Die Bearbeiter bitten um Nennung von Hugo Ahlenius, Nordpil und Peter Bird.
+
+Für den Erdbeben-Globus wurden die Linien auf 0,1 Grad vereinfacht. Die Achsen
+der Tiefseegräben wurden aus den Subduktionsgrenzen ausgeschnitten; die Achse
+des Puerto-Rico-Grabens wurde von Hand ergänzt. Die Tiefen der Gräben sind auf
+100 m gerundet (Quellen in wissensbasis.html).
+
+
+Landflächen, Gebirge, Großstädte (eingebettet in index.html)
+------------------------------------------------------------
+Natural Earth, https://www.naturalearthdata.com/
+Gemeinfrei (Public Domain). https://www.naturalearthdata.com/about/terms-of-use/
+Verwendet: Land 1:110 Mio. (über world-atlas), geography regions 1:50 Mio.
+(Klasse Range/mtn), populated places 1:50 Mio. (ab 5 Mio. Einwohnern).
