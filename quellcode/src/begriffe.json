@@ -1,0 +1,703 @@
+{
+ "glossar": [
+  {
+   "t": "Albedo",
+   "v": [
+    "Albedo"
+   ],
+   "d": "Anteil des Sonnenlichts, den eine Oberfläche zurückwirft. Frischer Schnee und Eis werfen viel Licht zurück, dunkles Meerwasser nur wenig. Schmilzt Eis, nimmt die Erde mehr Sonnenenergie auf."
+  },
+  {
+   "t": "AMOC (Atlantische Umwälzströmung)",
+   "v": [
+    "AMOC",
+    "Umwälzströmung",
+    "Golfstrom-System"
+   ],
+   "d": "Meeresströmungssystem im Atlantik: Warmes Oberflächenwasser fließt nach Norden, kühlt ab, sinkt in die Tiefe und fließt nach Süden zurück. Im Spiel heißt es „Golfstrom-System“; der Golfstrom ist ein Teil davon."
+  },
+  {
+   "t": "Anforderungsbereich",
+   "v": [
+    "Anforderungsbereich"
+   ],
+   "d": "Art der geistigen Anforderung einer Aufgabe (nicht gleichbedeutend mit ihrer Schwierigkeit): I Wiedergeben und Beschreiben, II Erklären und Anwenden, III Beurteilen und Bewerten. Operatoren wie „beschreibe“ oder „beurteile“ zeigen den Bereich an."
+  },
+  {
+   "t": "Anpassung",
+   "v": [
+    "Anpassung",
+    "anpassen"
+   ],
+   "d": "Maßnahmen, die Menschen und Natur vor den Folgen des Klimawandels schützen, zum Beispiel Deiche, Hitzeschutzpläne oder Frühwarnsysteme. Im Spiel ein eigener Bereich des Klimafonds."
+  },
+  {
+   "t": "Anpassungsgrenze",
+   "v": [
+    "Anpassungsgrenze",
+    "Grenzen der Anpassung",
+    "Grenze der Anpassung"
+   ],
+   "d": "Punkt, ab dem Anpassung ein Risiko nicht mehr ausreichend senken kann. Weiche Grenzen lassen sich mit Geld, Wissen oder Politik verschieben, harte nicht (IPCC). Im Spiel ist sie bei einem Risiko von 100 erreicht."
+  },
+  {
+   "t": "Atmosphäre",
+   "v": [
+    "Atmosphäre",
+    "Lufthülle"
+   ],
+   "d": "Lufthülle der Erde. Im Spiel eine eigene Sphäre und der globale Knoten, über den sich die Erwärmung auf alle Elemente verteilt."
+  },
+  {
+   "t": "Basiskonzept",
+   "v": [
+    "Basiskonzept",
+    "Basisteilkonzept"
+   ],
+   "d": "Grundlegende Denkweise des Fachs Geographie, mit der sich ganz unterschiedliche Themen erschließen lassen, zum Beispiel System, Maßstäblichkeit oder Nachhaltigkeit."
+  },
+  {
+   "t": "Biosphäre",
+   "v": [
+    "Biosphäre"
+   ],
+   "d": "Gesamtheit aller Lebewesen und ihrer Lebensräume."
+  },
+  {
+   "t": "CO₂-Entnahme",
+   "v": [
+    "CO₂-Entnahme"
+   ],
+   "d": "Verfahren, die Kohlendioxid aus der Luft holen und speichern, etwa durch Aufforstung oder technische Anlagen. Neuartige technische Verfahren spielen bisher nur eine winzige Rolle."
+  },
+  {
+   "t": "El Niño",
+   "v": [
+    "El Niño",
+    "El-Niño",
+    "ENSO"
+   ],
+   "d": "Natürliche Klimaschwankung im tropischen Pazifik, bei der das Oberflächenwasser im Osten ungewöhnlich warm ist. El Niño verändert weltweit Regen und Temperaturen und gehört zum Wechselspiel ENSO."
+  },
+  {
+   "t": "Eisschild",
+   "v": [
+    "Eisschild"
+   ],
+   "d": "Gewaltige Eismasse, die ein ganzes Land oder einen Kontinent bedeckt, wie in Grönland und der Antarktis. Anders als Meereis liegt sie auf Land; schmilzt sie, steigt der Meeresspiegel."
+  },
+  {
+   "t": "Emissionen",
+   "v": [
+    "Emission",
+    "Ausstoß"
+   ],
+   "d": "Freisetzung von Treibhausgasen in die Atmosphäre. Das Spiel zählt sie in Gigatonnen (Milliarden Tonnen) CO₂ pro Jahr."
+  },
+  {
+   "t": "Exposition",
+   "v": [
+    "Exposition"
+   ],
+   "d": "Wie stark Menschen, Gebäude oder Ökosysteme einer Gefahr ausgesetzt sind, zum Beispiel durch ihre Lage an einer Küste."
+  },
+  {
+   "t": "Fehlanpassung",
+   "v": [
+    "Fehlanpassung"
+   ],
+   "d": "Anpassung, die langfristig mehr schadet als nützt, etwa ein Deich, hinter dem immer dichter gebaut wird, sodass im Ernstfall mehr auf dem Spiel steht."
+  },
+  {
+   "t": "Fehlvorstellung",
+   "v": [
+    "Fehlvorstellung",
+    "Alltagsvorstellung"
+   ],
+   "d": "Vorstellung, die Lernende aus dem Alltag mitbringen und die fachlich nicht trägt, etwa dass der Treibhauseffekt vom Ozonloch kommt. Sie lässt sich nur verändern, wenn sie sichtbar gemacht und ernst genommen wird."
+  },
+  {
+   "t": "Feuchtkugeltemperatur",
+   "v": [
+    "Feuchtkugeltemperatur",
+    "feuchte Hitze"
+   ],
+   "d": "Temperatur, die ein Thermometer mit feuchtem Stoff anzeigt; sie verbindet Hitze und Luftfeuchte. Ab etwa 30–31 °C kann sich auch ein junger, gesunder Mensch nicht mehr dauerhaft durch Schwitzen kühlen."
+  },
+  {
+   "t": "Gravitativer Fingerabdruck",
+   "v": [
+    "gravitative Fingerabdruck",
+    "gravitativen Fingerabdruck",
+    "Fingerabdruck"
+   ],
+   "d": "Regionales Muster des Meeresspiegels beim Schmelzen eines Eisschilds. Weil die Anziehungskraft der Eismasse nachlässt und sich das entlastete Land hebt, sinkt der Meeresspiegel in der Nähe; weit entfernt steigt er stärker als im globalen Mittel."
+  },
+  {
+   "t": "Großkreis",
+   "v": [
+    "Großkreis"
+   ],
+   "d": "Kreis auf der Kugeloberfläche, dessen Mittelpunkt der Kugelmittelpunkt ist, etwa der Äquator. Ein Großkreisbogen ist die kürzeste Verbindung zwischen zwei Punkten auf der Kugel (Orthodrome). Auf dem 3D-Globus verlaufen die Wechselwirkungen als Großkreisbögen."
+  },
+  {
+   "t": "Hydrosphäre",
+   "v": [
+    "Hydrosphäre"
+   ],
+   "d": "Das Wasser der Erde: Ozeane, Flüsse, Seen und Grundwasser."
+  },
+  {
+   "t": "IPCC (Weltklimarat)",
+   "v": [
+    "IPCC",
+    "Weltklimarat"
+   ],
+   "d": "Zwischenstaatlicher Ausschuss für Klimaänderungen. Er forscht nicht selbst, sondern fasst den Stand der Forschung zusammen. Der Synthesebericht von 2023 ist seine jüngste Gesamtbilanz."
+  },
+  {
+   "t": "Kartennetzentwurf (Projektion)",
+   "v": [
+    "Kartennetzentwurf",
+    "Projektion",
+    "Verebnung"
+   ],
+   "d": "Verfahren, die gekrümmte Erdoberfläche in die Ebene einer Karte zu übertragen. Jeder Entwurf verzerrt Flächen, Winkel oder Strecken; nur der Globus zeigt die Erde unverzerrt."
+  },
+  {
+   "t": "Kaskade (Kettenreaktion)",
+   "v": [
+    "Kaskade",
+    "Kettenreaktion",
+    "Dominoeffekt"
+   ],
+   "d": "Ein Element verändert sich oder kippt und stößt dadurch weitere an, wie bei umfallenden Dominosteinen."
+  },
+  {
+   "t": "Kipp-Druck",
+   "v": [
+    "Kipp-Druck"
+   ],
+   "d": "Spielbegriff: Anzeige, die sich aufbaut, solange die Temperatur über der Schwelle eines Elements liegt. Bei 100 gilt das Element als gekippt."
+  },
+  {
+   "t": "Kippelement",
+   "v": [
+    "Kippelement",
+    "Kipp-Element"
+   ],
+   "d": "Großer Teil des Erdsystems, der beim Überschreiten einer Schwelle in einen anderen Zustand wechseln kann, etwa ein Eisschild, die AMOC oder der Amazonas-Regenwald."
+  },
+  {
+   "t": "Kipppunkt",
+   "v": [
+    "Kipppunkt"
+   ],
+   "d": "Schwelle, ab der sich eine Veränderung selbst verstärkt und kaum noch umkehren lässt. Ein überschrittener Kipppunkt legt eine Entwicklung fest, die oft Jahrzehnte bis Jahrtausende dauert."
+  },
+  {
+   "t": "Klima und Wetter",
+   "v": [
+    "=Klima",
+    "Wetter"
+   ],
+   "d": "Wetter ist der Zustand der Atmosphäre an einem Ort zu einer bestimmten Zeit. Klima beschreibt das Wetter eines Ortes oder Gebiets statistisch, also Mittelwerte, Schwankungen und Extreme, in der Regel über 30 Jahre."
+  },
+  {
+   "t": "Klimafonds",
+   "v": [
+    "Klimafonds"
+   ],
+   "d": "Spielbegriff: das Budget einer Gruppe mit Einnahmen (etwa CO₂-Abgabe) und Ausgaben für Klimaschutz, Naturschutz und Anpassung."
+  },
+  {
+   "t": "Klimaschutz",
+   "v": [
+    "Klimaschutz",
+    "Minderung"
+   ],
+   "d": "Maßnahmen, die den Ausstoß von Treibhausgasen senken oder CO₂ binden, zum Beispiel erneuerbare Energien oder der Schutz von Wäldern und Mooren."
+  },
+  {
+   "t": "Kohlenstoffsenke",
+   "v": [
+    "Senke",
+    "Kohlenstoffspeicher"
+   ],
+   "d": "Speicher, der mehr CO₂ aufnimmt als abgibt, etwa Wälder, Moore oder der Ozean. Wird er geschwächt, bleibt mehr CO₂ in der Luft."
+  },
+  {
+   "t": "Korallenbleiche",
+   "v": [
+    "Korallenbleiche",
+    "bleichen"
+   ],
+   "d": "Ist das Wasser zu warm, stoßen Korallen die Algen ab, mit denen sie zusammenleben, und werden weiß. Hält der Hitzestress an, sterben sie."
+  },
+  {
+   "t": "Kryosphäre",
+   "v": [
+    "Kryosphäre"
+   ],
+   "d": "Alle Formen von Eis und Schnee: Gletscher, Eisschilde, Meereis und gefrorene Böden."
+  },
+  {
+   "t": "Kumulierte Emissionen",
+   "v": [
+    "kumuliert"
+   ],
+   "d": "Summe aller CO₂-Emissionen seit Beginn der Industrialisierung. Die Erwärmung wächst etwa im gleichen Verhältnis; nach dem IPCC wahrscheinlich um 0,27–0,63 °C je 1.000 Gigatonnen CO₂."
+  },
+  {
+   "t": "Kybernetik",
+   "v": [
+    "Kybernetik",
+    "kybernetisch"
+   ],
+   "d": "Wissenschaft von Steuerung und Regelung in Systemen mit Rückkopplungen. Frederic Vester übertrug sie auf Umwelt und Gesellschaft, etwa im Spiel „Ökolopoly“."
+  },
+  {
+   "t": "Maßstabsebene",
+   "v": [
+    "Maßstabsebene",
+    "Maßstäblichkeit"
+   ],
+   "d": "Betrachtungsebene eines Raums: lokal, regional, national, international und global; die Standards für die Oberstufe ergänzen die planetare Ebene. Beim Wechsel der Ebene ändert sich oft die Einschätzung einer Sache."
+  },
+  {
+   "t": "Meereis",
+   "v": [
+    "Meereis"
+   ],
+   "d": "Gefrorenes Meerwasser, das auf dem Ozean schwimmt. Sein Schmelzen hebt den Meeresspiegel praktisch nicht, verstärkt aber die Erwärmung der Arktis."
+  },
+  {
+   "t": "Meeresspiegelanstieg",
+   "v": [
+    "Meeresspiegel"
+   ],
+   "d": "Anstieg des mittleren Wasserstands der Ozeane, vor allem durch die Wärmeausdehnung des Wassers und schmelzendes Landeis. Er fällt regional unterschiedlich aus."
+  },
+  {
+   "t": "Mensch-Umwelt-System",
+   "v": [
+    "Mensch-Umwelt-System"
+   ],
+   "d": "Geographische Sicht auf Natur und Gesellschaft als ein System, in dem sich beide gegenseitig beeinflussen."
+  },
+  {
+   "t": "Monsun",
+   "v": [
+    "Monsun"
+   ],
+   "d": "Großräumiger Wind, der mit den Jahreszeiten seine Richtung wechselt und Regen- und Trockenzeiten bringt, etwa in Westafrika und Südasien."
+  },
+  {
+   "t": "Mystery",
+   "v": [
+    "Mystery"
+   ],
+   "d": "Unterrichtsmethode: Gruppen ordnen Informationskarten zu einem Wirkungsgefüge, um eine rätselhafte Leitfrage zu beantworten, die zwei scheinbar unverbundene Sachverhalte verbindet, oft Personen an verschiedenen Orten."
+  },
+  {
+   "t": "Netto-Null",
+   "v": [
+    "Netto-Null",
+    "Netto-Ausstoß",
+    "netto null"
+   ],
+   "d": "Es wird nicht mehr CO₂ ausgestoßen, als der Atmosphäre wieder entzogen wird. Dann steigt die Temperatur in etwa nicht weiter."
+  },
+  {
+   "t": "Operator",
+   "v": [
+    "Operator"
+   ],
+   "d": "Handlungsanweisendes Verb in einer Aufgabe, etwa beschreiben, erläutern oder beurteilen. Es zeigt, was verlangt ist und zu welchem Anforderungsbereich die Aufgabe gehört."
+  },
+  {
+   "t": "Ozonloch",
+   "v": [
+    "Ozonloch",
+    "Ozonschicht"
+   ],
+   "d": "Starke Ausdünnung der Ozonschicht in großer Höhe, vor allem über der Antarktis, verursacht durch FCKW. Ein anderes Problem als der Treibhauseffekt."
+  },
+  {
+   "t": "Pariser Klimaabkommen",
+   "v": [
+    "Pariser Klimaabkommen",
+    "Pariser Klimaabkommens"
+   ],
+   "d": "Internationaler Vertrag von 2015: Die Erwärmung soll auf deutlich unter 2 °C begrenzt werden, möglichst auf 1,5 °C, jeweils gegenüber der vorindustriellen Zeit."
+  },
+  {
+   "t": "Pedosphäre",
+   "v": [
+    "Pedosphäre"
+   ],
+   "d": "Die Böden der Erde, die oberste, belebte Schicht der Erdkruste."
+  },
+  {
+   "t": "Permafrost",
+   "v": [
+    "Permafrost"
+   ],
+   "d": "Boden, der mindestens zwei Jahre in Folge gefroren ist. Er speichert riesige Mengen Kohlenstoff, der beim Tauen als CO₂ und Methan frei werden kann."
+  },
+  {
+   "t": "Resilienz",
+   "v": [
+    "Resilienz"
+   ],
+   "d": "Fähigkeit eines Systems, Störungen aufzufangen, sich zu erholen und sich anzupassen, zum Beispiel einer Küstenregion nach einer Sturmflut."
+  },
+  {
+   "t": "Risiko",
+   "v": [
+    "Risiko"
+   ],
+   "d": "Mögliche negative Folgen. Nach dem IPCC entsteht es aus Gefahr, Exposition und Verwundbarkeit; das Spiel vereinfacht: Risiko = Gefahr × (1 − Schutz)."
+  },
+  {
+   "t": "Rückkopplung",
+   "v": [
+    "Rückkopplung"
+   ],
+   "d": "Eine Wirkung wirkt auf ihre Ursache zurück. Verstärkend (positive Rückkopplung): Die Veränderung schaukelt sich auf. Ausgleichend (negative Rückkopplung): Die Veränderung wird gebremst. „Positiv“ heißt hier nicht „gut“."
+  },
+  {
+   "t": "Sphäre",
+   "v": [
+    "Sphäre"
+   ],
+   "d": "Teilbereich des Erdsystems, etwa Atmosphäre, Hydrosphäre, Kryosphäre, Lithosphäre, Pedosphäre und Biosphäre. Das Spiel nutzt fünf davon (ohne Lithosphäre); der Mensch kommt als sechste Sphäre hinzu."
+  },
+  {
+   "t": "Spiel-Schwelle",
+   "v": [
+    "Spiel-Schwelle"
+   ],
+   "d": "Schwelle, die das Spiel für Elemente ohne belegten Kipppunkt setzt, gestützt auf Aussagen des IPCC."
+  },
+  {
+   "t": "SSP5-8.5",
+   "v": [
+    "SSP5-8.5",
+    "RCP8.5"
+   ],
+   "d": "Klimaszenario mit sehr hohen Emissionen, Nachfolger von RCP8.5. Im Spiel der Stresstest ohne Klimaschutz. Die Zahl 8.5 steht für einen zusätzlichen Strahlungsantrieb von 8,5 Watt pro Quadratmeter um 2100."
+  },
+  {
+   "t": "Stresstest",
+   "v": [
+    "Stresstest"
+   ],
+   "d": "Im Spiel der Pfad ohne Klimaschutz nach SSP5-8.5. Er zeigt den ungünstigen Fall und ist eine Warnung, keine Vorhersage."
+  },
+  {
+   "t": "Syndrom",
+   "v": [
+    "Syndrom"
+   ],
+   "d": "Typisches Muster von Mensch-Umwelt-Problemen, das in vielen Regionen ähnlich auftritt, etwa das Sahel-Syndrom. Der Syndromansatz ist im Kerncurriculum der Oberstufe verankert."
+  },
+  {
+   "t": "System",
+   "v": [
+    "System"
+   ],
+   "d": "Gefüge aus Elementen und ihren Beziehungen. Als Ganzes zeigt es Eigenschaften, die die einzelnen Teile allein nicht haben."
+  },
+  {
+   "t": "Szenario",
+   "v": [
+    "Szenario",
+    "Szenarien"
+   ],
+   "d": "Wenn-dann-Rechnung für eine mögliche Zukunft, zum Beispiel: Wenn die Emissionen so steigen, dann wird es so warm. Ein Szenario ist keine Vorhersage."
+  },
+  {
+   "t": "Treibhauseffekt",
+   "v": [
+    "Treibhauseffekt"
+   ],
+   "d": "Treibhausgase lassen Sonnenlicht weitgehend durch, nehmen aber die Wärmestrahlung der Erdoberfläche auf und strahlen einen Teil zurück. Der natürliche Effekt macht Leben möglich, der vom Menschen verstärkte erwärmt die Erde."
+  },
+  {
+   "t": "Treibhausgase",
+   "v": [
+    "Treibhausgas"
+   ],
+   "d": "Gase, die Wärmestrahlung aufnehmen und so den Treibhauseffekt bewirken. Den natürlichen Effekt tragen vor allem Wasserdampf und Kohlendioxid (CO₂); der Mensch verstärkt ihn vor allem durch CO₂, Methan und Lachgas."
+  },
+  {
+   "t": "Unumkehrbarkeit",
+   "v": [
+    "Unumkehrbarkeit",
+    "unumkehrbar"
+   ],
+   "d": "Eine Veränderung lässt sich in menschlichen Zeiträumen nicht rückgängig machen, selbst wenn ihre Ursache wegfällt."
+  },
+  {
+   "t": "Vertrauensgrad",
+   "v": [
+    "Vertrauensgrad",
+    "hohes Vertrauen",
+    "mittleres Vertrauen",
+    "geringes Vertrauen",
+    "sehr hohes Vertrauen"
+   ],
+   "d": "Angabe des IPCC, wie gut eine Aussage durch Belege gestützt ist und wie einig sich die Forschung ist, von „sehr gering“ bis „sehr hoch“."
+  },
+  {
+   "t": "Verwundbarkeit (Vulnerabilität)",
+   "v": [
+    "Verwundbarkeit",
+    "verwundbar",
+    "Vulnerabilität"
+   ],
+   "d": "Anfälligkeit von Menschen oder Ökosystemen für Schäden und fehlende Fähigkeit, damit umzugehen. Sie hängt stark von Geld, Infrastruktur und Wissen ab."
+  },
+  {
+   "t": "Vorindustrielle Zeit",
+   "v": [
+    "1850–1900",
+    "vorindustriell"
+   ],
+   "d": "Bezugszeitraum für die Erwärmung, meist die Jahre 1850–1900."
+  },
+  {
+   "t": "Wärmeausdehnung",
+   "v": [
+    "Wärmeausdehnung"
+   ],
+   "d": "Wasser dehnt sich aus, wenn es wärmer wird. Das ist einer der Hauptgründe für den Meeresspiegelanstieg."
+  },
+  {
+   "t": "Wechselwirkung",
+   "v": [
+    "Wechselwirkung"
+   ],
+   "d": "Im engeren Sinn die gegenseitige Beeinflussung zweier Elemente; im Spiel jede gerichtete Wirkung eines Elements auf ein anderes. Im Spiel gibt es 46; sie verstärken, bremsen oder wirken in unklarer Richtung."
+  },
+  {
+   "t": "Wirkungsgefüge",
+   "v": [
+    "Wirkungsgefüge"
+   ],
+   "d": "Darstellung von Ursachen und Wirkungen als Netz aus Elementen und Pfeilen."
+  },
+  {
+   "t": "Zeitskala",
+   "v": [
+    "Zeitskal",
+    "Zeitspanne"
+   ],
+   "d": "Zeitraum, in dem eine Veränderung abläuft: bei Korallen Jahre, beim Amazonas Jahrzehnte bis ein Jahrhundert, bei Eisschilden Jahrtausende."
+  }
+ ],
+ "register": [
+  {
+   "t": "Amazonas-Regenwald",
+   "v": [
+    "Amazonas"
+   ]
+  },
+  {
+   "t": "Beutelsbacher Konsens",
+   "v": [
+    "Beutelsbacher Konsens"
+   ]
+  },
+  {
+   "t": "Bildungsstandards",
+   "v": [
+    "Bildungsstandards",
+    "Standards"
+   ]
+  },
+  {
+   "t": "Deich",
+   "v": [
+    "Deich"
+   ]
+  },
+  {
+   "t": "Differenzierung",
+   "v": [
+    "Differenzierung"
+   ]
+  },
+  {
+   "t": "Frühwarnung",
+   "v": [
+    "Frühwarnung",
+    "Frühwarnsystem"
+   ]
+  },
+  {
+   "t": "Funktion (Basisteilkonzept)",
+   "v": [
+    "Funktion"
+   ]
+  },
+  {
+   "t": "Gletscher",
+   "v": [
+    "Gletscher"
+   ]
+  },
+  {
+   "t": "Global Tipping Points Report",
+   "v": [
+    "Global Tipping Points Report",
+    "GTPR"
+   ]
+  },
+  {
+   "t": "Globale Temperaturerhöhung (Kurve)",
+   "v": [
+    "Globale Temperaturerhöhung"
+   ]
+  },
+  {
+   "t": "Grönländischer Eisschild",
+   "v": [
+    "Grönland"
+   ]
+  },
+  {
+   "t": "Hitzewelle",
+   "v": [
+    "Hitzewelle"
+   ]
+  },
+  {
+   "t": "Kerncurriculum",
+   "v": [
+    "Kerncurriculum",
+    "Kerncurricula",
+    "KC"
+   ]
+  },
+  {
+   "t": "Klimagefühle, Klimaangst",
+   "v": [
+    "Klimagefühl",
+    "Klimaangst",
+    "Angst"
+   ]
+  },
+  {
+   "t": "Kognitiver Konflikt",
+   "v": [
+    "kognitive Konflikt",
+    "kognitiven Konflikt",
+    "Widerspruch"
+   ]
+  },
+  {
+   "t": "Korallenriffe",
+   "v": [
+    "Korallen",
+    "Riff"
+   ]
+  },
+  {
+   "t": "Küstenschutz",
+   "v": [
+    "Küstenschutz"
+   ]
+  },
+  {
+   "t": "Macht (Basiskonzept)",
+   "v": [
+    "Macht"
+   ]
+  },
+  {
+   "t": "Nachhaltigkeit",
+   "v": [
+    "Nachhaltigkeit"
+   ]
+  },
+  {
+   "t": "Nordseeküste",
+   "v": [
+    "Nordsee"
+   ]
+  },
+  {
+   "t": "Ökolopoly",
+   "v": [
+    "Ökolopoly"
+   ]
+  },
+  {
+   "t": "Prozess (Basisteilkonzept)",
+   "v": [
+    "Prozess"
+   ]
+  },
+  {
+   "t": "Raummuster",
+   "v": [
+    "Raummuster"
+   ]
+  },
+  {
+   "t": "Raumperspektiven",
+   "v": [
+    "Raumperspektive",
+    "Perspektiven auf Raum"
+   ]
+  },
+  {
+   "t": "Raumverständnis",
+   "v": [
+    "Raumverständnis",
+    "Raumkonzept"
+   ]
+  },
+  {
+   "t": "Sahel",
+   "v": [
+    "Sahel"
+   ]
+  },
+  {
+   "t": "Struktur (Basisteilkonzept)",
+   "v": [
+    "Struktur"
+   ]
+  },
+  {
+   "t": "Sturmflut",
+   "v": [
+    "Sturmflut"
+   ]
+  },
+  {
+   "t": "Systemdenken, Systemkompetenz",
+   "v": [
+    "Systemdenken",
+    "Systemkompetenz"
+   ]
+  },
+  {
+   "t": "Vorhersagen – Beobachten – Erklären",
+   "v": [
+    "Vorhersagen – Beobachten – Erklären",
+    "Vorhersage notieren",
+    "Vorhersage, Entscheidung"
+   ]
+  },
+  {
+   "t": "Westantarktischer Eisschild",
+   "v": [
+    "Westantarktis"
+   ]
+  }
+ ]
+}

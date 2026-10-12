@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Baut Terra Vergo aus den Quelldateien in src/ zu index.html, begleitheft.html und wissensbasis.html (Ordner build/).
-Aufruf: python3 build.py   (benötigt Python 3 und das Paket markdown)"""
+Aufruf: python3 build.py   (benötigt Python 3 mit den Paketen markdown und beautifulsoup4;
+für begleitheft.docx zusätzlich Node.js mit dem npm-Paket docx)"""
 import base64, re, pathlib
 ROOT = pathlib.Path(__file__).parent
 SRC = ROOT / 'src'
@@ -47,12 +48,26 @@ print('index.html', len(full) // 1024, 'KB')
 
 # ---------- Begleitheft ----------
 bh_body = (SRC / 'begleitheft_body.html').read_text().replace('{{ELEMENTS}}', (SRC / 'bh_elements.html').read_text()).replace('{{LINKS}}', (SRC / 'bh_links.html').read_text())
+# Abschnittsnummern, Inhaltsverzeichnis, Glossar und Register; dazu eine strukturierte Fassung für die Word-Datei (make_docx.js)
+import json, sys
+sys.path.insert(0, str(ROOT))
+import bh_tools
+bh_body, bh_stats = bh_tools.process(bh_body, json.loads((SRC / 'begriffe.json').read_text()))
+(OUT / 'begleitheft.json').write_text(json.dumps(bh_tools.to_blocks(bh_body), ensure_ascii=False))
+print('Begleitheft:', bh_stats)
 bh_sprite = f'<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{pat}{geo_symbol}</defs></svg>'
 bh_css = (SRC / 'bh.css').read_text()
 bh = (head.replace('Terra Vergo: ein kybernetisches Klimaspiel', 'Begleitheft zu Terra Vergo, einem kybernetischen Klimaspiel')
       + f'<title>Begleitheft Terra Vergo</title>\n<style>\n{fontcss}</style>\n<style>\n{bh_css}\n</style>\n</head>\n<body>\n{bh_sprite}\n{bh_body}\n</body>\n</html>\n')
 (OUT / 'begleitheft.html').write_text(bh)
 print('begleitheft.html', len(bh) // 1024, 'KB')
+# Word-Fassung des Begleithefts (nur wenn Node.js mit dem Paket docx vorhanden ist)
+import shutil, subprocess
+if shutil.which('node') and (ROOT / 'make_docx.js').exists():
+    if subprocess.run(['node', str(ROOT / 'make_docx.js')], cwd=ROOT).returncode == 0:
+        bh_tools.fix_docx_bookmarks(OUT / 'begleitheft.docx')
+else:
+    print('Hinweis: Node.js oder make_docx.js fehlt, begleitheft.docx wird nicht erzeugt.')
 
 # ---------- Wissensbasis als lesbare Seite ----------
 import markdown

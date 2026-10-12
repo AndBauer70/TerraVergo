@@ -30,7 +30,7 @@ Dazu: Fieberkurve mit Thermometer und Folgekosten, 46 Wechselwirkungen (verstär
 
 ## Material
 
-- `begleitheft.html` und `begleitheft.pdf`: Begleitheft für Lehrkräfte und Eltern (Ablauf, Didaktik, Kerncurriculum, Klimagefühle, Datenschutz)
+- `begleitheft.html`, `begleitheft.pdf` und `begleitheft.docx` (Word): Begleitheft für Lehrkräfte und Eltern mit Ablauf, Basiskonzepten der Geographie, Bezug zum Kerncurriculum, Schülerschwierigkeiten und Hilfen, Aufgaben, Klimagefühlen, Datenschutz, Glossar und Register
 - `wissensbasis.html` und `docs/wissensbasis.md`: die Recherche hinter dem Spiel mit allen Zahlen, Spannen, Vertrauensgraden und Quellen
 - `impressum.html`: Impressum, Urheberrecht und Datenschutzhinweise
 - Das Lösungsblatt mit Lösungsskizze und Codes ist bewusst nicht veröffentlicht, damit das Mystery ein Rätsel bleibt.
@@ -45,7 +45,7 @@ Das Spiel stellt keine Anfragen an fremde Server, setzt keine Cookies und sammel
 
 ## Quellcode
 
-Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit dem Paket `markdown`) baut daraus `index.html`, `begleitheft.html`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
+Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit den Paketen `markdown` und `beautifulsoup4`; für die Word-Datei zusätzlich Node.js mit dem npm-Paket `docx`) baut daraus `index.html`, `begleitheft.html`, `begleitheft.docx`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
 
 ## Urheberrecht
 

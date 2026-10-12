@@ -89,6 +89,36 @@ ul.src li{font-size:.86rem;margin-bottom:4px}
 @page{size:A4;margin:16mm 15mm}
 .foot{margin-top:18px;text-align:center}
 table.el.lk td.sg1{color:#B42325;font-weight:800;white-space:nowrap}table.el.lk td.sg-1{color:#1E6FD0;font-weight:800;white-space:nowrap}table.el.lk td.sg0{color:#4A5266;font-weight:800;white-space:nowrap}
+/* Überarbeitung: Nummern, Inhaltsverzeichnis, Glossar, Register */
+h2 .num,h3 .num{display:inline-block;min-width:1.6em;color:#E0393B}
+h3 .num{min-width:2.3em}
+.toc ol{list-style:none;padding-left:0}
+.toc li .num{display:inline-block;min-width:1.8em;font-weight:800;color:var(--muted)}
+table.bk td:first-child,table.fv td:first-child{width:22%}
+table.fv td:first-child{font-style:italic}
+dl.glossar{columns:2;column-gap:28px;margin:10px 0}
+dl.glossar .gi{break-inside:avoid;margin:0 0 9px}
+dl.glossar dt{font-weight:800;font-size:.92rem;scroll-margin-top:12px}
+dl.glossar dd{margin:1px 0 0;font-size:.86rem;line-height:1.45}
+dl.glossar dt:target,dl.glossar dt:target+dd{background:#FFF3A6}
+@media (max-width:640px){dl.glossar{columns:1}}
+.register{columns:3;column-gap:24px;font-size:.84rem;margin-top:8px}
+.register .rg{break-inside:avoid-column}
+.register h4{font-family:var(--f-comic);font-weight:400;font-size:1.25rem;letter-spacing:.04em;margin:8px 0 2px;color:#E0393B;break-after:avoid}
+.register ul{list-style:none;padding:0;margin:0}
+.register li{margin:0 0 3px;line-height:1.35;break-inside:avoid}
+.register .rt{font-weight:700}
+.register a{text-decoration:none}
+.register a.g{display:inline-block;border:1.5px solid currentColor;border-radius:4px;padding:0 3px;font-size:.72rem;font-weight:800;line-height:1.2}
+@media (max-width:760px){.register{columns:2}}
+@media (max-width:460px){.register{columns:1}}
+h2,h3{scroll-margin-top:12px}
+@media print{dl.glossar{columns:2}.register{columns:3;font-size:8pt}dl.glossar dd{font-size:8.6pt}h2 .num,h3 .num{color:#B42325}}
+@media print{
+  table.fv,table.bk,table.el{break-inside:auto}
+  thead{display:table-header-group}
+  #basiskonzepte,#schwierigkeiten,#glossar,#register{break-before:page;page-break-before:always}
+}
 
 .doc h1{font-size:clamp(1.8rem,4.5vw,2.6rem)} .doc table{min-width:640px} .doc td,.doc th{font-size:.8rem} .wbhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;border-bottom:3px dashed var(--ink);padding-bottom:10px;margin-bottom:10px}
 
