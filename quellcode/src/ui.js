@@ -21,7 +21,7 @@ function nextNino(){for(let i=G.r;i<ROUNDS;i++)if(ENSO[i])return `${YEAR0+DT*i}�
 /* ===================== Kopf ===================== */
 function tipText(){
   const n=nTip(G);
-  if(G.over){const nh=Object.keys(G.humanCrossed).length;return n+nh?`Die Erde hat Narben bekommen: ${n} weitere ${n===1?'Element':'Elemente'} im Erdsystem gekippt${nh?` und ${nh} beim Menschen`:''}. Schaut in der Fieberkurve nach, wann es passiert ist. Was hättet ihr früher tun können?`:'Großartig! Im Spiel ist kein weiteres Element gekippt. Ihr habt verstanden: Früh handeln wirkt am stärksten!';}
+  if(G.over){const nh=Object.keys(G.humanCrossed).length;return n+nh?`Die Erde hat Narben bekommen: ${n} weitere ${n===1?'Element':'Elemente'} im Erdsystem gekippt${nh?` und ${nh} beim Menschen`:''}. Schaut bei „Globale Temperaturerhöhung“ nach, wann es passiert ist. Was hättet ihr früher tun können?`:'Großartig! Im Spiel ist kein weiteres Element gekippt. Ihr habt verstanden: Früh handeln wirkt am stärksten!';}
   const nino=ENSO[G.r]===1?' Achtung: In diesen fünf Jahren kommt ein starker El Niño (Spielannahme). Das setzt Korallen und Amazonas zusätzlich unter Stress.':'';
   if(G.r===0)return 'Willkommen im Kontrollraum! Die Erde hat schon rund 1,4 °C Fieber, und die Korallenriffe haben ihren Kipppunkt bereits überschritten. Euer Ziel: bis 2075 kein weiterer Kipppunkt, und die Menschen schützen. Im Stresstest ohne Klimaschutz steigt das Fieber bis 2075 auf rund 3,7 °C. Früh handeln wirkt am stärksten!'+nino;
   let worst=null,wp=-1;for(const k of TIPK){if(G.tipped[k])continue;const v=G.S[k]+(G.T-effTc(k,G))*40;if(v>wp){wp=v;worst=k;}}
@@ -42,7 +42,7 @@ function renderTop(){
   document.getElementById('years').innerHTML=h;
   const T=G.T;
   document.getElementById('tbig').textContent=`${fmt(T,2)} °C`;
-  document.getElementById('tnote').textContent=T<1.5?'Unter der 1,5-Grad-Grenze von Paris.':T<2?'Über 1,5 °C, aber unter 2 °C.':'Über der Pariser 2-Grad-Grenze!';
+  document.getElementById('tnote').textContent=T<1.5?'Unter der 1,5-Grad-Grenze des Pariser Klimaabkommens.':T<2?'Über 1,5 °C, aber unter 2 °C.':'Über der 2-Grad-Grenze des Pariser Klimaabkommens!';
 }
 
 /* ===================== Fieberkurve mit Thermometer und Folgekosten ===================== */

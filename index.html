@@ -499,6 +499,8 @@ ol.cas{margin:0;padding-left:0;list-style:none;display:grid;gap:3px;font-size:.8
 ol.cas .back{color:#1E6FD0;font-weight:700}
 @media (min-width:1001px){.mapwrap .info{max-height:calc(100vh - 24px);overflow:auto;position:sticky;top:12px;overscroll-behavior:contain}}
 @media (pointer:coarse){.lhit{stroke-width:26}}
+.fhead>div:last-child{margin-left:auto;max-width:15.5em}
+#tnote{text-wrap:balance}
 
 </style>
 </head>
@@ -873,8 +875,8 @@ ol.cas .back{color:#1E6FD0;font-weight:700}
       <div class="hbtns"><button class="ghost" id="restart" type="button">Neues Spiel</button><button class="ghost" id="tomystery" type="button">Mystery ansehen</button><a class="ghost" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a></div>
     </section>
     <section class="box fever" aria-labelledby="fh">
-      <div class="fhead"><div><h2 class="comic-h" id="fh">Fieberkurve der Erde</h2><div class="tl">Thermometer, Temperaturverlauf und Folgekosten</div></div><div style="text-align:right"><div class="tbig" id="tbig"></div><div class="tl" id="tnote"></div></div></div>
-      <div class="fwrap"><svg id="fever" viewBox="0 0 720 330" role="img" aria-label="Fieberkurve: Temperatur von 2025 bis 2075 im Vergleich zum Stresstest und zur heutigen Politik, dazu Klimaschäden pro Jahr als Säulen"></svg><div class="ftt" id="fever-tt" hidden></div></div>
+      <div class="fhead"><div><h2 class="comic-h" id="fh">Globale Temperaturerhöhung</h2><div class="tl">Thermometer, Temperaturverlauf und Folgekosten</div></div><div style="text-align:right"><div class="tbig" id="tbig"></div><div class="tl" id="tnote"></div></div></div>
+      <div class="fwrap"><svg id="fever" viewBox="0 0 720 330" role="img" aria-label="Globale Temperaturerhöhung: Temperatur von 2025 bis 2075 im Vergleich zum Stresstest und zur heutigen Politik, dazu Klimaschäden pro Jahr als Säulen"></svg><div class="ftt" id="fever-tt" hidden></div></div>
       <div class="series"><span><b style="border-color:#E0393B"></b>Euer Weg</span><span><b style="border-color:#1B1B2F;border-top-style:dashed"></b>Stresstest ohne Klimaschutz (SSP5-8.5)</span><span><b style="border-color:#7D8597;border-top-style:dotted"></b>Heutige Politik</span><span><b style="border-color:#1F9D45;border-top-style:dotted"></b>Paris: 1,5 °C und 2 °C</span><span><i class="bar" style="background:#F2A900"></i>Klimaschäden, euer Weg</span><span><i class="bar" style="background:#fff;border-style:dashed"></i>Klimaschäden im Stresstest</span></div>
       <details class="ftbl"><summary>Werte als Tabelle</summary><div class="tbl"><table id="fever-tbl"></table></div><p class="fsrc">Temperatur: an IPCC AR6 angepasste Interpolation. Hintergrundfarben: Kipprisiko nach IPCC-Synthesebericht 2023 (hoch ab 1,5 °C, sehr hoch ab 2,5 °C). Schäden: Spielfunktion, Spanne der Studien beim Darüberfahren. Der Stresstest ist ein Worst-Case-Pfad, keine Vorhersage.</p></details>
     </section>
@@ -1285,7 +1287,7 @@ function nextNino(){for(let i=G.r;i<ROUNDS;i++)if(ENSO[i])return `${YEAR0+DT*i}�
 /* ===================== Kopf ===================== */
 function tipText(){
   const n=nTip(G);
-  if(G.over){const nh=Object.keys(G.humanCrossed).length;return n+nh?`Die Erde hat Narben bekommen: ${n} weitere ${n===1?'Element':'Elemente'} im Erdsystem gekippt${nh?` und ${nh} beim Menschen`:''}. Schaut in der Fieberkurve nach, wann es passiert ist. Was hättet ihr früher tun können?`:'Großartig! Im Spiel ist kein weiteres Element gekippt. Ihr habt verstanden: Früh handeln wirkt am stärksten!';}
+  if(G.over){const nh=Object.keys(G.humanCrossed).length;return n+nh?`Die Erde hat Narben bekommen: ${n} weitere ${n===1?'Element':'Elemente'} im Erdsystem gekippt${nh?` und ${nh} beim Menschen`:''}. Schaut bei „Globale Temperaturerhöhung“ nach, wann es passiert ist. Was hättet ihr früher tun können?`:'Großartig! Im Spiel ist kein weiteres Element gekippt. Ihr habt verstanden: Früh handeln wirkt am stärksten!';}
   const nino=ENSO[G.r]===1?' Achtung: In diesen fünf Jahren kommt ein starker El Niño (Spielannahme). Das setzt Korallen und Amazonas zusätzlich unter Stress.':'';
   if(G.r===0)return 'Willkommen im Kontrollraum! Die Erde hat schon rund 1,4 °C Fieber, und die Korallenriffe haben ihren Kipppunkt bereits überschritten. Euer Ziel: bis 2075 kein weiterer Kipppunkt, und die Menschen schützen. Im Stresstest ohne Klimaschutz steigt das Fieber bis 2075 auf rund 3,7 °C. Früh handeln wirkt am stärksten!'+nino;
   let worst=null,wp=-1;for(const k of TIPK){if(G.tipped[k])continue;const v=G.S[k]+(G.T-effTc(k,G))*40;if(v>wp){wp=v;worst=k;}}
@@ -1306,7 +1308,7 @@ function renderTop(){
   document.getElementById('years').innerHTML=h;
   const T=G.T;
   document.getElementById('tbig').textContent=`${fmt(T,2)} °C`;
-  document.getElementById('tnote').textContent=T<1.5?'Unter der 1,5-Grad-Grenze von Paris.':T<2?'Über 1,5 °C, aber unter 2 °C.':'Über der Pariser 2-Grad-Grenze!';
+  document.getElementById('tnote').textContent=T<1.5?'Unter der 1,5-Grad-Grenze des Pariser Klimaabkommens.':T<2?'Über 1,5 °C, aber unter 2 °C.':'Über der 2-Grad-Grenze des Pariser Klimaabkommens!';
 }
 
 /* ===================== Fieberkurve mit Thermometer und Folgekosten ===================== */

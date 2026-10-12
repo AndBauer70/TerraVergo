@@ -263,3 +263,5 @@ ol.cas{margin:0;padding-left:0;list-style:none;display:grid;gap:3px;font-size:.8
 ol.cas .back{color:#1E6FD0;font-weight:700}
 @media (min-width:1001px){.mapwrap .info{max-height:calc(100vh - 24px);overflow:auto;position:sticky;top:12px;overscroll-behavior:contain}}
 @media (pointer:coarse){.lhit{stroke-width:26}}
+.fhead>div:last-child{margin-left:auto;max-width:15.5em}
+#tnote{text-wrap:balance}
