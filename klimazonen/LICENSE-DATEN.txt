@@ -1,0 +1,40 @@
+Daten in Klimazonen der Erde
+============================
+
+1. Klimadaten des Deutschen Wetterdienstes
+------------------------------------------
+Quelle: Deutscher Wetterdienst (DWD), Climate Data Center (CDC),
+Globale CLIMAT-Daten, langjährige Mittel (multi-annual means) 1991–2020:
+  - Lufttemperatur, Monatsmittel
+  - Niederschlag, Monatssummen
+  - Stationsliste (stations_list_CLIMAT_data.txt)
+https://opendata.dwd.de/climate_environment/CDC/observations_global/CLIMAT/multi_annual/
+
+Lizenz: Creative Commons Namensnennung 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/deed.de
+Nutzungsbedingungen des CDC:
+https://opendata.dwd.de/climate_environment/CDC/Nutzungsbedingungen_German.pdf
+
+Quellenvermerk: Datenbasis: Deutscher Wetterdienst, eigene Bearbeitung
+
+Bearbeitung: Auswahl von Stationen, Berechnung der Jahresmittel, Ergänzung
+einzelner fehlender Monate aus den Nachbarmonaten, Korrektur von zwei
+Koordinatenfehlern (Abisko, Tiznit), Entfernen unplausibler Werte, deutsche
+Stations- und Ländernamen. Einzelheiten in wissensbasis.html.
+
+2. WMO-Klimanormalwerte der NOAA
+--------------------------------
+Für die Stationen Kilimandscharo (Flughafen, WMO 63791) und Jungfraujoch
+(WMO 06730):
+WMO Member Nations (2023): WMO Climatological Standard Normals for
+1991-2020 (NCEI Accession 0253808). NOAA National Centers for Environmental
+Information. Dataset. https://doi.org/10.25921/800j-vn07
+
+Die Daten sind frei zugänglich. NCEI nennt keine ausdrückliche Lizenz;
+gebeten wird um die obige Zitierung.
+
+3. Land und Gebirge
+-------------------
+Natural Earth, https://www.naturalearthdata.com – gemeinfrei (public domain).
+Landflächen in der Aufbereitung world-atlas von Michael Bostock, siehe
+LICENSE-D3-WORLD-ATLAS.txt.
