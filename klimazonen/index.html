@@ -146,7 +146,7 @@ svg .lab.r{font-size:11.5px;font-style:italic;font-weight:700;fill:var(--range)}
 
 /* Diagramm */
 .plotscroll{overflow-x:auto}
-#plot{display:block;width:100%;min-width:680px;height:auto;border:3px solid var(--ink);border-radius:12px;background:#F7FBFF;touch-action:manipulation}
+#plot{display:block;width:100%;min-width:560px;max-width:900px;margin:0 auto;height:auto;border:3px solid var(--ink);border-radius:12px;background:#F7FBFF;touch-action:manipulation}
 #plot text{font-family:var(--f-body);fill:var(--ink)}
 .foot{font-size:.78rem;color:var(--muted)}
 details.teach summary{cursor:pointer;font-family:var(--f-comic);font-size:1.5rem;letter-spacing:.04em}
@@ -248,8 +248,8 @@ details.teach p,details.teach li{max-width:78ch;font-size:.9rem}
 
   <section class="box" aria-labelledby="h-plot">
     <h2 class="comic-h" id="h-plot">Temperatur und Breitengrad</h2>
-    <p class="sub">Jeder Punkt ist wieder eine Station: links der Südpol, in der Mitte der Äquator, rechts der Nordpol. Je höher ein Punkt liegt, desto wärmer ist es dort im Jahresmittel. Dreiecke sind Stationen über 1.500 m Höhe.</p>
-    <div class="plotscroll"><svg id="plot" viewBox="0 0 1000 470" role="img" aria-label="Streudiagramm: Jahresmitteltemperatur aller Stationen nach geographischer Breite"></svg></div>
+    <p class="sub">Jeder Punkt ist wieder eine Station. Senkrecht steht die geographische Breite wie auf der Karte: oben der Nordpol, in der Mitte der Äquator, unten der Südpol. Je weiter rechts ein Punkt liegt, desto wärmer ist es dort im Jahresmittel. Dreiecke sind Stationen über 1.500 m Höhe.</p>
+    <div class="plotscroll"><svg id="plot" viewBox="0 0 1000 640" role="img" aria-label="Streudiagramm: Jahresmitteltemperatur aller Stationen nach geographischer Breite"></svg></div>
   </section>
 
   <section class="box">
@@ -536,32 +536,34 @@ function climDiagram(s){
   o+=`<text x="${X0}" y="${Y1+45}" font-size="10" fill="#4A5266">Mittelwerte 1991–2020 · Jahresmittel ${nf(s.t)} °C${P?` · ${P.reduce((a,b)=>a+b,0).toLocaleString('de-DE')} mm`:''}</text>`;
   return o;}
 
-/* ---------- Temperatur-Breiten-Diagramm ---------- */
-const PL={X0:62,X1:976,Y0:22,Y1:400,tmin:-60,tmax:32};
-const px=la=>PL.X0+(la+90)/180*(PL.X1-PL.X0),py=t=>PL.Y1-(t-PL.tmin)/(PL.tmax-PL.tmin)*(PL.Y1-PL.Y0);
+/* ---------- Temperatur-Breiten-Diagramm: Breite senkrecht (Nordpol oben), Temperatur waagerecht ---------- */
+const PL={X0:78,X1:960,Y0:36,Y1:584,tmin:-60,tmax:32};
+const px=t=>PL.X0+(t-PL.tmin)/(PL.tmax-PL.tmin)*(PL.X1-PL.X0),py=la=>PL.Y0+(90-la)/180*(PL.Y1-PL.Y0);
 function drawPlot(){const svg=document.getElementById('plot');const on=anyOn();let o='';
   o+=`<rect x="${PL.X0}" y="${PL.Y0}" width="${PL.X1-PL.X0}" height="${PL.Y1-PL.Y0}" fill="#fff" stroke="#1B1B2F" stroke-width="2"/>`;
-  // Zonenbänder der eingeschalteten Zonen
-  if(on&&ST.mode==='zones'){const b=[PL.tmin,...ST.lim,PL.tmax];for(const z of ST.zones){const a=Math.max(PL.tmin,b[z]),c=Math.min(PL.tmax,b[z+1]);o+=`<rect x="${PL.X0}" y="${py(c)}" width="${PL.X1-PL.X0}" height="${py(a)-py(c)}" fill="${ZHEX[z]}" fill-opacity=".14"/>`;}}
-  if(on&&ST.mode==='range')o+=`<rect x="${PL.X0}" y="${py(ST.hi)}" width="${PL.X1-PL.X0}" height="${py(ST.lo)-py(ST.hi)}" fill="${RHEX}" fill-opacity=".14"/>`;
-  for(let t=-60;t<=30;t+=10){o+=`<line x1="${PL.X0}" x2="${PL.X1}" y1="${py(t)}" y2="${py(t)}" stroke="#E3E8F0"/><text x="${PL.X0-8}" y="${py(t)+4}" text-anchor="end" font-size="12" style="font-variant-numeric:tabular-nums">${t}</text>`;}
-  o+=`<text transform="translate(18,${(PL.Y0+PL.Y1)/2}) rotate(-90)" text-anchor="middle" font-size="12.5" font-weight="700">Jahresmitteltemperatur in °C</text>`;
-  // Zonengrenzen
-  ST.lim.forEach((v,i)=>{o+=`<line x1="${PL.X0}" x2="${PL.X1}" y1="${py(v)}" y2="${py(v)}" stroke="#1B1B2F" stroke-width="1.4" stroke-dasharray="6 4"/><text x="${PL.X1-6}" y="${py(v)-5}" text-anchor="end" font-size="11.5" font-weight="700" stroke="#fff" stroke-width="3" paint-order="stroke">${nf(v,v%1?1:0)} °C</text>`;});
-  // Breitenkreise
-  for(const [lat,n] of [[-66.56,'Polarkreis'],[-23.44,'Wendekreis'],[0,'Äquator'],[23.44,'Wendekreis'],[66.56,'Polarkreis']]){
-    o+=`<line x1="${px(lat)}" x2="${px(lat)}" y1="${PL.Y0}" y2="${PL.Y1}" stroke="#12306E" stroke-width="${lat?1.3:2}" ${lat?'stroke-dasharray="7 5"':''} opacity=".7"/><text x="${px(lat)}" y="${PL.Y0-6}" text-anchor="middle" font-size="11" font-weight="700" fill="#12306E">${n}</text>`;}
-  for(let la=-90;la<=90;la+=30)o+=`<text x="${px(la)}" y="${PL.Y1+18}" text-anchor="middle" font-size="12" style="font-variant-numeric:tabular-nums">${la===0?'0°':Math.abs(la)+'° '+(la<0?'S':'N')}</text>`;
-  o+=`<text x="${(PL.X0+PL.X1)/2}" y="${PL.Y1+40}" text-anchor="middle" font-size="12.5" font-weight="700">Geographische Breite</text><text x="${PL.X0}" y="${PL.Y1+40}" font-size="11.5" fill="#4A5266">← Südpol</text><text x="${PL.X1}" y="${PL.Y1+40}" text-anchor="end" font-size="11.5" fill="#4A5266">Nordpol →</text>`;
+  // Zonenbänder der eingeschalteten Zonen (senkrecht)
+  if(on&&ST.mode==='zones'){const b=[PL.tmin,...ST.lim,PL.tmax];for(const z of ST.zones){const a=Math.max(PL.tmin,b[z]),c=Math.min(PL.tmax,b[z+1]);o+=`<rect x="${px(a)}" y="${PL.Y0}" width="${px(c)-px(a)}" height="${PL.Y1-PL.Y0}" fill="${ZHEX[z]}" fill-opacity=".14"/>`;}}
+  if(on&&ST.mode==='range')o+=`<rect x="${px(ST.lo)}" y="${PL.Y0}" width="${px(ST.hi)-px(ST.lo)}" height="${PL.Y1-PL.Y0}" fill="${RHEX}" fill-opacity=".14"/>`;
+  // Temperaturraster und Achse unten
+  for(let t=-60;t<=30;t+=10){o+=`<line x1="${px(t)}" x2="${px(t)}" y1="${PL.Y0}" y2="${PL.Y1}" stroke="#E3E8F0"/><text x="${px(t)}" y="${PL.Y1+18}" text-anchor="middle" font-size="12" style="font-variant-numeric:tabular-nums">${t}</text>`;}
+  o+=`<text x="${(PL.X0+PL.X1)/2}" y="${PL.Y1+40}" text-anchor="middle" font-size="12.5" font-weight="700">Jahresmitteltemperatur in °C</text><text x="${PL.X0}" y="${PL.Y1+40}" font-size="11.5" fill="#4A5266">← kälter</text><text x="${PL.X1}" y="${PL.Y1+40}" text-anchor="end" font-size="11.5" fill="#4A5266">wärmer →</text>`;
+  // Zonengrenzen (senkrecht)
+  ST.lim.forEach(v=>{o+=`<line x1="${px(v)}" x2="${px(v)}" y1="${PL.Y0}" y2="${PL.Y1}" stroke="#1B1B2F" stroke-width="1.4" stroke-dasharray="6 4"/><text x="${px(v)}" y="${PL.Y0-8}" text-anchor="middle" font-size="11.5" font-weight="700">${nf(v,v%1?1:0)} °C</text>`;});
+  // Breitenkreise (waagerecht, wie auf der Karte)
+  for(const [lat,n] of [[66.56,'nördl. Polarkreis'],[23.44,'nördl. Wendekreis'],[0,'Äquator'],[-23.44,'südl. Wendekreis'],[-66.56,'südl. Polarkreis']]){
+    o+=`<line x1="${PL.X0}" x2="${PL.X1}" y1="${py(lat)}" y2="${py(lat)}" stroke="#12306E" stroke-width="${lat?1.3:2}" ${lat?'stroke-dasharray="7 5"':''} opacity=".7"/><text x="${PL.X0+8}" y="${py(lat)-5}" font-size="11" font-weight="700" fill="#12306E" stroke="#fff" stroke-width="3" paint-order="stroke">${n}</text>`;}
+  for(let la=-90;la<=90;la+=30)o+=`<text x="${PL.X0-8}" y="${py(la)+4}" text-anchor="end" font-size="12" style="font-variant-numeric:tabular-nums">${la===0?'0°':Math.abs(la)+'° '+(la<0?'S':'N')}</text>`;
+  o+=`<text transform="translate(16,${(PL.Y0+PL.Y1)/2}) rotate(-90)" text-anchor="middle" font-size="12.5" font-weight="700">Geographische Breite</text>`;
+  o+=`<text x="${PL.X1-6}" y="${PL.Y0+16}" text-anchor="end" font-size="11.5" fill="#4A5266">Nordpol ↑</text><text x="${PL.X1-6}" y="${PL.Y1-8}" text-anchor="end" font-size="11.5" fill="#4A5266">Südpol ↓</text>`;
   // Punkte: graue zuerst
   PPOS=new Array(S.length);let dots='',hot='';
-  for(const s of S){const m=on&&match(s);if(on&&!m&&!ST.grey)continue;const x=px(s.la),y=py(clamp(s.t,PL.tmin,PL.tmax)),r=m?4.2:2.8;
+  for(const s of S){const m=on&&match(s);if(on&&!m&&!ST.grey)continue;const x=px(clamp(s.t,PL.tmin,PL.tmax)),y=py(s.la),r=m?4.2:2.8;
     const fill=m?colorOf(s):'#AEB6C6',st=m?'#1B1B2F':'#6B7385',sw=m?1:.6;
     const shp=s.h>=1500?`<path d="M${x.toFixed(1)},${(y-r-1.5).toFixed(1)} L${(x+r+1).toFixed(1)},${(y+r).toFixed(1)} L${(x-r-1).toFixed(1)},${(y+r).toFixed(1)} Z" fill="${fill}" stroke="${st}" stroke-width="${sw}"/>`:`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${fill}" stroke="${st}" stroke-width="${sw}"/>`;
     if(m)hot+=shp;else dots+=shp;PPOS[s.i]=[x,y,r,m];}
   o+=dots+hot;
-  if(ST.sel){const s=ST.sel,x=px(s.la),y=py(s.t);o+=`<circle class="selring" cx="${x}" cy="${y}" r="8"/><circle class="selring2" cx="${x}" cy="${y}" r="10.5"/>`;
-    const right=x<PL.X1-180;o+=`<text x="${x+(right?14:-14)}" y="${y-10}" text-anchor="${right?'start':'end'}" font-size="12.5" font-weight="700" stroke="#fff" stroke-width="3.5" paint-order="stroke">${esc(s.n)} · ${nf(s.t)} °C</text>`;}
+  if(ST.sel){const s=ST.sel,x=px(s.t),y=py(s.la);o+=`<circle class="selring" cx="${x}" cy="${y}" r="8"/><circle class="selring2" cx="${x}" cy="${y}" r="10.5"/>`;
+    const right=x<PL.X1-200;o+=`<text x="${x+(right?14:-14)}" y="${y-10}" text-anchor="${right?'start':'end'}" font-size="12.5" font-weight="700" stroke="#fff" stroke-width="3.5" paint-order="stroke">${esc(s.n)} · ${nf(s.t)} °C</text>`;}
   svg.innerHTML=o;}
 
 /* ---------- Ablauf ---------- */
