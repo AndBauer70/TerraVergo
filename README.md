@@ -7,7 +7,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `klimasimulation/` | **Terra Vergo – Das Rätsel vom Deich**: Mystery und kybernetisches Klimaspiel 2025–2075, mit Begleitheft und Wissensbasis |
 | `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
 
-Beide Anwendungen liegen unverändert in ihren Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
+Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
 ## Inhalt des Pakets
 
