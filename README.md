@@ -6,6 +6,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 |---|---|
 | `klimasimulation/` | **Terra Vergo – Das Rätsel vom Deich**: Mystery und kybernetisches Klimaspiel 2025–2075, mit Begleitheft und Wissensbasis |
 | `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
+| `christallers-land/` | **Christallers Land**: Planspiel zur Theorie der zentralen Orte in fünf Leveln, mit Anleitung in `LIESMICH.txt` |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -18,6 +19,7 @@ assets/vendor/                 d3-array und d3-geo (ISC-Lizenz) für den Globus
 assets/land110.js              Landflächen (Natural Earth, gemeinfrei)
 klimasimulation/               Terra Vergo
 erdbeben/                      Erdbeben-Globus
+christallers-land/             Christallers Land
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus
 .gitattributes                 einheitliche Zeilenenden
