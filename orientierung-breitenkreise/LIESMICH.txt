@@ -1,0 +1,34 @@
+Orientierung auf unserer Erde: Die Breitenkreise
+Lernanwendung zu Globus, Gradnetz und Kartenentwürfen – Leitmotiv „Gerade oder gebogen?“
+==========================================================================================
+
+Inhalt des Ordners
+------------------
+index.html                  Die Lernanwendung für die Schülerinnen und Schüler (Start hier)
+begleitheft.html            Begleitheft für Lehrkräfte und Eltern: Ablauf, Lösungen, Differenzierung
+wissensbasis.html           Fachlicher Hintergrund mit Quellen
+impressum.html              Impressum, Lizenzen und Datenschutz
+LICENSE-SCHRIFTEN.txt       Lizenz der eingebetteten Schriften (SIL Open Font License 1.1)
+LICENSE-D3-WORLD-ATLAS.txt  Lizenzen der Bibliothek d3, von world-atlas und Natural Earth
+LIESMICH.txt                Diese Datei
+
+So nutzen Sie die Dateien
+-------------------------
+- Den ganzen Ordner entpacken und zusammen lassen, damit die Verweise zwischen den Seiten funktionieren.
+- index.html doppelklicken. Die Anwendung öffnet sich im Browser (Chrome, Edge, Firefox, Safari).
+- Alles läuft ohne Internet: Bibliothek, Kartendaten und Schriften sind in den Dateien eingebettet.
+  Es werden keine Inhalte von fremden Servern geladen.
+- Tablets und Schulnetz: Den Ordner auf den Schulserver, in die Schulcloud, nach Moodle oder IServ
+  hochladen und den Link zu index.html an die Klasse geben.
+- Webseite: Den Ordner unverändert z. B. bei GitHub Pages veröffentlichen. index.html ist dann die Startseite.
+
+Einzelne Schritte direkt öffnen
+-------------------------------
+An die Adresse von index.html anhängen: #vermuten, #globus, #papier oder #loesen
+
+Datenschutz
+-----------
+Keine Anmeldung, keine Cookies, keine Statistik. Antworten und Fortschritt bleiben im Browser des Geräts.
+"Alles zurücksetzen" in Schritt 4 löscht sie.
+
+© 2026 Andreas Bauer. Für Unterricht und nicht-kommerzielle Bildungszwecke frei nutzbar mit Quellenangabe.
