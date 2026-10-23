@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Christallers Land</title>
+<meta name="description" content="Planspiel zur Theorie der zentralen Orte nach Walter Christaller">
+<link rel="stylesheet" href="css/schriften.css">
+<link rel="stylesheet" href="css/style.css">
+<style>html{color-scheme:light}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1>Christallers Land</h1>
+      <p>Ein Planspiel zur Theorie der zentralen Orte (Walter Christaller, 1933)</p>
+    </div>
+    <nav class="levels" id="levels" aria-label="Level"></nav>
+  </header>
+
+  <div id="insightSlot"></div>
+
+  <div class="main">
+    <section class="mapcard" aria-label="Karte">
+      <div class="mapbar">
+        <span class="eyebrow" id="mapTitle">Karte</span>
+        <div class="layers" id="layers" aria-label="Einzugsgebiete anzeigen"></div>
+      </div>
+      <svg id="map" role="img" aria-label="Hexagonale Karte der Region"></svg>
+      <div class="legend">
+        <span id="lgRanks"></span>
+        <span><svg width="26" height="14" viewBox="-13 -9 26 14" aria-hidden="true"><path d="M-10.6 2.8v-2.6l2.6-2.2 2.6 2.2v2.6zM-2.6 2.8v-2.6l2.6-2.2 2.6 2.2v2.6zM5.4 2.8v-2.6l2.6-2.2 2.6 2.2v2.6z" fill="var(--house)"/></svg>Haushalte im Feld</span>
+        <span><i class="lg-box" id="lgArea"></i>Einzugsgebiet eines Ladens</span>
+        <span><svg width="16" height="12" aria-hidden="true"><rect width="16" height="12" fill="url(#hatch)"/></svg>nicht versorgt</span>
+        <span><svg width="34" height="14" aria-hidden="true"><rect x="0.5" y="0.5" width="33" height="13" rx="4" fill="var(--sheet)" stroke="var(--warn)"/><text x="17" y="10" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="600" fill="var(--warn)">22/30</text></svg>Kunden / Schwelle, rot = Verlust</span>
+      </div>
+      <div class="toast" id="toast" hidden></div>
+    </section>
+
+    <aside class="sheet" aria-label="Planungsbogen">
+      <div class="sec">
+        <span class="eyebrow" id="lvEyebrow">Level 1</span>
+        <h2 id="lvTitle">Das tägliche Brot</h2>
+        <p class="story" id="lvStory"></p>
+        <p class="mission" id="lvMission"></p>
+      </div>
+      <div class="sec">
+        <h3>Werkzeug</h3>
+        <div class="tools" id="tools"></div>
+        <div class="toolrow">
+          <button class="btn" id="btnHint" type="button">Tipp</button>
+          <button class="btn" id="btnReset" type="button">Neu anfangen</button>
+          <button class="btn" id="btnSolution" type="button">Musterlösung</button>
+        </div>
+      </div>
+      <div class="sec">
+        <h3>Ziele</h3>
+        <ul class="goals" id="goals"></ul>
+      </div>
+      <div class="sec">
+        <h3>Bilanz</h3>
+        <table class="bil" id="bil"></table>
+      </div>
+      <div class="sec">
+        <h3>Feld</h3>
+        <div class="info" id="info">Fahre über die Karte oder tippe ein Feld an.</div>
+      </div>
+    </aside>
+  </div>
+
+  <details class="help" id="help">
+    <summary>Die Theorie in Kürze</summary>
+    <div class="theory">
+      <div><h4>Zentraler Ort</h4><p>Ein Ort, der Güter und Dienste nicht nur für sich selbst, sondern für das Umland anbietet. Je mehr und je seltenere Güter er anbietet, desto höher seine Zentralität.</p></div>
+      <div><h4>Obere Grenze der Reichweite</h4><p>Die größte Entfernung, die Menschen für ein Gut zurücklegen. Brot holt man nebenan, für das Krankenhaus fährt man weiter.</p></div>
+      <div><h4>Untere Grenze der Reichweite</h4><p>Die Mindestnachfrage (Schwelle), die ein Anbieter braucht, um sich zu tragen. Liegt sie über der möglichen Kundschaft, schließt der Laden.</p></div>
+      <div><h4>Sechseck</h4><p>Kreise lassen Lücken oder überlappen. Konkurrieren gleiche Anbieter um gleichmäßig verteilte Kunden, werden ihre Einzugsgebiete zu Sechsecken, die die Fläche lückenlos füllen.</p></div>
+      <div><h4>Hierarchie</h4><p>Orte höherer Ordnung bieten auch alle Güter niedrigerer Ordnung an. Es gibt viele kleine und wenige große zentrale Orte.</p></div>
+      <div><h4>Versorgungsprinzip (k = 3)</h4><p>Im Idealmodell umfasst das Einzugsgebiet eines Ortes nächsthöherer Stufe das Gebiet von drei Orten der Stufe darunter. Heute: Grund-, Mittel- und Oberzentren der Raumordnung.</p></div>
+    </div>
+  </details>
+</div>
+<script src="js/spiel.js"></script>
+</body>
+</html>

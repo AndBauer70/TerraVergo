@@ -1,0 +1,114 @@
+CHRISTALLERS LAND
+Ein Planspiel zur Theorie der zentralen Orte (Walter Christaller, 1933)
+Einzelspieler · 5 Level · läuft im Browser, auch offline
+========================================================================
+
+
+1. SPIEL STARTEN
+----------------
+Den Ordner "christallers-land" entpacken und die Datei index.html
+doppelklicken. Das Spiel öffnet sich im Standardbrowser (Firefox, Chrome,
+Edge, Safari). Eine Internetverbindung ist nicht nötig.
+
+Für die Klasse:
+- Ordner auf einen USB-Stick oder ins Tauschlaufwerk legen, oder
+- den ganzen Ordner auf IServ, Moodle oder den Schul-Webserver hochladen
+  und den Link auf index.html weitergeben.
+Wichtig: Die Ordnerstruktur nicht verändern (css, js und fonts müssen
+neben index.html liegen).
+
+
+2. ORDNERINHALT
+---------------
+index.html                  Startseite des Spiels
+css/style.css               Gestaltung (Farben, Layout, heller/dunkler Modus)
+css/schriften.css           Einbindung der lokalen Schriften
+js/spiel.js                 Spiellogik, Level-Daten und Musterlösungen
+fonts/*.woff2               Schriften Barlow Condensed, Source Sans 3,
+                            IBM Plex Mono
+fonts/LIZENZ-SCHRIFTEN.txt  Lizenz der Schriften (SIL Open Font License 1.1)
+LIESMICH.txt                diese Datei
+
+
+3. SO WIRD GESPIELT
+-------------------
+Die Region ist eine Ebene aus Sechseck-Feldern. Auf jedem Feld wohnen
+gleich viele Haushalte. Sie kaufen immer bei der nächstgelegenen
+Einrichtung.
+
+Jede Einrichtung hat zwei Kennwerte:
+- Reichweite: so viele Felder weit gehen die Kunden höchstens
+  (obere Grenze der Reichweite)
+- Schwelle: so viele Haushalte braucht die Einrichtung mindestens,
+  sonst macht sie Verlust (untere Grenze der Reichweite)
+
+Werkzeug wählen (Bäckerei, Arztpraxis, Gymnasium) und auf ein Feld tippen.
+Ab Level 2 gilt: Eine höhere Einrichtung kommt nur in einen Ort, der alle
+niedrigeren schon hat. So entstehen Marktorte, Amtsorte und Kreisstädte.
+
+Sterne:
+  ★    alle Haushalte erreichen jedes Gut
+  ★★   zusätzlich trägt sich jede Einrichtung
+  ★★★  zusätzlich nicht mehr Einrichtungen als die Musterlösung
+
+Nach zwei Sternen erscheint eine Erkenntniskarte, die das Gespielte mit
+Christallers Begriffen erklärt.
+
+
+4. DIE LEVEL
+------------
+1  Das tägliche Brot   Reichweite, Schwelle, Sechseck als Grundfigur
+2  Der Landarzt        Hierarchie: Orte höherer Ordnung
+3  Die Kreisstadt      Versorgungsprinzip (k = 3), Pyramide der Zentralität
+4  Landflucht          Unterschreiten der Schwelle in peripheren Räumen,
+                       Daseinsvorsorge
+5  Das Auto            größere Reichweiten und Betriebe, Konzentration auf
+                       weniger, größere Orte
+
+Level 4 und 5 starten mit der Musterlösung von Level 3 als "altem Netz",
+das die Spielenden umbauen müssen.
+
+Zeitbedarf: etwa 45 Minuten für alle Level, Level 1 dauert 5 bis 10 Minuten.
+
+Vorschlag für die Auswertung im Unterricht:
+- Bildschirmfotos der Netze vergleichen: Wo entstehen Sechsecke?
+- Verhältnis der Ortstypen in Level 3 an der Tafel notieren
+  (viele Marktorte, wenige Kreisstädte)
+- Modellkritik: Welche Annahmen setzt das Spiel? (Ebene, gleichmäßige
+  Bevölkerung, Kunden wählen immer den nächsten Ort, keine Kosten außer
+  der Schwelle)
+- Transfer: Grund-, Mittel- und Oberzentren im Landes-Raumordnungs-
+  programm Niedersachsen (LROP) auf einer realen Karte suchen
+
+
+5. DATENSCHUTZ
+--------------
+Das Spiel baut keine Verbindung zu fremden Servern auf: keine Google Fonts,
+keine CDN-Skripte, kein Tracking, keine Cookies, keine Konten.
+
+Gespeichert wird nur im Browser des jeweiligen Geräts (localStorage):
+die erreichten Sterne und das zuletzt gebaute Netz je Level. Diese Daten
+verlassen das Gerät nicht. Löschen: Browserdaten für die Seite löschen
+oder ein privates Fenster nutzen (dann wird nichts gespeichert).
+
+
+6. WERTE ANPASSEN (für Lehrkräfte)
+----------------------------------
+In js/spiel.js stehen die Level im Block "const LEVELS = [...]".
+Je Level lassen sich ändern:
+  R          Größe der Karte (Felder vom Mittelpunkt bis zum Rand)
+  reach      Reichweite einer Einrichtung in Feldern
+  thr        Schwelle in Haushalten (ein volles Feld hat 10 Haushalte)
+  minSupply  Anteil der Haushalte, die versorgt sein müssen (1 = 100 %)
+  story, mission, hint   Texte im Spiel
+
+Achtung: Die Musterlösungen in "const SOLUTIONS" passen nur zu den
+ausgelieferten Werten. Nach einer Änderung kann ein Level unlösbar werden
+oder die Musterlösung ungültig sein. Vorher eine Sicherungskopie anlegen.
+
+
+7. LIZENZ
+---------
+Spiel: erstellt mit Claude (Anthropic) für den Erdkundeunterricht,
+frei nutzbar und veränderbar für Unterrichtszwecke.
+Schriften: SIL Open Font License 1.1, siehe fonts/LIZENZ-SCHRIFTEN.txt.
