@@ -48,7 +48,7 @@ Hinweis: GitHub pausiert zeitgesteuerte Actions in Repositorys, in denen 60 Tage
 ## Weitere Anwendungen ergänzen
 
 1. Die neue Anwendung in einen eigenen Ordner legen, z. B. `vulkane/`, mit einer `index.html` darin.
-2. In der Startseite `index.html` eine der beiden Karten (`<a class="app" …>…</a>`) kopieren und `href`, Bild, Etikett, Titel und Text anpassen. Die Stelle ist mit einem Kommentar markiert. Die Karten ordnen sich von selbst in Spalten an.
+2. In der Startseite `index.html` sind die Anwendungen nach Klassenstufen gegliedert (Klasse 5 und 6, Klasse 7 bis 10). Eine der Karten (`<a class="app" …>…</a>`) kopieren und `href`, Bild, Etikett, Titel und Text anpassen. Die Stelle ist mit einem Kommentar markiert. Die Karten ordnen sich von selbst in Spalten an.
 
 ## Datenschutz
 
