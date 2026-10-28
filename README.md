@@ -4,7 +4,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 
 | Ordner | Anwendung |
 |---|---|
-| `klimasimulation/` | **Terra Vergo – Das Rätsel vom Deich**: Mystery und kybernetisches Klimaspiel 2025–2075, mit Begleitheft und Wissensbasis |
+| `klimasimulation/` | **Terra Vergo**: zwei eigenständige Anwendungen, das Mystery „Das Rätsel vom Deich“ (`mystery.html`) und die Klimasimulation „Der Kontrollraum“ 2025–2075 (`klimasimulation.html`), dazu eine eigene Startseite, Begleitheft und Wissensbasis |
 | `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
 | `orientierung-breitenkreise/` | **Orientierung auf unserer Erde: Die Breitenkreise**: Globus, Gradnetz und Kartenentwürfe (Zylinder, Kegel, Ebene) für Klasse 5–7, mit Begleitheft und Wissensbasis |
 | `christallers-land/` | **Christallers Land**: Planspiel zur Theorie der zentralen Orte in fünf Leveln, mit Anleitung in `LIESMICH.txt` |
@@ -41,6 +41,8 @@ Nach wenigen Minuten ist alles erreichbar:
 
 - Startseite: `https://<benutzername>.github.io/erdlabor/`
 - Terra Vergo: `https://<benutzername>.github.io/erdlabor/klimasimulation/`
+  - Mystery: `…/klimasimulation/mystery.html`
+  - Klimasimulation: `…/klimasimulation/klimasimulation.html`
 - Erdbeben-Globus: `https://<benutzername>.github.io/erdlabor/erdbeben/`
 
 Hinweis: GitHub pausiert zeitgesteuerte Actions in Repositorys, in denen 60 Tage lang nichts passiert ist. Falls die Aktualisierung einmal stoppt, genügt im Reiter Actions ein Klick auf „Enable workflow“.

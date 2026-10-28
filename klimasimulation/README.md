@@ -4,12 +4,17 @@ Ein kybernetisches Klimaspiel mit Mystery-Einstieg für die Klassen 7 bis 10 am 
 
 Idee, Konzept und Spieldesign: Andreas Bauer. Technische Umsetzung mit Unterstützung von Claude.ai (Anthropic).
 
-**Spielen:** `index.html` im Browser öffnen oder über GitHub Pages aufrufen. Es wird nichts installiert, und das Spiel läuft auch offline.
+Terra Vergo besteht aus **zwei eigenständigen Anwendungen**, die aufeinander aufbauen, aber auch einzeln funktionieren:
+
+- `mystery.html`: Mystery „Das Rätsel vom Deich“
+- `klimasimulation.html`: Klimasimulation „Der Kontrollraum“
+
+`index.html` ist die Startseite mit Links zu beiden. Jede Datei läuft für sich im Browser, über GitHub Pages oder offline. Es wird nichts installiert.
 
 ## Ablauf
 
-1. **Mystery „Das Rätsel vom Deich“.** Prof. Geo, Jannes aus Ostfriesland und Aputsiaq aus Grönland stellen die Leitfrage: *Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?* Die Gruppen verbinden 21 Karten zu einem Wirkungsgefüge. Jede gefundene Kernidee verrät einen Buchstaben des Codeworts für den Kontrollraum.
-2. **Spiel im Kontrollraum.** Die Gruppen steuern die Erde von 2025 bis 2075 in zehn Runden zu je fünf Jahren. Ziel: Kein weiteres Element des Erdsystems kippt, und die Menschen bleiben unter den Grenzen der Anpassung. Ohne Klimaschutz folgt das Spiel dem Stresstest SSP5-8.5 (früher RCP8.5) und erreicht 2075 rund 3,7 °C.
+1. **Mystery „Das Rätsel vom Deich“.** Prof. Geo, Jannes aus Ostfriesland und Aputsiaq aus Grönland stellen die Leitfrage: *Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?* Die Gruppen verbinden 21 Karten zu einem Wirkungsgefüge. Jede gefundene Kernidee verrät einen Buchstaben des Codeworts für den Kontrollraum. Mit „Neu beginnen“ startet die nächste Gruppe mit leerem Brett.
+2. **Klimasimulation im Kontrollraum.** Der Tür-Comic am Ende des Mysterys verlinkt sie, sie lässt sich aber auch direkt öffnen. Die Gruppen steuern die Erde von 2025 bis 2075 in zehn Runden zu je fünf Jahren. Ziel: Kein weiteres Element des Erdsystems kippt, und die Menschen bleiben unter den Grenzen der Anpassung. Ohne Klimaschutz folgt das Spiel dem Stresstest SSP5-8.5 (früher RCP8.5) und erreicht 2075 rund 3,7 °C.
 
 ## Inhalte
 
@@ -26,11 +31,11 @@ Idee, Konzept und Spieldesign: Andreas Bauer. Technische Umsetzung mit Unterstü
 
 Der 3D-Globus lässt sich mit Maus, Finger oder Pfeiltasten drehen und per Knopf auf Kontinente, Arktis oder Antarktis ausrichten. Dort sind die Polargebiete ohne die Verzerrung der flachen Karte zu sehen.
 
-Dazu: Fieberkurve mit Thermometer und Folgekosten, 46 Wechselwirkungen (verstärkend, bremsend oder unklar, mit Kettenreaktionen und Rückkopplungen), Klimafonds mit Einnahmen und Förderprogrammen, Klimaschutz, Naturschutz und Anpassung, ein Comic nach jeder Runde und ein Bereich für Lehrkräfte.
+Dazu: Kurve „Globale Temperaturerhöhung“ mit Thermometer und Folgekosten, 46 Wechselwirkungen (verstärkend, bremsend oder unklar, mit Kettenreaktionen und Rückkopplungen), Klimafonds mit Einnahmen und Förderprogrammen, Klimaschutz, Naturschutz und Anpassung, ein Comic nach jeder Runde und ein Bereich für Lehrkräfte.
 
 ## Material
 
-- `begleitheft.html`, `begleitheft.pdf` und `begleitheft.docx` (Word): Begleitheft für Lehrkräfte und Eltern mit Ablauf, Basiskonzepten der Geographie, Bezug zum Kerncurriculum, Schülerschwierigkeiten und Hilfen, Aufgaben, Klimagefühlen, Datenschutz, Glossar und Register
+- `begleitheft.html`, `begleitheft.pdf` und `begleitheft.docx` (Word): Begleitheft für Lehrkräfte und Eltern mit Ablauf, Basiskonzepten der Geographie, Bezug zu Bildungsstandards und Lehrplänen, Schülerschwierigkeiten und Hilfen, Aufgaben, Klimagefühlen, Datenschutz, Glossar und Register
 - `wissensbasis.html` und `docs/wissensbasis.md`: die Recherche hinter dem Spiel mit allen Zahlen, Spannen, Vertrauensgraden und Quellen
 - `impressum.html`: Impressum, Urheberrecht und Datenschutzhinweise
 - Das Lösungsblatt mit Lösungsskizze und Codes ist bewusst nicht veröffentlicht, damit das Mystery ein Rätsel bleibt.
@@ -41,11 +46,11 @@ IPCC-Synthesebericht 2023 (AR6), Berichte der Arbeitsgruppen I und II, Sonderber
 
 ## Datenschutz
 
-Das Spiel stellt keine Anfragen an fremde Server, setzt keine Cookies und sammelt keine Daten. Nur der Fortschritt im Mystery und die gewählte Kartenansicht werden lokal im Browser gespeichert. Beim Aufruf über GitHub Pages protokolliert GitHub die IP-Adresse der Besucher; Einzelheiten im Impressum.
+Das Spiel stellt keine Anfragen an fremde Server, setzt keine Cookies und sammelt keine Daten. Das Mystery speichert seinen Fortschritt, die Klimasimulation die gewählte Kartenansicht, beides nur lokal im Browser. Beim Aufruf über GitHub Pages protokolliert GitHub die IP-Adresse der Besucher; Einzelheiten im Impressum.
 
 ## Quellcode
 
-Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit den Paketen `markdown` und `beautifulsoup4`; für die Word-Datei zusätzlich Node.js mit dem npm-Paket `docx`) baut daraus `index.html`, `begleitheft.html`, `begleitheft.docx`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
+Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit den Paketen `markdown` und `beautifulsoup4`; für die Word-Datei zusätzlich Node.js mit dem npm-Paket `docx`) baut daraus `index.html`, `mystery.html`, `klimasimulation.html`, `begleitheft.html`, `begleitheft.docx`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
 
 ## Urheberrecht
 

@@ -1,0 +1,27 @@
+/* Getrennte Anwendungen: Startseite, Rücksetzen im Mystery, Knöpfe im Tür-Comic */
+.ghost.warn{background:#FFE0DC;border-color:#E0393B;color:#9B1C1F}
+.cbtns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.csum a.go{display:inline-block;text-decoration:none;color:var(--ink)}
+.cbtns .ghost{font-size:.95rem}
+
+.start{max-width:1080px}
+.shero .owl{grid-row:1/span 2;align-self:start}
+.shero .logo{font-size:clamp(2.4rem,5vw,3.8rem)}
+.shero .bubble{margin-top:0;align-self:start}
+@media (max-width:640px){.shero .owl{grid-row:auto;width:78px}.shero .bubble{grid-column:1/-1}.shero .bubble::before,.shero .bubble::after{display:none}}
+.apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:760px){.apps{grid-template-columns:1fr}}
+.app{position:relative;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);transition:transform .15s}
+.app:hover{transform:rotate(-.6deg) translateY(-2px)}
+.app:focus-visible{outline:4px solid #1E6FD0;outline-offset:4px}
+.app .aill{width:100%;height:auto;border:3px solid var(--ink);border-radius:12px;display:block}
+.app .aill .q{font-family:var(--f-comic);font-size:28px;fill:#1B1B2F}
+.app .anum{position:absolute;top:-14px;left:-12px;width:44px;height:44px;border-radius:50%;background:#FF5A3C;color:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center;font-family:var(--f-comic);font-size:1.7rem;z-index:1}
+.app .akind{font-weight:800;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.app h2{font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.app p{margin:0}
+.app .ameta{font-size:.85rem;color:var(--muted);font-weight:600}
+.app .go{display:block;text-align:center;margin-top:auto}
+.app p.ameta{margin-bottom:8px}
+.smore p{margin:8px 0}
+@media (prefers-reduced-motion:reduce){.app{transition:none}.app:hover{transform:none}}

@@ -1,0 +1,45 @@
+<div class="wrap">
+
+<!-- ===================== Mystery ===================== -->
+<section id="mystery" class="mys" aria-labelledby="mtitle">
+  <header class="box mhead">
+    <div><p class="logo">Terra Vergo</p><h1 class="mt" id="mtitle">Das Rätsel vom Deich</h1></div>
+    <div class="hbtns"><a class="ghost" id="mtosim" href="klimasimulation.html" hidden>Zur Klimasimulation</a><button class="ghost" id="mnew" type="button" title="Alle Pfeile, den Lösungssatz und die Kartenpositionen löschen, zum Beispiel für die nächste Gruppe">Neu beginnen</button><a class="ghost" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a></div>
+  </header>
+  <div class="story" id="story"></div>
+  <div class="lq"><div class="k">Leitfrage des Mysterys</div><h2>Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?</h2></div>
+  <ol class="steps">
+    <li>Lest alle Karten in Ruhe. Manche helfen euch, manche lenken ab.</li>
+    <li>Verbindet Ursache und Wirkung: Tippt bei einer Karte auf ➜ und dann auf die Karte, auf die sie wirkt. Karten lassen sich verschieben.</li>
+    <li>Lasst Prof. Geo euer Netz prüfen. Jede gefundene Kernidee verrät einen Buchstaben des Codeworts.</li>
+    <li>Vervollständigt den Lösungssatz und gebt das Codewort an der Tür ein.</li>
+  </ol>
+  <section class="box" aria-labelledby="bh">
+    <div class="bhead"><h2 class="comic-h" id="bh">Euer Wirkungsgefüge</h2><div class="mmode" id="mmode" aria-live="polite"></div><button class="ghost sm" id="mreset" type="button">Karten neu ordnen</button></div>
+    <div class="boardwrap" id="boardwrap"><div class="board" id="board"><svg id="wires" aria-hidden="true"></svg></div></div>
+  </section>
+  <div class="mtools">
+    <section class="box" aria-labelledby="lh">
+      <h2 class="comic-h" id="lh">Eure Pfeile (<span id="mcount">0</span>)</h2>
+      <p class="sub">Ohne Ziehen geht es auch hier: Ursache und Wirkung wählen, dann verbinden.</p>
+      <div class="madd"><select id="mfrom" aria-label="Ursache"></select><select id="mto" aria-label="Wirkung"></select><button class="ghost" id="madd" type="button">Verbinden</button></div>
+      <ul class="mlist" id="mlist"></ul>
+    </section>
+    <section class="box" aria-labelledby="ch">
+      <h2 class="comic-h" id="ch">Prof. Geos Prüfung</h2>
+      <button class="go" id="mcheck" type="button" style="margin-top:4px">Prüft unser Netz!</button>
+      <div class="mfb" id="mfb" aria-live="polite"></div>
+      <div class="slots" id="mslots" aria-label="Codewort mit zehn Buchstaben"></div>
+      <div class="kassesec">Lösungssatz</div>
+      <p class="sent">Der Deich an der Nordsee muss wachsen, weil das Meer <select id="s1" aria-label="Lücke 1"></select> und weltweit <select id="s2" aria-label="Lücke 2"></select>. Grönlands Schmelzwasser <select id="s3" aria-label="Lücke 3"></select>.</p>
+      <div class="dooropen"><label for="mcode" class="nm">Codewort:</label><input type="text" id="mcode" autocomplete="off" spellcheck="false" maxlength="12" placeholder="?"><button class="go" id="mopen" type="button">Tür öffnen</button></div>
+      <div class="mmsg" id="mmsg" aria-live="polite"></div>
+    </section>
+  </div>
+  <p class="mfoot">Für Lehrkräfte: Ablauf und Hintergründe stehen im <a href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a>. Lösung und Lehrkraft-Code enthält das Lösungsblatt für Lehrkräfte. Mit „Neu beginnen“ startet die nächste Gruppe mit leerem Brett.</p>
+</section>
+
+<footer class="sitefoot"><b>Terra Vergo</b> · Idee, Konzept und Spieldesign: Andreas Bauer · © 2026 Andreas Bauer · <a href="impressum.html" target="_blank" rel="noopener">Impressum</a></footer>
+</div>
+
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovt"></div>

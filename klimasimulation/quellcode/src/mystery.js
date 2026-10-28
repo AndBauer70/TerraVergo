@@ -192,24 +192,32 @@ function tryOpen(){
   openDoor(false);
 }
 function openDoor(teacher){
-  M.solved=true;mSave();const mm=document.getElementById('mmsg');mm.textContent='';mm.className='mmsg';
+  M.solved=true;mSave();updateSolved();const mm=document.getElementById('mmsg');mm.textContent='';mm.className='mmsg';
   const ov=document.getElementById('ov');
   ov.innerHTML=`<div class="comic door"><div class="ctitle"><h2 id="ovt">Tür offen!</h2><div class="narr">${teacher?'Lehrkraft-Zugang':'Rätsel gelöst'}</div></div>
     <div class="dwrap"><svg viewBox="0 0 220 200" class="dsvg" aria-hidden="true"><g class="burst" style="--i:0"><polygon points="${star(110,100,96,62,16)}" fill="#FFD23F" stroke="#1B1B2F" stroke-width="3"/></g><use href="#i-geo" x="40" y="30" width="140" height="150"/></svg>
-    <div class="dtext">${teacher?'<p>Das Mystery wurde übersprungen. Tipp: Spielt es später gemeinsam, es führt direkt zu den Dominoeffekten im Spiel.</p>':'<p><b>Stark gelöst!</b> Der Deich wächst vor allem, weil das Meer wärmer wird und sich ausdehnt und weil weltweit Gletscher und Eisschilde schmelzen. Grönland ist ein sichtbares Zeichen dafür. Sein Schmelzwasser kommt an der Nordsee aber nur zu etwa einem Fünftel an, an Grönlands Küste sinkt das Meer sogar.</p><p>Alles hängt mit allem zusammen, nur oft anders, als man zuerst denkt.</p>'}
-    <p>Im Kontrollraum seht ihr jetzt das ganze Erdsystem: sechs Sphären, 24 verwundbare Orte, 50 Jahre. Eure Aufgabe: bis 2075 kein weiterer Kipppunkt, und die Menschen schützen.</p></div></div>
-    <div class="csum" style="--n:1"><div class="m"><div>Codewort: <span>KLIMADEICH</span></div></div><button class="go" id="ovclose">In den Kontrollraum!</button></div></div>`;
+    <div class="dtext">${teacher?'<p>Die Tür wurde mit dem Lehrkraft-Code geöffnet. Tipp: Spielt das Mystery gemeinsam, es führt direkt zu den Dominoeffekten in der Klimasimulation.</p>':'<p><b>Stark gelöst!</b> Der Deich wächst vor allem, weil das Meer wärmer wird und sich ausdehnt und weil weltweit Gletscher und Eisschilde schmelzen. Grönland ist ein sichtbares Zeichen dafür. Sein Schmelzwasser kommt an der Nordsee aber nur zu etwa einem Fünftel an, an Grönlands Küste sinkt das Meer sogar.</p><p>Alles hängt mit allem zusammen, nur oft anders, als man zuerst denkt.</p>'}
+    <p>Hinter der Tür wartet der Kontrollraum, die Klimasimulation: sechs Sphären, 24 verwundbare Orte, 50 Jahre. Eure Aufgabe dort: bis 2075 kein weiterer Kipppunkt, und die Menschen schützen.</p></div></div>
+    <div class="csum" style="--n:1"><div class="m"><div>Codewort: <span>KLIMADEICH</span></div></div><div class="cbtns"><button class="ghost" id="ovclose" type="button">Zurück zum Wirkungsgefüge</button><a class="go" id="ovgo" href="klimasimulation.html">In den Kontrollraum!</a></div></div></div>`;
   ov.hidden=false;document.body.style.overflow='hidden';
-  const go=()=>{ov.hidden=true;ov.innerHTML='';document.body.style.overflow='';showGame();};
-  document.getElementById('ovclose').addEventListener('click',go);ov.onkeydown=e=>{if(e.key==='Escape')go();};
-  setTimeout(()=>document.getElementById('ovclose')?.focus({preventScroll:true}),50);
+  const close=()=>{ov.hidden=true;ov.innerHTML='';document.body.style.overflow='';document.getElementById('mopen').focus({preventScroll:true});};
+  document.getElementById('ovclose').addEventListener('click',close);ov.onkeydown=e=>{if(e.key==='Escape')close();};
+  setTimeout(()=>document.getElementById('ovgo')?.focus({preventScroll:true}),50);
 }
-function showGame(){document.getElementById('mystery').hidden=true;document.getElementById('game').hidden=false;buildGame();if(!G)G=initState();render();window.scrollTo(0,0);}
-function showMystery(){document.getElementById('game').hidden=true;document.getElementById('mystery').hidden=false;document.getElementById('mback').hidden=!M.solved;if(!M.laid)layoutCards();fitBoard();renderWires();window.scrollTo(0,0);}
+function updateSolved(){document.getElementById('mtosim').hidden=!M.solved;}
+/* „Neu beginnen“: zweistufig, damit niemand aus Versehen das Netz einer Gruppe löscht */
+let resetArm=0;
+function resetMystery(ev){const b=ev.currentTarget;
+  const disarm=()=>{clearTimeout(resetArm);resetArm=0;b.textContent='Neu beginnen';b.classList.remove('warn');};
+  if(!resetArm){b.textContent='Wirklich alles löschen?';b.classList.add('warn');resetArm=setTimeout(disarm,5000);return;}
+  disarm();
+  M.pos={};M.edges=[];M.sent={};M.solved=false;mSave();
+  for(const S of SENT)document.getElementById(S.id).value='';
+  document.getElementById('mcode').value='';const mm=document.getElementById('mmsg');mm.textContent='';mm.className='mmsg';
+  document.getElementById('mfb').innerHTML='';document.getElementById('mfrom').value='';document.getElementById('mto').value='';
+  setSrc(null);layoutCards();renderWires();renderEdgeList();showSlots(evalNet().found);updateSolved();window.scrollTo(0,0);
+}
 
 /* ===================== Start ===================== */
-mLoad();buildMystery();
-document.getElementById('tomystery').addEventListener('click',showMystery);
-document.getElementById('mback').addEventListener('click',showGame);
-function start(data){if(data&&data.game&&data.game.hist)G=data.game;if(M.solved||G)showGame();else showMystery();}
-window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
+mLoad();buildMystery();updateSolved();
+document.getElementById('mnew').addEventListener('click',resetMystery);
