@@ -2,6 +2,7 @@
 """Baut Terra Vergo aus den Quelldateien in src/ (Ordner build/):
 - index.html: Startseite mit Links zu beiden Anwendungen
 - mystery.html: Mystery „Das Rätsel vom Deich“ (eigenständige Anwendung)
+- rungholt.html: Mystery „Das Rätsel von Rungholt“ (eigenständige Anwendung mit Spurenkarte)
 - klimasimulation.html: Klimasimulation „Der Kontrollraum“ (eigenständige Anwendung)
 - begleitheft.html/.docx, wissensbasis.html, impressum.html; artifact.html ist die Startseite für claude.ai
 Aufruf: python3 build.py   (benötigt Python 3 mit den Paketen markdown und beautifulsoup4;
@@ -56,6 +57,17 @@ mys_full, _ = app_page('Mystery: Das Rätsel vom Deich · Terra Vergo',
                        (SRC / 'mystery_body.html').read_text(), [read('mystery_helpers.js', 'mystery.js')])
 (OUT / 'mystery.html').write_text(mys_full)
 print('mystery.html', len(mys_full) // 1024, 'KB')
+
+# ---------- Mystery 2: Rungholt ----------
+# Spurenkarte: src/rungholt_map.svg (erzeugt mit gen_rungholt_map.py, Küste © OpenStreetMap-Mitwirkende, ODbL)
+rung_style = style.removesuffix('</style>') + (SRC / 'rungholt.css').read_text() + '\n</style>'  # eigenes CSS hinter dem gemeinsamen
+rung_body = (SRC / 'rungholt_body.html').read_text().replace('{{RMAP}}', (SRC / 'rungholt_map.svg').read_text().strip())
+rung_js = read('mystery_helpers.js', 'rungholt.js')
+rung_title = 'Mystery: Das Rätsel von Rungholt · Terra Vergo'
+rung_desc = 'Mystery „Das Rätsel von Rungholt“ aus Terra Vergo: Wo lag Rungholt, und warum versank es 1362 im Meer? Indizien deuten und auf einer Karte verorten. Für die Klassen 7 bis 10.'
+rung_full = (head_for(rung_desc) + f'<title>{rung_title}</title>\n{rung_style}\n</head>\n<body>\n{sprite}\n{rung_body}\n<script>\n{rung_js}\n</script>\n</body>\n</html>\n')
+(OUT / 'rungholt.html').write_text(rung_full)
+print('rungholt.html', len(rung_full) // 1024, 'KB')
 
 # ---------- Klimasimulation ----------
 # 3D-Globus: d3-array und d3-geo (ISC-Lizenz, siehe src/vendor/LICENSE-D3-WORLD-ATLAS.txt) und Landflächen von Natural Earth (gemeinfrei)

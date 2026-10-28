@@ -1,0 +1,171 @@
+/* ===== Mystery 2: Das Rätsel von Rungholt (Spurenkarte statt Wirkungsgefüge) ===== */
+.rung .bhead{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.rtools{display:flex;gap:8px;flex-wrap:wrap}
+.rtools .ghost{display:inline-flex;align-items:center;gap:6px}
+.rtools svg{width:18px;height:18px}
+#rflag.on{background:var(--action);outline:3px dashed var(--mensch);outline-offset:2px}
+.rlayout{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(280px,1fr);gap:14px;align-items:start}
+@media (max-width:1180px){.rlayout{grid-template-columns:minmax(0,1fr)}}
+.rmapwrap{position:relative;border:3px solid var(--ink);border-radius:12px;overflow:hidden;background:#5AA9E6;line-height:0}
+#rmap{width:100%;height:auto;display:block;touch-action:none;user-select:none;-webkit-user-select:none}
+.rmapwrap.picking #rmap{cursor:crosshair}
+.rmapwrap.picking{outline:4px dashed var(--mensch);outline-offset:3px}
+#rmap text{font-family:var(--f-body);paint-order:stroke;stroke-linejoin:round}
+#rmap .ml-sea{font-family:var(--f-comic);font-size:52px;fill:#fff;letter-spacing:.25em;stroke:#1B1B2F;stroke-width:3px}
+#rmap .ml-isl{font-size:23px;font-weight:800;fill:#1B1B2F;stroke:#fff;stroke-width:4px}
+#rmap .ml-sm{font-size:18px;font-weight:800;fill:#1B1B2F;stroke:#fff;stroke-width:4px}
+#rmap .ml-xs{font-size:15px;font-weight:700;fill:#1B1B2F;stroke:#fff;stroke-width:3.5px}
+#rmap .ml-hl{font-size:17px;font-weight:800;fill:#1B1B2F;stroke:#fff;stroke-width:4px}
+#rmap .ml-town{font-size:21px;font-weight:800;fill:#1B1B2F;stroke:#fff;stroke-width:4px}
+#rmap .ml-ch{font-size:17px;font-style:italic;font-weight:800;fill:#0B3F78;stroke:#fff;stroke-width:3.5px}
+#rmap .ml-watt{font-size:16px;font-weight:700;fill:#8A6D2F;letter-spacing:.35em}
+#rmap .ml-dot{fill:#1B1B2F;stroke:#fff;stroke-width:2}
+#rmap .ml-grid line{stroke:#1B1B2F;stroke-opacity:.28;stroke-width:1.5;stroke-dasharray:5 7}
+#rmap .ml-glab rect{fill:#fff;stroke:#1B1B2F;stroke-width:2}
+#rmap .ml-glab text{font-size:15px;font-weight:800;text-anchor:middle}
+#rmap .ml-glab g{transform-box:fill-box}
+#rmap .ml-scale rect:first-child,#rmap .ml-north circle{fill:#fff;stroke:#1B1B2F;stroke-width:2.5}
+#rmap .ml-scale text{font-size:14px;font-weight:800;text-anchor:middle}
+#rmap .ml-north text{font-weight:800;text-anchor:middle;font-size:16px;stroke:#fff;stroke-width:3px}
+#rmap .ml-attr{font-size:11px;fill:#1B1B2F;stroke:#fff;stroke-width:3px}
+/* Stecknadeln */
+#rpins .pin{cursor:grab}
+#rpins .pin.drag{cursor:grabbing}
+#rpins .pin path.head{stroke:#1B1B2F;stroke-width:3;stroke-linejoin:round}
+#rpins .pin circle{fill:#fff;stroke:#1B1B2F;stroke-width:2}
+#rpins .pin text{font-family:var(--f-body);font-weight:800;font-size:15px;text-anchor:middle;fill:#1B1B2F;pointer-events:none}
+#rpins .pin.hl path.head{stroke-width:5}
+#rpins .pin.hl .ring{display:block}
+#rpins .pin .ring{display:none;fill:none;stroke:var(--mensch);stroke-width:4;stroke-dasharray:6 4}
+#rpins .pin:focus{outline:none}
+#rpins .pin:focus-visible .ring{display:block}
+#rpins .flag path.cloth{fill:#FFD23F;stroke:#1B1B2F;stroke-width:3;stroke-linejoin:round}
+#rpins .flag text{font-family:var(--f-comic);font-size:20px;letter-spacing:.04em}
+#rzones .zr{fill:#FFD23F;fill-opacity:.28;stroke:#1B1B2F;stroke-width:3;stroke-dasharray:10 7}
+#rzones .zl{fill:#A0673A;fill-opacity:.12;stroke:#A0673A;stroke-width:2.5;stroke-dasharray:4 6}
+#rzones .zc{fill:none;stroke:#1E6FD0;stroke-opacity:.22;stroke-linecap:round;stroke-linejoin:round}
+#rzones text.zsm{font-size:17px;fill:#6B4423}
+#rzones .zs{fill:#fff;fill-opacity:.12;stroke:#fff;stroke-width:4;stroke-dasharray:12 8}
+#rzones .zh{fill:#1E6FD0;fill-opacity:.15;stroke:#1E6FD0;stroke-width:2.5;stroke-dasharray:4 6}
+#rzones text{font-family:var(--f-comic);font-size:22px;letter-spacing:.04em;fill:#1B1B2F;stroke:#fff;stroke-width:4px;paint-order:stroke}
+/* Fundkiste */
+.rbox{min-width:0}
+.rfh{font-family:var(--f-comic);font-weight:400;font-size:1.45rem;letter-spacing:.05em;margin:0 0 2px}
+.rfh .rleft{font-family:var(--f-body);font-size:.8rem;font-weight:700;letter-spacing:0;color:var(--muted)}
+.rbox .sub{font-size:.8rem;margin-bottom:8px}
+.rcards{display:grid;gap:10px;max-height:var(--rmaxh,760px);overflow:auto;padding:4px 10px 8px 4px;overscroll-behavior:contain}
+@media (max-width:1180px){.rcards{max-height:none;overflow:visible;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}}
+.rcard{position:relative;perspective:1200px}
+.rcard .rinner{display:grid;height:100%;transition:transform .7s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
+.rcard .rfront,.rcard .rback{grid-area:1/1;position:relative;background:#fff;border:2.5px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:opacity .2s}
+.rcard .rback{transform:rotateY(180deg);display:grid;place-items:center;align-content:center;gap:2px;min-height:150px;background-color:#EAD9A8;background-image:radial-gradient(#B89A5B 1.2px,transparent 1.5px),repeating-linear-gradient(-35deg,transparent 0 16px,rgba(255,255,255,.35) 16px 22px);background-size:10px 10px,auto}
+.rcard .rback .rbq{width:58px;height:58px;border-radius:50%;background:var(--action);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:grid;place-items:center;font-family:var(--f-comic);font-size:2.2rem;line-height:1;transform:rotate(-6deg)}
+.rcard .rback .rbt{font-family:var(--f-comic);font-size:1.35rem;letter-spacing:.08em;margin-top:6px}
+.rcard .rback .rbl{font-family:var(--f-comic);font-size:.85rem;letter-spacing:.08em;color:#FF5A3C;-webkit-text-stroke:.6px var(--ink)}
+.rcard.hidden .rinner{transform:rotateY(180deg)}
+.rcard.hidden .rback{box-shadow:-3px 3px 0 var(--ink)}
+.rcards.noanim .rinner{transition:none}
+.rcard .band{display:flex;justify-content:space-between;gap:6px;border-bottom:2.5px solid var(--ink);border-radius:7px 7px 0 0;padding:2px 8px 2px 36px;font-size:.66rem;font-weight:800;color:var(--ink)}
+.rcard .band.dark{color:#fff}
+.rcard .rnum{position:absolute;left:-6px;top:-8px;width:32px;height:32px;border-radius:50%;border:2.5px solid var(--ink);display:grid;place-items:center;font-weight:800;font-size:.9rem;background:#fff;box-shadow:2px 2px 0 var(--ink)}
+.rcard h4{margin:6px 10px 2px;font-size:.86rem;line-height:1.2}
+.rcard p{margin:0 10px 6px;font-size:.76rem;line-height:1.35}
+.rcard .ract{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:0 8px 8px}
+.rcard .ract .ghost{font-size:.72rem;padding:3px 8px;box-shadow:1px 1px 0 var(--ink);display:inline-flex;align-items:center;gap:4px}
+.rcard .ract svg{width:13px;height:13px}
+.rcard .ract select{font-size:.72rem;padding:2px 4px;border-width:2px;border-radius:7px;width:auto}
+.rcard .rpick.on{background:var(--mensch);color:#fff}
+.rcard .rfake[aria-pressed="true"]{background:#1B1B2F;color:#fff}
+.rcard.placed .rfront{background:#F3FBF2}
+.rcard.bg .rfront{background:#F4F6FA}
+.rcard .rbg[aria-pressed="true"]{background:#1E6FD0;color:#fff}
+.rcard.fake .rfront{opacity:.72;background:#EEF0F4}
+.rcard.fake::after{content:"Falsche Spur?";position:absolute;right:10px;top:24px;transform:rotate(-8deg);border:3px solid #B3261E;color:#B3261E;font-family:var(--f-comic);font-size:1.15rem;letter-spacing:.05em;padding:0 6px;border-radius:6px;background:rgba(255,255,255,.85);pointer-events:none}
+.rcard.flash .rfront{animation:rflash 1.2s}
+@keyframes rflash{0%,60%{box-shadow:0 0 0 6px var(--action),3px 3px 0 var(--ink)}100%{box-shadow:3px 3px 0 var(--ink)}}
+.rlegend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--muted);align-items:center}
+.rlegend .lg{display:inline-block;width:18px;height:12px;border:2px solid var(--ink);border-radius:3px;margin-right:5px;vertical-align:-1px}
+.rlegend .lg.land{background:#9ED28B}.rlegend .lg.watt{background:#EAD9A8}.rlegend .lg.sand{background:#F6E7B8;border-style:dashed}.rlegend .lg.sea{background:#5AA9E6}
+.rcheck{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:18px;align-items:start}
+@media (max-width:900px){.rcheck{grid-template-columns:minmax(0,1fr)}}
+.rung .sent select{max-width:100%}
+.door .dtext .today{background:var(--narr);border:2.5px dashed var(--ink);border-radius:12px;padding:8px 12px}
+@media (prefers-reduced-motion:reduce){.rcard.flash .rfront{animation:none}.rcard .rinner{transition:none}}
+#rpins .pin{touch-action:none}
+.rung .mmode:empty{display:none}
+.rswipe{display:none;font-size:.75rem;font-weight:700;color:var(--muted);margin:6px 0 0}
+@media (max-width:700px){
+  .rmapwrap{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  #rmap{width:780px;max-width:none;touch-action:pan-x pan-y}
+  .rswipe{display:block}
+}
+/* Kopf: Titel im Stil des Terra-Vergo-Logos, Terra Vergo klein darüber */
+.rung .mhead .rkicker{font-family:var(--f-comic);font-size:1rem;letter-spacing:.08em;color:var(--muted);margin:0 0 2px}
+.rung .mhead h1.rtitle{font-size:clamp(2rem,5.4vw,3.4rem);font-weight:400;margin:2px 0 6px}
+/* Einführungs-Comic kompakter */
+.rung .story{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:1040px;margin-inline:auto;width:100%}
+.rung .story .pnl{box-shadow:3px 3px 0 var(--ink);border-width:2.5px}
+.rung .story .pnl .ptag{font-size:.62rem;padding:2px 8px}
+.rung .story .pnl .cap{font-size:.76rem;line-height:1.35;padding:4px 9px 8px}
+@media (max-width:900px){.rung .story{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.rung .story .pnl .cap{font-size:.72rem}}
+/* Indizien immer unter Karte und Legende, nie daneben */
+.rung .rlayout{grid-template-columns:minmax(0,1fr)}
+.rung .rcards{max-height:none;overflow:visible;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.rung .rbox{margin-top:6px}
+/* Freischaltung, Lehrkraft-Zugang */
+.rgate{display:grid;gap:8px;justify-items:start;align-content:start}
+.rgate .go{width:auto;margin:0;padding:8px 20px;font-size:1.4rem}
+.rteach{font-size:.8rem;color:var(--muted)}
+.rteach summary{cursor:pointer;font-weight:700}
+.rteach .dooropen input{font-family:var(--f-body);font-size:.9rem;letter-spacing:0;text-transform:none;width:16ch}
+.rprog{display:flex;gap:5px;flex-wrap:wrap;margin:4px 0}
+.rprog i{width:28px;height:18px;border:2.5px solid var(--ink);border-radius:6px;background:#fff}
+.rprog i.on{background:var(--good);transform:rotate(-3deg)}
+/* Windrose (Indiz 2) */
+#rpins .wind .wbg{fill:#fff;fill-opacity:.92;stroke:#1B1B2F;stroke-width:3}
+#rpins .wind .wt{stroke:#1B1B2F;stroke-width:2}
+#rpins .wind .wl{font-family:var(--f-body);font-size:11px;font-weight:800;text-anchor:middle;fill:#1B1B2F}
+#rpins .wind .wl2{font-size:8px;fill:#5B6475}
+#rpins .wind .wshaft{stroke:#C2408F;stroke-width:5;stroke-linecap:round}
+#rpins .wind .whead{fill:#C2408F;stroke:#1B1B2F;stroke-width:2;stroke-linejoin:round}
+#rpins .wind .wfeath{stroke:#C2408F;stroke-width:3;stroke-linecap:round;fill:none}
+#rpins .wind .rot{fill:#C2408F;fill-opacity:0;stroke:none;cursor:grab}
+#rpins .wind:hover .rot,#rpins .wind:focus-visible .rot{fill-opacity:.18}
+#rpins .wind .wnum{fill:var(--atmo);stroke:#1B1B2F;stroke-width:2}
+#rpins .wind .wn{font-family:var(--f-body);font-weight:800;font-size:12px;text-anchor:middle;fill:#fff}
+.rcard .rrotw{display:inline-flex;gap:4px}
+.rcard .rrotw[hidden]{display:none}
+.rcard .rrot{font-size:.9rem!important;padding:1px 8px!important}
+/* Selbst aufdecken */
+.rcard .rback{cursor:pointer}
+.rcard .rback .rbh{font-size:.68rem;font-weight:700;color:var(--muted);margin-top:4px}
+.rcard .rback:focus-visible{outline:3px solid var(--mensch);outline-offset:3px}
+.rcards:not(.ready) .rcard.hidden .rback{cursor:not-allowed}
+.rcards:not(.ready) .rcard.hidden .rback .rbh{visibility:hidden}
+.rcards.ready .rcard.hidden .rback:hover{transform:rotateY(180deg) translateY(-3px)}
+.rcards.ready .rcard.hidden .rback .rbq{animation:rwiggle 2.4s infinite}
+@keyframes rwiggle{0%,80%,100%{transform:rotate(-6deg)}86%{transform:rotate(8deg)}92%{transform:rotate(-12deg)}}
+.rkmsg{min-height:1.3em;margin:0 0 6px;font-weight:800;font-size:.85rem;color:#C2410C}
+@media (prefers-reduced-motion:reduce){.rcards.ready .rcard.hidden .rback .rbq{animation:none}}
+/* Phase 2: Wirkungsgefüge */
+.rwg .wsub{max-width:none;margin-bottom:6px}
+.rwg .wleg{display:inline-block;border:2px solid var(--ink);border-radius:6px;padding:0 6px;font-size:.75rem;font-weight:800;margin-right:4px;background:#fff}
+.rwg .wleg.nat{border-left:7px solid #C2408F}.rwg .wleg.vul{border-left:7px solid #FF6B3D}.rwg .wleg.zus{background:#EEF1F6;border-style:dashed}
+.rwg .wsignt{display:inline-flex;gap:6px;align-items:center;font-size:.8rem;cursor:pointer}
+.rwg .wsigninfo{max-width:none}
+.wcard.w-nat{border-left:8px solid #C2408F}
+.wcard.w-vul{border-left:8px solid #FF6B3D}
+.wcard.w-zus{background:#EEF1F6;border-style:dashed}
+.wcard.w-zus h4{font-size:.9rem}
+.wcard.w-fake{border-left:8px solid #8C93A3}
+.wcard p{font-size:.72rem}
+#wires .wire.neg{stroke-dasharray:7 5}
+#wires .wsg{pointer-events:all;cursor:pointer}
+#wires .wsg circle{fill:#FFF3A6;stroke:var(--ink);stroke-width:2}
+#wires .wsg.s1 circle{fill:#D9F5DF}#wires .wsg.s-1 circle{fill:#FFE0DC}
+#wires .wsg text{font-family:var(--f-body);font-weight:800;font-size:16px;text-anchor:middle;fill:var(--ink)}
+.wtools{margin-top:14px}
+.wtools .wbtns{display:inline-flex;gap:4px}
+.rwg .sent select{max-width:100%}
+.rwg #wsubmit{width:auto;padding:8px 22px;font-size:1.4rem;margin-top:10px}

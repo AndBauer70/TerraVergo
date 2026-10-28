@@ -7,6 +7,7 @@ Idee, Konzept und Spieldesign: Andreas Bauer. Technische Umsetzung mit Unterstü
 Terra Vergo besteht aus **zwei eigenständigen Anwendungen**, die aufeinander aufbauen, aber auch einzeln funktionieren:
 
 - `mystery.html`: Mystery „Das Rätsel vom Deich“
+- `rungholt.html`: Mystery „Das Rätsel von Rungholt“ (Indizien auf einer Spurenkarte verorten: Wo lag Rungholt, und warum versank es 1362?)
 - `klimasimulation.html`: Klimasimulation „Der Kontrollraum“
 
 `index.html` ist die Startseite mit Links zu beiden. Jede Datei läuft für sich im Browser, über GitHub Pages oder offline. Es wird nichts installiert.
@@ -50,10 +51,10 @@ Das Spiel stellt keine Anfragen an fremde Server, setzt keine Cookies und sammel
 
 ## Quellcode
 
-Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit den Paketen `markdown` und `beautifulsoup4`; für die Word-Datei zusätzlich Node.js mit dem npm-Paket `docx`) baut daraus `index.html`, `mystery.html`, `klimasimulation.html`, `begleitheft.html`, `begleitheft.docx`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
+Der Ordner `quellcode/` enthält die Quelldateien, damit sich das Spiel nachvollziehen lässt. Eigene Bearbeitungen und Weitergabe sind nur mit Zustimmung erlaubt (siehe unten). `python3 build.py` (Python 3 mit den Paketen `markdown` und `beautifulsoup4`; für die Word-Datei zusätzlich Node.js mit dem npm-Paket `docx`) baut daraus `index.html`, `mystery.html`, `rungholt.html`, `klimasimulation.html`, `begleitheft.html`, `begleitheft.docx`, `wissensbasis.html` und `impressum.html` im Unterordner `build/`. `node test/model_test.js` rechnet das Spielmodell mit verschiedenen Strategien durch.
 
 ## Urheberrecht
 
 © 2026 Andreas Bauer. Für Unterricht und andere nicht-kommerzielle Bildungszwecke darf Terra Vergo mit Quellenangabe frei genutzt werden. Für Vervielfältigung, Bearbeitung, Verbreitung oder kommerzielle Nutzung außerhalb der Grenzen des Urheberrechts ist die vorherige schriftliche Zustimmung nötig. Den vollständigen Wortlaut und einen Vorschlag für die Quellenangabe enthält `LICENSE.md`, die Anschrift `impressum.html`.
 
-Eingebettete Fremdinhalte behalten ihre eigenen, freien Lizenzen: Schriften Bangers und Lexend (SIL Open Font License 1.1, `LICENSE-SCHRIFTEN.txt`), d3-array 3.2.4, d3-geo 3.1.1 und world-atlas 2.0.2 (ISC-Lizenz, `LICENSE-D3-WORLD-ATLAS.txt`), Kartendaten von Natural Earth (gemeinfrei).
+Eingebettete Fremdinhalte behalten ihre eigenen, freien Lizenzen: Schriften Bangers und Lexend (SIL Open Font License 1.1, `LICENSE-SCHRIFTEN.txt`), d3-array 3.2.4, d3-geo 3.1.1 und world-atlas 2.0.2 (ISC-Lizenz, `LICENSE-D3-WORLD-ATLAS.txt`), Kartendaten von Natural Earth (gemeinfrei). Die Küstenlinie der Rungholt-Karte stammt aus OpenStreetMap (© OpenStreetMap-Mitwirkende, ODbL; erzeugt mit `quellcode/gen_rungholt_map.py`).
