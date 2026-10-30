@@ -51,6 +51,7 @@ const APPS = [
   { id: 'planspiel-kartoffelhof', titel: 'Planspiel Kartoffelhof', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'kaffee-lieferkette', titel: 'Die Kaffee-Spur', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'laendlicher_raum', titel: 'Rura Viva', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'schanze', titel: 'Wer macht die Schanze?', stufe: 'Oberstufe', start: '' },
 ];
 
 // Welche Dateien geschützt werden
