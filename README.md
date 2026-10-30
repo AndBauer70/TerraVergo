@@ -8,6 +8,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
 | `orientierung-breitenkreise/` | **Orientierung auf unserer Erde: Die Breitenkreise**: Globus, Gradnetz und Kartenentwürfe (Zylinder, Kegel, Ebene) für Klasse 5–7, mit Begleitheft und Wissensbasis |
 | `christallers-land/` | **Christallers Land**: Planspiel zur Theorie der zentralen Orte in fünf Leveln, mit Anleitung in `LIESMICH.txt` |
+| `kaffee-lieferkette/` | **Die Kaffee-Spur**: drei Kaffee-Lieferketten (Solino, Discounter, Marke) als Stationen und Wege auf Weltkarte und 3D-Globus, mit Preisaufteilung, Wirkungsgefüge, Stresstest, Lösungsplan und Denkwerkstatt; Begleitheft, Arbeitsblätter M1–M6 und Wissensbasis |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -21,6 +22,7 @@ assets/land110.js              Landflächen (Natural Earth, gemeinfrei)
 klimasimulation/               Terra Vergo
 erdbeben/                      Erdbeben-Globus
 christallers-land/             Christallers Land
+kaffee-lieferkette/            Die Kaffee-Spur
 orientierung-breitenkreise/    Orientierung auf unserer Erde: Die Breitenkreise
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus
@@ -51,6 +53,31 @@ Hinweis: GitHub pausiert zeitgesteuerte Actions in Repositorys, in denen 60 Tage
 
 1. Die neue Anwendung in einen eigenen Ordner legen, z. B. `vulkane/`, mit einer `index.html` darin.
 2. In der Startseite `index.html` sind die Anwendungen nach Klassenstufen gegliedert (Klasse 5 und 6, Klasse 7 bis 10). Eine der Karten (`<a class="app" …>…</a>`) kopieren und `href`, Bild, Etikett, Titel und Text anpassen. Die Stelle ist mit einem Kommentar markiert. Die Karten ordnen sich von selbst in Spalten an.
+
+## Bereich für Lehrkräfte
+
+Begleithefte, Wissensbasen und Lösungsblätter liegen verschlüsselt in `lehrkraefte/` (ein Unterordner je Anwendung). Die Übersicht `lehrkraefte/index.html` enthält die geographiedidaktischen Grundlagen, die Liste aller Dokumente und die Datenschutzhinweise. Die Dokumente öffnen sich erst nach Eingabe des Passworts für Lehrkräfte; entschlüsselt wird nur im Browser (PBKDF2 + AES-256-GCM).
+
+```
+lehrkraefte/index.html                 Übersicht mit Passwortfeld
+lehrkraefte/<anwendung>/*.html         verschlüsselte Dokumente
+lehrkraefte/schloss.js, lehrkraefte.css  Entschlüsselung und Gestaltung
+lehrkraefte/dokumente.js               automatisch erzeugte Liste
+lehrkraefte/werkzeug/verschluesseln.mjs  Werkzeug zum Verschlüsseln
+_lehrkraefte-originale/                unverschlüsselte Originale – NICHT hochladen (.gitignore)
+```
+
+An den alten Stellen (z. B. `erdbeben/begleitheft.html`) liegen kleine Weiterleitungen, damit alle Links aus den Anwendungen weiter funktionieren.
+
+**Dokument ändern oder neu hinzufügen:** die neue unverschlüsselte Fassung (z. B. `begleitheft.html` aus `klimasimulation/quellcode/build/`) einfach in den Anwendungsordner legen, dann im Hauptordner aufrufen:
+
+```
+node lehrkraefte/werkzeug/verschluesseln.mjs
+```
+
+Das Werkzeug fragt nach dem Passwort, verschiebt die neue Fassung nach `_lehrkraefte-originale/`, verschlüsselt alles neu und setzt die Weiterleitungen. **Passwort ändern:** dasselbe Kommando mit dem neuen Passwort. Eine neue Anwendung wird in der Liste `APPS` am Anfang des Werkzeugs ergänzt.
+
+Achtung beim Hochladen ohne Git: den Ordner `_lehrkraefte-originale/` nie mit hochladen.
 
 ## Datenschutz
 
