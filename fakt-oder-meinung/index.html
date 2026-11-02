@@ -121,8 +121,18 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media (max-width:800px){.levels{grid-template-columns:1fr}}
 .lvl{border:3px solid var(--ink);border-radius:14px;background:var(--paper);padding:12px 14px;text-align:left;cursor:pointer;box-shadow:4px 4px 0 var(--ink);display:grid;gap:4px;font-size:.88rem}
 .lvl b{font-family:var(--f-comic);font-weight:400;font-size:1.6rem;letter-spacing:.04em}
-.lvl[aria-pressed="true"]{background:var(--action);transform:rotate(-1deg)}
-.lvl ul{margin:2px 0 0;padding-left:18px}
+.lvl{transition:transform .15s,background-color .15s,box-shadow .15s,border-color .15s}
+.lvl:hover,.lvl:focus-visible{background:#DFF1FF;border-color:var(--logo);box-shadow:6px 6px 0 var(--ink);transform:translate(-2px,-2px)}
+.lvl:hover b,.lvl:focus-visible b{color:var(--logo)}
+.lvl[aria-pressed="true"]{background:#BFE3FB;border-color:var(--ink);box-shadow:0 0 0 3px var(--logo),5px 5px 0 var(--ink);transform:rotate(-1deg)}
+.lvl[aria-pressed="true"] b{color:var(--tat)}
+.lvl[aria-pressed="true"] b::after{content:" ✓";font-family:var(--f-body);font-size:1.1rem}
+.erd .globe{width:1.25em;height:1.25em;flex:none}
+.erd .spin{animation:globe-spin 6s linear infinite}
+@keyframes globe-spin{from{transform:translateX(0)}to{transform:translateX(-20px)}}
+.lvl{align-content:start}
+.lvl p{margin:2px 0 0;line-height:1.45}
+.lvl .lt{justify-self:start;border:2px solid var(--ink);border-radius:999px;padding:0 8px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;background:var(--paper)}
 .howto{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
 @media (max-width:900px){.howto{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.howto{grid-template-columns:1fr}}
@@ -370,9 +380,8 @@ textarea{min-height:68px;resize:vertical}
       </div>
       <div class="hbtns">
         <button class="ghost" id="restart" type="button">Neu beginnen</button>
-        <a class="ghost" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a>
         <a class="ghost" href="materialien.html" target="_blank" rel="noopener">Arbeitsblätter</a>
-        <a class="ghost" href="../index.html">Zum Erdlabor</a>
+        <a class="ghost erd" href="../index.html"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true"><defs><clipPath id="gclip"><circle cx="10" cy="10" r="8"/></clipPath></defs><circle cx="10" cy="10" r="8" fill="#7FC4EE"/><g clip-path="url(#gclip)"><g class="spin" fill="#4FB24C" stroke="#1B1B2F" stroke-width=".8" stroke-linejoin="round"><path d="M3 5c2-1 4 0 4 2s-2 2-1 4-2 3-3 1-1-6 0-7z"/><path d="M11 3c2 0 3 1 3 2s-2 1-1 3 0 3-1 2-2-3-2-4 0-3 1-3z"/><path d="M15 11c2 0 3 2 2 4s-3 1-3-1 0-3 1-3z"/><path d="M23 5c2-1 4 0 4 2s-2 2-1 4-2 3-3 1-1-6 0-7z"/><path d="M31 3c2 0 3 1 3 2s-2 1-1 3 0 3-1 2-2-3-2-4 0-3 1-3z"/><path d="M35 11c2 0 3 2 2 4s-3 1-3-1 0-3 1-3z"/></g></g><circle cx="10" cy="10" r="8" fill="none" stroke="#1B1B2F" stroke-width="1.6"/><path d="M5 6.5q2-2.5 5-3" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" opacity=".7"/></svg>Zum Erdlabor</a>
       </div>
     </header>
     <section class="box bal" aria-labelledby="balh">
@@ -387,11 +396,6 @@ textarea{min-height:68px;resize:vertical}
       </div>
     </section>
   </div>
-
-  <nav class="box stations" aria-labelledby="stah">
-    <div class="sh"><h2 class="comic-h" id="stah">Eure vier Stationen</h2><span class="sm muted" id="stahs"></span></div>
-    <ol class="stlist" id="phases"></ol>
-  </nav>
 
   <main class="box" id="main" aria-live="polite"></main>
 
@@ -488,11 +492,11 @@ const CARDS=[
 ];
 const LEVELS={
   basis:{n:'Basis',ids:['fao','def','zahl','schuld','siegel','loesung','skandal','dorsch'],
-    d:['Prüfpfad und Prüffragen sichtbar','Satzanfänge für die eigene Meinung','Passende Quellenkarte liegt bereit','8 Aussagen, eindeutige Fälle']},
+    t:'8 Aussagen',d:['Ihr sortiert jede Aussage in eine Spalte: Tatsache, Meinung oder Mischform. Der Prüfpfad führt euch Frage für Frage, und ihr begründet mit einem Merkmal.','Beim Prüfen liegt die passende Quellenkarte schon bereit. Mischformen zerlegt ihr in Fakt und Wertung.','Dann findet ihr heraus, wer was mit welchem Interesse sagt.','Zum Schluss schreibt ihr eure eigene Meinung als Fakt + Wertung + Begründung. Satzanfänge helfen euch.']},
   standard:{n:'Standard',ids:['fao','def','schuld','siegel','loesung','skandal','dorsch','dreiviertel','1974','zucht'],
-    d:['Prüfpfad auf Klick','Satzanfänge für die eigene Meinung','Quellenkarte selbst auswählen','10 Aussagen, auch eine falsche Tatsache']},
+    t:'10 Aussagen',d:['Ihr sortiert die Aussagen und begründet jede mit einem Merkmal. Den Prüfpfad öffnet ihr nur, wenn ihr ihn braucht.','Für jede Behauptung sucht ihr selbst die passende Quellenkarte. Vorsicht: Eine Tatsache ist falsch!','Danach findet ihr heraus, wer was mit welchem Interesse sagt.','Eure eigene Meinung schreibt ihr als Fakt + Wertung + Begründung, mit Satzanfängen.']},
   experte:{n:'Experte',ids:['fao','def','zahl','schuld','siegel','loesung','skandal','dorsch','dreiviertel','1974','zucht','politik'],
-    d:['Kein Prüfpfad, nur die Kriterien','Eigene Meinung frei formulieren','Quellenkarte selbst auswählen','12 Aussagen, mit ausgewählten Fakten']}
+    t:'12 Aussagen',d:['Ihr sortiert ohne Prüfpfad, nur mit den Kriterien, und begründet jede Zuordnung.','Ihr wählt die Quellen selbst und entlarvt falsche und ausgewählte Fakten.','Ihr erkennt die Interessen hinter den Aussagen.','Eure eigene Meinung formuliert ihr frei: Fakt + Wertung + Begründung.']}
 };
 const PHASES=['Sortieren','Prüfen','Wer spricht?','Meine Position'];
 const PHASED=['Aussagen in Tatsache, Meinung oder Mischform einordnen','Fakten mit Quellenkarten abgleichen','Sprecher und Interessen erkennen','Fakt + Wertung + Begründung'];
@@ -528,11 +532,11 @@ function score(){
 /* ================= Kopf und Bilanz ================= */
 function renderHead(){
   const ph=$('#phases');
-  ph.innerHTML=PHASES.map((n,k)=>{
+  if(ph){ph.innerHTML=PHASES.map((n,k)=>{
     const cls=(st.lvl&&(k+1<st.ph||st.fin))?'done':(st.lvl&&k+1===st.ph?'now':'open');
     const lab={done:'erledigt',now:'jetzt',open:'offen'}[cls];
     return '<li class="sta '+cls+'"'+(cls==='now'?' aria-current="step"':'')+'><span class="no">'+(cls==='done'?'✓':(k+1))+'</span><span class="stt">'+lab+'</span><b>'+n+'</b><span class="d">'+PHASED[k]+'</span></li>';}).join('');
-  $('#stahs').textContent=!st.lvl||st.ph===0?'Erst eine Stufe wählen, dann geht es los.':st.fin?'Alle Stationen geschafft!':'Ihr seid an Station '+st.ph+' von 4.';
+  $('#stahs').textContent=!st.lvl||st.ph===0?'Erst eine Stufe wählen, dann geht es los.':st.fin?'Alle Stationen geschafft!':'Ihr seid an Station '+st.ph+' von 4.';}
   renderSeal();
   const {p,max}=score();
   $('#tPts').textContent=p;$('#tPtsS').textContent='von '+max;
@@ -584,13 +588,7 @@ function render(){
 function renderStart(m){
   tip('Hallo! Beim Streit um Überfischung fliegen Zahlen und Meinungen durcheinander. Wir sortieren sie, prüfen die Fakten und schauen, wer was sagt. Wählt zuerst eure Stufe.');
   m.innerHTML='<h2 class="comic-h">Wählt eure Stufe</h2><p class="sub">Je höher die Stufe, desto weniger Hilfen gibt es. Ihr könnt jederzeit neu beginnen und eine andere Stufe wählen.</p>'+
-   '<div class="levels">'+Object.entries(LEVELS).map(([k,l])=>'<button type="button" class="lvl" data-l="'+k+'" aria-pressed="'+(st.lvl===k)+'"><b>'+l.n+'</b><ul>'+l.d.map(x=>'<li>'+x+'</li>').join('')+'</ul></button>').join('')+'</div>'+
-   '<div class="howto">'+[
-     ['Sortieren','Jede Aussage kommt in eine Spalte: Tatsache, Meinung oder Mischform. Ihr begründet mit einem Merkmal.'],
-     ['Prüfen','Fakten werden mit Quellenkarten abgeglichen. Mischformen zerlegt ihr in Fakt und Wertung.'],
-     ['Wer spricht?','Zu jeder Aussage gehört jemand mit einem Interesse. Welches?'],
-     ['Meine Position','Ihr schreibt eure eigene Meinung: Fakt + Wertung + Begründung.']
-   ].map((s,k)=>'<div class="step"><span class="n">'+(k+1)+'</span><span><b>'+s[0]+'</b>'+s[1]+'</span></div>').join('')+'</div>'+
+   '<div class="levels">'+Object.entries(LEVELS).map(([k,l])=>'<button type="button" class="lvl" data-l="'+k+'" aria-pressed="'+(st.lvl===k)+'"><b>'+l.n+'</b><span class="lt">'+l.t+'</span><p>'+l.d.join(' ')+'</p></button>').join('')+'</div>'+
    '<button class="go" id="startgo" type="button" '+(st.lvl?'':'disabled')+'>Los geht\'s!</button>';
   m.querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{st.lvl=b.dataset.l;save();render();});
   $('#startgo').onclick=()=>{st.deck=LEVELS[st.lvl].ids.slice();shuffle(st.deck);st.ph=1;st.i=0;save();render();window.scrollTo({top:0,behavior:'smooth'});};
