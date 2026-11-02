@@ -1,11 +1,11 @@
-// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-10-30. Nicht von Hand ändern.
-window.TV_LK={"salz":"hR2fjMrTrVI3+qN8GWYTow==","iter":600000,"id":"89b66e9109f9","pruef":{"iv":"tqmOXp8WU3CV3pW2","ct":"XMdN3vJhXfsLzFTWpAjksz8do3MpQk00BpylQ1UZeswPuIg+ef8="}};
+// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-02. Nicht von Hand ändern.
+window.TV_LK={"salz":"vfB9FO9vkSIrKDHdEqJcNA==","iter":600000,"id":"a910059b8c0e","pruef":{"iv":"qq+yIidijVim/H8L","ct":"NpIvq2HLMoH9IkqfRVqtHVQ43orkFh8a3vDzfhpkjGk8QmP+x2c="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
   "titel": "Erdbeben-Globus",
   "stufe": "Klasse 5 und 6",
-  "start": "../Erdbeben/",
+  "start": "../erdbeben/",
   "dokumente": [
    {
     "art": "Begleitheft",
@@ -66,6 +66,38 @@ window.TV_DOKUMENTE=[
     "href": "kompass-raetsel/wissensbasis.html",
     "typ": "html",
     "kb": 133
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "rettung-auf-sogapalag",
+  "titel": "Rettung auf Sogapalag",
+  "stufe": "Klasse 5 und 6",
+  "start": "../rettung-auf-sogapalag/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft Rettung auf Sogapalag",
+    "href": "rettung-auf-sogapalag/begleitheft.html",
+    "typ": "html",
+    "kb": 89
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "expedition-sogapalag",
+  "titel": "Expedition Sogapalag",
+  "stufe": "Klasse 5 und 6",
+  "start": "../expedition-sogapalag/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft Expedition Sogapalag",
+    "href": "expedition-sogapalag/begleitheft.html",
+    "typ": "html",
+    "kb": 82
    }
   ],
   "offen": []
@@ -248,7 +280,22 @@ window.TV_DOKUMENTE=[
   "titel": "Fakt oder Meinung?",
   "stufe": "Klasse 7 bis 10",
   "start": "../fakt-oder-meinung/",
-  "dokumente": [],
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Fakt oder Meinung?",
+    "href": "fakt-oder-meinung/begleitheft.html",
+    "typ": "html",
+    "kb": 151
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Fakt oder Meinung?",
+    "href": "fakt-oder-meinung/wissensbasis.html",
+    "typ": "html",
+    "kb": 129
+   }
+  ],
   "offen": [
    {
     "art": "Arbeitsblätter",
@@ -283,5 +330,28 @@ window.TV_DOKUMENTE=[
     "href": "../laendlicher_raum/materialien.html"
    }
   ]
+ },
+ {
+  "id": "schanze",
+  "titel": "Wer macht die Schanze?",
+  "stufe": "Oberstufe",
+  "start": "../schanze/",
+  "dokumente": [
+   {
+    "art": "Begleitheft als Word-Datei",
+    "titel": "Begleitheft als Word-Datei",
+    "href": "schanze/begleitheft-word.html",
+    "typ": "docx",
+    "kb": 22
+   },
+   {
+    "art": "Begleitheft als PDF",
+    "titel": "Begleitheft als PDF",
+    "href": "schanze/begleitheft-pdf.html",
+    "typ": "pdf",
+    "kb": 174
+   }
+  ],
+  "offen": []
  }
 ];
