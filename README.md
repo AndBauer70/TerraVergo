@@ -6,8 +6,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 |---|---|
 | `klimasimulation/` | **Terra Vergo**: zwei eigenständige Anwendungen, das Mystery „Das Rätsel vom Deich“ (`mystery.html`) und die Klimasimulation „Der Kontrollraum“ 2025–2075 (`klimasimulation.html`), dazu eine eigene Startseite, Begleitheft und Wissensbasis |
 | `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
-| `rettung-auf-sogapalag/` | **Rettung auf Sogapalag**: Funk-Abenteuer für zwei Personen mit zwei Tablets (Klasse 5 und 6). Der abgestürzte Forscher hat nur einen Kompass, die Expeditionsleiterin lotst ihn mit topographischer Karte, Himmelsrichtungen und Maßstabsleiste ins Basiscamp; jede Insel wird aus einem gemeinsamen Code neu erzeugt |
-| `expedition-sogapalag/` | **Expedition Sogapalag**: schwierigere Fortsetzung für zwei Personen mit zwei Tablets. Der Forscher sieht den Dschungel in der Ich-Perspektive und bestimmt Richtungen mit dem Kompass; die Expeditionsleiterin kennt die überwindbaren Hindernisse nicht und ist auf seine Rückmeldungen angewiesen; das Trinkwasser ist knapp |
+| `expedition-sogapalag/` | **Expedition Sogapalag**: Funk-Abenteuer für zwei Personen mit zwei Tablets (Klasse 5 und 6). Der Forscher sieht den Dschungel in der Ich-Perspektive und bestimmt Richtungen mit dem Kompass; die Expeditionsleiterin kennt die überwindbaren Hindernisse nicht und ist auf seine Rückmeldungen angewiesen; das Trinkwasser ist knapp |
 | `orientierung-breitenkreise/` | **Orientierung auf unserer Erde: Die Breitenkreise**: Globus, Gradnetz und Kartenentwürfe (Zylinder, Kegel, Ebene) für Klasse 5–7, mit Begleitheft und Wissensbasis |
 | `christallers-land/` | **Christallers Land**: Planspiel zur Theorie der zentralen Orte in fünf Leveln, mit Anleitung in `LIESMICH.txt` |
 | `fakt-oder-meinung/` | **Fakt oder Meinung?**: Aussagen zum Streitfall Überfischung nach Tatsache, Meinung oder Mischform sortieren, mit Quellenkarten prüfen und nach Sprecher und Interesse fragen; drei Hilfestufen für Klasse 7–10 |
@@ -27,8 +26,7 @@ erdbeben/                      Erdbeben-Globus
 christallers-land/             Christallers Land
 kaffee-lieferkette/            Die Kaffee-Spur
 orientierung-breitenkreise/    Orientierung auf unserer Erde: Die Breitenkreise
-rettung-auf-sogapalag/         Rettung auf Sogapalag (zwei Personen, zwei Tablets)
-expedition-sogapalag/          Expedition Sogapalag (Fortsetzung, Ich-Perspektive)
+expedition-sogapalag/          Expedition Sogapalag (zwei Personen, zwei Tablets)
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus
 .gitattributes                 einheitliche Zeilenenden

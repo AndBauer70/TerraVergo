@@ -1,6 +1,6 @@
 # Expedition Sogapalag
 
-Schwierigere Fortsetzung von „Rettung auf Sogapalag“ für **Klasse 5 und 6**, gespielt von **zwei Personen mit zwei Tablets**.
+Funk-Abenteuer zur räumlichen Orientierung für **Klasse 5 und 6**, gespielt von **zwei Personen mit zwei Tablets**.
 
 - Der **Forscher im Dschungel** sieht die Landschaft in der Ich-Perspektive. Die Bilder entsprechen den Signaturen der Karte. Seine Blickrichtung bestimmt er mit einem Plattenkompass: Marschrichtung am Ring einstellen, dann drehen, bis die Nadel im Haus liegt.
 - Die **Expeditionsleiterin im Basiscamp** hat die genordete Karte mit Planquadraten und Maßstabsleiste. Furten, Hängebrücken, Dornendickicht und gefährliche Tiere sind darin nicht eingezeichnet. Rückmeldungen des Forschers trägt sie mit „Meldung eintragen“ in die Karte ein.

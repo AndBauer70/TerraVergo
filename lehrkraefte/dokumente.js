@@ -71,22 +71,6 @@ window.TV_DOKUMENTE=[
   "offen": []
  },
  {
-  "id": "rettung-auf-sogapalag",
-  "titel": "Rettung auf Sogapalag",
-  "stufe": "Klasse 5 und 6",
-  "start": "../rettung-auf-sogapalag/",
-  "dokumente": [
-   {
-    "art": "Begleitheft",
-    "titel": "Begleitheft Rettung auf Sogapalag",
-    "href": "rettung-auf-sogapalag/begleitheft.html",
-    "typ": "html",
-    "kb": 89
-   }
-  ],
-  "offen": []
- },
- {
   "id": "expedition-sogapalag",
   "titel": "Expedition Sogapalag",
   "stufe": "Klasse 5 und 6",
