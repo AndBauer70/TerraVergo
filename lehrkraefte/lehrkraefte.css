@@ -59,6 +59,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #FF6B
 .lk-app .start{font-size:.82rem}
 .lk-app ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
 .lk-app li{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.lk-did{margin:10px 0 0;padding:8px 10px;background:var(--land);border:1.5px solid var(--ink);border-radius:8px;font-size:.84rem;line-height:1.45}
+.lk-did dt{font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lk-did dd{margin:0 0 6px;hyphens:auto;-webkit-hyphens:auto}
+.lk-did dd:last-child{margin-bottom:0}
 .lk-doc{font-weight:700}
 .lk-doc[aria-disabled=true]{color:var(--muted);text-decoration:none;cursor:not-allowed}
 .lk-doc[aria-disabled=true]::before{content:"🔒 ";font-weight:400}

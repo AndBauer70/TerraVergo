@@ -113,6 +113,40 @@
     return e;
   }
 
+  // Geographiedidaktischer Ansatz und methodischer Schwerpunkt je Anwendung
+  var DIDAKTIK = {
+    'erdbeben': ['Physisch-geographischer Zugang zur Plattentektonik über echte, tagesaktuelle Geodaten: Verbreitungsmuster von Erdbeben erkennen und mit Plattengrenzen, Tiefseegräben und Gebirgen erklären.', 'Datengestützte Kartenanalyse auf Weltkarte und 3D-Globus; Ebenen und Filter (Magnitude, Tiefe) gezielt kombinieren, Hypothesen zu räumlichen Mustern bilden und prüfen.'],
+    'klimazonen': ['Forschend-entdeckendes Lernen mit realen Klimadaten; Klimazonen als Modell und Generalisierung verstehen und typische Schülervorstellungen an Ausreißern wie Hochlagen bearbeiten (Leufke, 2011).', 'Exploration von 1.332 Klimastationen am Globus, Zonen ein- und ausblenden, eigene Temperaturbereiche festlegen und eine begründete Zoneneinteilung entwickeln.'],
+    'kompass-raetsel': ['Problemorientiertes Lernen zur räumlichen Orientierung: Himmelsrichtungen und Einnorden des Kompasses werden mit der naturwissenschaftlichen Erklärung des Erdmagnetfelds verknüpft.', 'Narrativ gerahmter Forschungsauftrag (Wandertagebuch) mit Indizien-Koffer und gestuften Halten; Vermuten, Prüfen und Erklären im Wechsel.'],
+    'rettung-auf-sogapalag': ['Räumliche Orientierung als kommunikative Handlung: Wechsel vom körperbezogenen (links, rechts) zum absoluten Bezugssystem der Himmelsrichtungen (Levinson, 2003); Kartenkompetenz mit Signaturen, Planquadraten und Maßstab (DGfG O3, O4).', 'Informationslückenaufgabe in Partnerarbeit mit zwei Tablets und Funkprotokoll; zufällig erzeugte Inseln aus einem gemeinsamen Code, drei Stufen, Reflexion am kürzesten Weg.'],
+    'expedition-sogapalag': ['Orientierung im simulierten Realraum: Abgleich von Karte und Landschaft aus der Ich-Perspektive, Marschrichtung mit dem Plattenkompass bestimmen; die unvollständige Karte macht Karten als zeitgebundene Konstruktion erfahrbar.', 'Kooperatives Problemlösen im Wechsel von Anweisung und Rückmeldung; Nachführen der Karte durch gemeldete Hindernisse, Ressourcenknappheit (Trinkwasser) als Anlass zur gemeinsamen Wegplanung.'],
+    'orientierung-breitenkreise': ['Konzeptwechsel an einer typischen Schülervorstellung (gerade oder gebogene Breitenkreise); Raumdarstellungen als Konstruktion verstehen (DGfG O5, Kartennetzentwürfe).', 'Vermuten – Prüfen – Erklären am drehbaren Globus; Modellexperiment mit Papier als Zylinder, Kegel und Ebene.'],
+    'sensor-werkstatt': ['Fernerkundung als geographischer Erkenntnisweg: Satellitenbilder sind Messdaten, keine Fotos; Anwendung auf ein Mensch-Umwelt-Problem (Fichtensterben im Harz).', 'Handlungsorientierte Werkstatt in Stationen: Licht in Spektralbändern messen, Echt- und Falschfarben mischen, eine eigene Farbskala entwerfen und auswerten.'],
+    'klimasimulation': ['Förderung von Systemkompetenz (Mehren et al., 2016; Rempfler & Uphues, 2010): Wirkungsgefüge, Rückkopplungen, Verzögerungen und Kipppunkte des Klimasystems; lösungsorientiert im Sinne einer Bildung für nachhaltige Entwicklung.', 'Mystery nach Thinking Through Geography als Einstieg, danach kybernetische Simulation über 50 Jahre mit Entscheidungen zu Klimaschutz und Anpassung; Modellkritik anhand der offengelegten Parameter.'],
+    'christallers-land': ['Theoriegeleitete Siedlungsgeographie: die Theorie der zentralen Orte als Modell erarbeiten und mit Wandel (Landflucht, Motorisierung) konfrontieren.', 'Planspiel in fünf Leveln mit unmittelbarer Rückmeldung; Modellbildung und Modellreflexion durch Versuch und Verbesserung.'],
+    'rungholt': ['Naturgefahr und Vulnerabilität: historisch-geographische Rekonstruktion eines Sturmflut-Untergangs und Unterscheidung von Naturereignis und selbst gemachter Verwundbarkeit.', 'Mystery mit 15 Indizien, Verortung auf der Karte des Wattenmeers, Ausrichten der Windrose, Quellenkritik an falschen Spuren und Aufbau eines Wirkungsgefüges.'],
+    'planspiel-kartoffelhof': ['Mensch-Umwelt-System Landwirtschaft: Zielkonflikte zwischen ökonomischer, ökologischer und sozialer Nachhaltigkeit am Beispiel von Bio- und konventionellem Anbau.', 'Planspiel über zehn Jahre mit Wirkungsnetz; Entscheidungen, Rückkopplungen und Eingriffe weiterer Akteure (Politik, Handel, Kundschaft) auswerten.'],
+    'kaffee-lieferkette': ['Globales Lernen nach dem Orientierungsrahmen Globale Entwicklung (Schreiber & Siege, 2016): Lieferketten, Preisbildung und Konsumentscheidungen in ihren sozialen, ökonomischen und ökologischen Folgen.', 'Spurensuche entlang von Stationen auf Weltkarte und Globus, Preisaufteilung vergleichen, Stresstest und Lösungsplan, Denkwerkstatt; Arbeitsblätter M1–M6.'],
+    'fakt-oder-meinung': ['Beurteilungs- und Bewertungskompetenz (DGfG, 2020): Sach- und Werturteile unterscheiden, Tatsachenbehauptungen prüfen und Interessen hinter Aussagen erkennen.', 'Sortieraufgabe mit Prüfpfad, Quellenkarten und drei Hilfestufen; Abschluss mit einer eigenen, begründeten Position.'],
+    'laendlicher_raum': ['Ländliche Räume als System: Schrumpfung, Daseinsvorsorge und Steuerungsmöglichkeiten unter der Leitfrage „Der Letzte macht das Licht aus?“.', 'Mystery „Das Rätsel von Altenrode“ und Simulation „Die Kreistagsrunde“ über fünf Runden; Wirkungszusammenhänge erkennen und Entscheidungen begründen.'],
+    'schanze': ['Machtkritische Stadtgeographie: Gestaltungs- und Deutungsmacht im Schanzenviertel, Raum als gemacht und umkämpft (Lefebvre, 1991; Harvey, 2008; Raumkonzepte nach Wardenga, 2002).', 'Stationenarbeit mit Raumbildern, Kartenkritik (Gefahrengebiet 2014), Analyse von Pressetexten zu G20 und abschließender Machtkarte der Akteure.']
+  };
+  // Anwendungen, deren Dokumente noch nicht verschlüsselt sind, trotzdem zeigen
+  var ERGAENZUNG = [
+    { id: 'rettung-auf-sogapalag', titel: 'Rettung auf Sogapalag', stufe: 'Klasse 5 und 6', start: '../rettung-auf-sogapalag/', nach: 'kompass-raetsel' },
+    { id: 'expedition-sogapalag', titel: 'Expedition Sogapalag', stufe: 'Klasse 5 und 6', start: '../expedition-sogapalag/', nach: 'rettung-auf-sogapalag' },
+    { id: 'schanze', titel: 'Wer macht die Schanze?', stufe: 'Oberstufe', start: '../schanze/', nach: null }
+  ];
+  DOKS = DOKS.slice();
+  ERGAENZUNG.forEach(function (e) {
+    if (DOKS.some(function (a) { return a.id === e.id; })) return;
+    var neu = { id: e.id, titel: e.titel, stufe: e.stufe, start: e.start, dokumente: [], offen: [], spaeter: e.id !== 'schanze' };
+    var k = -1;
+    DOKS.forEach(function (a, i) { if (a.id === e.nach) k = i; });
+    if (k < 0) DOKS.forEach(function (a, i) { if (a.stufe === e.stufe) k = i; });
+    if (k < 0) DOKS.push(neu); else DOKS.splice(k + 1, 0, neu);
+  });
+
   // Übersicht aufbauen, nach Klassenstufen gegliedert
   liste.innerHTML = '';
   var stufe = null, grid = null;
@@ -127,6 +161,13 @@
     box.appendChild(el('h4', {}, app.titel));
     var s = el('a', { 'class': 'start', href: app.start }, 'Anwendung öffnen');
     box.appendChild(s);
+    var dd = DIDAKTIK[app.id];
+    if (dd) {
+      var dl = el('dl', { 'class': 'lk-did' });
+      dl.appendChild(el('dt', {}, 'Geographiedidaktischer Ansatz')); dl.appendChild(el('dd', {}, dd[0]));
+      dl.appendChild(el('dt', {}, 'Methodischer Schwerpunkt')); dl.appendChild(el('dd', {}, dd[1]));
+      box.appendChild(dl);
+    }
     var ul = el('ul');
     app.dokumente.forEach(function (d) {
       var li = el('li');
@@ -143,6 +184,7 @@
       ul.appendChild(li);
     });
     box.appendChild(ul);
+    if (app.spaeter) box.appendChild(el('p', { 'class': 'lk-hinweis' }, 'Das Begleitheft erscheint hier, sobald das Verschlüsselungswerkzeug das nächste Mal gelaufen ist.'));
     grid.appendChild(box);
   });
   if (!DOKS.length) liste.innerHTML = '<p class="lk-hinweis">Noch keine Dokumente verschlüsselt.</p>';

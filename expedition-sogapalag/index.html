@@ -465,7 +465,7 @@ button{font:inherit;color:inherit}
     <section class="card panel">
       <h3>Zeichenerklärung</h3>
       <ul class="legend" id="legend"></ul>
-      <p class="legend-note">Diese Karte ist alt. Furten, Brücken, Dornendickicht und gefährliche Tiere sind nicht eingezeichnet. Ob man durchkommt, weiß nur der Forscher.</p>
+      <p class="legend-note">Diese Karte ist alt. Furten, Brücken, Dornendickicht, gefährliche Tiere und die neuen Lavaströme des Vulkans sind nicht eingezeichnet. Ob man durchkommt, weiß nur der Forscher.</p>
     </section>
     <section class="card panel">
       <h3>Funk-Peilung</h3>
@@ -1464,9 +1464,10 @@ function extendIsland(G){
   const X = i => i % W, Y = i => (i - (i % W)) / W, inb = (x, y) => x >= 0 && y >= 0 && x < W && y < H;
   const cheb = (a, b) => Math.max(Math.abs(X(a) - X(b)), Math.abs(Y(a) - Y(b)));
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(rng() * (i + 1)); const q = a[i]; a[i] = a[j]; a[j] = q; } return a; };
-  const thicket = new Uint8Array(N), bridge = new Uint8Array(N);
+  const thicket = new Uint8Array(N), bridge = new Uint8Array(N), lava = new Uint8Array(N);
+  let volcano = -1;
   const base = i => t[i] === T.GRASS || t[i] === T.FOREST || t[i] === T.FORD;
-  const pass = i => bridge[i] ? true : (base(i) && !thicket[i]);
+  const pass = i => bridge[i] ? true : (base(i) && !thicket[i] && !lava[i]);
   function canStep(i, d){
     if (G.dirs === 4 && (d & 1)) return -1;
     const x = X(i), y = Y(i), nx = x + DIRS8[d][0], ny = y + DIRS8[d][1];
@@ -1476,7 +1477,8 @@ function extendIsland(G){
     if ((d & 1) && !pass(y * W + nx) && !pass(ny * W + x)) return -1;
     return n;
   }
-  const effort = i => t[i] === T.FOREST ? 1.35 : t[i] === T.FORD ? 1.6 : 1;
+  const hot = i => volcano >= 0 && cheb(i, volcano) <= 2;
+  const effort = i => (t[i] === T.FOREST ? 1.35 : t[i] === T.FORD ? 1.6 : 1) * (hot(i) ? 1.4 : 1);
   function bfs(s, block){
     const D = new Int16Array(N).fill(-1), q = [s]; D[s] = 0;
     for (let h = 0; h < q.length; h++){ const c = q[h]; for (let d = 0; d < 8; d++){ const n = canStep(c, d); if (n < 0 || D[n] >= 0 || (block && block[n] >= 0)) continue; D[n] = D[c] + 1; q.push(n); } }
@@ -1510,22 +1512,49 @@ function extendIsland(G){
     const inner = comp.filter(c => { const b = G.gorgeConn[c]; return ((b & 5) === 5) || ((b & 10) === 10); });
     if (inner.length && rng() < L.bridge) bridge[inner[Math.floor(rng() * inner.length)]] = 1;
   }
-  // 2. Quelle: ungefähr auf halber Strecke, aber nicht auf dem kürzesten Weg
+  // 2. Aktiver Vulkan auf dem höchsten Gipfel, mit frischem Lavastrom (fehlt in der alten Karte)
+  if (G.peaks.length){ volcano = G.peaks[0].i; G.peaks[0].name = 'Vulkan ' + G.peaks[0].name; G.peaks[0].h += 400; }
+  else {
+    let bestN = -1;
+    for (let i = 0; i < N; i++) if (t[i] === T.MOUNTAIN){ let n = 0; for (let d = 0; d < 8; d++){ const x = X(i) + DIRS8[d][0], y = Y(i) + DIRS8[d][1]; if (inb(x, y) && t[y * W + x] === T.MOUNTAIN) n++; } if (n > bestN){ bestN = n; volcano = i; } }
+    if (volcano >= 0) G.peaks.push({i: volcano, name: 'Vulkan', h: 1100});
+  }
+  if (volcano >= 0){
+    const keepV = new Set([G.crash, G.camp, ...G.landmarks.map(l => l.i)]);
+    const ok = i => (t[i] === T.GRASS || t[i] === T.FOREST) && !keepV.has(i) && !bridge[i] && cheb(i, G.crash) > 1 && cheb(i, G.camp) > 1;
+    const len = 3 + Math.floor(rng() * 3);
+    let cur = volcano, made = 0;
+    const visited = new Set([volcano]);
+    for (let k = 0; k < 14 && made < len; k++){
+      let next = -1;
+      for (const dd of shuffle([0, 1, 2, 3])){
+        const x = X(cur) + N4[dd][0], y = Y(cur) + N4[dd][1];
+        if (!inb(x, y)) continue;
+        const n = y * W + x;
+        if (visited.has(n)) continue;
+        if (ok(n)){ lava[n] = 1; const D = bfs(G.crash, G.animals); if (D[G.camp] < 0){ lava[n] = 0; continue; } next = n; made++; break; }
+        if (t[n] === T.MOUNTAIN && made === 0 && next < 0) next = n;
+      }
+      if (next < 0) break;
+      visited.add(next); cur = next;
+    }
+  }
+  // 3. Quelle: ungefähr auf halber Strecke, aber nicht auf dem kürzesten Weg
   const dc = bfs(G.crash, G.animals), dk = bfs(G.camp, G.animals), total = dc[G.camp];
   const lmSet = new Set(G.landmarks.map(l => l.i));
   let cands = [];
   for (let i = 0; i < N; i++){
-    if (!pass(i) || G.animals[i] >= 0 || G.landmarks.some(l => cheb(l.i, i) < 3) || i === G.crash || i === G.camp || t[i] === T.FORD || dc[i] < 0 || dk[i] < 0) continue;
+    if (!pass(i) || hot(i) || G.animals[i] >= 0 || G.landmarks.some(l => cheb(l.i, i) < 3) || i === G.crash || i === G.camp || t[i] === T.FORD || dc[i] < 0 || dk[i] < 0) continue;
     if (dc[i] < 2 || dk[i] < 2) continue;
     if (dc[i] + dk[i] === total) continue;
     const r = dc[i] / Math.max(1, total);
     if (r < 0.25 || r > 0.75 || dc[i] + dk[i] > total + 5) continue;
     cands.push(i);
   }
-  if (!cands.length) for (let i = 0; i < N; i++) if (pass(i) && G.animals[i] < 0 && !lmSet.has(i) && i !== G.crash && i !== G.camp && dc[i] >= 2 && dk[i] >= 1) cands.push(i);
+  if (!cands.length) for (let i = 0; i < N; i++) if (pass(i) && !hot(i) && G.animals[i] < 0 && !lmSet.has(i) && i !== G.crash && i !== G.camp && dc[i] >= 2 && dk[i] >= 1) cands.push(i);
   const quelle = cands.length ? cands[Math.floor(rng() * cands.length)] : -1;
   if (quelle >= 0) G.landmarks.push({i: quelle, kind: 'quelle', name: 'Quelle'});
-  // 3. Dickicht im Dschungel, solange alles erreichbar bleibt
+  // 4. Dickicht im Dschungel, solange alles erreichbar bleibt
   const keep = new Set([G.crash, G.camp, quelle, ...G.landmarks.map(l => l.i)]);
   const forest = [];
   for (let i = 0; i < N; i++) if (t[i] === T.FOREST && !keep.has(i) && cheb(i, G.crash) > 1 && cheb(i, G.camp) > 1) forest.push(i);
@@ -1538,7 +1567,7 @@ function extendIsland(G){
     const D = bfs(G.crash, G.animals);
     if (D[G.camp] < 0 || (quelle >= 0 && D[quelle] < 0)) thicket[i] = 0; else placed++;
   }
-  G.thicket = thicket; G.bridge = bridge; G.quelle = quelle;
+  G.thicket = thicket; G.bridge = bridge; G.quelle = quelle; G.lava = lava; G.volcano = volcano; G.hot = hot;
   G.pass = pass; G.canStep = canStep; G.effortOf = effort;
   G.best = dijkstra(G.crash, G.camp, G.animals);
   G.solve = dijkstra;
@@ -1546,6 +1575,16 @@ function extendIsland(G){
   G.flee = L.flee;
   G.hideFords = true;
   return G;
+}
+function volcanoMap(ctx, cx, cy, s){
+  const lw = Math.max(1, s * 0.035);
+  ctx.save(); ctx.lineJoin = 'round';
+  ctx.fillStyle = '#b09268'; ctx.fillRect(cx - s / 2, cy - s / 2, s, s);
+  ctx.beginPath(); ctx.moveTo(cx - s * 0.46, cy + s * 0.38); ctx.lineTo(cx - s * 0.12, cy - s * 0.22); ctx.lineTo(cx + s * 0.12, cy - s * 0.22); ctx.lineTo(cx + s * 0.46, cy + s * 0.38); ctx.closePath(); ctx.fillStyle = '#5b4a42'; ctx.fill(); ctx.strokeStyle = COL.ink; ctx.lineWidth = lw; ctx.stroke();
+  ctx.strokeStyle = '#ff7a1f'; ctx.lineWidth = Math.max(1.5, s * 0.06); ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(cx - s * 0.06, cy - s * 0.2); ctx.lineTo(cx - s * 0.2, cy + s * 0.3); ctx.moveTo(cx + s * 0.06, cy - s * 0.2); ctx.lineTo(cx + s * 0.16, cy + s * 0.1); ctx.stroke();
+  ell(ctx, cx, cy - s * 0.22, s * 0.13, s * 0.05); ctx.fillStyle = '#ff5a1f'; ctx.fill(); ctx.lineWidth = lw * 0.8; ctx.strokeStyle = COL.ink; ctx.stroke();
+  for (const [dx, dy, r] of [[0.02, -0.36, 0.08], [0.1, -0.46, 0.1]]){ circ(ctx, cx + dx * s, cy + dy * s, r * s); ctx.fillStyle = '#c9cdd2'; ctx.fill(); ctx.lineWidth = lw * 0.7; ctx.stroke(); }
+  ctx.restore();
 }
 function buildGame(code, level){
   const g = SOGA.generate(code, level);
@@ -1648,7 +1687,9 @@ function groundCol(x, y){
   if (tt === T.SEA) return o ? '#3aa5dd' : '#3fabe2';
   if (tt === T.LAKE || tt === T.RIVER) return o ? '#4fb0e6' : '#55b5ea';
   if (tt === T.FORD) return '#6cbde8';
-  if (tt === T.MOUNTAIN) return o ? '#b89a70' : '#b09268';
+  if (i >= 0 && G.lava[i]) return '#2b1d18';
+  if (tt === T.MOUNTAIN) return i === G.volcano ? '#4a3c36' : (o ? '#b89a70' : '#b09268');
+  if (i >= 0 && G.hot(i) && tt !== T.MOUNTAIN) return o ? '#a9b46a' : '#a2ad62';
   if (tt === T.GORGE) return '#3a2a22';
   if (tt === T.FOREST) return G.thicket[i] ? '#3f7d3a' : (o ? '#5fa650' : '#58a04a');
   if (nearSea(x, y)) return o ? '#f0d58f' : '#ead08a';
@@ -1789,6 +1830,51 @@ function spLandmark(ctx, x, y, k, kind){
   }
 }
 
+function spVolcano(ctx, x, y, k, now){
+  const w = 2.3 * k, hV = 1.75 * k, lw = Math.max(1.5, k * 0.022), cw = w * 0.17;
+  const t = REDUCE ? 0 : now / 1000;
+  // Rauchsäule
+  for (let j = 0; j < 7; j++){
+    const ph = REDUCE ? j / 7 : (t / 5 + j / 7) % 1;
+    const r = k * (0.14 + ph * 0.42), sx = x + Math.sin(ph * 4 + j) * k * 0.12 + ph * k * 0.5, sy = y - hV - ph * k * 1.9;
+    circ(ctx, sx, sy, r); ctx.fillStyle = `rgba(${150 - ph * 40},${145 - ph * 40},${150 - ph * 40},${(0.9 - ph * 0.7).toFixed(3)})`; ctx.fill();
+    ctx.strokeStyle = `rgba(27,27,47,${(0.6 - ph * 0.5).toFixed(3)})`; ctx.lineWidth = lw * 0.8; ctx.stroke();
+  }
+  // Kegel
+  ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(x - w / 2, y); ctx.lineTo(x - cw, y - hV); ctx.lineTo(x + cw, y - hV); ctx.lineTo(x + w / 2, y); ctx.closePath(); fillInk(ctx, '#5b4a42', lw);
+  ctx.beginPath(); ctx.moveTo(x + cw * 0.2, y - hV); ctx.lineTo(x + cw, y - hV); ctx.lineTo(x + w / 2, y); ctx.lineTo(x + w * 0.08, y); ctx.closePath(); ctx.fillStyle = '#463830'; ctx.fill();
+  // Lavarinnen
+  const glow = 0.75 + 0.25 * Math.sin(t * 3);
+  ctx.strokeStyle = `rgba(255,${Math.round(110 + 60 * glow)},40,1)`; ctx.lineCap = 'round';
+  for (const [sx0, ex0, wd] of [[-0.3, -0.85, 0.07], [0.2, 0.5, 0.06], [-0.05, -0.2, 0.05]]){
+    ctx.lineWidth = k * wd; ctx.beginPath(); ctx.moveTo(x + cw * sx0 * 2, y - hV + k * 0.04);
+    ctx.quadraticCurveTo(x + w * ex0 * 0.25, y - hV * 0.55, x + w * ex0 * 0.42, y - k * 0.05); ctx.stroke();
+  }
+  // Krater mit Glut
+  ell(ctx, x, y - hV, cw, k * 0.06); fillInk(ctx, `rgb(255,${Math.round(90 + 70 * glow)},30)`, lw);
+  for (let j = 0; j < 6; j++){
+    const ph = REDUCE ? j / 6 : (t * 0.8 + j / 6) % 1;
+    circ(ctx, x + (j - 2.5) * cw * 0.35 + ph * k * 0.1 * (j % 2 ? 1 : -1), y - hV - ph * k * 0.55, k * 0.025 * (1 - ph) + 0.5);
+    ctx.fillStyle = `rgba(255,${Math.round(160 * (1 - ph)) + 60},40,${(1 - ph).toFixed(3)})`; ctx.fill();
+  }
+}
+function spLava(ctx, x, y, k, now, seed){
+  const t = REDUCE ? 0 : now / 1000, lw = Math.max(1, k * 0.02);
+  ctx.lineCap = 'round';
+  for (let j = 0; j < 5; j++){
+    const g = 0.6 + 0.4 * Math.sin(t * 2.5 + j + seed);
+    ctx.strokeStyle = `rgb(255,${Math.round(90 + 90 * g)},30)`; ctx.lineWidth = lw * (1.5 + j % 2);
+    const sx = x + (cellHash(j, seed, 21) - 0.5) * 0.8 * k, sy = y - cellHash(seed, j, 22) * 0.08 * k;
+    ctx.beginPath(); ctx.moveTo(sx - k * 0.12, sy); ctx.lineTo(sx, sy - k * 0.02); ctx.lineTo(sx + k * 0.14, sy + k * 0.01); ctx.stroke();
+  }
+  for (let j = 0; j < 3; j++){
+    const ph = REDUCE ? j / 3 : (t / 2.4 + j / 3 + seed * 0.13) % 1;
+    circ(ctx, x + (j - 1) * k * 0.25, y - k * (0.05 + ph * 0.45), k * (0.05 + ph * 0.08));
+    ctx.fillStyle = `rgba(235,235,235,${(0.6 * (1 - ph)).toFixed(3)})`; ctx.fill();
+  }
+}
+
 /* ---------- Bild zusammensetzen ---------- */
 function renderView(now){
   const ctx = EX.ctx, ex = ST.ex;
@@ -1872,7 +1958,7 @@ function renderView(now){
     if (tt === T.FOREST){
       if (G.thicket[i]){ add(c.x + 0.5, c.y + 0.5, (ctx, x, y, k) => spThicket(ctx, x, y, k, c.x * 31 + c.y)); for (let j = 0; j < 2; j++) add(c.x + 0.25 + 0.5 * hs(j, 1), c.y + 0.2 + 0.3 * hs(j, 2), (ctx, x, y, k) => spTree(ctx, x, y, k, 0.2)); }
       else for (let j = 0; j < 3; j++) add(c.x + 0.18 + 0.64 * hs(j, 1), c.y + 0.18 + 0.64 * hs(j, 2), (ctx, x, y, k) => spTree(ctx, x, y, k, hs(j, 3)));
-    } else if (tt === T.MOUNTAIN){
+    } else if (tt === T.MOUNTAIN && i !== G.volcano){
       add(c.x + 0.5, c.y + 0.55, (ctx, x, y, k) => spMountain(ctx, x, y, k, c.x * 17 + c.y));
     } else if (tt === T.GRASS && c.f < 4.2){
       for (let j = 0; j < 4; j++) add(c.x + 0.1 + 0.8 * hs(j, 1), c.y + 0.1 + 0.8 * hs(j, 2), (ctx, x, y, k) => spTuft(ctx, x, y, k));
@@ -1887,7 +1973,13 @@ function renderView(now){
       const posts = vert ? [[0, 0.36], [0, 0.64], [1, 0.36], [1, 0.64]] : [[0.36, 0], [0.64, 0], [0.36, 1], [0.64, 1]];
       for (const [ux, uy] of posts) add(c.x + ux, c.y + uy, (ctx, x, y, k) => spPost(ctx, x, y, k));
     }
+    if (i >= 0 && G.lava[i]) add(c.x + 0.5, c.y + 0.5, (ctx, x, y, k) => spLava(ctx, x, y, k, now, c.x * 7 + c.y));
     if (i >= 0 && G.animals[i] >= 0) add(c.x + 0.5, c.y + 0.62, (ctx, x, y, k) => { animalGlyph(ctx, x, y - k * 0.2, k * 0.24, G.animals[i]); });
+  }
+  if (G.volcano >= 0){
+    const vx = G.volcano % G.W + 0.5, vy = Math.floor(G.volcano / G.W) + 0.55;
+    const [f, l] = toCam(C, vx, vy);
+    if (f > 0.5 && f < 40){ const [sx, sy] = scr(C, f, l, 0); const k = C.focal / f; if (sx > -k * 3 && sx < w + k * 3) sprites.push({f, sx, sy, k, fn: (ctx, x, y, kk) => { spVolcano(ctx, x, y, kk, now); if (f < 4.6) label(ctx, G.peaks[0].name, x, y - kk * 1.95, clamp(kk * 0.13, 12, 20), '#b3141f'); }}); }
   }
   sprites.sort((p, q) => q.f - p.f);
   for (const s of sprites){ ctx.save(); s.fn(ctx, s.sx, s.sy, s.k); ctx.restore(); }
@@ -1959,6 +2051,8 @@ BLOCK_TEXT[T.GORGE] = ['eine Schlucht ohne Brücke', 'Eine tiefe Schlucht – un
 function blockReason(n, nx, ny){
   if (n < 0) return ['das Meer', BLOCK_TEXT[T.SEA][1]];
   const tt = G.t[n];
+  if (G.lava[n]) return ['ein glühender Lavastrom', 'Glühende Lava! Hier kommst du auf keinen Fall durch.'];
+  if (n === G.volcano) return ['der Vulkan', 'Der Vulkan! Viel zu heiß und viel zu steil.'];
   if (tt === T.FOREST && G.thicket[n]) return ['undurchdringliches Dornendickicht', 'Undurchdringliches Dornendickicht! Hier kommst du nicht durch.'];
   if (BLOCK_TEXT[tt]) return BLOCK_TEXT[tt];
   return ['eine enge Stelle', 'Zu eng! Zwischen den Hindernissen kommst du nicht schräg hindurch.'];
@@ -2007,6 +2101,7 @@ function afterStep(i, prev){
     return;
   }
   if (i === G.camp){ win(); return; }
+  if (G.hot(i) && !ex.hotSeen){ ex.hotSeen = true; save(); bubble('Hier am Vulkan ist es glühend heiß. Du trinkst viel mehr Wasser!', 'warn', 3600); }
   checkWater(i);
   lookAround();
 }
@@ -2078,11 +2173,18 @@ function describeView(){
     else if (tt === T.FORD) { what = 'ein Fluss mit Trittsteinen (Furt)'; pri = 3; }
     else if (tt === T.MOUNTAIN) what = 'ein Berg mit steilen Felsen';
     else if (tt === T.GORGE) { what = G.bridge[i] ? 'eine Schlucht mit Hängebrücke' : 'eine tiefe Schlucht'; pri = G.bridge[i] ? 3 : 5; }
+    else if (G.lava[i]) { what = 'ein glühender Lavastrom'; pri = 0; }
+    else if (i === G.volcano) { what = 'der rauchende Vulkan'; pri = 1; }
     else if (tt === T.FOREST && G.thicket[i]) what = 'dichtes Dornengestrüpp';
     if (!what) continue;
     const m = Math.round(dist * G.cellM / 50) * 50, si = SECTORS.indexOf(sec);
     const it = items.get(what) || {what, secs: new Set(), m, pri};
     it.secs.add(si); it.m = Math.min(it.m, m); items.set(what, it);
+  }
+  if (G.volcano >= 0 && !items.has('der rauchende Vulkan')){
+    const dx = G.volcano % G.W - ex.x, dy = Math.floor(G.volcano / G.W) - ex.y, f = dx * fx + dy * fy, l = dx * rx + dy * ry;
+    const az = deg(Math.atan2(l, f)), sec = f > 0 ? SECTORS.find(s2 => az >= s2[0] && az < s2[1]) : null;
+    if (sec) items.set('der rauchende Vulkan', {what: 'der rauchende Vulkan in der Ferne', secs: new Set([SECTORS.indexOf(sec)]), m: Math.round(Math.sqrt(dx * dx + dy * dy) * G.cellM / 100) * 100, pri: 1});
   }
   const list = [...items.values()].sort((p, q) => p.pri - q.pri || p.m - q.m).slice(0, 8);
   for (const it of list){
@@ -2129,6 +2231,7 @@ function drawTruth(ctx, ox, oy, s){
   ctx.save();
   for (let i = 0; i < G.W * G.H; i++){
     const x = ox + (i % G.W) * s, y = oy + Math.floor(i / G.W) * s;
+    if (G.lava[i]){ ctx.fillStyle = '#2b1d18'; ctx.fillRect(x, y, s, s); ctx.strokeStyle = '#ff7a1f'; ctx.lineWidth = Math.max(1.5, s * 0.08); ctx.beginPath(); ctx.moveTo(x + s * 0.1, y + s * 0.3); ctx.lineTo(x + s * 0.5, y + s * 0.55); ctx.lineTo(x + s * 0.9, y + s * 0.4); ctx.moveTo(x + s * 0.2, y + s * 0.8); ctx.lineTo(x + s * 0.6, y + s * 0.7); ctx.stroke(); }
     if (G.thicket[i]){
       ctx.fillStyle = 'rgba(20,55,25,0.62)'; ctx.fillRect(x, y, s, s);
       ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = Math.max(1, s * 0.04); ctx.beginPath();
@@ -2150,6 +2253,7 @@ function drawMiniMap(ctx, w, h, withTrail){
   ctx.fillStyle = COL.sea; ctx.fillRect(0, 0, w, h);
   G.hideFords = false; drawWorld(ctx, G, ox, oy, s, 'map', 0); G.hideFords = true;
   drawTruth(ctx, ox, oy, s);
+  if (G.volcano >= 0) volcanoMap(ctx, ox + (G.volcano % G.W + 0.5) * s, oy + (Math.floor(G.volcano / G.W) + 0.5) * s, s);
   drawAnimals(ctx, G, ox, oy, s);
   if (withTrail){
     const tr = ST.ex.trail;
@@ -2276,6 +2380,7 @@ function drawMap(){
   ctx.fillStyle = COL.mapPaper; ctx.fillRect(0, 0, M.cw, M.ch);
   ctx.save(); ctx.beginPath(); ctx.rect(M.ox, M.oy, W * s, H * s); ctx.clip();
   drawWorld(ctx, G, M.ox, M.oy, s, 'map', 0);
+  if (G.volcano >= 0) volcanoMap(ctx, M.ox + (G.volcano % G.W + 0.5) * s, M.oy + (Math.floor(G.volcano / G.W) + 0.5) * s, s);
   ctx.strokeStyle = 'rgba(22,22,29,0.25)'; ctx.lineWidth = 1; ctx.beginPath();
   for (let x = 1; x < W; x++){ ctx.moveTo(M.ox + x * s, M.oy); ctx.lineTo(M.ox + x * s, M.oy + H * s); }
   for (let y = 1; y < H; y++){ ctx.moveTo(M.ox, M.oy + y * s); ctx.lineTo(M.ox + W * s, M.oy + y * s); }
@@ -2495,7 +2600,7 @@ function renderLog(){
 function buildLegend(){
   const items = [
     ['grass', 'Wiese'], ['forest', 'Dschungel'], ['mountain', 'Berg'], ['gorge', 'Schlucht'],
-    ['lake', 'See'], ['river', 'Fluss'], ['quelle', 'Quelle', 'Trinkwasser'], ['lm', 'Sehenswürdigkeit'],
+    ['volcano', 'Vulkan', 'aktiv!'], ['lake', 'See'], ['river', 'Fluss'], ['quelle', 'Quelle', 'Trinkwasser'], ['lm', 'Sehenswürdigkeit'],
     ['crash', 'Absturzstelle', 'Start'], ['camp', 'Basiscamp', 'Ziel']
   ];
   const ul = $('#legend'); ul.innerHTML = '';
@@ -2523,6 +2628,7 @@ function legendDraw(ctx, k, s){
   else if (k[0] === 'a'){ animalBadge(ctx, c, c, s * 1.1, Number(k[1])); }
   else if (k === 'lm'){ landmarkIcon(ctx, c, c, s, 'ruine', u); }
   else if (k === 'quelle'){ landmarkIcon(ctx, c, c, s, 'quelle', u); }
+  else if (k === 'volcano'){ volcanoMap(ctx, c, c, s); }
   else if (k === 'crash'){ wreckIcon(ctx, c, c, s, u); }
   else if (k === 'camp'){ campIcon(ctx, c, c, s, u); }
 }
@@ -2580,7 +2686,7 @@ function openMarkMenu(x, y){
     html: '<p>Was hat der Forscher hier gemeldet?</p>', actions, dismiss: () => {}});
 }
 function waterInfo(){
-  $('#water-info').innerHTML = `Der Forscher startet mit <b>${fmtL(G.waterMax)}</b>. Auf 1&nbsp;km Weg trinkt er etwa einen halben Liter, im Dschungel und beim Durchwaten von Furten mehr. Eine <b>Quelle</b> ist in der Karte eingezeichnet; dort füllt er die Flasche auf.`;
+  $('#water-info').innerHTML = `Der Forscher startet mit <b>${fmtL(G.waterMax)}</b>. In der Nähe des Vulkans ist es heiß, dort braucht er viel mehr Wasser. Auf 1&nbsp;km Weg trinkt er etwa einen halben Liter, im Dschungel und beim Durchwaten von Furten mehr. Eine <b>Quelle</b> ist in der Karte eingezeichnet; dort füllt er die Flasche auf.`;
 }
 function showCampIntro(){
   openModal({
@@ -2588,7 +2694,7 @@ function showCampIntro(){
     art: (ctx, w, h) => { artBurst(ctx, w, h, '#2f9a4a'); campIcon(ctx, w / 2, h / 2, h * 0.85, h / 70); },
     html: `<p>Der Forscher ist in Planquadrat <b>${pq(G.crash)}</b> abgestürzt. Bring ihn zum Basiscamp in <b>${pq(G.camp)}</b>. Er sieht nur den Dschungel vor sich, du siehst die ganze Karte.</p>
       <ol class="howto">
-        <li><span><b>Plane einen Weg</b> mit Windrose, Stechzirkel und Maßstabsleiste. Achtung: Die Karte ist alt. Ob ein Fluss eine Furt hat, eine Schlucht eine Brücke oder ob der Dschungel durchdringbar ist, steht nicht darin.</span></li>
+        <li><span><b>Plane einen Weg</b> mit Windrose, Stechzirkel und Maßstabsleiste. Achtung: Die Karte ist alt. Ob ein Fluss eine Furt hat, eine Schlucht eine Brücke oder ob der Dschungel durchdringbar ist, steht nicht darin. Und der Vulkan ist aktiv: Wo frische Lava fließt, weiß nur der Forscher.</span></li>
         <li><span><b>Funke Richtung und Entfernung</b>, zum Beispiel: „Geh 400 m nach Nordosten. Kommen!“</span></li>
         <li><span><b>Hör auf die Rückmeldung.</b> Trag mit „Meldung eintragen“ in die Karte ein, wo der Forscher nicht durchkommt oder wo es weitergeht. Dann plane neu.</span></li>
       </ol>
