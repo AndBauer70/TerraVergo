@@ -44,6 +44,7 @@ const APPS = [
   { id: 'klimazonen', titel: 'Klimazonen der Erde', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'kompass-raetsel', titel: 'Das Kompass-Rätsel', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'rettung-auf-sogapalag', titel: 'Rettung auf Sogapalag', stufe: 'Klasse 5 und 6', start: '' },
+  { id: 'expedition-sogapalag', titel: 'Expedition Sogapalag', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'orientierung-breitenkreise', titel: 'Die Breitenkreise', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'sensor-werkstatt', titel: 'Die Sensor-Werkstatt', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'klimasimulation', titel: 'Terra Vergo: Das Rätsel vom Deich und Klimasimulation', stufe: 'Klasse 7 bis 10', start: 'mystery.html' },
