@@ -8,6 +8,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `erdbeben/` | **Erdbeben-Globus**: echte USGS-Erdbebendaten auf Weltkarte und 3D-Globus, mit Begleitheft und Wissensbasis |
 | `orientierung-breitenkreise/` | **Orientierung auf unserer Erde: Die Breitenkreise**: Globus, Gradnetz und Kartenentwürfe (Zylinder, Kegel, Ebene) für Klasse 5–7, mit Begleitheft und Wissensbasis |
 | `christallers-land/` | **Christallers Land**: Planspiel zur Theorie der zentralen Orte in fünf Leveln, mit Anleitung in `LIESMICH.txt` |
+| `fakt-oder-meinung/` | **Fakt oder Meinung?**: Aussagen zum Streitfall Überfischung nach Tatsache, Meinung oder Mischform sortieren, mit Quellenkarten prüfen und nach Sprecher und Interesse fragen; drei Hilfestufen für Klasse 7–10 |
 | `kaffee-lieferkette/` | **Die Kaffee-Spur**: drei Kaffee-Lieferketten (Solino, Discounter, Marke) als Stationen und Wege auf Weltkarte und 3D-Globus, mit Preisaufteilung, Wirkungsgefüge, Stresstest, Lösungsplan und Denkwerkstatt; Begleitheft, Arbeitsblätter M1–M6 und Wissensbasis |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.

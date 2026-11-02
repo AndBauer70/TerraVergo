@@ -244,6 +244,19 @@ window.TV_DOKUMENTE=[
   ]
  },
  {
+  "id": "fakt-oder-meinung",
+  "titel": "Fakt oder Meinung?",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../fakt-oder-meinung/",
+  "dokumente": [],
+  "offen": [
+   {
+    "art": "Arbeitsblätter",
+    "href": "../fakt-oder-meinung/materialien.html"
+   }
+  ]
+ },
+ {
   "id": "laendlicher_raum",
   "titel": "Rura Viva",
   "stufe": "Klasse 7 bis 10",
