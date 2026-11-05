@@ -1,5 +1,5 @@
-// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-02. Nicht von Hand ändern.
-window.TV_LK={"salz":"oB/me46JbvnracKhEfMeJw==","iter":600000,"id":"786525f75c81","pruef":{"iv":"bu35U6mIY5i3dEmu","ct":"/3VOdOIL9gSzP8YUYWLvb0tPGXXurcuP42a4eQqFxUKsxOWEU2I="}};
+// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-05. Nicht von Hand ändern.
+window.TV_LK={"salz":"ALtXcA6OX91cRFjflIJFZA==","iter":600000,"id":"b43cbf9d6a2b","pruef":{"iv":"lSBYypltavbWT2Ib","ct":"B92O7M7jgQIQkN2oQDe4m0T9ckF651IkLWV+oHWbGf43LTYfyE4="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -286,6 +286,22 @@ window.TV_DOKUMENTE=[
     "href": "../fakt-oder-meinung/materialien.html"
    }
   ]
+ },
+ {
+  "id": "jagonaut",
+  "titel": "Jagonaut",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../jagonaut/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft Jagonaut",
+    "href": "jagonaut/begleitheft.html",
+    "typ": "html",
+    "kb": 167
+   }
+  ],
+  "offen": []
  },
  {
   "id": "laendlicher_raum",

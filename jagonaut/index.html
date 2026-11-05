@@ -87,7 +87,7 @@ a.ghost{text-decoration:none;color:var(--ink);display:inline-flex;align-items:ce
 /* Hauptbereich */
 .ship{display:grid;gap:18px}
 .cockpit{display:grid;gap:16px;background:#FFF3C2;background-image:radial-gradient(rgba(180,140,20,.13) 1.2px,transparent 1.5px);background-size:9px 9px}
-.cockpit h2{font-size:1.7rem}
+.cockpit h2{font-size:1.7rem;margin-top:10px}
 .cockpit{--ov:120px;border-radius:44px 44px 18px 18px}
 .viewrow{perspective:1100px;display:grid;grid-template-columns:minmax(140px,180px) minmax(0,880px) minmax(140px,180px);justify-content:center;gap:18px;align-items:center}
 .inst.side{grid-template-columns:1fr}
@@ -414,6 +414,73 @@ body:not(.onmap):not(.relief) header .bubble{display:none}
 .lbname{font-weight:700;font-size:.85rem;display:flex;gap:8px;align-items:center}
 .lbname input{border:2.5px solid var(--ink);border-radius:8px;padding:4px 8px;flex:1;font-size:.9rem}
 @media print{body.printlb .wrap{display:none!important}body.printlb .modal{position:static;background:none;padding:0;display:block!important;overflow:visible}body.printlb .mbox{max-height:none;box-shadow:none;border:0;width:100%;overflow:visible}body.printlb .noprint{display:none!important}}
+
+/* Greifarm-Steuerung, Nieten, Schweißnähte */
+.console{grid-template-areas:"lotte lotte lotte" "weld weld weld" "ap joy sw";grid-template-columns:minmax(0,1.15fr) minmax(200px,.8fr) minmax(0,1.05fr)}
+.lotte{grid-area:lotte}.weld{grid-area:weld}.pap{grid-area:ap}.pjoy{grid-area:joy}.psw{grid-area:sw}
+@media (max-width:1000px){.console{grid-template-areas:"lotte lotte" "weld weld" "ap ap" "joy sw";grid-template-columns:1fr 1fr}.pap{grid-column:auto}}
+@media (max-width:560px){.console{grid-template-areas:"lotte" "weld" "ap" "joy" "sw";grid-template-columns:1fr}}
+.inst.side .parm{gap:6px;padding:10px 10px 12px;min-width:0;justify-items:center}
+
+#rsvg svg{user-select:none;-webkit-user-select:none}#rsvg #ship{cursor:grab;touch-action:none}@media (max-width:560px){#rsvg{overflow-x:auto}#rsvg svg{min-width:660px}}#rsvg .rmk{cursor:pointer}#rsvg .rmk:focus{outline:none}#rsvg .rmk:focus circle{stroke-width:4}
+#rsvg .rmk.pick circle{animation:mkp 1s ease-in-out infinite}@keyframes mkp{50%{stroke-width:5}}@media (prefers-reduced-motion:reduce){#rsvg .rmk.pick circle{animation:none}}
+.terms{display:flex;flex-wrap:wrap;gap:6px}.term{font:inherit;font-size:.82rem;font-weight:800;border:2.5px solid var(--ink);border-radius:999px;padding:4px 12px;background:#fff;box-shadow:2px 2px 0 var(--ink);cursor:pointer}
+.term[aria-pressed="true"]{background:#FFD23F;transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.rpos{font-weight:800;min-width:72px;text-align:center}.rlsel summary{cursor:pointer;font-size:.82rem;font-weight:700;margin-bottom:6px}
+.armbtns{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}.armbtns .pbtn{font-size:.78rem;padding:4px 8px}
+.armc .chip{vertical-align:middle;font-family:var(--f-body,Lexend,sans-serif);letter-spacing:.03em;background:#FFF6C9}
+.axl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.axi{border:2px solid var(--ink);border-radius:10px;padding:8px 10px;display:grid;gap:5px;background:#F7FAFF;align-content:start;min-width:0}
+.axi.ok{background:#EAF7EE}.axi>b{font-size:.92rem}
+.axsvg{width:100%;max-width:340px;height:auto;display:block}
+.axt{border-collapse:collapse;font-size:.8rem;width:100%}.axt th,.axt td{border-bottom:1px solid #C9CDD6;padding:3px 6px;text-align:left}
+.axbars{display:grid;gap:4px}.axb{display:grid;grid-template-columns:62px 1fr 64px;gap:6px;align-items:center;font-size:.8rem}
+.axb i{display:block;height:12px;border:1.5px solid var(--ink);border-radius:6px;background:linear-gradient(90deg,var(--c) var(--w),#fff var(--w))}
+.axerz{display:flex;flex-wrap:wrap;gap:6px}.axerz span{border:2px solid var(--ink);border-radius:8px;padding:2px 8px;font-size:.8rem;background:#FFF6C9}
+.armc textarea{width:100%;font:inherit;font-size:.85rem;border:2px solid var(--ink);border-radius:8px;padding:6px;box-sizing:border-box}
+.axbox{border:2px dashed var(--ink);border-radius:10px;padding:8px 10px;background:#FFFDF2;display:grid;gap:4px}.axbox ul{margin:0;padding-left:18px;font-size:.82rem}
+.axh{font-family:var(--f-comic);font-weight:400;font-size:1.15rem;letter-spacing:.04em;margin:6px 0 0}
+.mzl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.mzi{border:2px solid var(--ink);border-radius:10px;padding:8px 10px;display:grid;gap:6px;background:#FBF6EE}.mzi p{font-size:.86rem}
+.mzi select,.kzi select{font:inherit;font-size:.85rem;border:2px solid var(--ink);border-radius:8px;padding:4px;max-width:100%}
+.mzi select.ok,.kzi select.ok{background:#D9F2E0}.mzi select.no,.kzi select.no{background:#FBE0DF}
+.kzl{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.kzi{border:2px solid var(--ink);border-radius:10px;padding:8px;display:grid;grid-template-columns:44px 1fr;gap:10px;background:#FBF6EE}.kzi>div{display:grid;gap:5px;align-content:start}.kzi p{font-size:.84rem}
+.kcol{width:44px;height:140px}
+.lockc{opacity:.75}
+.parm .armpad{grid-template-columns:repeat(3,38px);grid-template-areas:". u ." "l g r" ". d .";gap:4px}
+.parm .armpad .pbtn{width:38px;height:34px;padding:0;font-size:1rem}
+.parm .lcds{font-size:.85rem;white-space:normal;text-align:center}
+.parm .plab{justify-self:start}
+.parm .aphint{text-align:center;margin:0}
+.parm .plab{font-size:.9rem}
+.parm .k-g{width:40px;height:40px}.parm .k-g svg{width:22px;height:22px}
+.parm .aphint{font-size:.66rem}
+.parm .aprow{gap:6px}
+@media (max-width:1000px){.inst.side .parm{grid-column:1/-1}}
+@media (max-width:560px){.viewrow{grid-template-columns:1fr}.inst.side{grid-template-columns:1fr 1fr}.inst.side .gauge{min-width:0}}
+.armpad{display:grid;grid-template-areas:". u ." "l g r" ". d .";grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;justify-items:center}
+.armpad .pbtn{width:100%;touch-action:none;user-select:none;-webkit-user-select:none}
+.k-g{background:#9AA3B5;cursor:pointer;padding:0;width:52px;height:52px}
+.k-g:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.lcds{font-size:1rem;padding:2px 8px}
+.weld{height:10px;border-radius:5px;border:1.5px solid rgba(27,27,47,.55);background:repeating-linear-gradient(115deg,#9C7015 0 2px,#F2D06A 2px 5px,#C99A2E 5px 8px);box-shadow:inset 0 2px 2px rgba(255,255,255,.35),inset 0 -2px 2px rgba(0,0,0,.25)}
+.console{background-image:radial-gradient(circle,#F6DA7A 0 2.6px,#7A5A12 2.9px 4px,transparent 4.5px),radial-gradient(circle,#F6DA7A 0 2.6px,#7A5A12 2.9px 4px,transparent 4.5px),radial-gradient(circle,#F6DA7A 0 2.6px,#7A5A12 2.9px 4px,transparent 4.5px),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.12));
+  background-size:28px 12px,12px 28px,12px 28px,auto;background-position:0 calc(100% - 2px),2px 0,calc(100% - 2px) 0,0 0;background-repeat:repeat-x,repeat-y,repeat-y,no-repeat}
+.pnl{background:radial-gradient(circle at 9px 9px,#C9CFDB 0 2.6px,#1B1B2F 2.9px 3.8px,transparent 4.2px),radial-gradient(circle at calc(100% - 9px) 9px,#C9CFDB 0 2.6px,#1B1B2F 2.9px 3.8px,transparent 4.2px),radial-gradient(circle at 9px calc(100% - 9px),#C9CFDB 0 2.6px,#1B1B2F 2.9px 3.8px,transparent 4.2px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#C9CFDB 0 2.6px,#1B1B2F 2.9px 3.8px,transparent 4.2px),#2B3245;padding:12px 14px}
+.pnl .plab{margin-left:8px}
+.gauge{background:radial-gradient(circle at 7px 7px,#C9CFDB 0 2.2px,#1B1B2F 2.5px 3.3px,transparent 3.7px),radial-gradient(circle at calc(100% - 7px) 7px,#C9CFDB 0 2.2px,#1B1B2F 2.5px 3.3px,transparent 3.7px),radial-gradient(circle at 7px calc(100% - 7px),#C9CFDB 0 2.2px,#1B1B2F 2.5px 3.3px,transparent 3.7px),radial-gradient(circle at calc(100% - 7px) calc(100% - 7px),#C9CFDB 0 2.2px,#1B1B2F 2.5px 3.3px,transparent 3.7px),#fff}
+.cockpit{position:relative;isolation:isolate}
+.cockpit::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
+  background-image:radial-gradient(circle,#F3DC8E 0 2.6px,#9C7A1E 2.9px 4px,transparent 4.5px),radial-gradient(circle,#F3DC8E 0 2.6px,#9C7A1E 2.9px 4px,transparent 4.5px),
+   repeating-linear-gradient(0deg,#B48A26 0 2px,#F4DA80 2px 5px,#D1A63A 5px 8px),repeating-linear-gradient(0deg,#B48A26 0 2px,#F4DA80 2px 5px,#D1A63A 5px 8px),
+   radial-gradient(circle,#F3DC8E 0 2.4px,#9C7A1E 2.7px 3.7px,transparent 4.2px),radial-gradient(circle,#F3DC8E 0 2.4px,#9C7A1E 2.7px 3.7px,transparent 4.2px);
+  background-size:26px 12px,26px 12px,9px 100%,9px 100%,12px 22px,12px 22px;
+  background-position:0 5px,0 calc(100% - 5px),9% 0,91% 0,calc(9% - 14px) 0,calc(91% + 14px) 0;
+  background-repeat:repeat-x,repeat-x,no-repeat,no-repeat,repeat-y,repeat-y;opacity:.85}
+@media (max-width:1000px){.cockpit::before{background-size:26px 12px,26px 12px,0 0,0 0,0 0,0 0}}
+.portbox{position:relative;align-self:center;width:100%}
+.rivring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
 /* Lehrkräfte */
 details summary{cursor:pointer;font-family:var(--f-comic);font-size:1.4rem;letter-spacing:.04em}
 details p,details li{font-size:.9rem;max-width:82ch}
@@ -511,29 +578,16 @@ details a{color:var(--sea);font-weight:700}
             <span class="sub" id="iT2"></span></div>
         </div>
         <div class="portwrap">
+        <div class="portbox"><svg class="rivring" id="rivring" aria-hidden="true"></svg>
         <div class="port" id="port">
           <canvas id="pc" width="560" height="560" aria-hidden="true"></canvas>
           <div class="crits" id="crits"></div>
           <div class="glows" id="glows" aria-hidden="true"></div>
-          <svg class="armsvg" viewBox="0 0 400 400" aria-label="Greifarm mit Farbkarte und Styroporbecher" role="img">
-            <g transform="translate(-10 -62)" stroke="#1B1B2F" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M430 236 335 268" stroke="#1B1B2F" stroke-width="30"/><path d="M430 236 335 268" stroke="#F2A13A" stroke-width="22"/>
-              <path d="M335 268 282 238" stroke="#1B1B2F" stroke-width="24"/><path d="M335 268 282 238" stroke="#F2A13A" stroke-width="16"/>
-              <path d="M380 244l6 18M360 251l6 18" stroke="#B66A14" stroke-width="3"/>
-              <circle cx="335" cy="268" r="15" fill="#9AA3B5" stroke-width="3"/><circle cx="335" cy="268" r="5" fill="#59627A" stroke-width="2"/>
-              <circle cx="282" cy="238" r="11" fill="#9AA3B5" stroke-width="3"/>
-              <path d="M276 228l-12-8M276 248l-12 8" stroke-width="5" fill="none"/>
-              <g transform="translate(184 214)"><rect width="82" height="56" rx="4" fill="#fff" stroke-width="3"/>
-                <rect x="6" y="6" width="22" height="20" fill="#E0393B" stroke-width="1.5"/><rect x="30" y="6" width="22" height="20" fill="#FF8A1F" stroke-width="1.5"/><rect x="54" y="6" width="22" height="20" fill="#FFD23F" stroke-width="1.5"/>
-                <rect x="6" y="30" width="22" height="20" fill="#2FA84F" stroke-width="1.5"/><rect x="30" y="30" width="22" height="20" fill="#1E6FD0" stroke-width="1.5"/><rect x="54" y="30" width="22" height="20" fill="#FFFFFF" stroke-width="1.5"/></g>
-              <path d="M335 283v12" stroke-width="3"/>
-              <g id="cup"><path d="M314 296h42l-6 52h-30Z" fill="#F7F7F2" stroke-width="3"/><path d="M312 296h46" stroke-width="5"/><path d="M322 314c4 3 22 3 26 0M321 330c4 3 24 3 28 0" fill="none" stroke="#C9CDD6" stroke-width="2.5"/><text x="335" y="324" text-anchor="middle" font-size="11" font-weight="800" fill="#1E6FD0" stroke="none" font-family="Lexend,sans-serif">JN</text></g>
-            </g>
-          </svg>
+          <svg class="armsvg" viewBox="0 0 400 400" aria-label="Steuerbarer Greifarm" role="img"><g id="armg" stroke="#1B1B2F" stroke-linejoin="round" stroke-linecap="round"></g></svg>
           <div class="lampcone"></div>
           <div class="glass"></div>
           <div class="hud" id="hud">0 m</div>
-        </div>
+        </div></div>
         <svg class="dbar" id="dbar" viewBox="0 0 74 400" preserveAspectRatio="none" role="slider" tabindex="0" aria-label="Tiefenleiste: antippen, um eine Zieltiefe zu wählen" aria-valuemin="0" aria-valuemax="4000" aria-valuenow="0"></svg>
         </div>
         <div class="inst side" aria-live="off">
@@ -541,7 +595,19 @@ details a{color:var(--sea);font-weight:700}
             <div class="lbar" id="lbar" aria-hidden="true"></div></div>
           <div class="gauge"><small>Wasserdruck</small><b id="iP">1,0 bar</b>
             <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" fill="#fff" stroke="#1B1B2F" stroke-width="2.5"/><path d="M9 31A15 15 0 1 1 35 31" fill="none" stroke="#9AA3B5" stroke-width="2"/><path d="M29 7A15 15 0 0 1 35 31" fill="none" stroke="#E0393B" stroke-width="3"/><line id="ndl" x1="22" y1="22" x2="22" y2="9" stroke="#1B1B2F" stroke-width="2.5" stroke-linecap="round" transform="rotate(-130 22 22)"/><circle cx="22" cy="22" r="3" fill="#1B1B2F"/></svg>
-            <span class="sub" id="iP2">Becher am Greifarm: <span id="cupH">10,0 cm</span></span></div>
+            <span class="sub" id="iP2"></span></div>
+        <div class="pnl parm">
+          <span class="plab">Greifarm</span>
+          <div class="armpad">
+            <button class="pbtn" type="button" data-arm="up" style="grid-area:u" aria-label="Greifarm heben" title="heben">▲</button>
+            <button class="pbtn" type="button" data-arm="out" style="grid-area:l" aria-label="Greifarm ausfahren" title="ausfahren">◀</button>
+            <button class="knob k-g" type="button" id="grab" style="grid-area:g" aria-label="Greifen oder loslassen"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M5 20 9 8l4 5 4-5 4 12" fill="none" stroke="#1B1B2F" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+            <button class="pbtn" type="button" data-arm="in" style="grid-area:r" aria-label="Greifarm einziehen" title="einziehen">▶</button>
+            <button class="pbtn" type="button" data-arm="down" style="grid-area:d" aria-label="Greifarm senken" title="senken">▼</button>
+          </div>
+          <span class="lcd lcds" id="armlcd">Greifer offen</span><div class="armbtns"><button class="pbtn" type="button" id="armtool">Werkzeug</button><button class="pbtn" type="button" id="armpark">Parken</button></div>
+          <p class="aphint">▲▼ heben/senken · ◀▶ aus/ein · Mitte: greifen oder Werkzeug benutzen.</p>
+        </div>
         </div>
       </div>
       <div class="console" role="group" aria-label="Bedienpult">
@@ -549,6 +615,7 @@ details a{color:var(--sea);font-weight:700}
           <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4v8" stroke="#1B1B2F" stroke-width="3"/><circle cx="32" cy="4" r="3.5" fill="#FF7A30" stroke="#1B1B2F" stroke-width="2"/><rect x="6" y="12" width="52" height="42" rx="12" fill="#FFD23F" stroke="#1B1B2F" stroke-width="3"/><rect x="13" y="19" width="38" height="28" rx="8" fill="#0F1A16" stroke="#1B1B2F" stroke-width="2.5"/><g class="lblink"><rect x="21" y="26" width="7" height="9" rx="3" fill="#9CFFB0"/><rect x="36" y="26" width="7" height="9" rx="3" fill="#9CFFB0"/></g><path d="M25 40q7 5 14 0" fill="none" stroke="#9CFFB0" stroke-width="2.5" stroke-linecap="round"/><rect x="2" y="26" width="5" height="14" rx="2" fill="#9AA3B5" stroke="#1B1B2F" stroke-width="2"/><rect x="57" y="26" width="5" height="14" rx="2" fill="#9AA3B5" stroke="#1B1B2F" stroke-width="2"/></svg>
           <div><b class="who">LOTTE · Bordcomputer</b><p id="lotteMsg"></p><p id="lotteNext"></p></div>
         </div>
+        <div class="weld" aria-hidden="true"></div>
         <div class="pnl pap">
           <span class="plab">Autopilot</span>
           <div class="aprow"><span class="led" id="apled"></span><span class="lcd" id="ziel">Ziel 0 m</span><span id="apst">angehalten</span></div>
@@ -746,7 +813,7 @@ const MCR={
   txt:"Xenophyophoren sind Einzeller – und trotzdem so groß wie eine Faust. Ihr Gehäuse kleben sie aus Schlammkörnchen zusammen. Man hat sie im Marianengraben in über 10.000 m Tiefe gefunden.",
   anp:"Fangen Nahrungsteilchen aus dem Wasser; ihr Gehäuse bietet anderen Kleintieren Unterschlupf.",
   vb:"0 0 120 80",pic:`<g class="body" ${SK}><path d="M10 72c-2-14 6-20 14-18 0-12 12-18 20-12 4-12 20-14 26-4 8-8 22-4 22 8 10-2 18 8 14 18-2 6-6 8-10 8H14Z" fill="#D8C7A2"/><g fill="#A8936A" stroke="none"><circle cx="30" cy="62" r="2.5"/><circle cx="48" cy="52" r="2"/><circle cx="62" cy="60" r="2.5"/><circle cx="78" cy="50" r="2"/><circle cx="92" cy="62" r="2.5"/><circle cx="40" cy="68" r="1.8"/><circle cx="70" cy="70" r="1.8"/></g></g>`},
- koralle:{id:"koralle",n:"Geweihkoralle",lat:"Acropora (Steinkoralle)",band:[30,60],floor:true,bleach:true,pos:[24,0],w:24,fy:10,range:"0–40 m, meist in den oberen 20 m",
+ koralle:{id:"koralle",n:"Geweihkoralle",lat:"Acropora (Steinkoralle)",band:[2,40],floor:true,bleach:true,pos:[24,0],w:24,fy:10,range:"0–40 m, meist in den oberen 20 m",
   merk:"verzweigter, harter Stock wie ein Geweih, fest am Boden gewachsen",
   txt:"Steinkorallen sind Tiere: Viele winzige Polypen bauen gemeinsam ein Skelett aus Kalk. In ihrem Gewebe leben Algen, die durch Photosynthese Nahrung liefern und den Korallen ihre Farbe geben.",
   anp:"Brauchen klares, warmes und helles Wasser für ihre Algen.",
@@ -871,10 +938,10 @@ const MIS={
   cr:["koralle","clown","schildkroete","papagei","riffhai","riesenmuschel"].map(id=>MCR[id]),minFound:5,
   need:{v:"L",d:[0,5,10,20,30,45,60]},
   q:"Warum gibt es Korallenriffe nur in flachem, warmem, klarem Wasser – und was macht eine Hitzewelle mit ihnen?",
-  intro:"Das Great Barrier Reef ist das größte Korallenriff der Erde: über 2300 km lang und aus dem All zu sehen. Hier leben Tausende Arten auf engem Raum. Ihr taucht am Außenriff bis zum Sandboden in 60 m.",
+  intro:"Das Great Barrier Reef ist das größte Korallenriff der Erde: über 2300 km lang und aus dem All zu sehen. Hier leben Tausende Arten auf engem Raum. Ihr taucht am Außenriff entlang: Von der Oberfläche bis etwa 40 m wachsen Korallen, darunter liegt bis 60 m nur noch Sandboden.",
   thema:"Korallenriff, Licht, Korallenbleiche",
-  facts:[["Tauchtiefe","bis 60 m"],["Wasser","im Sommer 28–29 °C"],["Besonderheit","sehr klares Wasser"]],
-  tip:"Willkommen am Great Barrier Reef! Messt das Licht bis zum Sandboden in 60 m und vergleicht mit dem Atlantik. Dann simuliert ihr eine Hitzewelle.",
+  facts:[["Tauchtiefe","bis 60 m"],["Korallen","von 0 bis etwa 40 m"],["Wasser","im Sommer 28–29 °C, sehr klar"]],
+  tip:"Willkommen am Great Barrier Reef! Messt das Licht bis zum Sandboden in 60 m und achtet darauf, bis zu welcher Tiefe Korallen wachsen. Dann simuliert ihr eine Hitzewelle.",
   tasks:[
    Object.assign({id:"r1",q:"Am Riff kommt selbst in 30 m noch viel Licht an. Trotzdem wachsen Steinkorallen fast nur in den oberen 30–40 m. Warum?",o:[["In ihrem Gewebe leben Algen. Diese brauchen viel Licht für die Photosynthese und versorgen die Koralle mit Nahrung.",""],["Weiter unten ist das Wasser zu salzig.","Der Salzgehalt ist oben und unten fast gleich."],["Korallen müssen zum Atmen auftauchen.","Korallen haben keine Lungen. Was brauchen ihre Algen?"]],ok:0,why:"Genau! Korallen und Algen leben in Symbiose: Die Algen liefern Zucker, die Koralle bietet Schutz und Nährstoffe. Deshalb gibt es Riffe nur in klarem, flachem, warmem Wasser."},lockNeed),
    {id:"r2",lock:()=>!D.heatSeen,lockMsg:"Schiebt zuerst den Hitzewellen-Regler auf mindestens +1,5 °C und beobachtet die Korallen im Bullauge.",q:"Was passiert mit den Korallen, wenn das Wasser wochenlang 1–2 °C wärmer ist als sonst?",o:[["Sie wachsen schneller, weil Wärme gut für sie ist.","Korallen leben schon nahe an ihrer Temperaturgrenze."],["Sie stoßen ihre Algen ab und werden weiß. Dauert die Hitze an, verhungern sie.",""],["Sie wandern in kühleres Wasser.","Korallen sind festgewachsen und können nicht wandern."]],ok:1,why:"Richtig, das ist die Korallenbleiche. Ohne Algen fehlt den Korallen der größte Teil ihrer Nahrung. Kühlt das Wasser rechtzeitig ab, können sie sich erholen."},
@@ -937,29 +1004,31 @@ const MIS={
   need:{v:"T",d:[0,20,50,100,200,300,500,1000]},
   q:"Wer frisst wen unter dem Meereis – und was passiert, wenn das Eis schwindet?",
   intro:"In der Framstraße zwischen Grönland und Spitzbergen treffen kaltes Polarwasser und warmes Atlantikwasser aufeinander. Die Oberfläche ist mit Meereis bedeckt. Unter dem Eis beginnt eine Nahrungskette, die bis zum Eisbären reicht.",
-  thema:"Meereis, Nahrungskette, Klimawandel",
+  thema:"Meereis, Nahrungskette, Wassermassen",
   facts:[["Tauchtiefe","bis 2500 m"],["Wasser","−1,6 °C unter dem Eis"],["Besonderheit","Meereis, wenig Licht"]],
   tip:"Willkommen in der Arktis! Messt die Temperatur unter dem Eis und sucht die Tiere der Nahrungskette. Den Eisbären seht ihr nur an der Oberfläche.",
   widget:()=>chainHTML(),
   tasks:[
    Object.assign({id:"a1",q:"Euer Thermometer zeigt unter dem Eis etwa −1,6 °C. Warum ist das Wasser nicht gefroren?",o:[["Salzwasser gefriert erst bei etwa −1,8 °C.",""],["Das Thermometer zeigt zu wenig an.","Die Messung stimmt."],["Unter dem Eis ist es immer wärmer als 0 °C.","Euer Messwert liegt unter 0 °C."]],ok:0,why:"Genau! Das gelöste Salz senkt den Gefrierpunkt. Fische wie der Polardorsch haben Frostschutz im Blut."},lockNeed),
-   Object.assign({id:"a2",q:"In 200–300 m ist es mit fast 3 °C wärmer als an der Oberfläche. Woher kommt das warme Wasser?",o:[["Aus dem Atlantik: Ein Ausläufer des Golfstroms schiebt warmes, salziges und damit schweres Wasser unter das kalte, leichtere Polarwasser.",""],["Vom heißen Erdinneren.","Dafür ist der Boden viel zu weit weg."],["Die Sonne wärmt das Wasser durch das Eis.","Unter dem Eis kommt kaum Sonnenlicht an."]],ok:0,why:"Richtig! Der Westspitzbergenstrom ist die Fortsetzung des Golfstroms. Weil sich dieses Atlantikwasser erwärmt, schmilzt das Eis zunehmend auch von unten."},lockNeed),
-   {id:"a3",lock:()=>!chainOk(),lockMsg:"Baut zuerst die Nahrungskette.",q:"Die Meereisfläche im September schrumpft seit 1979 um etwa 13 % pro Jahrzehnt. Was bedeutet das für eure Nahrungskette?",o:[["Weniger Eis heißt weniger Eisalgen. Krebse und Polardorsch finden weniger Nahrung, Robben und Eisbären verlieren Beute – und der Eisbär seine Jagdplattform.",""],["Nur der Eisbär ist betroffen.","Die Kette beginnt mit den Eisalgen am Eis."],["Mehr Tiere, weil es wärmer wird.","Die Arten hier sind an Eis und Kälte angepasst."]],ok:0,why:"Genau! Fällt das erste Glied der Kette weg, spüren es alle anderen. Die Arktis erwärmt sich etwa dreimal so schnell wie die Erde im Durchschnitt."}],
-  stamp:"Die Nahrungskette unter dem Eis: Eisalgen → Ruderfußkrebs → Polardorsch → Ringelrobbe → Eisbär. Mit dem Meereis schwindet ihre Grundlage.",
+   Object.assign({id:"a2",q:"In 200–300 m ist es mit fast 3 °C wärmer als an der Oberfläche. Woher kommt das warme Wasser?",o:[["Aus dem Atlantik: Ein Ausläufer des Golfstroms schiebt warmes, salziges und damit schweres Wasser unter das kalte, leichtere Polarwasser.",""],["Vom heißen Erdinneren.","Dafür ist der Boden viel zu weit weg."],["Die Sonne wärmt das Wasser durch das Eis.","Unter dem Eis kommt kaum Sonnenlicht an."]],ok:0,why:"Richtig! Der Westspitzbergenstrom ist die Fortsetzung des Golfstroms. So liegen hier zwei Wassermassen übereinander: oben kaltes, leichtes Polarwasser, darunter wärmeres, salzigeres Atlantikwasser."},lockNeed),
+   {id:"a3",lock:()=>!chainOk(),lockMsg:"Baut zuerst die Nahrungskette.",q:"Stellt euch vor, in einem Jahr gäbe es kaum Ruderfußkrebse. Was würde in der Nahrungskette passieren?",o:[["Polardorsche fänden zu wenig Nahrung. Dadurch hätten Ringelrobben und Eisbären weniger Beute – die Eisalgen würden dagegen weniger gefressen.",""],["Nur die Ruderfußkrebse wären betroffen.","In einer Nahrungskette hängen alle Glieder zusammen."],["Die Eisbären hätten mehr zu fressen.","Eisbären fressen keine Krebse – sie leben von Robben, die von Fischen leben."]],ok:0,why:"Genau! Fällt ein Glied der Kette aus, spüren es alle, die darauf folgen. Die Ruderfußkrebse sind das wichtigste Verbindungsglied zwischen den Algen und den Fischen."}],
+  stamp:"Die Nahrungskette unter dem Eis: Eisalgen → Ruderfußkrebs → Polardorsch → Ringelrobbe → Eisbär. Unter dem kalten Polarwasser liegt wärmeres Atlantikwasser.",
   wok:()=>chainOk()},
  marianen:{id:"marianen",n:"Zum tiefsten Punkt der Erde",kurz:"Marianengraben",ort:"Challenger-Tief, Westpazifik",ll:[142.2,11.35],lx:-17,ly:-12,col:"#16244A",
   maxD:10900,TT:[[0,29],[50,28.8],[100,27],[150,24],[200,20],[300,13],[500,8],[1000,4.3],[2000,2.2],[4000,1.5],[6000,1.6],[8000,2],[10900,2.5]],k1:.06,k2:.0222,tr:[0,30,5],cmax:10900,
   cr:[cpc("laternen",{band:[400,950]}),cpc("angler",{band:[1300,2600]}),cpc("pelikan",{band:[1800,3400]}),MCR.scheibenbauch,MCR.xeno,MCR.flohkrebs],minFound:4,
   need:{v:"P",d:[0,1000,2000,4000,6000,8000,10900]},
   q:"Wie tief ist der tiefste Punkt der Ozeane – und kann dort unten noch etwas leben?",
-  intro:"Im Marianengraben geht es fast 11.000 m in die Tiefe. Der Mount Everest würde hineinpassen, und über seinem Gipfel wäre noch 2 km Wasser. Für diese Mission bekommt Jagonaut einen Spezialrumpf. Bis heute haben nur wenige Tauchboote den Grund erreicht: Trieste (1960), Deepsea Challenger (2012) und Limiting Factor (seit 2019).",
+  intro:"Im Marianengraben geht es fast 11.000 m in die Tiefe. Der Mount Everest würde hineinpassen, und über seinem Gipfel wäre noch 2 km Wasser. Für diese Mission bekommt Jagonaut einen Spezialrumpf. Bis heute haben nur wenige Tauchboote den Grund erreicht: Trieste (1960), Deepsea Challenger (2012) und Limiting Factor (seit 2019). Am Greifarm hängen diesmal eine Farbkarte und ein Styroporbecher – beobachtet sie während der langen Fahrt nach unten.",
   thema:"Tiefseegraben, Plattentektonik, Druck",
-  facts:[["Tauchtiefe","bis 10.900 m"],["Druck am Grund","über 1000 bar"],["Wasser","oben 29 °C, unten 2,5 °C"]],
+  facts:[["Tauchtiefe","bis 10.900 m"],["Druck am Grund","über 1000 bar"],["Am Greifarm","Farbkarte und Styroporbecher"]],
   tip:"Willkommen über dem Challenger-Tief! Die Fahrt nach unten ist lang – nutzt den Autopiloten und messt unterwegs den Druck.",
   tasks:[
    {id:"b1",q:"Warum ist der Marianengraben so tief?",o:[["Hier taucht die Pazifische Platte unter die Philippinische Platte ab (Subduktion).",""],["Ein Meteorit hat ihn ausgehoben.","Der Graben ist eine Plattengrenze, kein Krater."],["Ein Fluss hat ihn ausgespült.","Unter Wasser gibt es keine Flüsse, die so tief graben."]],ok:0,why:"Genau! Schaltet auf der Missionskarte die Plattengrenzen ein: Die Tiefseegräben liegen an den gestrichelten Linien."},
    Object.assign({id:"b2",q:"Wie hoch ist der Wasserdruck am Grund in fast 11.000 m Tiefe?",o:[["rund 110 bar","Das wäre in etwa 1100 m Tiefe. Schaut in euer Messprotokoll."],["rund 1100 bar",""],["rund 11.000 bar","So viel ist es nicht – 1 bar je 10 m."]],ok:1,why:"Richtig! Auf jedem Fingernagel lastet so viel Gewicht wie ein Kleinwagen."},lockNeed),
-   {id:"b3",lock:()=>nFound()<2,lockMsg:"Bestimmt zuerst mindestens zwei Lebewesen.",q:"Unterhalb von etwa 8200 m wurden noch nie Fische gefunden, Flohkrebse leben aber bis ganz unten. Was vermuten Forschende?",o:[["Der Druck stört die Eiweiße im Körper. Fische schützen sich mit einem Schutzstoff – aber nur bis etwa 8200 m.",""],["Am Grund gibt es keinen Sauerstoff.","Am Grund gibt es Sauerstoff – die Flohkrebse atmen ihn."],["Es ist dort unten zu warm.","Am Grund sind es nur etwa 2,5 °C."]],ok:0,why:"Genau, das ist die Vermutung der Forschung. Der tiefste gefilmte Fisch schwamm in 8336 m Tiefe."}],
+   {id:"b3",lock:()=>nFound()<2,lockMsg:"Bestimmt zuerst mindestens zwei Lebewesen.",q:"Unterhalb von etwa 8200 m wurden noch nie Fische gefunden, Flohkrebse leben aber bis ganz unten. Was vermuten Forschende?",o:[["Der Druck stört die Eiweiße im Körper. Fische schützen sich mit einem Schutzstoff – aber nur bis etwa 8200 m.",""],["Am Grund gibt es keinen Sauerstoff.","Am Grund gibt es Sauerstoff – die Flohkrebse atmen ihn."],["Es ist dort unten zu warm.","Am Grund sind es nur etwa 2,5 °C."]],ok:0,why:"Genau, das ist die Vermutung der Forschung. Der tiefste gefilmte Fisch schwamm in 8336 m Tiefe."},
+   {id:"b5",q:"Beobachtet gleich zu Beginn des Abtauchens die Farbkarte am Greifarm. Welche Farbe wirkt als erste grau-schwarz?",o:[["Rot",""],["Gelb","Gelb hält länger durch. Taucht noch einmal auf 10 m und vergleicht."],["Grün","Grün bleibt lange sichtbar. Achtet auf die erste Farbe oben links."],["Blau","Blau bleibt am längsten! Deshalb sieht das Meer blau aus."]],ok:0,why:"Genau! Wasser schluckt rotes Licht schon in den ersten Metern. Blaues Licht kommt am tiefsten. Schaltet in 50 m einmal den Scheinwerfer an: Mit weißem Licht ist das Rot plötzlich wieder da."},
+   {id:"b4",q:"Am Greifarm hängt ein Styroporbecher, 10 cm hoch. Beobachtet ihn beim Abtauchen (seine Höhe steht auch beim Wasserdruck). Was passiert und warum?",o:[["Er schrumpft, weil der Wasserdruck die Luft in den Styroporkügelchen zusammenpresst.",""],["Er wird größer, weil er sich mit Wasser vollsaugt.","Beobachtet die Höhenangabe unter dem Becher genau."],["Er schrumpft, weil das kalte Wasser ihn schmelzen lässt.","Kälte lässt Styropor nicht schmelzen."]],ok:0,why:"Genau! Styropor besteht fast nur aus Luftbläschen. Der Druck presst sie zusammen. Am Grund ist der Becher nur noch etwa 4,5 cm hoch – und bleibt auch nach dem Auftauchen klein. Ein beliebtes Andenken von Tiefsee-Expeditionen."}],
   stamp:"Der Marianengraben ist eine Subduktionszone und mit fast 11.000 m die tiefste Stelle der Ozeane. Am Grund herrscht ein Druck von über 1000 bar – und trotzdem gibt es Leben."}
 };
 const ORDER=["atlantik","riff","golfstrom","humboldt","raucher","arktis","marianen"];
@@ -977,7 +1046,7 @@ const isAtl=()=>S.m==="atlantik";
 const curNeed=()=>isAtl()?NEED[S.st]:M.need;
 const mNeedDone=()=>!M.need||M.need.d.every(d=>recAt(d,M.need.v));
 const curNeedDone=()=>isAtl()?needDone(S.st):mNeedDone();
-const allTasks=()=>[...Object.values(TASKS).flat(),...ORDER.flatMap(id=>MIS[id].tasks||[])];
+const allTasks=()=>[...Object.values(TASKS).flat(),...ORDER.flatMap(id=>MIS[id].tasks||[]),...Object.values(ARMX).flatMap(x=>x.tasks)];
 const FR=()=>Math.min(200,M.maxD*.5);
 const bleachF=()=>M.scene==="reef"?clamp(((D.heat||0)-.5)/1.5,0,1):0;
 const MD0=()=>({recs:[],found:{},q:{},done:false,heat:0,heatSeen:false,probe:false,chain:[]});
@@ -1002,15 +1071,14 @@ function upwellHTML(){return `<div class="card"><h3>So funktioniert der Auftrieb
    <text x="20" y="150" font-size="11" font-weight="800" fill="#fff">kaltes, nährstoffreiches Tiefenwasser steigt auf</text>
   </svg></div>`}
 function probeHTML(){const at=U.depth>=M.maxD-3;return `<div class="card"><h3>Temperatursonde</h3>
-  <p>Taucht bis zum Meeresboden in ${th(M.maxD)} m, schaltet den Scheinwerfer ein und haltet die Sonde mit dem Greifarm in den Schlot.</p>
-  <div class="nextbar" style="justify-content:flex-start"><button class="go" type="button" id="probe">Sonde in den Schlot halten</button></div>
+  <p>Taucht bis zum Meeresboden in ${th(M.maxD)} m und schaltet den Scheinwerfer ein. Steuert dann am Bedienpult den <b>Greifarm</b>: Fahrt die Greiferspitze an die orange glühende Öffnung des Schlots und drückt die Mitte (greifen). Die Sonde im Greifer misst die Temperatur.</p>
   <p class="fb ${D.probe?"ok":""}" id="probefb">${D.probe?"Messwert im Schlot: <b>365 °C</b>. Das Wasser direkt neben dem Schlot: nur 3,9 °C.":""}</p></div>`}
 function chainHTML(){const ch=D.chain||[];const pool=CHAIN.slice().sort((a,b)=>MCR[a].n.localeCompare(MCR[b].n));
   const ic=id=>`<svg viewBox="${MCR[id].vb}" aria-hidden="true">${MCR[id].pic}</svg>`;
   return `<div class="card"><h3>Nahrungskette bauen</h3><p>Wer wird von wem gefressen? Tippt die Lebewesen in der richtigen Reihenfolge an – beginnt mit dem, das selbst kein Tier frisst.</p>
   <div class="chain" aria-label="Eure Nahrungskette">${ch.length?ch.map((id,i)=>`${i?"<i>→</i>":""}<span class="ci used">${ic(id)}${esc(MCR[id].n)}</span>`).join(""):`<span class="cap">Noch leer.</span>`}</div>
   ${chainOk()?`<p class="fb ok">Richtig! Die Energie fließt vom Licht über die Eisalgen bis zum Eisbären. Jedes Glied hängt vom vorherigen ab.</p>`:`<div class="chain">${pool.filter(id=>!ch.includes(id)).map(id=>`<button type="button" class="ci ${U.chW===id?"no":""}" data-chain="${id}">${ic(id)}${esc(MCR[id].n)}</button>`).join("")}</div>${U.chW?`<p class="fb no">${esc(MCR[U.chW].n)} passt hier noch nicht. Wer wird von dem letzten Glied gefressen?</p>`:""}`}</div>`}
-function heatHTML(){const h=D.heat||0;return `<div class="card"><h3>Hitzewelle simulieren</h3><p>Schiebt den Regler: Um wie viel ist das Wasser wärmer als im normalen Sommer? Beobachtet die Korallen im Bullauge am Boden (ab 30 m) – mit Scheinwerfer seht ihr die Farben am besten.</p>
+function heatHTML(){const h=D.heat||0;return `<div class="card"><h3>Hitzewelle simulieren</h3><p>Schiebt den Regler: Um wie viel ist das Wasser wärmer als im normalen Sommer? Beobachtet die Korallen im Bullauge (zwischen 0 und 40 m) – mit Scheinwerfer seht ihr die Farben am besten.</p>
   <div class="rng"><label for="heat">wärmer als normal</label><input type="range" id="heat" min="0" max="3" step=".5" value="${h}"><output id="heato">+${de(h)} °C</output></div>
   <p class="cap" id="heatfb">${heatTxt(h)}</p></div>`}
 const heatTxt=h=>h<1?"Die Korallen sind gesund und bunt.":h<1.5?"Die Korallen stehen unter Stress und verlieren erste Algen.":h<2.5?"Korallenbleiche! Die Korallen stoßen ihre Algen ab und werden weiß.":"Schwere Bleiche: Hält die Hitze an, sterben viele Korallen.";
@@ -1042,7 +1110,7 @@ function updMission(){if(M.type==="relief"){mCheckDone();return}const ch=$("#ch"
   const unl=M.tasks.some(t=>!D.q[t.id]&&document.querySelector(`#task_${t.id}.lock`)&&!(t.lock&&t.lock()));if(unl)renderStage();mCheckDone()}
 const mDoneNow=()=>mNeedDone()&&M.tasks.every(t=>D.q[t.id])&&nFound()>=M.minFound&&(!M.wok||M.wok());
 function mCheckDone(){if(!D.done&&mDoneNow()){D.done=true;save();renderStage();renderTip();say("Mission geschafft! "+M.stamp)}}
-function mDemo(){if(M.type==="relief"){const R=relD();["a","p"].forEach(k=>{const P=PROF[k];for(let i=0;i<NSEC;i++)R.pings[k].push((i+.5)*P.len/NSEC);P.mk.forEach(m=>R.labels[m.k]=m.f)});save();renderAll();return}M.need.d.forEach(d=>{if(!recAt(d,M.need.v)){let r=D.recs.find(x=>Math.abs(x.d-d)<=2);if(!r){r={d,T:null,L:null,P:null};D.recs.push(r)}r.T=Math.round(temp(d)*10)/10;r.P=press(d);r.L=lightPct(d)}});
+function mDemo(){if(M.type==="relief"){const R=relD();["a","p"].forEach(k=>{const P=PROF[k];for(let i=0;i<NSEC;i++)R.pings[k].push((i+.5)*P.len/NSEC);P.mk.forEach(m=>R.labels[m.k]=m.f)});R.mz={};MERK.forEach((m,i)=>R.mz[i]=m[0]);R.kz={};KERNE.forEach(k=>R.kz[k.id]=k.f);save();renderAll();return}M.need.d.forEach(d=>{if(!recAt(d,M.need.v)){let r=D.recs.find(x=>Math.abs(x.d-d)<=2);if(!r){r={d,T:null,L:null,P:null};D.recs.push(r)}r.T=Math.round(temp(d)*10)/10;r.P=press(d);r.L=lightPct(d)}});
   D.recs.sort((a,b)=>a.d-b.d);M.cr.forEach(c=>{if(!D.found[c.id])D.found[c.id]={d:Math.round((c.band[0]+c.band[1])/2)}});
   D.heat=D.heat||2;D.heatSeen=true;D.probe=true;D.chain=CHAIN.slice();save();renderAll()}
 
@@ -1146,7 +1214,7 @@ function enterMission(id){S.m=id;M=MIS[id];D=id==="atlantik"?S:(S.mx[id]=Object.
   Object.assign(U,{depth:0,target:0,pan:0,lamp:false,wrong:{},cw:{},chW:null});
   $("#lamp").setAttribute("aria-pressed","false");$("#lampled").classList.remove("on");port.classList.remove("lamp");crits.style.transform=glows.style.transform="";
   $("#dr").max=M.maxD;$("#dr").step=M.maxD<=100?1:5;syncCrits.last="";checkEvents.floor=false;checkEvents.dark=false;$("#apz").dataset.k="";lastShownDepth=-1;
-  renderAll();setTarget(0);window.scrollTo({top:0})}
+  U.arm={...ARM0,open:true,sample:null};U.tool=0;U.trapT=0;renderAll();setTarget(0);drawArm();setTimeout(drawRivets,60);window.scrollTo({top:0})}
 
 /* ============ Bullauge: Szenen ============ */
 function drawPort(d,t){
@@ -1168,19 +1236,19 @@ function drawPort(d,t){
   for(let i=0;i<n;i++){const p=SNOW[i];ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r*(d>200?1.3:1),0,7);ctx.fill()}
   if(M.flow){ctx.strokeStyle=`rgba(255,255,255,${.12+.25*bright(d)+(U.lamp?.2:0)})`;ctx.lineWidth=2;for(let i=0;i<14;i++){const L=40+(i%3)*25,x=((i*137+t*M.flow*900)%(W+260))-130,y=(i*61)%H;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+L,y);ctx.stroke()}}
   ctx.strokeStyle="rgba(230,245,255,.75)";ctx.lineWidth=1.5;BUBS.forEach(p=>{ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,7);ctx.stroke()});
-  if(d>M.maxD-FR()){const ft=floorTop(d)*H,fy=x=>ft+Math.sin(x/37)*6+Math.sin(x/11)*2;
+  if(d>M.maxD-FR()||M.scene==="reef"){const ft=bedTop(d)*H,fy=x=>ft+Math.sin(x/37)*6+Math.sin(x/11)*2;
     const base=M.scene==="reef"?[226,206,160]:M.scene==="smoker"?[92,80,74]:[150,128,100],A=U.lamp?{r:1,g:1,b:1}:a;
     const col=[base[0]*A.r*.95+8,base[1]*A.g*.95+7,base[2]*A.b*.95+9];
     ctx.fillStyle=`rgb(${col.map(v=>v|0)})`;ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W;x+=10)ctx.lineTo(x,fy(x));ctx.lineTo(W,H);ctx.closePath();ctx.fill();
     ctx.strokeStyle="#1B1B2F";ctx.lineWidth=3;ctx.beginPath();for(let x=0;x<=W;x+=10)ctx.lineTo(x,fy(x));ctx.stroke();
-    if(M.scene==="reef")drawReef(ft,A);else if(M.scene==="smoker")drawSmoker(ft,t);
+    if(M.scene==="reef")drawReef(ft,A);else if(M.scene==="smoker")drawSmoker(ft,t);if(M.id==="marianen"&&U.lamp&&!(D.ax&&D.ax.tuete))drawBag(ft);
     else if(U.lamp){ctx.fillStyle="rgba(110,90,70,.8)";for(let i=0;i<14;i++){ctx.beginPath();ctx.ellipse((i*73)%W,ft+18+(i*37)%(H-ft-10),6,3,0,0,7);ctx.fill()}}}
 }
-function drawReef(ft,A){const W=pc.width,H=pc.height,bl=bleachF(),u=H/480;
+function drawReef(ft,A){const W=pc.width,H=pc.height,bl=bleachF(),cf=clamp((41-U.depth)/6,0,1),u=H/480*(.65+.35*cf);
   const col=c=>{const m=c.map(v=>v+(245-v)*bl);return `rgb(${(m[0]*A.r)|0},${(m[1]*A.g)|0},${(m[2]*A.b)|0})`};
   const C=[[.07,"br",[231,127,166]],[.19,"brain",[200,150,60]],[.33,"table",[120,170,90]],[.47,"fan",[150,80,200]],[.6,"br",[240,140,60]],[.74,"brain",[110,160,200]],[.88,"br",[230,90,100]]];
   ctx.lineJoin=ctx.lineCap="round";
-  C.forEach(([fx,k,c])=>{const x=fx*W,y=ft+4;ctx.strokeStyle="#1B1B2F";ctx.fillStyle=col(c);
+  C.forEach(([fx,k,c],i)=>{if(((i*3)%7)/7>=cf-.01)return;const x=fx*W,y=ft+4;ctx.strokeStyle="#1B1B2F";ctx.fillStyle=col(c);
     if(k==="br"){const P=[[0,0,0,-60],[0,-30,-22,-58],[0,-38,24,-70],[-14,-48,-30,-80],[14,-56,10,-92]];
       [[12,"#1B1B2F"],[7,col(c)]].forEach(([w,s])=>{ctx.lineWidth=w*u;ctx.strokeStyle=s;P.forEach(([a,b,c2,d2])=>{ctx.beginPath();ctx.moveTo(x+a*u,y+b*u);ctx.lineTo(x+c2*u,y+d2*u);ctx.stroke()})})}
     else if(k==="brain"){ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(x,y,40*u,30*u,0,Math.PI,0);ctx.closePath();ctx.fill();ctx.stroke();ctx.lineWidth=2;ctx.beginPath();for(let i=-30;i<=30;i+=6)ctx.lineTo(x+i*u,y-14*u-Math.sin(i)*5*u);ctx.stroke()}
@@ -1188,7 +1256,7 @@ function drawReef(ft,A){const W=pc.width,H=pc.height,bl=bleachF(),u=H/480;
     else{ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,48*u,Math.PI*1.15,Math.PI*1.85);ctx.closePath();ctx.fill();ctx.stroke();ctx.lineWidth=1.5;for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(x,y,(12+i*8)*u,Math.PI*1.18,Math.PI*1.82);ctx.stroke()}}});
 }
 const PUFF=Array.from({length:22},(_,i)=>i/22);
-function drawSmoker(ft,t){const W=pc.width,H=pc.height,x0=W*.38,top=ft-H*.27;
+function drawSmoker(ft,t){const W=pc.width,H=pc.height,x0=W*.5,top=ft-H*.27;
   if(!U.lamp){const gl=ctx.createRadialGradient(x0,top,2,x0,top,40);gl.addColorStop(0,"rgba(255,120,50,.55)");gl.addColorStop(1,"rgba(255,120,50,0)");ctx.fillStyle=gl;ctx.beginPath();ctx.arc(x0,top,40,0,7);ctx.fill();return}
   ctx.fillStyle="#E9E4D8";for(let i=0;i<6;i++){ctx.beginPath();ctx.ellipse(x0+(i-2.5)*W*.07,ft+8+(i%2)*6,W*.03,5,0,0,7);ctx.fill()}
   PUFF.forEach((ph0,i)=>{const ph=(t*.22+ph0)%1,y=top-ph*H*.75,x=x0+Math.sin(i*2.3+ph*5)*ph*W*.09,rr=8+ph*46;ctx.fillStyle=`rgba(22,20,22,${(1-ph)*.85})`;ctx.beginPath();ctx.arc(x,y,rr,0,7);ctx.fill()});
@@ -1281,16 +1349,45 @@ const PROF={
    mk:[{k:"A",x:110,f:"Schelf"},{k:"B",x:300,f:"Kontinentalhang"},{k:"C",x:1100,f:"Tiefseebecken"},{k:"D",x:2955,f:"Mittelozeanischer Rücken"}]},
  p:{n:"Profil B: Westpazifik",sub:"Philippinensee → Marianengraben → Pazifisches Becken, entlang 11° N (vereinfacht)",l:"Philippinensee",r:"Pazifisches Becken",len:1630,max:11000,
    pts:[[0,5600],[200,5900],[380,5400],[450,3200],[520,4200],[600,3800],[680,1500],[720,400],[745,2500],[765,6500],[785,10900],[805,8000],[840,6200],[900,5400],[1100,5600],[1400,5900],[1630,6000]],
-   mk:[{k:"E",x:720,f:"Inselbogen"},{k:"F",x:785,f:"Tiefseerinne"},{k:"G",x:1300,f:"Tiefseebecken"}]}};
-const FORMS=["Inselbogen","Kontinentalhang","Mittelozeanischer Rücken","Schelf","Tiefseebecken","Tiefseerinne"];
+   mk:[{k:"E",x:720,f:"Inselbogen"},{k:"F",x:785,f:"Tiefseegraben"},{k:"G",x:1300,f:"Tiefseebecken"}]}};
+const FORMS=["Inselbogen","Kontinentalhang","Mittelozeanischer Rücken","Schelf","Tiefseebecken","Tiefseegraben"];
 const NSEC=10;
 const pDepth=(P,x)=>interp(P.pts,x);
 const relD=()=>{D.pings=D.pings||{a:[],p:[]};D.labels=D.labels||{};D.prof=D.prof||"a";D.pos=D.pos||{a:2900,p:300};return D};
 const secDone=(k,i)=>{const P=PROF[k],w=P.len/NSEC;return relD().pings[k].some(x=>x>=i*w&&x<=(i+1)*w)};
 const profDone=k=>{for(let i=0;i<NSEC;i++)if(!secDone(k,i))return false;return true};
 const labelsOk=()=>["a","p"].every(k=>PROF[k].mk.every(m=>relD().labels[m.k]===m.f));
-function reliefSVG(){const k=relD().prof,P=PROF[k],W=900,H=400,L=50,Rr=880,T=60,B=340,done=profDone(k);
-  const X=x=>L+x/P.len*(Rr-L),Y=d=>T+d/P.max*(B-T),pos=D.pos[k];
+function reliefStage(){const R=relD(),k=R.prof,P=PROF[k],pos=R.pos[k],dep=pDepth(P,pos),t=2*dep/1500,last=U.lastPing===k+":"+pos;
+  const nsec=[...Array(NSEC).keys()].filter(i=>secDone(k,i)).length;
+  return `<div class="shead"><span class="num" style="background:${M.col}">${ORDER.indexOf(M.id)+1}</span><h2>${esc(M.n)}</h2><div class="meta"><span class="chip">Echolot</span><span class="chip">2 Profile</span><span class="chip">6 Reliefformen</span></div></div>
+  <div class="auftrag"><small>Forschungsfrage</small>${esc(M.q)}</div>
+  <div class="card"><h3>So funktioniert das Echolot</h3><p>${esc(M.intro)}</p><p class="cap">Tiefe = Schallgeschwindigkeit im Wasser (etwa 1500 m/s) × Laufzeit des Echos : 2 (der Schall muss hin und zurück).</p></div>
+  <div class="card dia"><div class="seg" role="group" aria-label="Profil wählen"><button type="button" data-prof="a" aria-pressed="${k==="a"}">Profil A: Südatlantik ${profDone("a")?"✓":""}</button><button type="button" data-prof="p" aria-pressed="${k==="p"}">Profil B: Westpazifik ${profDone("p")?"✓":""}</button></div>
+   <p class="cap">${esc(P.sub)}</p><div id="rsvg">${reliefSVG()}</div>
+   ${profDone(k)?`<div class="terms" role="group" aria-label="Fachbegriffe">${FORMS.map(f=>`<button type="button" class="term" data-term="${f}" aria-pressed="${U.term===f}">${f}</button>`).join("")}</div><p class="cap">Beschriften: Tippt einen Fachbegriff an und dann die passende Markierung im Echolotbild.</p>`:`<p class="cap">Zieht das Forschungsschiff ALKOR an der Wasseroberfläche an die gewünschte Stelle (oder nutzt ◀ ▶).</p>`}
+   <div class="aprow" style="color:var(--ink)"><button class="pbtn" type="button" data-rmv="-1" aria-label="Schiff nach links">◀</button><output id="rposo" class="rpos">${th(pos)} km</output><button class="pbtn" type="button" data-rmv="1" aria-label="Schiff nach rechts">▶</button><button class="go" type="button" id="ping">Echolot senden</button>${k==="a"?`<button class="ghost" type="button" id="rcore">Bohrkern ziehen</button>`:""}
+    <span class="lcd" id="rlcd">${last?`Echo ${de(t,1)} s · ${th(dep)} m`:"Echo – s · – m"}</span></div>
+   <p class="prog">${nsec} von ${NSEC} Abschnitten vermessen${profDone(k)?" – Profil fertig! Beschriftet jetzt die Reliefformen im Bild.":""}</p></div>
+  ${profDone(k)?`<div class="card"><h3>Reliefformen beschriften</h3><p>Beschriftet jede Markierung im Echolotbild mit dem passenden Fachbegriff: ${P.mk.filter(m=>R.labels[m.k]===m.f).length} von ${P.mk.length} richtig.</p><details class="rlsel"><summary>Stattdessen Auswahllisten benutzen</summary>${P.mk.map(m=>{const v=R.labels[m.k]||"";const cls=v?(v===m.f?"ok":"no"):"";return `<div class="zrow" style="background:#5B4636"><span>Markierung ${m.k}</span><select data-rl="${m.k}" class="${cls}" aria-label="Reliefform für Markierung ${m.k}"><option value="">– wählen –</option>${FORMS.map(f=>`<option ${f===v?"selected":""}>${f}</option>`).join("")}</select></div>`}).join("")}</details>
+   ${P.mk.every(m=>R.labels[m.k]===m.f)?`<p class="fb ok">${k==="a"?"Richtig! Der Mittelozeanische Rücken im Atlantik heißt Mittelatlantischer Rücken. In seiner Mitte liegt ein Zentralgraben.":"Richtig! Der Tiefseegraben vor den Marianen-Inseln ist der Marianengraben – die tiefste Stelle der Ozeane."}</p>`:""}</div>`:""}
+  ${reliefExtraHTML()}
+  ${M.tasks.map(taskHTML).join("")}
+  ${D.done?`<div class="stamp"><span class="ic">✓</span><div><b class="t">Mission geschafft!</b>${esc(M.stamp)}</div></div><div class="nextbar"><button class="go" type="button" data-tomap>Zur Missionsauswahl</button></div>`:""}`}
+const RG={W:900,H:400,L:50,Rr:880,T:60,B:340};
+const rX=(P,x)=>RG.L+x/P.len*(RG.Rr-RG.L),rY=(P,d)=>RG.T+d/P.max*(RG.B-RG.T);
+function alkorSVG(){return `<g class="alkor" transform="translate(31 0)"><rect x="-48" y="-44" width="96" height="62" fill="transparent" stroke="none"/>
+  <path d="M-38 -6 L-35 -24 L-27 -24 L-30 -6" fill="none" stroke="#1B1B2F" stroke-width="5" stroke-linejoin="round"/><path d="M-38 -6 L-35 -24 L-27 -24 L-30 -6" fill="none" stroke="#FFD23F" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M-31 -24v8" stroke="#1B1B2F" stroke-width="1.5"/>
+  <path d="M15 -18v-20M9 -32h12" stroke="#1B1B2F" stroke-width="2.2"/><circle cx="15" cy="-39" r="2" fill="#E0393B" stroke="#1B1B2F" stroke-width="1"/>
+  <path d="M-12 -6v-9h14v9Z" fill="#F4F6FA" stroke="#1B1B2F" stroke-width="2"/><path d="M-9 -15v-6h7v6Z" fill="#1D3A6B" stroke="#1B1B2F" stroke-width="1.5"/>
+  <path d="M2 -6v-14h20l7 14Z" fill="#F4F6FA" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/><path d="M7 -16h5M14 -16h5M21 -16h3" stroke="#1D3A6B" stroke-width="3"/>
+  <path d="M-36 2 L41 2 L37 8 L-33 8Z" fill="#C2372E" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M-42 -7 L36 -7 L46 -13 L41 2 L-38 2Z" fill="#1D3A6B" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="-6" y="-0.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#fff" letter-spacing=".08em">ALKOR</text>
+  <path d="M-31 8v5" stroke="#1B1B2F" stroke-width="2"/></g>`}
+function jagoSVG(){return `<g id="jago" opacity="0"><path d="M0 0v-30" id="jcable" stroke="#1B1B2F" stroke-width="1.4"/><path d="M-6 -2h12v-7h-12Z" fill="#59627A" stroke="#1B1B2F" stroke-width="1.8"/><path d="M-3 -2h6v26h-6Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="1.6"/><path d="M-3 4h6M-3 11h6M-3 18h6" stroke="#fff" stroke-width="1.2"/><rect id="jcore" x="-2" y="24" width="4" height="0" fill="#B8A27E" stroke="#1B1B2F" stroke-width="1"/></g>`}
+function reliefSVG(){const k=relD().prof,P=PROF[k],{W,H,L,Rr,T,B}=RG,done=profDone(k);
+  const X=x=>rX(P,x),Y=d=>rY(P,d),pos=D.pos[k];
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(P.n)}: Tiefenprofil"><defs><linearGradient id="rsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FC4EE"/><stop offset="1" stop-color="#16244A"/></linearGradient></defs>
    <rect x="0" y="0" width="${W}" height="${T}" fill="#DDF3FF"/><rect x="${L}" y="${T}" width="${Rr-L}" height="${B-T+30}" fill="url(#rsea)"/>`;
   for(let i=1;i<NSEC;i++)s+=`<line x1="${X(i*P.len/NSEC)}" x2="${X(i*P.len/NSEC)}" y1="${T}" y2="${B+30}" stroke="rgba(255,255,255,.18)" stroke-dasharray="3 5"/>`;
@@ -1303,64 +1400,81 @@ function reliefSVG(){const k=relD().prof,P=PROF[k],W=900,H=400,L=50,Rr=880,T=60,
   const pp=D.pings[k].slice().sort((a,b)=>a-b);
   if(pp.length>1&&!done)s+=`<polyline points="${pp.map(x=>`${X(x).toFixed(1)},${Y(pDepth(P,x)).toFixed(1)}`).join(" ")}" fill="none" stroke="#FFD23F" stroke-width="2.5" stroke-dasharray="6 4"/>`;
   pp.forEach(x=>{s+=`<circle cx="${X(x).toFixed(1)}" cy="${Y(pDepth(P,x)).toFixed(1)}" r="4.5" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2"/>`});
-  if(done)P.mk.forEach(m=>{const ok=D.labels[m.k]===m.f,x=X(m.x),yf=Y(pDepth(P,m.x)),y=Math.max(yf-26,T+18);s+=`<g transform="translate(${x} ${y})"><line y1="10" y2="${Math.max(12,yf-y-2)}" stroke="#1B1B2F" stroke-width="2"/><circle r="12" fill="${ok?"#1F9D45":"#FFD23F"}" stroke="#1B1B2F" stroke-width="2.5"/><text y="5" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="${ok?"#fff":"#1B1B2F"}">${m.k}</text></g>`});
+  if(k==="a")(D.cores||[]).forEach(x=>{const yy=Y(pDepth(P,x));s+=`<rect x="${(X(x)-3).toFixed(1)}" y="${yy.toFixed(1)}" width="6" height="16" fill="#FFD23F" stroke="#1B1B2F" stroke-width="1.5"/>`});
+  if(done)P.mk.forEach(m=>{const v=D.labels[m.k]||"",ok=v===m.f,x=X(m.x),yf=Y(pDepth(P,m.x)),y=Math.max(yf-26,T+18),sel=U.term&&!ok;
+    const lw=v.length*7.3+14,col=ok?"#1F9D45":v?"#E0393B":"#FFD23F";
+    s+=`<g class="rmk${sel?" pick":""}" data-mk="${m.k}" tabindex="0" role="button" aria-label="Markierung ${m.k}${v?": "+esc(v):""}" transform="translate(${x} ${y})"><circle r="24" fill="transparent" stroke="none"/><line y1="10" y2="${Math.max(12,yf-y-2)}" stroke="#1B1B2F" stroke-width="2"/><circle r="${sel?15:12}" fill="${col}" stroke="#1B1B2F" stroke-width="2.5"/><text y="5" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="${ok||v?"#fff":"#1B1B2F"}">${m.k}</text>
+     ${v?`<g transform="translate(16 -9)"><rect width="${lw.toFixed(0)}" height="19" rx="5" fill="#fff" stroke="${col}" stroke-width="2.5"/><text x="7" y="13.5" font-size="11.5" font-weight="800" fill="#1B1B2F">${esc(v)}</text></g>`:""}</g>`});
   s+=`<text x="${L+4}" y="${T-8}" font-size="12" font-weight="800">${esc(P.l)}</text><text x="${Rr-4}" y="${T-8}" text-anchor="end" font-size="12" font-weight="800">${esc(P.r)}</text>`;
   const sx=X(pos),dep=pDepth(P,pos);
-  s+=`<line id="pingl" x1="${sx}" y1="${T}" x2="${sx}" y2="${Y(dep)}" stroke="#FFF27A" stroke-width="3" stroke-dasharray="6 6" opacity="0"/>`;
-  s+=`<g transform="translate(${sx} ${T})"><path d="M-22 -2h44l-6 10h-32Z" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/><rect x="-8" y="-12" width="14" height="10" rx="3" fill="#F4F6FA" stroke="#1B1B2F" stroke-width="2"/><path d="M0 8v6" stroke="#1B1B2F" stroke-width="2"/></g>`;
+  s+=`<line id="pingl" x1="${sx}" y1="${T+13}" x2="${sx}" y2="${Y(dep)}" stroke="#FFF27A" stroke-width="3" stroke-dasharray="6 6" opacity="0"/>`;
+  s+=`<g id="ship" transform="translate(${sx.toFixed(1)} ${T})">${jagoSVG()}${alkorSVG()}</g>`;
   s+=`<text x="${(L+Rr)/2}" y="${H-6}" text-anchor="middle" font-size="11" fill="#4A5266">Entfernung: 0 bis ${th(P.len)} km · Überhöhung etwa ${Math.round((P.len*1000/(Rr-L))/(P.max/(B-T)))}-fach</text>`;
   return s+`</svg>`}
-function reliefStage(){const R=relD(),k=R.prof,P=PROF[k],pos=R.pos[k],dep=pDepth(P,pos),t=2*dep/1500,last=U.lastPing===k+":"+pos;
-  const nsec=[...Array(NSEC).keys()].filter(i=>secDone(k,i)).length;
-  return `<div class="shead"><span class="num" style="background:${M.col}">${ORDER.indexOf(M.id)+1}</span><h2>${esc(M.n)}</h2><div class="meta"><span class="chip">Echolot</span><span class="chip">2 Profile</span><span class="chip">6 Reliefformen</span></div></div>
-  <div class="auftrag"><small>Forschungsfrage</small>${esc(M.q)}</div>
-  <div class="card"><h3>So funktioniert das Echolot</h3><p>${esc(M.intro)}</p><p class="cap">Tiefe = Schallgeschwindigkeit im Wasser (etwa 1500 m/s) × Laufzeit des Echos : 2 (der Schall muss hin und zurück).</p></div>
-  <div class="card dia"><div class="seg" role="group" aria-label="Profil wählen"><button type="button" data-prof="a" aria-pressed="${k==="a"}">Profil A: Südatlantik ${profDone("a")?"✓":""}</button><button type="button" data-prof="p" aria-pressed="${k==="p"}">Profil B: Westpazifik ${profDone("p")?"✓":""}</button></div>
-   <p class="cap">${esc(P.sub)}</p><div id="rsvg">${reliefSVG()}</div>
-   <div class="rng"><label for="rpos">Position</label><input type="range" id="rpos" min="0" max="${P.len}" step="${P.len/300}" value="${pos}"><output id="rposo">${th(pos)} km</output></div>
-   <div class="aprow" style="color:var(--ink)"><button class="pbtn" type="button" data-rmv="-1">◀</button><button class="pbtn" type="button" data-rmv="1">▶</button><button class="go" type="button" id="ping">Echolot senden</button>
-    <span class="lcd" id="rlcd">${last?`Echo ${de(t,1)} s · ${th(dep)} m`:"Echo – s · – m"}</span></div>
-   <p class="prog">${nsec} von ${NSEC} Abschnitten vermessen${profDone(k)?" – Profil fertig! Benennt jetzt die Reliefformen.":""}</p></div>
-  ${profDone(k)?`<div class="card"><h3>Reliefformen benennen</h3><p>Welche Reliefform zeigt jede Markierung im Profil?</p>${P.mk.map(m=>{const v=R.labels[m.k]||"";const cls=v?(v===m.f?"ok":"no"):"";return `<div class="zrow" style="background:#5B4636"><span>Markierung ${m.k}</span><select data-rl="${m.k}" class="${cls}" aria-label="Reliefform für Markierung ${m.k}"><option value="">– wählen –</option>${FORMS.map(f=>`<option ${f===v?"selected":""}>${f}</option>`).join("")}</select></div>`}).join("")}
-   ${P.mk.every(m=>R.labels[m.k]===m.f)?`<p class="fb ok">${k==="a"?"Richtig! Der Mittelozeanische Rücken im Atlantik heißt Mittelatlantischer Rücken. In seiner Mitte liegt ein Zentralgraben.":"Richtig! Die Tiefseerinne vor den Marianen-Inseln ist der Marianengraben – die tiefste Stelle der Ozeane."}</p>`:""}</div>`:""}
-  ${M.tasks.map(taskHTML).join("")}
-  ${D.done?`<div class="stamp"><span class="ic">✓</span><div><b class="t">Mission geschafft!</b>${esc(M.stamp)}</div></div><div class="nextbar"><button class="go" type="button" data-tomap>Zur Missionsauswahl</button></div>`:""}`}
 function afterRelief(){const R=relD(),k=R.prof,P=PROF[k];
-  const setPos=v=>{R.pos[k]=clamp(Math.round(v),0,P.len);save();$("#rsvg").innerHTML=reliefSVG();$("#rposo").textContent=th(R.pos[k])+" km";$("#rpos").value=R.pos[k];$("#rlcd").textContent="Echo – s · – m"};
-  $("#rpos").oninput=e=>setPos(+e.target.value);
-  document.querySelectorAll("[data-rmv]").forEach(b=>b.onclick=()=>setPos(R.pos[k]+ +b.dataset.rmv*P.len/40));
-  $("#ping").onclick=()=>{const x=R.pos[k],dep=pDepth(P,x),t=2*dep/1500;
+  document.querySelectorAll("[data-rmv]").forEach(b=>b.onclick=()=>{if(U.diving)return;shipTo(R.pos[k]+ +b.dataset.rmv*P.len/40);save()});
+  $("#ping").onclick=()=>{if(U.diving)return;const x=R.pos[k],dep=pDepth(P,x),t=2*dep/1500;
     const l=$("#pingl");if(l&&!RM){l.style.transition="none";l.style.opacity="1";l.style.strokeDashoffset="300";void l.getBoundingClientRect();l.style.transition="stroke-dashoffset .6s linear, opacity .6s .6s";l.style.strokeDashoffset="0";l.style.opacity="0"}
     setTimeout(()=>{if(!R.pings[k].some(p=>Math.abs(p-x)<1))R.pings[k].push(x);U.lastPing=k+":"+x;save();
       say(`Echo nach <b>${de(t,1)} s</b>. 1500 m/s × ${de(t,1)} s : 2 = <b>${th(dep)} m</b> Tiefe.`);renderStage();mCheckDone()},RM?0:650)};
 }
+/* Schiff ziehen, Fachbegriffe im Bild zuordnen */
+function shipTo(v){const R=relD(),k=R.prof,P=PROF[k],st=P.len/300;R.pos[k]=clamp(Math.round(Math.round(v/st)*st),0,P.len);
+  const x=rX(P,R.pos[k]),sh=$("#ship"),l=$("#pingl");if(sh)sh.setAttribute("transform",`translate(${x.toFixed(1)} ${RG.T})`);
+  if(l){l.setAttribute("x1",x);l.setAttribute("x2",x);l.setAttribute("y2",rY(P,pDepth(P,R.pos[k])))}
+  const o=$("#rposo");if(o)o.textContent=th(R.pos[k])+" km";const c=$("#rlcd");if(c)c.textContent="Echo – s · – m";U.lastPing=""}
+function svgPt(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+let rdrag=null;
+function assignMk(id){const R=relD(),P=PROF[R.prof],m=P.mk.find(q=>q.k===id);if(!m)return;
+  if(!U.term){say("Tippt zuerst unten einen Fachbegriff an – dann die Markierung im Bild.",true);return}
+  R.labels[id]=U.term;const ok=U.term===m.f,t=U.term;U.term=null;save();renderStage();mCheckDone();
+  say(ok?`Richtig: Markierung ${id} ist ${/^(Schelf|Kontinentalhang|Inselbogen|Tiefseegraben|Mittelozeanischer Rücken)$/.test(t)?"der":"das"} <b>${esc(t)}</b>.`:`„${esc(t)}“ passt nicht zu Markierung ${id}. Schaut auf Tiefe und Form.`,!ok)}
+document.addEventListener("pointerdown",e=>{const host=e.target.closest&&e.target.closest("#rsvg");if(!host)return;
+  const mk=e.target.closest("[data-mk]");if(mk){assignMk(mk.dataset.mk);return}
+  const svg=host.querySelector("svg");if(!svg||U.diving)return;const pt=svgPt(svg,e);
+  if(!(e.target.closest("#ship")||pt.y<RG.T+26))return;e.preventDefault();rdrag=true;try{host.setPointerCapture(e.pointerId)}catch(_){}
+  const P=PROF[relD().prof];shipTo((pt.x-RG.L)/(RG.Rr-RG.L)*P.len)});
+document.addEventListener("pointermove",e=>{if(!rdrag)return;const svg=$("#rsvg svg");if(!svg)return;const P=PROF[relD().prof],pt=svgPt(svg,e);shipTo((pt.x-RG.L)/(RG.Rr-RG.L)*P.len)});
+["pointerup","pointercancel"].forEach(t=>document.addEventListener(t,()=>{if(rdrag){rdrag=null;save()}}));
+document.addEventListener("keydown",e=>{const mk=e.target.closest&&e.target.closest("[data-mk]");if(mk&&(e.key==="Enter"||e.key===" ")){e.preventDefault();assignMk(mk.dataset.mk)}});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-term]");if(!b)return;U.term=U.term===b.dataset.term?null:b.dataset.term;
+  document.querySelectorAll("[data-term]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.term===U.term));$("#rsvg").innerHTML=reliefSVG();
+  if(U.term)say(`<b>${esc(U.term)}</b> gewählt. Tippt jetzt die passende Markierung im Echolotbild an.`)});
+/* JAGO taucht für den Bohrkern */
+function jagoDive(done){const R=relD(),P=PROF.a,x=R.pos.a,yd=rY(P,pDepth(P,x))-RG.T-24,j=$("#jago");
+  if(RM||!j){done();return}U.diving=true;const c=$("#jcable"),cr=$("#jcore"),t0=performance.now(),D1=1500,D2=900,D3=1300;
+  j.setAttribute("opacity","1");
+  const f=now=>{const t=now-t0;let y,core=0;
+    if(t<D1){const u=t/D1;y=10+(yd-10)*(u*u*(3-2*u))}else if(t<D1+D2){y=yd;core=(t-D1)/D2}else if(t<D1+D2+D3){const u=(t-D1-D2)/D3;y=yd-(yd-10)*(u*u*(3-2*u));core=1}else{U.diving=false;done();return}
+    j.setAttribute("transform",`translate(0 ${y.toFixed(1)})`);c.setAttribute("d",`M0 -9V${(-y-19).toFixed(1)}`);cr.setAttribute("height",(core*10).toFixed(1));requestAnimationFrame(f)};
+  requestAnimationFrame(f)}
 
 MIS.relief={id:"relief",type:"relief",n:"Gebirge und Schluchten unter Wasser",kurz:"Relief des Meeresbodens",ort:"Südatlantik (23° S) und Westpazifik (11° N)",ll:[-15,-23],lx:-12,ly:24,col:"#8C5A2B",
   maxD:4000,TT:TT_ATL,k1:.06,k2:.0222,cr:[],minFound:0,
   q:"Wie sieht der Meeresboden aus – und wie entstehen seine Formen?",
-  intro:"Den Meeresboden kann man nicht sehen – aber hören. Jagonaut fährt an der Oberfläche und sendet mit dem Echolot Schallwellen nach unten. Aus der Zeit, bis das Echo zurückkommt, berechnet der Bordcomputer die Tiefe. So vermesst ihr zwei Profile durch den Ozean: Messt in jedem der zehn Abschnitte mindestens einmal.",
+  intro:"Den Meeresboden kann man nicht sehen – aber hören. Das Forschungsschiff ALKOR fährt an der Oberfläche und sendet mit dem Echolot Schallwellen nach unten. An Bord: ein Schwerelot, um Bohrkerne aus dem Meeresboden zu ziehen. Aus der Zeit, bis das Echo zurückkommt, berechnet der Bordcomputer die Tiefe. So vermesst ihr zwei Profile durch den Ozean: Messt in jedem der zehn Abschnitte mindestens einmal.",
   thema:"Echolot, Reliefformen des Meeresbodens, Plattentektonik",
   facts:[["Messgerät","Echolot (Schall)"],["Profil A","Brasilien → Namibia, 6000 km"],["Profil B","Philippinensee → Marianengraben, 1630 km"]],
-  zus:["Echolot: Tiefe aus der Laufzeit des Schalls","Schelf, Kontinentalhang und Tiefseebecken","Mittelatlantischer Rücken: Platten driften auseinander","Tiefseerinne Marianengraben: Subduktion"],
+  zus:["Echolot: Tiefe aus der Laufzeit des Schalls","Schelf, Kontinentalhang und Tiefseebecken","Mittelatlantischer Rücken: Platten driften auseinander","Tiefseegraben Marianengraben: Subduktion"],
   tip:"Wählt ein Profil, fahrt mit dem Regler an eine Stelle und sendet ein Echolot-Signal. In jedem der zehn Abschnitte braucht ihr mindestens eine Messung.",
   tasks:[
    {id:"e1",num:true,unit:"m",dv:"4500",q:"Rechnet selbst: Das Echo kommt nach 6 Sekunden zurück. Schall legt im Wasser etwa 1500 m pro Sekunde zurück. Wie tief ist das Meer an dieser Stelle?",accept:x=>Math.abs(x-4500)<=10,why:"Richtig: 1500 m/s × 6 s = 9000 m für Hin- und Rückweg, also 4500 m Tiefe.",no:"Noch nicht. Tipp: Der Schall läuft hin und zurück – teilt den Weg durch 2."},
-   {id:"e2",q:"Was ist der Schelf?",o:[["Der flache, vom Meer überflutete Rand eines Kontinents, meist weniger als 200 m tief.",""],["Die tiefste Stelle eines Ozeans.","Das ist eine Tiefseerinne."],["Ein Gebirge mitten im Ozean.","Das ist ein Mittelozeanischer Rücken."]],ok:0,why:"Genau! Auf dem Schelf liegen viele Fischgründe und Öl- und Gasfelder, zum Beispiel in der Nordsee."},
+   {id:"e2",q:"Was ist der Schelf?",o:[["Der flache, vom Meer überflutete Rand eines Kontinents, meist weniger als 200 m tief.",""],["Die tiefste Stelle eines Ozeans.","Das ist ein Tiefseegraben."],["Ein Gebirge mitten im Ozean.","Das ist ein Mittelozeanischer Rücken."]],ok:0,why:"Genau! Auf dem Schelf liegen viele Fischgründe und Öl- und Gasfelder, zum Beispiel in der Nordsee."},
    {id:"e3",lock:()=>!profDone("a"),lockMsg:"Vermesst zuerst Profil A vollständig.",q:"Mitten im Atlantik liegt ein Gebirge mit einem Graben auf dem Kamm. Wie entsteht es?",o:[["Hier driften zwei Platten auseinander. Der Boden reißt auf, Magma steigt nach und bildet neuen Meeresboden.",""],["Hier stoßen zwei Kontinente zusammen.","Hier ist weit und breit kein Kontinent – die Platten bewegen sich auseinander."],["Hier hat sich Sand angehäuft.","Das Gebirge besteht aus Vulkangestein."]],ok:0,why:"Richtig! So wächst der Atlantik jedes Jahr um etwa 2–3 cm – ungefähr so schnell, wie eure Fingernägel wachsen."},
    {id:"e4",lock:()=>!profDone("a"),lockMsg:"Vermesst zuerst Profil A vollständig.",q:"Wie heißt das Unterwassergebirge in Profil A?",o:[["Mittelatlantischer Rücken",""],["Ostpazifischer Rücken","Den gibt es auch – aber im Pazifik."],["Rocky Mountains","Das ist ein Gebirge an Land in Nordamerika."]],ok:0,why:"Genau! Er zieht sich von Island bis fast zur Antarktis – das längste Gebirge der Erde liegt unter Wasser."},
-   {id:"e5",lock:()=>!profDone("p"),lockMsg:"Vermesst zuerst Profil B vollständig.",q:"Wie heißt die Tiefseerinne in Profil B, und wie entsteht sie?",o:[["Marianengraben: Hier taucht die Pazifische Platte unter die Philippinische Platte ab (Subduktion).",""],["Puerto-Rico-Graben: Hier reißt der Boden auf.","Der Puerto-Rico-Graben liegt im Atlantik."],["Marianengraben: Ein Fluss hat ihn ausgespült.","Unter Wasser gräbt kein Fluss so tief."]],ok:0,why:"Richtig! Neben der Rinne steigen Vulkane auf und bilden einen Inselbogen – die Marianen-Inseln."},
+   {id:"e5",lock:()=>!profDone("p"),lockMsg:"Vermesst zuerst Profil B vollständig.",q:"Wie heißt der Tiefseegraben in Profil B, und wie entsteht sie?",o:[["Marianengraben: Hier taucht die Pazifische Platte unter die Philippinische Platte ab (Subduktion).",""],["Puerto-Rico-Graben: Hier reißt der Boden auf.","Der Puerto-Rico-Graben liegt im Atlantik."],["Marianengraben: Ein Fluss hat ihn ausgespült.","Unter Wasser gräbt kein Fluss so tief."]],ok:0,why:"Richtig! Neben der Rinne steigen Vulkane auf und bilden einen Inselbogen – die Marianen-Inseln."},
    {id:"e6",lock:()=>!profDone("a"),lockMsg:"Vermesst zuerst Profil A vollständig.",q:"Euer Profil ist stark überhöht. Was bedeutet das?",o:[["Die Tiefe ist viel stärker vergrößert als die Breite. In Wirklichkeit ist der Meeresboden viel flacher, als es im Profil aussieht.",""],["Das Meer ist in Wirklichkeit noch tiefer.","Die Tiefenwerte stimmen – nur die Darstellung ist gestreckt."],["Das Profil ist falsch.","Überhöhung ist ein übliches Mittel, damit man die Formen überhaupt erkennt."]],ok:0,why:"Genau! Ohne Überhöhung wäre das Profil A nur ein dünner Strich: 6000 km breit, aber höchstens 6 km tief."},
-   {id:"e7",lock:()=>!(profDone("a")&&profDone("p")),lockMsg:"Vermesst zuerst beide Profile.",q:"Welche Reliefform nimmt den größten Teil des Meeresbodens ein?",o:[["Tiefseebecken mit ihren weiten Ebenen in 4000–6000 m Tiefe",""],["Tiefseerinnen","Rinnen sind tief, aber schmal."],["Der Schelf","Der Schelf ist nur ein schmaler Saum an den Küsten."]],ok:0,why:"Richtig! Die Tiefseebecken sind der größte Lebensraum der Erde – und kaum erforscht."}],
-  stamp:"Vom Kontinent in die Tiefe: Schelf, Kontinentalhang und Tiefseebecken. Wo Platten auseinanderdriften, wächst ein Mittelozeanischer Rücken; wo eine Platte abtaucht, entsteht eine Tiefseerinne wie der Marianengraben.",
-  wok:()=>profDone("a")&&profDone("p")&&labelsOk()};
+   {id:"e7",lock:()=>!(profDone("a")&&profDone("p")),lockMsg:"Vermesst zuerst beide Profile.",q:"Welche Reliefform nimmt den größten Teil des Meeresbodens ein?",o:[["Tiefseebecken mit ihren weiten Ebenen in 4000–6000 m Tiefe",""],["Tiefseegräben","Gräben sind tief, aber schmal."],["Der Schelf","Der Schelf ist nur ein schmaler Saum an den Küsten."]],ok:0,why:"Richtig! Die Tiefseebecken sind der größte Lebensraum der Erde – und kaum erforscht."}],
+  stamp:"Vom Kontinent in die Tiefe: Schelf, Kontinentalhang und Tiefseebecken. Wo Platten auseinanderdriften, wächst ein Mittelozeanischer Rücken; wo eine Platte abtaucht, entsteht eine Tiefseegraben wie der Marianengraben.",
+  wok:()=>profDone("a")&&profDone("p")&&labelsOk()&&merkOk()&&kernZOk()};
 ORDER.splice(1,0,"relief");
 const ZUS={atlantik:["Wie tief dringt Sonnenlicht ins Meer?","Deckschicht, Sprungschicht, Tiefenwasser","Wasserdruck: +1 bar je 10 m","Lebewesen und ihre Anpassung an die Tiefe","Stockwerke des Meeres im Klimawandel"],
  riff:["Symbiose von Koralle und Alge braucht Licht","Hitzewelle → Korallenbleiche","Vulnerabilität und Resilienz des Riffs"],
  golfstrom:["Warme Meeresströmung aus den Tropen","Golfstrom → mildes Klima in Nordwesteuropa","Umwälzströmung (AMOC) als möglicher Kipppunkt"],
  humboldt:["Kalte Meeresströmung und Auftrieb","Plankton → Fischreichtum","El Niño und Küstenwüste Atacama"],
  raucher:["Plattengrenze am Mittelatlantischen Rücken","365 °C heißes Wasser – warum kocht es nicht?","Chemosynthese: Leben ohne Sonnenlicht"],
- arktis:["Meereis und Licht unter dem Eis","Nahrungskette von der Eisalge zum Eisbären","Warmes Atlantikwasser und Meereisrückgang"],
- marianen:["Tiefster Punkt der Ozeane: fast 11.000 m","Wasserdruck über 1000 bar","Subduktion und Leben im Hadal"]};
+ arktis:["Meereis und Licht unter dem Eis","Nahrungskette von der Eisalge zum Eisbären","Warmes Atlantikwasser unter kaltem Polarwasser"],
+ marianen:["Tiefster Punkt der Ozeane: fast 11.000 m","Wasserdruck über 1000 bar – der Styroporbecher schrumpft","Farbkarte: Welche Farbe verschwindet zuerst?","Subduktion und Leben im Hadal"]};
 Object.entries(ZUS).forEach(([k,v])=>MIS[k].zus=v);
 
 
@@ -1375,7 +1489,7 @@ function nextStep(){if(!S.m)return "";
   const minF=isAtl()?(S.st===4?8:0):(M.minFound||0);
   if(minF&&nFound()<minF)return `Bestimmt weitere Lebewesen im Bullauge: ${nFound()} von mindestens ${minF}.${bright(U.depth)<.1&&!U.lamp?" Schaltet den Scheinwerfer ein!":""}`;
   const ts=isAtl()?TASKS[S.st]:M.tasks;const open=ts.filter(t=>!D.q[t.id]);
-  if(open.length){const ul=open.find(t=>!(t.lock&&t.lock()));return ul?`Beantwortet die Fragen unter dem Cockpit: noch ${open.length} offen.`:esc(open[0].lockMsg||"Erledigt zuerst den Auftrag oben.")}
+  if(open.length){const ul=open.find(t=>!(t.lock&&t.lock()));return ul?`Beantwortet die Fragen unter dem Cockpit: noch ${open.length} offen.`:esc(open[0].lockMsg||(open[0].id.startsWith("t5")?"Ordnet zuerst die Stockwerke und Merkmale zu (unter dem Cockpit).":open[0].id.startsWith("t4")?"Bestimmt zuerst mindestens 6 Lebewesen.":"Erledigt zuerst den Messauftrag."))}
   const k=lbKey();if(!(S.lb[k]&&S.lb[k].saved))return "Fast geschafft: Tragt ins <b>Logbuch</b> ein, was ihr jetzt könnt.";
   return isAtl()?(S.st<5?"Alles erledigt! Weiter zur nächsten Station im Tauchplan.":"Expedition abgeschlossen!"):"Mission geschafft! Wählt über die Missionsauswahl ein neues Ziel.";}
 function updNext(){const n=$("#lotteNext");if(n){const h=nextStep();if(n.dataset.h!==h){n.dataset.h=h;n.innerHTML=h}}}
@@ -1386,16 +1500,16 @@ const LBU={
  oz:{t:"Ozean-Check",k:["Pazifi","Atlanti","Indisch","Arktisch","Südlich","Fläche","Kontinent"],f:["Welche Ozeane kanntest du schon, welche waren neu?","Woran erkennst du auf der Karte, wo ein Ozean beginnt und endet?"],p:"Wie bist du beim Zuordnen vorgegangen: gewusst, ausgeschlossen oder geraten?"},
  a1:{t:"Station 1: Licht",k:["Licht","Prozent","Photosynthese","Rot","Blau","Algen","200"],f:["Wie verändert sich das Licht mit der Tiefe – und was folgt daraus für Algen?","Warum verschwindet Rot zuerst?"],p:"Warum musstet ihr beim Messen den Scheinwerfer ausschalten?"},
  a2:{t:"Station 2: Temperatur",k:["Deckschicht","Sprungschicht","Tiefenwasser","Temperatur","Polar","schwer"],f:["Beschreibe das Temperaturprofil mit seinen drei Schichten.","Woher kommt das kalte Tiefenwasser?"],p:"Wie hat euch das Diagramm geholfen, die Schichten zu erkennen?"},
- a3:{t:"Station 3: Druck",k:["bar","Druck","10 m","Luft","Styropor","zusammen"],f:["Wie kannst du den Druck in jeder Tiefe berechnen?","Warum schrumpft der Styroporbecher, Tiefseetiere aber nicht?"],p:"Welche Regel habt ihr aus euren Messwerten abgeleitet – und wie?"},
+ a3:{t:"Station 3: Druck",k:["bar","Druck","10 m","Luft","Wasser","zusammen"],f:["Wie kannst du den Druck in jeder Tiefe berechnen?","Warum werden Tiefseetiere vom Druck nicht zerquetscht?"],p:"Welche Regel habt ihr aus euren Messwerten abgeleitet – und wie?"},
  a4:{t:"Station 4: Lebewesen",k:["Anpassung","angepasst","leucht","Augen","rot","Meeresschnee","Bestimmung"],f:["Nenne ein Lebewesen und erkläre, wie es an seine Tiefe angepasst ist.","Wovon leben Tiere, wo kein Licht hinkommt?"],p:"Wie seid ihr beim Bestimmen vorgegangen? Was hat geholfen, wenn ihr falsch lagt?"},
  a5:{t:"Station 5: Stockwerke",k:["Sonnenlichtzone","Dämmerlichtzone","Mitternachtszone","Schicht","Nährstoff","Klimawandel","Plankton"],f:["Wie ist das Meer in Stockwerke gegliedert?","Erkläre die Wirkungskette von der Erwärmung bis zu den Fischen."],p:"Welche Ergebnisse aus den Stationen 1–4 habt ihr hier wieder gebraucht?"},
- relief:{t:"Relief des Meeresbodens",k:["Echolot","Schall","Schelf","Kontinentalhang","Tiefseebecken","Rücken","Tiefseerinne","Subduktion","Platte","überhöht"],f:["Wie misst man die Meerestiefe mit dem Echolot?","Wie entstehen ein Mittelozeanischer Rücken und eine Tiefseerinne?"],p:"Warum musstet ihr in jedem Abschnitt messen? Was wäre bei nur drei Messungen passiert?"},
+ relief:{t:"Relief des Meeresbodens",k:["Echolot","Schall","Schelf","Kontinentalhang","Tiefseebecken","Rücken","Tiefseegraben","Subduktion","Platte","überhöht"],f:["Wie misst man die Meerestiefe mit dem Echolot?","Wie entstehen ein Mittelozeanischer Rücken und ein Tiefseegraben?"],p:"Warum musstet ihr in jedem Abschnitt messen? Was wäre bei nur drei Messungen passiert?"},
  riff:{t:"Great Barrier Reef",k:["Symbiose","Alge","Licht","Korallenbleiche","Hitzewelle","verwundbar","Resilienz","erholen"],f:["Warum gibt es Korallenriffe nur in flachem, klarem, warmem Wasser?","Was macht ein Riff verwundbar – und was hilft ihm, sich zu erholen?"],p:"Was hat dir der Hitzewellen-Regler gezeigt, was ein Text allein nicht zeigen kann?"},
  golfstrom:{t:"Golfstrom",k:["warm","Tropen","Nordatlantikstrom","Europa","Klima","Umwälzströmung","Kipppunkt","Schmelzwasser"],f:["Woher kommt das warme Wasser des Golfstroms, und wohin fließt es?","Was würde eine schwächere Umwälzströmung für Europa bedeuten?"],p:"Wie habt ihr Golfstrom und Humboldtstrom miteinander verglichen?"},
  humboldt:{t:"Humboldtstrom",k:["kalt","Auftrieb","Nährstoff","Plankton","Sardelle","El Niño","Wüste","Atacama"],f:["Erkläre den Auftrieb vor Peru mit eigenen Worten.","Was passiert bei El Niño – für Fische und für Menschen?"],p:"Wie hat euch das Schema geholfen, den Auftrieb zu verstehen?"},
  raucher:{t:"Black Smoker",k:["Schlot","Magma","Druck","Siedepunkt","Chemosynthese","Bakterien","Platte","auseinander"],f:["Warum kocht das 365 °C heiße Wasser im Schlot nicht?","Wie können Tiere ganz ohne Sonnenlicht leben?"],p:"Welche Messung hat euch überrascht – und warum?"},
- arktis:{t:"Arktis",k:["Meereis","Eisalge","Nahrungskette","Polardorsch","Robbe","Eisbär","Atlantikwasser","schmilzt","1,8"],f:["Beschreibe die Nahrungskette unter dem Eis.","Was passiert mit der Nahrungskette, wenn das Meereis schwindet?"],p:"Wie seid ihr beim Bauen der Nahrungskette vorgegangen?"},
- marianen:{t:"Marianengraben",k:["Subduktion","Platte","Druck","1100","Graben","Flohkrebs","Fisch","8200"],f:["Wie ist der Marianengraben entstanden?","Wie können Lebewesen unter mehr als 1000 bar Druck leben?"],p:"Wie habt ihr den Druck am Grund vorhergesagt, bevor ihr unten wart?"}};
+ arktis:{t:"Arktis",k:["Meereis","Eisalge","Nahrungskette","Polardorsch","Robbe","Eisbär","Atlantikwasser","Polarwasser","1,8"],f:["Beschreibe die Nahrungskette unter dem Eis.","Was passiert in der Nahrungskette, wenn ein Glied ausfällt?"],p:"Wie seid ihr beim Bauen der Nahrungskette vorgegangen?"},
+ marianen:{t:"Marianengraben",k:["Subduktion","Platte","Druck","1100","Graben","Flohkrebs","Styropor","Rot"],f:["Wie ist der Marianengraben entstanden?","Was haben Farbkarte und Styroporbecher auf dem Weg nach unten gezeigt?"],p:"Wie habt ihr den Druck am Grund vorhergesagt, bevor ihr unten wart?"}};
 const LBORDER=()=>["oz","a1","a2","a3","a4","a5",...ORDER.filter(id=>id!=="atlantik")];
 const CONF=[["sicher","#1F9D45"],["teilweise","#F2A900"],["noch unsicher","#E0393B"]];
 const lbKey=()=>!S.m?"oz":isAtl()?"a"+S.st:S.m;
@@ -1438,6 +1552,277 @@ document.addEventListener("click",e=>{
 document.addEventListener("input",e=>{if(e.target.id==="lbtxt"){const k=e.target.dataset.lbk;lbE(k).t=e.target.value;save();const c=$("#lbcount");if(c)c.textContent=e.target.value.length+"/500"}
   if(e.target.id==="lbname"){S.lbName=e.target.value;save()}});
 
+
+/* ============ Greifarm (steuerbar) ============ */
+const ARM0={a1:172,a2:62};
+const ARMB=[440,190],AL1=135,AL2=115;
+const rad=a=>a*Math.PI/180;
+const AX=()=>(D.ax=D.ax||{});
+function armGeo(){const A=U.arm,e=[ARMB[0]+AL1*Math.cos(rad(A.a1)),ARMB[1]+AL1*Math.sin(rad(A.a1))],da=A.a1+A.a2,w=[e[0]+AL2*Math.cos(rad(da)),e[1]+AL2*Math.sin(rad(da))],tip=[w[0]+16*Math.cos(rad(da)),w[1]+16*Math.sin(rad(da))];return {e,w,tip,da}}
+
+/* Werkzeuge am Greifarm */
+const TOOLS={
+ greifer:{n:"Greifer",how:"Fahrt die Greiferspitze an den Meeresboden und drückt die Mitte: Der Greifer nimmt eine Bodenprobe."},
+ schoepfer:{n:"Wasserschöpfer",how:"Fahrt auf eine Tiefe und drückt die Mitte: Der Wasserschöpfer füllt eine Flasche mit Meerwasser."},
+ netz:{n:"Planktonnetz",how:"Fahrt auf eine Tiefe und drückt die Mitte: Das feine Netz fängt alles, was im Wasser schwebt."},
+ garten:{n:"Korallenstück",how:"Fahrt auf 5–20 m und drückt die Mitte: Der Greifarm setzt ein Korallenstück auf das Gestell im Korallengarten."},
+ logger:{n:"Temperaturlogger",how:"Drückt in mindestens 5 m Tiefe die Mitte: Der Logger wird am Riff befestigt und misst zwölf Wochen lang die Temperatur."},
+ boje:{n:"Treibboje",how:"Taucht auf (0–3 m) und drückt die Mitte: Die Boje treibt mit der Strömung und funkt ihre Position per Satellit."},
+ o2:{n:"Sauerstoffsensor",how:"Fahrt auf eine Tiefe und drückt die Mitte: Der Sensor misst, wie viel Sauerstoff im Wasser gelöst ist."},
+ meissel:{n:"Gesteinsmeißel",how:"Am Boden mit Scheinwerfer: Fahrt die Spitze an die Wand des Schlots (nicht an die heiße Öffnung) und drückt die Mitte."},
+ schaber:{n:"Schaber",how:"Am Boden mit Scheinwerfer: Fahrt die Spitze an die weißen Flecken neben dem Schlot und drückt die Mitte."},
+ eis:{n:"Eisbohrer",how:"Fahrt direkt unter das Eis (0–5 m) und drückt die Mitte: Der Bohrer zieht einen Kern aus der Unterseite der Scholle."},
+ falle:{n:"Köderfalle",how:"Am Grund: Fahrt die Spitze an den Boden und drückt die Mitte, um die Falle abzusetzen. Drückt später noch einmal, um sie einzuholen."}};
+const MTOOLS={atlantik:["greifer","schoepfer","netz"],riff:["greifer","garten","logger"],golfstrom:["greifer","boje"],humboldt:["greifer","o2"],
+ raucher:["greifer","meissel","schaber"],arktis:["greifer","schoepfer","eis"],marianen:["greifer","falle"]};
+const toolList=()=>MTOOLS[M.id]||["greifer"];
+const curTool=()=>{const L=toolList();return L[(U.tool||0)%L.length]};
+
+/* Messwerte (vereinfacht) */
+const SAL_ATL=[[0,36.7],[100,36.6],[200,36.4],[500,35.5],[800,35.1],[1000,35],[2000,35],[4000,34.9]];
+const SAL_ARK=[[0,32.9],[20,33.2],[50,33.9],[100,34.6],[200,34.95],[300,35],[500,34.95],[1000,34.92],[2500,34.92]];
+const PLANK=[[0,1800],[50,1500],[100,900],[200,350],[500,90],[1000,30],[2000,8],[4000,2]];
+const O2H=[[0,6.5],[10,5.5],[20,3.5],[30,2.2],[50,.8],[80,.2],[100,.1],[500,.1],[600,.3],[800,.9]];
+const BOJE=[[-74.5,35.5,0],[-68,37.5,1],[-60,39.5,2],[-50,41.5,4],[-42,44.5,6],[-34,48,9],[-26,51.5,12],[-18,55,15],[-10,58.5,18],[-3,62,20],[5,65.5,22],[12,69,24]];
+const LOGN=[27.6,27.9,28.2,28.4,28.5,28.5,28.5,28.4,28.2,27.9,27.6,27.3,27];
+const LOGW=[0,0,.3,.7,1,1,1,1,1,.7,.3,0,0];
+function addBox(n,d,t){const a=AX();a.box=a.box||[];const i=a.box.findIndex(b=>b.n===n&&Math.abs(b.d-d)<1);const e={n,d:Math.round(d),t};if(i>=0)a.box[i]=e;else a.box.push(e);if(a.box.length>24)a.box.shift()}
+function pushDepth(k,obj){const a=AX();a[k]=a[k]||[];const i=a[k].findIndex(x=>Math.abs(x.d-obj.d)<1);if(i>=0)a[k][i]=obj;else a[k].push(obj);a[k].sort((x,y)=>x.d-y.d)}
+
+function drawArm(){const g=$("#armg");if(!g)return;const A=U.arm,{e,w,tip,da}=armGeo(),B=ARMB,f=n=>n.toFixed(1),tl=curTool();
+  const m=[(e[0]+w[0])/2,(e[1]+w[1])/2],sc=cupScale(U.depth),op=tl!=="greifer"?4:A.open?28:6,gear=M.id==="marianen";
+  const claw=s=>`<g transform="translate(${f(w[0])} ${f(w[1])}) rotate(${f(da)})"><path d="M2 0 L16 ${s*-4} L26 ${s*(-4-op*.35)}" fill="none" stroke="#1B1B2F" stroke-width="7"/><path d="M2 0 L16 ${s*-4} L26 ${s*(-4-op*.35)}" fill="none" stroke="#9AA3B5" stroke-width="3.5"/></g>`;
+  const TG={schoepfer:`<rect x="18" y="-8" width="30" height="16" rx="5" fill="#4FA3DB" stroke-width="2.5"/><path d="M18 -8v16M48 -8v16" stroke-width="4"/>`,
+    netz:`<path d="M18 -12 L58 -2 L58 2 L18 12Z" fill="rgba(255,255,255,.75)" stroke-width="2.5"/><path d="M28 -9 L28 9M38 -7 L38 7M48 -4 L48 4" stroke-width="1.2"/>`,
+    garten:`<path d="M20 0h10M30 0l10-10M30 0l12 6M36 -6l6-8" stroke="#E86FA5" stroke-width="6"/><path d="M20 0h10M30 0l10-10M30 0l12 6M36 -6l6-8" fill="none" stroke-width="1.2"/>`,
+    logger:`<rect x="18" y="-7" width="22" height="14" rx="3" fill="#FFD23F" stroke-width="2.5"/><circle cx="34" cy="0" r="2.5" fill="#E0393B" stroke="none"/>`,
+    boje:`<circle cx="30" cy="0" r="11" fill="#FF8A1F" stroke-width="2.5"/><path d="M30 -11v-12" stroke-width="2"/><path d="M19 0h22" stroke="#fff" stroke-width="3"/>`,
+    o2:`<path d="M18 0h28" stroke-width="7"/><path d="M18 0h28" stroke="#C9CDD6" stroke-width="3.5"/><circle cx="48" cy="0" r="5" fill="#1E6FD0" stroke-width="2"/>`,
+    meissel:`<path d="M18 -5h22l10 5-10 5H18Z" fill="#9AA3B5" stroke-width="2.5"/>`,
+    schaber:`<path d="M18 0h16" stroke-width="5"/><path d="M34 -10h6v20h-6Z" fill="#C9CDD6" stroke-width="2.5"/>`,
+    eis:`<path d="M18 -6h30v12H18Z" fill="#C9CDD6" stroke-width="2.5"/><path d="M24 -6l4 12M32 -6l4 12M40 -6l4 12" stroke-width="1.5"/>`,
+    falle:`<rect x="18" y="-11" width="30" height="22" rx="2" fill="rgba(255,255,255,.35)" stroke-width="2.5"/><path d="M26 -11v22M34 -11v22M42 -11v22M18 0h30" stroke-width="1.2"/>`}[tl]||"";
+  const tg=TG&&!(tl==="falle"&&AX().falle===1)&&!(tl==="boje"&&AX().boje)?`<g transform="translate(${f(w[0])} ${f(w[1])}) rotate(${f(da)})">${TG}</g>`:"";
+  g.innerHTML=`${gear?`<path d="M${f(m[0])} ${f(m[1])}v-22" stroke="#1B1B2F" stroke-width="3"/>
+   <g transform="translate(${f(m[0]-41)} ${f(m[1]-78)})"><rect width="82" height="56" rx="4" fill="#fff" stroke-width="3"/>
+    <rect x="6" y="6" width="22" height="20" fill="#E0393B" stroke-width="1.5"/><rect x="30" y="6" width="22" height="20" fill="#FF8A1F" stroke-width="1.5"/><rect x="54" y="6" width="22" height="20" fill="#FFD23F" stroke-width="1.5"/>
+    <rect x="6" y="30" width="22" height="20" fill="#2FA84F" stroke-width="1.5"/><rect x="30" y="30" width="22" height="20" fill="#1E6FD0" stroke-width="1.5"/><rect x="54" y="30" width="22" height="20" fill="#FFFFFF" stroke-width="1.5"/></g>`:""}
+   <path d="M${B[0]} ${B[1]}L${f(e[0])} ${f(e[1])}" stroke="#1B1B2F" stroke-width="30"/><path d="M${B[0]} ${B[1]}L${f(e[0])} ${f(e[1])}" stroke="#F2A13A" stroke-width="22"/>
+   <path d="M${f(e[0])} ${f(e[1])}L${f(w[0])} ${f(w[1])}" stroke="#1B1B2F" stroke-width="24"/><path d="M${f(e[0])} ${f(e[1])}L${f(w[0])} ${f(w[1])}" stroke="#F2A13A" stroke-width="16"/>
+   ${tg}${claw(1)}${claw(-1)}
+   ${A.sample&&tl==="greifer"?`<circle cx="${f(tip[0])}" cy="${f(tip[1])}" r="8" fill="${A.sample==="probe"?"#FF8A3A":A.sample==="tuete"?"#F4F6FA":"#7A5A3C"}" stroke="#1B1B2F" stroke-width="2"/>`:""}
+   <circle cx="${f(e[0])}" cy="${f(e[1])}" r="15" fill="#9AA3B5" stroke-width="3"/><circle cx="${f(e[0])}" cy="${f(e[1])}" r="5" fill="#59627A" stroke-width="2"/>
+   <circle cx="${f(w[0])}" cy="${f(w[1])}" r="10" fill="#9AA3B5" stroke-width="3"/>
+   ${gear?`<path d="M${f(e[0])} ${f(e[1]+15)}v10" stroke-width="3"/>
+   <g transform="translate(${f(e[0])} ${f(e[1]+25)}) scale(${sc.toFixed(3)})"><path d="M-21 0h42l-6 52h-30Z" fill="#F7F7F2" stroke-width="3"/><path d="M-23 0h46" stroke-width="5"/><path d="M-13 18c4 3 22 3 26 0M-14 34c4 3 24 3 28 0" fill="none" stroke="#C9CDD6" stroke-width="2.5"/><text x="0" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#1E6FD0" stroke="none" font-family="Lexend,sans-serif">JN</text></g>`:""}`;
+  const l=$("#armlcd");if(l)l.textContent=tl!=="greifer"?TOOLS[tl].n:A.sample?(A.sample==="probe"?"Sonde: 365 °C":A.sample==="tuete"?"Fundstück im Greifer":"Probe im Greifer"):A.open?"Greifer offen":"Greifer zu";
+  const tb=$("#armtool");if(tb){const L=toolList();tb.hidden=L.length<2;tb.textContent="Werkzeug "+((U.tool||0)%L.length+1)+"/"+L.length}}
+
+const SAMPLE={atlantik:"Tiefseeschlamm: Meeresschnee und winzige Kalkschalen. Er wächst nur wenige Millimeter in 1000 Jahren.",
+ riff:"Korallensand: zermahlener Kalk – vieles davon haben Papageifische ausgeschieden.",
+ golfstrom:"Sandiger Schlamm vom Kontinentalhang, mit Schalen von winzigem Plankton.",
+ humboldt:"Dunkler, fast schwarzer Schlamm: Hier ist kaum Sauerstoff, deshalb wird abgesunkenes Plankton kaum zersetzt.",
+ raucher:"Schwarze Erzkrümel aus Metallverbindungen – daraus wächst der Schlot.",
+ arktis:"Schlamm mit kleinen Steinen. Eisberge haben sie hergetragen und beim Schmelzen fallen lassen.",
+ marianen:"Feiner, weicher Schlamm aus fast 11.000 m – darin leben Einzeller wie Xenophyophoren."};
+const BAG=[248,-4];
+function armState(){const {tip}=armGeo(),atFloor=U.depth>=M.maxD-3,fl=floorTop(U.depth)*400,fy=fl+4;return {tip,atFloor,fl,fy,tipFloor:atFloor&&Math.abs(tip[1]-fy)<24}}
+function armRefresh(){save();drawArm();refreshArmCard()}
+function armGrab(){const tl=curTool();if(tl!=="greifer"){toolUse(tl);return}
+  const A=U.arm;
+  if(!A.open){A.open=true;A.sample=null;drawArm();return}
+  A.open=false;const {tip,atFloor,fl,fy,tipFloor}=armState();
+  if(M.scene==="smoker"&&atFloor){const top=[200,fl-108];
+    if(Math.hypot(tip[0]-top[0],tip[1]-top[1])<34){if(!U.lamp){say("Es ist stockdunkel. Schaltet den Scheinwerfer ein, damit ihr den Schlot trefft.",true);A.open=true;drawArm();return}
+      A.sample="probe";drawArm();if(!D.probe){D.probe=true;save();renderStage();mCheckDone()}say("Treffer! Die Sonde im Schlot zeigt <b>365 °C</b>. Direkt daneben sind es nur 3,9 °C.");return}}
+  if(M.id==="marianen"&&atFloor&&!AX().tuete&&Math.hypot(tip[0]-BAG[0],tip[1]-(fl+BAG[1]))<32){
+    if(!U.lamp){say("Da liegt etwas Helles am Boden – aber ohne Scheinwerfer erkennt ihr nichts.",true);A.open=true;drawArm();return}
+    A.sample="tuete";AX().tuete=true;addBox("Fundstück",U.depth,"Plastiktüte");armRefresh();say("Was ist das? Eine <b>Plastiktüte</b> – fast 11.000 m unter der Oberfläche! Schaut in die Greifarm-Einsätze unter dem Cockpit.");return}
+  if(tipFloor){A.sample="sed";addBox("Bodenprobe",U.depth,(SAMPLE[M.id]||SAMPLE.atlantik).split(":")[0]);armRefresh();say("Probe genommen! "+(SAMPLE[M.id]||SAMPLE.atlantik));return}
+  drawArm();say(atFloor?(M.scene==="smoker"?"Daneben! Fahrt die Greiferspitze an den Boden oder an die orange glühende Öffnung des Schlots.":"Der Greifer hat nichts erwischt. Senkt den Arm bis an den Meeresboden."):`Hier gibt es nichts zu greifen. Am Meeresboden in ${th(M.maxD)} m könnt ihr Proben nehmen.`,!atFloor)}
+
+function toolUse(tl){const a=AX(),d=U.depth,{tip,atFloor,fl,tipFloor}=armState();
+  if(tl==="schoepfer"){const s=interp(M.id==="arktis"?SAL_ARK:SAL_ATL,d),T=Math.round(temp(d)*10)/10;pushDepth("sal",{d:Math.round(d),s:Math.round(s*10)/10,T});
+    addBox("Wasserprobe",d,de(s)+" g Salz je Liter"+(M.id==="arktis"?", "+de(T)+" °C":""));armRefresh();
+    say(`Wasserprobe aus <b>${th(d)} m</b>: ${de(s)} g Salz je Liter${M.id==="arktis"?`, ${de(T)} °C`:""}. ${(a.sal||[]).length<2?"Nehmt noch eine Probe in einer ganz anderen Tiefe.":"Vergleicht eure Proben bei den Greifarm-Einsätzen."}`);return}
+  if(tl==="netz"){const n=Math.round(interp(PLANK,d)/(d<300?50:d<2000?5:1))*(d<300?50:d<2000?5:1);pushDepth("plank",{d:Math.round(d),n});addBox("Planktonnetz",d,"etwa "+th(n)+" Tiere je m³");armRefresh();
+    say(`Netzprobe aus <b>${th(d)} m</b>: etwa <b>${th(n)}</b> kleine Tiere je Kubikmeter Wasser – Ruderfußkrebse, Larven, Pfeilwürmer.`);return}
+  if(tl==="o2"){const v=Math.round(interp(O2H,d)*10)/10;pushDepth("o2",{d:Math.round(d),v});addBox("Sauerstoff",d,de(v)+" mg je Liter");armRefresh();
+    say(`Sauerstoff in <b>${th(d)} m</b>: <b>${de(v)} mg je Liter</b>.${v<2?" Das ist sehr wenig – die meisten Fische brauchen mehr.":""}`,false);return}
+  if(tl==="garten"){if(d<3||d>20){say("Korallengärten legt man im flachen, hellen Wasser an. Fahrt auf 5–20 m.",true);return}
+    a.garten=Math.min(3,(a.garten||0)+1);addBox("Korallengarten",d,a.garten+" von 3 Stücken gesetzt");armRefresh();
+    say(a.garten<3?`Korallenstück ${a.garten} sitzt auf dem Gestell. Setzt noch ${3-a.garten} weitere.`:"Alle drei Korallenstücke sitzen. Bei den Greifarm-Einsätzen seht ihr, wie es ihnen geht – probiert auch den Hitzewellen-Regler.");return}
+  if(tl==="logger"){if(d<5){say("Befestigt den Logger am Riff, also in mindestens 5 m Tiefe.",true);return}
+    a.logger=Math.round(d);addBox("Temperaturlogger",d,"am Riff befestigt");armRefresh();say(`Der Logger hängt in <b>${th(d)} m</b> am Riff. Seine Aufzeichnung über zwölf Sommerwochen seht ihr bei den Greifarm-Einsätzen. Verändert dazu den Hitzewellen-Regler.`);return}
+  if(tl==="boje"){if(d>3){say("Treibbojen schwimmen an der Oberfläche. Taucht auf (0–3 m).",true);return}
+    if(a.boje){say("Die Boje ist schon unterwegs. Ihren Weg seht ihr bei den Greifarm-Einsätzen.");return}
+    a.boje=true;addBox("Treibboje",0,"ausgesetzt vor Kap Hatteras");armRefresh();say("Boje ausgesetzt! Sie treibt mit dem Golfstrom davon. Spielt ihren Weg bei den Greifarm-Einsätzen ab.");return}
+  if(tl==="eis"){if(M.id!=="arktis"||d>5){say("Fahrt direkt unter das Eis (0–5 m).",true);return}
+    a.eis=true;addBox("Eisbohrkern",d,"Unterseite der Scholle, braune Schicht");armRefresh();say("Eisbohrkern gezogen! Die unterste Schicht ist <b>braun</b> gefärbt. Was ist das? Schaut bei den Greifarm-Einsätzen.");return}
+  if(tl==="meissel"){if(!atFloor){say(`Der Schlot steht am Boden in ${th(M.maxD)} m.`,true);return}
+    if(!U.lamp){say("Es ist stockdunkel. Schaltet den Scheinwerfer ein.",true);return}
+    const top=fl-108;if(Math.abs(tip[0]-200)<40&&tip[1]>top+12&&tip[1]<fl+6){a.erz=true;addBox("Gesteinsprobe",d,"Erz von der Schlotwand: Kupfer, Zink, Eisen");armRefresh();say("Ein Stück Schlotwand ist abgebrochen. Das Gestein glitzert: <b>Kupfer, Zink und Eisen</b>, dazu Spuren von Gold.");return}
+    say(Math.hypot(tip[0]-200,tip[1]-top)<34?"Vorsicht, das ist die 365 °C heiße Öffnung! Setzt den Meißel tiefer an der Wand an.":"Daneben. Fahrt die Spitze an die Wand des Schlots.",true);return}
+  if(tl==="schaber"){if(!atFloor){say(`Die Bakterienmatten liegen am Boden in ${th(M.maxD)} m.`,true);return}
+    if(!U.lamp){say("Es ist stockdunkel. Schaltet den Scheinwerfer ein.",true);return}
+    if(tipFloor&&Math.abs(tip[0]-200)<100&&Math.abs(tip[0]-200)>20){a.matte=true;addBox("Bakterienmatte",d,"weißer Belag, unter dem Mikroskop");armRefresh();say("Abgeschabt! Der weiße Belag besteht aus Milliarden Bakterien. Schaut ihn euch unter dem Mikroskop an (Greifarm-Einsätze).");return}
+    say("Fahrt die Spitze an den Boden zu den weißen Flecken neben dem Schlot.",true);return}
+  if(tl==="falle"){if(!atFloor){say(`Die Falle wird am Grund in ${th(M.maxD)} m abgesetzt.`,true);return}
+    if(!a.falle){if(!tipFloor){say("Senkt den Arm bis an den Boden, um die Falle abzusetzen.",true);return}
+      a.falle=1;U.trapT=Date.now();armRefresh();say("Die Köderfalle mit einem Stück Makrele steht am Grund. In Wirklichkeit wartet man einige Stunden – hier reichen ein paar Sekunden. Drückt dann noch einmal, um sie einzuholen.");return}
+    if(a.falle===1){if(U.trapT&&Date.now()-U.trapT<3500){say("Noch etwas Geduld …",false);return}
+      a.falle=2;addBox("Köderfalle",d,"über 100 Flohkrebse (Hirondellea gigas)");armRefresh();say("Falle eingeholt: Sie ist voller <b>Flohkrebse</b> – weit über 100 Stück! Sie haben den Köder in kurzer Zeit gefunden.");return}
+    say("Die Falle ist schon eingeholt. Den Fang findet ihr in der Probenkiste.");return}
+}
+let armT=0;
+function armMove(dir,step=1.4){const A=U.arm;
+  if(dir==="up")A.a1=Math.min(215,A.a1+step);if(dir==="down")A.a1=Math.max(118,A.a1-step);
+  if(dir==="out")A.a2=Math.max(-25,A.a2-step);if(dir==="in")A.a2=Math.min(120,A.a2+step);drawArm()}
+function armTool(){const L=toolList();U.tool=((U.tool||0)+1)%L.length;U.arm.open=true;U.arm.sample=null;drawArm();const t=TOOLS[curTool()];say(`Werkzeug: <b>${t.n}</b>. ${t.how}`)}
+document.addEventListener("pointerdown",e=>{const b=e.target.closest("[data-arm]");if(!b)return;e.preventDefault();clearInterval(armT);const d=b.dataset.arm;armMove(d);armT=setInterval(()=>armMove(d),30)});
+["pointerup","pointercancel","pointerleave"].forEach(t=>document.addEventListener(t,()=>clearInterval(armT)));
+document.addEventListener("keydown",e=>{const b=e.target.closest&&e.target.closest("[data-arm]");if(b&&(e.key==="Enter"||e.key===" ")){e.preventDefault();armMove(b.dataset.arm,4)}});
+
+/* Plastiktüte am Grund des Marianengrabens */
+function drawBag(ft){const W=pc.width,H=pc.height,s=W/400,x=BAG[0]*s,y=ft+BAG[1]*s;
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.lineJoin="round";ctx.strokeStyle="#1B1B2F";ctx.lineWidth=2.5;ctx.fillStyle="rgba(244,246,250,.9)";
+  ctx.beginPath();ctx.moveTo(-20,4);ctx.lineTo(-16,-14);ctx.lineTo(-8,-10);ctx.lineTo(0,-18);ctx.lineTo(9,-11);ctx.lineTo(18,-15);ctx.lineTo(22,4);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-14,-13);ctx.quadraticCurveTo(-12,-26,-6,-12);ctx.moveTo(10,-12);ctx.quadraticCurveTo(15,-25,17,-14);ctx.stroke();
+  ctx.strokeStyle="rgba(30,111,208,.7)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-10,-4);ctx.lineTo(8,-6);ctx.stroke();ctx.restore()}
+
+/* ============ Greifarm-Einsätze: Karte unter dem Cockpit ============ */
+const kernInfo=x=>{const dist=Math.abs(x-2955);if(x<380||x>5620)return {x,dist,cont:true};const age=dist/20,sed=age*6;return {x,dist,age,sed}};
+const ageTxt=a=>a<1?"jünger als 1 Mio. Jahre":"etwa "+th(a<20?Math.round(a):Math.round(a/5)*5)+" Mio. Jahre";
+const sedTxt=s=>s<3?"kaum, nur wenige Zentimeter":"etwa "+th(s<50?Math.round(s):Math.round(s/10)*10)+" m";
+const ARMX={
+ atlantik:{exp:[
+   {id:"sal",tool:"schoepfer",n:"Wasserproben: Wie salzig ist das Meer?",ok:a=>(a.sal||[]).some(x=>x.d<=200)&&(a.sal||[]).some(x=>x.d>=2000),need:"Nehmt eine Probe oben (bis 200 m) und eine tief unten (ab 2000 m).",
+    res:a=>salTab(a,false)},
+   {id:"plank",tool:"netz",n:"Planktonnetz: Wo schwebt das meiste Leben?",ok:a=>(a.plank||[]).some(x=>x.d<=200)&&(a.plank||[]).some(x=>x.d>=1000),need:"Fischt einmal in der Sonnenlichtzone (bis 200 m) und einmal ab 1000 m.",
+    res:a=>barTab(a.plank,"n",2000,"Tiere je m³",v=>th(v),"#2FA84F")}],
+  tasks:[
+   {id:"xa1",q:"Viele denken: Unten in der Tiefe ist das Meer salziger. Stimmt das? (Prüft es mit dem Wasserschöpfer in 50 m und in 3000 m.)",o:[["Nein. Oben und unten sind es rund 35–37 g Salz pro Liter. Hier in den Subtropen ist das Wasser oben sogar etwas salziger, weil viel Wasser verdunstet.",""],["Ja, unten ist es viel salziger, weil sich das Salz am Boden absetzt.","Salz ist im Wasser gelöst und setzt sich nicht ab. Vergleicht eure Wasserproben."],["Ja, unten ist das Wasser doppelt so salzig.","Vergleicht die Werte in der Probenkiste: Der Unterschied ist klein."]],ok:0,why:"Genau! Der Salzgehalt ist fast überall im Ozean ähnlich. Wo viel verdunstet, wird das Oberflächenwasser etwas salziger; wo es viel regnet oder Eis schmilzt, wird es etwas weniger salzig."},
+   {id:"xa2",q:"Mit dem Planktonnetz fangt ihr in 50 m viel mehr Tiere als in 1000 m. Warum?",o:[["Oben wachsen im Sonnenlicht Algen. Davon leben die kleinen Tiere. In der Tiefe gibt es nur Meeresschnee als Nahrung.",""],["Unten ist das Wasser zu salzig.","Der Salzgehalt ist oben und unten fast gleich."],["Unten ist das Netz zu langsam.","Das Netz fängt überall gleich gut."]],ok:0,why:"Richtig! Das Leben im Meer hängt am Licht: Je tiefer, desto weniger Nahrung kommt an – und desto weniger Tiere leben dort."}]},
+ relief:{exp:[
+   {id:"kern",n:"Bohrkerne: Wie alt ist der Meeresboden?",ok:a=>{const K=(D.cores||[]).map(kernInfo).filter(k=>!k.cont);return K.some(k=>k.dist<150)&&K.some(k=>k.dist>1500)},need:"Wählt Profil A, zieht ALKOR an eine Stelle im tiefen Ozean und drückt „Bohrkern ziehen“: Das Schwerelot wird hinabgelassen. Bohrt nah am Rücken und weit entfernt davon.",
+    res:()=>kernTab()}],
+  tasks:[
+   {id:"xr1",q:"Die Bohrkerne zeigen: Je weiter vom Mittelatlantischen Rücken entfernt, desto älter ist das Vulkangestein und desto dicker die Schlammschicht darüber. Was folgt daraus?",o:[["Am Rücken entsteht neuer Meeresboden. Er wandert langsam zu beiden Seiten weg und wird dabei älter.",""],["Der Schlamm rutscht vom Rücken herunter und sammelt sich am Rand.","Dann müsste das Gestein darunter überall gleich alt sein."],["Am Rand des Ozeans ist der Boden älter, weil es dort tiefer ist.","Die Tiefe allein erklärt nicht, warum das Gestein älter wird. Wo entsteht neuer Boden?"]],ok:0,why:"Genau! 1968 bohrte das Forschungsschiff Glomar Challenger im Südatlantik und fand genau dieses Muster. Das war ein wichtiger Beleg dafür, dass sich die Platten bewegen."},
+   {id:"xr2",num:true,unit:"Mio. Jahre",dv:"50",q:"Rechnet: Der Meeresboden wandert hier etwa 2 cm pro Jahr vom Rücken weg, das sind 20 km in einer Million Jahre. Wie alt ist der Boden 1000 km vom Rücken entfernt?",accept:x=>Math.abs(x-50)<=1,why:"Richtig: 1000 km : 20 km je Million Jahre = 50 Millionen Jahre.",no:"Noch nicht. Tipp: Teilt die Entfernung durch 20 km."}]},
+ riff:{exp:[
+   {id:"garten",tool:"garten",n:"Korallengarten anlegen",ok:a=>(a.garten||0)>=3,need:"Setzt in 5–20 m Tiefe drei Korallenstücke auf das Gestell.",res:a=>gartenSVG(a)},
+   {id:"logger",tool:"logger",n:"Temperaturlogger: zwölf Sommerwochen",ok:a=>!!a.logger,need:"Befestigt den Logger in mindestens 5 m Tiefe. Verändert dann den Hitzewellen-Regler.",res:a=>a.logger?loggerSVG():""}],
+  tasks:[
+   {id:"xf1",q:"Der Logger zeigt: In einer Hitzewelle liegt das Wasser sechs Wochen lang 1,5 °C über dem üblichen Sommerhöchstwert. Warum ist das gefährlich, obwohl 1,5 °C nach wenig klingt?",o:[["Korallen leben dicht an ihrer Temperaturgrenze. Schon gut 1 °C mehr über mehrere Wochen setzt sie so unter Stress, dass sie ihre Algen abstoßen.",""],["Es ist nicht gefährlich, Korallen mögen warmes Wasser.","Korallen brauchen Wärme – aber nur bis zu einer Grenze."],["Gefährlich ist nur ein einziger sehr heißer Tag.","Entscheidend ist, wie lange die Hitze anhält."]],ok:0,why:"Genau! Forschende zählen, wie viele Wochen das Wasser über der Bleichgrenze liegt. Je länger und stärker, desto schwerer die Bleiche."},
+   {id:"xf2",q:"In Korallengärten ziehen Forschende Korallenstücke heran und pflanzen sie auf geschädigte Riffe. Was kann das – und was nicht?",o:[["Es hilft, geschädigte Stellen schneller wieder zu besiedeln. Gegen die Ursache, die Erwärmung des Meeres, hilft es nicht.",""],["Damit ist das Riff für immer gerettet.","Bei der nächsten Hitzewelle bleichen auch die neuen Korallen. Probiert es mit dem Regler aus."],["Es bringt gar nichts.","Für einzelne Riffstellen ist es eine echte Hilfe."]],ok:0,why:"Richtig! Korallengärten stärken die Resilienz einzelner Riffe. Das Riff als Ganzes hat aber nur eine Zukunft, wenn die Erwärmung der Meere gebremst wird."}]},
+ golfstrom:{exp:[
+   {id:"boje",tool:"boje",n:"Treibboje: Wohin trägt der Golfstrom?",ok:a=>!!a.boje,need:"Taucht auf (0–3 m), wählt die Treibboje und drückt die Mitte.",res:a=>bojeHTML(a)}],
+  tasks:[
+   {id:"xg1",q:"Eure Treibboje braucht vom Kap Hatteras bis vor Norwegen etwa zwei Jahre. Was zeigt ihr Weg?",o:[["Die Strömung trägt Wasser – und damit Wärme – über Tausende Kilometer bis nach Nordeuropa.",""],["Der Golfstrom fließt im Kreis zurück nach Amerika.","Ein Teil kehrt im Wirbel um – aber eure Boje treibt nach Nordosten."],["Die Boje wird vom Wind nach Süden gedrückt.","Schaut auf ihren Weg auf der Karte."]],ok:0,why:"Genau! Solche Treibbojen gibt es wirklich: Weltweit treiben über 1000 davon und funken Position und Temperatur an Satelliten."}]},
+ humboldt:{exp:[
+   {id:"o2",tool:"o2",n:"Sauerstoff: Wo wird es knapp?",ok:a=>(a.o2||[]).some(x=>x.d<=30)&&(a.o2||[]).some(x=>x.d>=250),need:"Messt in 0–30 m und einmal ab 250 m.",
+    res:a=>barTab(a.o2,"v",7,"mg je Liter",v=>de(v),"#1E6FD0",v=>v<2)}],
+  tasks:[
+   {id:"xh1",q:"Der Sensor zeigt: In 300 m Tiefe ist fast kein Sauerstoff. Warum hält sich der Humboldt-Kalmar tagsüber trotzdem dort auf?",o:[["Er kommt mit sehr wenig Sauerstoff aus. Seine Feinde wie Thunfische und Seelöwen brauchen viel Sauerstoff und folgen ihm nicht.",""],["Dort ist es wärmer als oben.","Unten ist es kälter. Denkt an die Feinde."],["Dort gibt es mehr Licht.","In 300 m ist es fast dunkel."]],ok:0,why:"Richtig! Die sauerstoffarme Schicht ist für den Kalmar ein Versteck. Nachts steigt er zum Jagen nach oben."},
+   {id:"xh2",q:"Warum ist in 100–500 m Tiefe vor Peru so wenig Sauerstoff?",o:[["Viel abgestorbenes Plankton sinkt nach unten. Bakterien zersetzen es und verbrauchen dabei den Sauerstoff.",""],["Die Fische atmen ihn weg.","Fische verbrauchen nur einen kleinen Teil."],["Der Druck presst den Sauerstoff aus dem Wasser.","Der Druck ist nicht der Grund."]],ok:0,why:"Genau! Gerade weil das Meer hier so reich an Plankton ist, wird in der Tiefe so viel Sauerstoff verbraucht. Solche Zonen heißen Sauerstoffminimumzonen."}]},
+ raucher:{exp:[
+   {id:"erz",tool:"meissel",n:"Gesteinsprobe: Erz vom Schlot",ok:a=>!!a.erz,need:"Wählt den Gesteinsmeißel und fahrt ihn am Boden mit Scheinwerfer an die Wand des Schlots.",res:a=>a.erz?erzHTML():""},
+   {id:"matte",tool:"schaber",n:"Bakterienmatte unter dem Mikroskop",ok:a=>!!a.matte,need:"Wählt den Schaber und fahrt ihn an die weißen Flecken am Boden neben dem Schlot.",res:a=>a.matte?matteSVG():""}],
+  tasks:[
+   {id:"xs1",q:"Die Schlotwand enthält Kupfer, Zink und Eisen – Metalle für Kabel und Batterien. Firmen möchten solche Erze am Meeresboden abbauen. Welche Abwägung ist fachlich begründet?",o:[["Die Metalle sind wertvoll. Der Abbau würde aber Lebensgemeinschaften zerstören, die es nur an wenigen Orten gibt und die kaum erforscht sind. Deshalb fordern viele Staaten und Forschende, zuerst die Folgen zu klären.",""],["Abbauen ist unproblematisch, weil in der Tiefsee nichts lebt.","Ihr habt selbst Garnelen, Muscheln und Fische am Schlot gefunden."],["Man kann überall abbauen, die Tiere ziehen einfach zum nächsten Schlot.","Viele Arten leben nur an wenigen Schloten. Ob sie sich erholen, weiß niemand."]],ok:0,why:"Genau. Hier stehen wirtschaftliche Interessen gegen den Schutz einzigartiger Ökosysteme. Über Regeln für den Tiefseebergbau wird international gestritten."},
+   {id:"xs2",q:"Die weiße Matte besteht aus Bakterien. Was brauchen sie, um Nahrung herzustellen?",o:[["Chemische Stoffe aus dem heißen Wasser, zum Beispiel Schwefelwasserstoff (er riecht nach faulen Eiern).",""],["Sonnenlicht.","In 2300 m Tiefe kommt kein Sonnenlicht an."],["Meeresschnee von oben.","Davon allein könnten nicht so viele Tiere leben."]],ok:0,why:"Richtig, das ist Chemosynthese. Die Bakterien sind der Anfang der Nahrungskette am Schlot."}]},
+ arktis:{exp:[
+   {id:"sal",tool:"schoepfer",n:"Wasserproben: zwei Wassermassen",ok:a=>(a.sal||[]).some(x=>x.d<100)&&(a.sal||[]).some(x=>x.d>=200),need:"Nehmt eine Probe über 100 m und eine ab 200 m.",res:a=>salTab(a,true)},
+   {id:"eis",tool:"eis",n:"Eisbohrkern von der Unterseite",ok:a=>!!a.eis,need:"Fahrt direkt unter das Eis (0–5 m), wählt den Eisbohrer und drückt die Mitte.",res:a=>a.eis?eisSVG():""}],
+  tasks:[
+   {id:"xk1",q:"Eure Wasserproben: oben etwa 33 g Salz pro Liter, ab 200 m etwa 35 g. Warum ist das Wasser oben weniger salzig?",o:[["Schmelzwasser vom Eis und Flusswasser aus Sibirien und Kanada verdünnen das Wasser an der Oberfläche.",""],["Die Sonne lässt das Salz verdunsten.","Beim Verdunsten bleibt das Salz im Wasser – es wird salziger, nicht weniger salzig."],["Das Salz sinkt nach unten.","Gelöstes Salz sinkt nicht ab."]],ok:0,why:"Genau! Weniger salziges Wasser ist leichter. Deshalb bleibt es oben liegen, obwohl es kälter ist als das Atlantikwasser darunter."},
+   {id:"xk2",q:"Im Eisbohrkern ist die Unterseite braun gefärbt. Was ist das?",o:[["Eisalgen. Sie wachsen an der Unterseite des Eises, wo noch etwas Licht durchscheint.",""],["Schmutz von Schiffen.","Hier fahren kaum Schiffe – und die Farbe lebt."],["Rost vom Meeresboden.","Der Boden ist über 2000 m entfernt."]],ok:0,why:"Richtig! Die Eisalgen sind der Anfang der Nahrungskette unter dem Eis: Sie werden von Ruderfußkrebsen gefressen."}]},
+ marianen:{exp:[
+   {id:"falle",tool:"falle",n:"Köderfalle am Grund",ok:a=>a.falle===2,need:"Wählt die Köderfalle, setzt sie am Grund ab und holt sie nach ein paar Sekunden wieder ein.",res:a=>a.falle===2?`<p class="fb ok">Fang: weit über 100 Flohkrebse (<i>Hirondellea gigas</i>), bis 5 cm lang. Sie fressen alles, was herabsinkt – sogar Holz.</p>`:a.falle===1?`<p class="cap">Die Falle steht am Grund …</p>`:""},
+   {id:"tuete",tool:"greifer",n:"Fundstück am Grund",ok:a=>!!a.tuete,need:"Schaut euch am Grund mit Scheinwerfer genau um und greift, was nicht dorthin gehört.",res:a=>a.tuete?`<p class="fb ok">Eine Plastiktüte! Bei einer Auswertung alter Tauchvideos entdeckten Forschende 2018 eine solche Tüte in 10.898 m Tiefe.</p>`:""}],
+  tasks:[
+   {id:"xm1",q:"Eure Köderfalle ist nach kurzer Zeit voller Flohkrebse. Was zeigt das?",o:[["Auch am tiefsten Punkt der Erde leben viele Tiere. Sie finden jedes Futter schnell, das von oben herabsinkt.",""],["Die Flohkrebse sind mit dem Tauchboot nach unten gefahren.","Sie leben dort unten."],["Am Grund gibt es genug Pflanzen für alle.","In völliger Dunkelheit wachsen keine Pflanzen."]],ok:0,why:"Genau! Die Flohkrebse sind Aasfresser. Jeder tote Fisch, der herabsinkt, ist für sie ein Festmahl."},
+   {id:"xm2",q:"In fast 11.000 m Tiefe wurde eine Plastiktüte gefunden. Was bedeutet dieser Fund?",o:[["Müll gelangt bis an den tiefsten Ort der Erde und zersetzt sich dort kaum. Kein Ort im Meer ist mehr unberührt vom Menschen.",""],["Die Tüte stammt von einem Tauchboot.","Tauchboote lassen keinen Müll zurück. Der Müll kommt von Land."],["Plastik ist in der Tiefsee harmlos.","Tiere können sich darin verfangen oder Teile fressen."]],ok:0,why:"Richtig. Plastik gelangt über Flüsse und Küsten ins Meer, sinkt ab und bleibt Jahrhunderte erhalten. Der Fund zeigt, wie weit der Einfluss des Menschen reicht."}]}};
+Object.values(ARMX).forEach(x=>x.tasks.forEach((t,i)=>{t.zn="Z"+(i+1);t.arm=true}));
+
+function salTab(a,T){const L=a.sal||[];if(!L.length)return "";return `<table class="axt"><thead><tr><th>Tiefe</th><th>Salz je Liter</th>${T?"<th>Temperatur</th>":""}</tr></thead><tbody>${L.map(x=>`<tr><td>${th(x.d)} m</td><td><b>${de(x.s)} g</b></td>${T?`<td>${de(x.T)} °C</td>`:""}</tr>`).join("")}</tbody></table>`}
+function barTab(L,k,mx,unit,fmt,col,warn){if(!L||!L.length)return "";return `<div class="axbars">${L.map(x=>`<div class="axb"><span>${th(x.d)} m</span><i style="--w:${clamp(x[k]/mx,.02,1)*100}%;--c:${warn&&warn(x[k])?"#E0393B":col}"></i><b>${fmt(x[k])}</b></div>`).join("")}</div><p class="cap">Angaben in ${unit}${k==="v"?". Rot: unter 2 mg – für die meisten Fische zu wenig.":""}</p>`}
+function kernTab(){const K=(D.cores||[]).map(kernInfo).sort((a,b)=>a.dist-b.dist);if(!K.length)return "";
+  return `<table class="axt"><thead><tr><th>Bohrstelle</th><th>Abstand zum Rücken</th><th>Alter des Vulkangesteins</th><th>Schlamm darüber</th></tr></thead><tbody>${K.map(k=>`<tr><td>${th(k.x)} km</td><td>${th(k.dist)} km ${k.x<2955?"westlich":"östlich"}</td>${k.cont?`<td><b>kein Vulkangestein:</b> Granit (kontinentale Kruste)</td><td>mehrere Kilometer Sand und Ton</td>`:`<td><b>${ageTxt(k.age)}</b></td><td>${sedTxt(k.sed)}</td>`}</tr>`).join("")}</tbody></table>`}
+function gartenSVG(a){const n=a.garten||0;if(!n)return "";const bl=bleachF()>.3;return `<svg class="axsvg" viewBox="0 0 240 100" role="img" aria-label="Korallengarten mit ${n} Korallenstücken"><path d="M20 70h200M40 70V40M200 70V40M40 40h160" stroke="#1B1B2F" stroke-width="3" fill="none"/>
+  ${[80,120,160].slice(0,n).map(x=>`<path d="M${x} 40v-16M${x} 30l-9-10M${x} 28l9-12" stroke="#1B1B2F" stroke-width="8" stroke-linecap="round"/><path d="M${x} 40v-16M${x} 30l-9-10M${x} 28l9-12" stroke="${bl?"#F4F6FA":"#E86FA5"}" stroke-width="4.5" stroke-linecap="round"/>`).join("")}<text x="120" y="88" text-anchor="middle" font-size="10" font-weight="700" fill="#1B1B2F">${bl?"Hitzewelle: Auch die jungen":"Die Korallenstücke"}</text><text x="120" y="99" text-anchor="middle" font-size="10" font-weight="700" fill="#1B1B2F">${bl?"Korallen bleichen aus.":"wachsen an."}</text></svg>`}
+function loggerSVG(){const h=D.heat||0,W=300,H=150,L=34,R=286,T=12,B=118,y=v=>B-(v-26.5)/(32-26.5)*(B-T),x=i=>L+i*(R-L)/12;
+  const hw=LOGN.map((v,i)=>v+h*LOGW[i]),wk=hw.filter(v=>v>=29.5).length;
+  return `<svg class="axsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Temperaturkurve des Loggers über zwölf Wochen"><rect x="${L}" y="${T}" width="${R-L}" height="${y(29.5)-T}" fill="#FFE1DC"/>
+   ${[27,28,29,30,31,32].map(v=>`<text x="${L-5}" y="${y(v)+4}" text-anchor="end" font-size="10">${v}</text><line x1="${L}" x2="${R}" y1="${y(v)}" y2="${y(v)}" stroke="#DDE1E8"/>`).join("")}
+   <line x1="${L}" x2="${R}" y1="${y(29.5)}" y2="${y(29.5)}" stroke="#E0393B" stroke-width="2" stroke-dasharray="6 4"/><text x="${R-2}" y="${y(29.5)-4}" text-anchor="end" font-size="10" font-weight="800" fill="#A3201F">Bleichgrenze 29,5 °C</text>
+   <polyline points="${LOGN.map((v,i)=>x(i)+","+y(v)).join(" ")}" fill="none" stroke="#9AA3B5" stroke-width="2.5" stroke-dasharray="4 4"/>
+   <polyline points="${hw.map((v,i)=>x(i)+","+y(v)).join(" ")}" fill="none" stroke="#E0393B" stroke-width="3.5"/>
+   <path d="M${L} ${T}V${B}H${R}" fill="none" stroke="#1B1B2F" stroke-width="2"/>${[0,2,4,6,8,10,12].map(i=>`<text x="${x(i)}" y="${B+13}" text-anchor="middle" font-size="10">${i}</text>`).join("")+`<text x="${(L+R)/2}" y="${B+26}" text-anchor="middle" font-size="10" font-weight="700">Wochen</text>`}<text x="10" y="${(T+B)/2}" font-size="10" transform="rotate(-90 10 ${(T+B)/2})" text-anchor="middle">°C</text></svg>
+   <p class="cap">Grau gestrichelt: normaler Sommer. Rot: mit Hitzewelle +${de(h)} °C (Regler oben). ${h?`<b>${wk} Wochen</b> über der Bleichgrenze.`:"Schiebt den Hitzewellen-Regler und beobachtet die Kurve."}</p>`}
+function bojeHTML(a){const W=320,H=230;let land="",path="",lab="";
+  try{const pr=d3.geoMercator().fitExtent([[4,4],[W-4,H-4]],{type:"MultiPoint",coordinates:[[-82,26],[22,26],[-82,72],[22,72]]}).clipExtent([[0,0],[W,H]]),gp=d3.geoPath(pr);
+   land=`<path d="${gp(LAND)}" fill="#E9DFC4" stroke="#1B1B2F" stroke-width="1"/>`;
+   const P=BOJE.map(b=>pr([b[0],b[1]]));
+   if(a.boje){path=`<polyline class="bpath" points="${P.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#E0393B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>`;
+    lab=BOJE.map((b,i)=>[0,4,12,24].includes(b[2])?`<circle cx="${P[i][0].toFixed(1)}" cy="${P[i][1].toFixed(1)}" r="4" fill="#FF8A1F" stroke="#1B1B2F" stroke-width="1.5"/><text x="${(P[i][0]+(b[2]===24?-6:6)).toFixed(1)}" y="${(P[i][1]+(i===0?14:b[2]===24?16:-5)).toFixed(1)}" text-anchor="${b[2]===24?"end":"start"}" font-size="10" font-weight="800" fill="#1B1B2F" paint-order="stroke" stroke="#fff" stroke-width="3">${b[2]?b[2]+" Monate":"Start"}</text>`:"").join("")}
+   else lab=`<circle cx="${P[0][0].toFixed(1)}" cy="${P[0][1].toFixed(1)}" r="5" fill="#FF8A1F" stroke="#1B1B2F" stroke-width="1.5"/><text x="${(P[0][0]+7).toFixed(1)}" y="${(P[0][1]+14).toFixed(1)}" font-size="10" font-weight="800">Jagonaut</text>`}catch(e){}
+  const km=a.boje?Math.round(d3.geoLength({type:"LineString",coordinates:BOJE.map(b=>[b[0],b[1]])})*6371/100)*100:0;
+  return `<svg class="axsvg bmap" viewBox="0 0 ${W} ${H}" role="img" aria-label="Karte des Nordatlantiks mit dem Weg der Treibboje"><rect width="${W}" height="${H}" fill="#CFE9F8"/>${land}${path}${lab}</svg>
+   ${a.boje?`<div class="aprow"><button class="ghost" type="button" data-bplay>Weg abspielen</button><span class="cap">Etwa ${th(km)} km in rund zwei Jahren – vom Kap Hatteras bis vor die Lofoten (vereinfachte Bahn).</span></div>`:""}`}
+function erzHTML(){return `<div class="axerz"><span><b>Kupfer</b> (Kupferkies)</span><span><b>Zink</b> (Zinkblende)</span><span><b>Eisen</b> (Pyrit, „Katzengold“)</span><span>Spuren von <b>Gold</b> und Silber</span></div>
+  <label class="cap" for="urteil">Euer Urteil: Sollte man hier Erz abbauen? Begründet in ein bis zwei Sätzen.</label><textarea id="urteil" data-urteil rows="2">${esc(D.urteil||"")}</textarea>`}
+function matteSVG(){let s="";for(let i=0;i<26;i++){const an=i*2.4,rr=8+((i*17)%34),x=120+rr*Math.cos(an)-6,y=55+rr*Math.sin(an),r=(i*29)%180;s+=`<rect x="${x}" y="${y}" width="${i%3?16:28}" height="5" rx="2.5" fill="#F4F6FA" stroke="#1B1B2F" stroke-width="1.2" transform="rotate(${r} ${x} ${y})"/>`}
+  for(let i=0;i<6;i++)s+=`<circle cx="${(120+30*Math.cos(i*1.1+.5)).toFixed(1)}" cy="${(55+30*Math.sin(i*1.1+.5)).toFixed(1)}" r="2.2" fill="#FFD23F"/>`;
+  return `<svg class="axsvg" viewBox="0 0 240 110" role="img" aria-label="Bakterien unter dem Mikroskop"><circle cx="120" cy="55" r="52" fill="#3A4253" stroke="#1B1B2F" stroke-width="3"/>${s}</svg><p class="cap">Unter dem Mikroskop: stäbchen- und fadenförmige Schwefelbakterien, gelbe Schwefelkörnchen. Vergrößerung etwa 1000-fach.</p>`}
+function eisSVG(){return `<svg class="axsvg" viewBox="0 0 240 70" role="img" aria-label="Eisbohrkern mit brauner Unterseite"><rect x="20" y="20" width="200" height="30" rx="14" fill="#F4F8FC" stroke="#1B1B2F" stroke-width="2.5"/><rect x="186" y="21.5" width="32" height="27" rx="12" fill="#A5793F"/><path d="M186 20v30" stroke="#1B1B2F" stroke-width="1.5"/><text x="22" y="14" font-size="10" font-weight="800">Oberseite</text><text x="218" y="14" text-anchor="end" font-size="10" font-weight="800">Unterseite (Wasser)</text><text x="120" y="64" text-anchor="middle" font-size="10">etwa 1,5 m Meereis</text></svg>`}
+
+function armCardHTML(){const X=ARMX[M.id];if(!X)return "";const a=AX();
+  const box=(a.box||[]).slice().reverse();
+  return `<div class="card armc" id="armc"><h3>Greifarm-Einsätze <span class="chip">freiwillig</span></h3>
+  <p class="cap">${M.type==="relief"?"Vom Forschungsschiff ALKOR wird ein Schwerelot an einem Seil bis zum Meeresboden hinabgelassen. Es bohrt sich in den Boden und bringt einen Kern nach oben: Knopf „Bohrkern ziehen“ beim Echolot.":"Wählt am Greifarm-Pult mit „Werkzeug“ ein Gerät und drückt die Mitte."} Die Einsätze sind ein Angebot: Die Zusatzaufgaben könnt ihr jederzeit bearbeiten, und für die Mission zählen sie nicht.</p>
+  <div class="axl">${X.exp.map(e=>{const ok=e.ok(a);return `<div class="axi ${ok?"ok":""}"><b>${ok?"✓ ":""}${esc(e.n)}</b>${e.tool?`<span class="cap">Werkzeug: ${esc(TOOLS[e.tool].n)}</span>`:""}<span class="cap">${esc(e.need)}</span>${e.res(a)||""}</div>`}).join("")}</div>
+  ${M.type!=="relief"?`<div class="axbox"><b>Probenkiste</b>${box.length?`<ul>${box.map(b=>`<li><b>${esc(b.n)}</b> · ${th(b.d)} m · ${esc(b.t)}</li>`).join("")}</ul>`:`<span class="cap">Noch leer.</span>`}</div>`:""}
+  <h4 class="axh">Zusatzaufgaben</h4>${X.tasks.map(taskHTML).join("")}</div>`}
+function refreshArmCard(){const c=$("#armc");if(c){c.outerHTML=armCardHTML()}}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-bplay]");if(!b)return;const p=document.querySelector(".bmap .bpath");if(!p)return;
+  if(RM){p.style.strokeDasharray="";return}p.style.transition="none";p.style.strokeDasharray="100";p.style.strokeDashoffset="100";void p.getBoundingClientRect();p.style.transition="stroke-dashoffset 4s linear";p.style.strokeDashoffset="0"});
+document.addEventListener("input",e=>{if(e.target.matches("[data-urteil]")){D.urteil=e.target.value;save();return}if(e.target.id==="heat")refreshArmCard()});
+function drawRivets(){const p=$("#port"),sv=$("#rivring");if(!p||!sv)return;const w=p.offsetWidth;if(!w)return;const r=w/2-9;let s="";
+  for(let i=0;i<24;i++){const a=i/24*Math.PI*2;s+=`<circle cx="${(w/2+r*Math.cos(a)).toFixed(1)}" cy="${(w/2+r*Math.sin(a)).toFixed(1)}" r="${Math.max(2.6,w/180).toFixed(1)}" fill="#FBE38A" stroke="#8C6B1A" stroke-width="1.6"/>`}
+  sv.setAttribute("viewBox",`0 0 ${w} ${w}`);sv.innerHTML=s}
+
+/* ============ Relief: Merkmale und Bohrkerne zuordnen ============ */
+const RFORMS=["Schelf","Kontinentalhang","Tiefseebecken","Mittelozeanischer Rücken","Tiefseegraben"];
+const MERK=[["Tiefseebecken","Weite, fast ebene Flächen in etwa 4–5 km Tiefe. Der Untergrund ist ozeanische Kruste: dünner und dichter als die kontinentale Kruste."],
+ ["Tiefseegraben","Hier sinkt ozeanische Kruste an der Grenze zu einer anderen Platte in den Erdmantel ab und wird vernichtet. Bis zu 11 km tief."],
+ ["Schelf","Höchstens 200 m tief. Die Fortsetzung des Festlands ins Meer: kontinentale Kruste mit sehr dicken Sedimentschichten darauf."],
+ ["Mittelozeanischer Rücken","Zwei Platten bewegen sich auseinander. Aufsteigendes Magma drückt den Boden nach oben, ständig entsteht neue ozeanische Kruste – ein Gebirge unter Wasser."],
+ ["Kontinentalhang","Oft sehr steiler Abfall, der die kontinentale Kruste begrenzt. Auch er besteht aus dicken Sedimentschichten."]];
+const KERNE=[{id:"k1",f:"Tiefseebecken",w:"Wassertiefe 5100 m",t:"Mehrere hundert Meter feiner Tiefseeschlamm. Darunter altes, dunkles Vulkangestein (Basalt) der ozeanischen Kruste, rund 100 Millionen Jahre alt.",L:[["#B8A27E",.55],["#3E4450",.45]],why:"Richtig! Viel Schlamm auf alter ozeanischer Kruste: Hier hatte der Meeresschnee sehr lange Zeit, sich abzulagern."},
+ {id:"k2",f:"Schelf",w:"Wassertiefe 120 m",t:"Sehr dicke Schichten aus Sand und Ton, die Flüsse vom Festland herangetragen haben. Ganz unten heller, grobkörniger Granit der kontinentalen Kruste.",L:[["#E3CB8F",.3],["#B8A27E",.4],["#E7B9A8",.3]],why:"Richtig! Sand, Ton und Granit: Der Schelf ist die Fortsetzung des Festlands ins Meer."},
+ {id:"k3",f:"Mittelozeanischer Rücken",w:"Wassertiefe 2600 m",t:"Fast kein Schlamm, nur eine hauchdünne Schicht. Darunter frisches, schwarzes Vulkangestein (Basalt), jünger als eine Million Jahre.",L:[["#B8A27E",.04],["#23272F",.96]],why:"Richtig! Ganz junges Vulkangestein ohne Schlamm: Hier ist der Meeresboden eben erst entstanden."}];
+const merkOk=()=>MERK.every((m,i)=>(relD().mz||{})[i]===m[0]);
+const kernZOk=()=>KERNE.every(k=>(relD().kz||{})[k.id]===k.f);
+function kernCol(L){let y=4,s="";L.forEach(([c,h])=>{const hh=h*132;s+=`<rect x="6" y="${y.toFixed(1)}" width="32" height="${hh.toFixed(1)}" fill="${c}"/>`;y+=hh});
+  return `<svg viewBox="0 0 44 140" class="kcol" aria-hidden="true">${s}<rect x="6" y="4" width="32" height="132" rx="6" fill="none" stroke="#1B1B2F" stroke-width="2.5"/></svg>`}
+const selF=(attr,key,v,opts)=>`<select ${attr}="${key}" class="${v?(opts.ok?"ok":"no"):""}" aria-label="Reliefform wählen"><option value="">– Reliefform wählen –</option>${RFORMS.map(f=>`<option ${f===v?"selected":""}>${f}</option>`).join("")}</select>`;
+function reliefExtraHTML(){const R=relD(),A=profDone("a"),B=A&&profDone("p");R.mz=R.mz||{};R.kz=R.kz||{};
+  const merk=B?`<div class="card"><h3>Merkmale zuordnen</h3><p>Zu welcher Reliefform passt jede Beschreibung? Nutzt eure Profile und euer Schulbuch.</p>
+   <div class="mzl">${MERK.map((m,i)=>{const v=R.mz[i]||"";return `<div class="mzi"><p>${esc(m[1])}</p>${selF("data-mz",i,v,{ok:v===m[0]})}</div>`}).join("")}</div>
+   ${merkOk()?`<p class="fb ok">Alle Merkmale richtig zugeordnet! Schelf und Kontinentalhang gehören noch zum Kontinent. Tiefseebecken, Rücken und Tiefseegraben liegen auf ozeanischer Kruste.</p>`:""}</div>`
+   :`<div class="card lockc"><h3>Merkmale zuordnen</h3><p class="cap">Vermesst zuerst beide Profile. Dann ordnet ihr jeder Reliefform ihre typischen Merkmale zu.</p></div>`;
+  const kern=A?`<div class="card"><h3>Bohrkerne zuordnen</h3><p>Die ALKOR hat an drei Stellen von Profil A Bohrkerne aus dem Meeresboden gezogen. Woher stammt welcher Kern?</p>
+   <div class="kzl">${KERNE.map((k,i)=>{const v=R.kz[k.id]||"",ok=v===k.f;return `<div class="kzi">${kernCol(k.L)}<div><b>Kern ${i+1}</b><span class="cap">${k.w}</span><p>${esc(k.t)}</p>${selF("data-kz",k.id,v,{ok})}${v?`<p class="fb ${ok?"ok":"no"}">${ok?esc(k.why):v==="Kontinentalhang"&&k.f==="Schelf"?"Fast! Auch der Kontinentalhang besteht aus dicken Sedimentschichten. Achtet aber auf die Wassertiefe.":"Noch nicht. Achtet auf die Wassertiefe, auf das Gestein ganz unten und auf die Dicke der Schlammschicht."}</p>`:""}</div></div>`}).join("")}</div>
+   <p class="cap">Legende: hellbraun Schlamm/Ton, gelb Sand, dunkelgrau bis schwarz Basalt (ozeanische Kruste), rosa Granit (kontinentale Kruste).</p></div>`:"";
+  return merk+kern}
+document.addEventListener("change",e=>{const m=e.target.closest("[data-mz],[data-kz]");if(!m)return;const R=relD();
+  if(m.dataset.mz!=null)(R.mz=R.mz||{})[m.dataset.mz]=m.value;else (R.kz=R.kz||{})[m.dataset.kz]=m.value;save();renderStage();mCheckDone()});
+document.addEventListener("click",e=>{if(!e.target.closest("#rcore")||U.diving)return;const R=relD(),x=R.pos.a,ki=kernInfo(x);R.cores=R.cores||[];
+  say(`Das Schwerelot wird am Seil hinabgelassen – bis auf ${th(pDepth(PROF.a,x))} m …`);jagoDive(()=>{if(!R.cores.some(c=>Math.abs(c-x)<20))R.cores.push(x);save();
+  say(ki.cont?`Bohrkern bei ${th(x)} km: mehrere Kilometer Sand und Ton – darunter <b>Granit</b>. Hier liegt noch kontinentale Kruste.`:`Bohrkern bei ${th(x)} km, ${th(ki.dist)} km vom Rücken: Vulkangestein ${ageTxt(ki.age)} alt, darüber Schlamm: ${sedTxt(ki.sed)}.`);renderStage()})});
+try{new ResizeObserver(drawRivets).observe($("#port"))}catch(e){window.addEventListener("resize",drawRivets)}
+
 /* ============ Zustand ============ */
 const KEYS="ozeanaut-v1";
 const S0=()=>({lb:{},lbName:"",oz:OZ0(),m:null,mx:{},lay:{cur:true,pb:false},view:"map",st:1,max:1,done:{},q:{},recs:[],found:{},zones:{},cards:{},warm:0,calc:"",report:""});
@@ -1445,7 +1830,7 @@ let S=S0();
 try{const raw=localStorage.getItem(KEYS);if(raw)S=Object.assign(S0(),JSON.parse(raw))}catch(e){}
 let D=S,M=MIS.atlantik;
 function save(){try{localStorage.setItem(KEYS,JSON.stringify(S))}catch(e){}}
-const U={msel:null,cwr:[],chW:null,depth:0,target:0,lamp:false,vel:0,joy:{on:false,x:0,y:0},joyMove:false,pan:0,wrong:{},kp:[],kc:null,kmsg:"",tz:4000,lastTipT:0,cw:{}};
+const U={arm:{...ARM0,open:true,sample:null},msel:null,cwr:[],chW:null,depth:0,target:0,lamp:false,vel:0,joy:{on:false,x:0,y:0},joyMove:false,pan:0,wrong:{},kp:[],kc:null,kmsg:"",tz:4000,lastTipT:0,cw:{}};
 
 /* ============ Stationen ============ */
 const ICON={
@@ -1465,7 +1850,7 @@ const nFound=()=>Object.keys(D.found).length;
 const TASKS={
  1:[
   {id:"t1a",lock:()=>!needDone(1),q:"Schau auf euer Diagramm: In welcher Tiefe kommt nur noch etwa 1 % des Sonnenlichts an?",o:[["in etwa 10 m","In 10 m sind es noch über 50 %. Schaut in eurem Messprotokoll nach."],["in etwa 50 m","In 50 m sind es noch rund 15 %. Taucht tiefer."],["zwischen 150 und 200 m",""],["erst in etwa 1000 m","In 1000 m ist so gut wie gar kein Sonnenlicht mehr übrig."]],ok:2,why:"Richtig! Ab etwa 150 bis 200 m Tiefe reicht das Licht nicht mehr für die Photosynthese. Darunter ist es Dämmerlicht, unter etwa 1000 m völlig dunkel."},
-  {id:"t1b",q:"Beobachtet beim Abtauchen die Farbkarte am Greifarm im Bullauge. Welche Farbe wirkt als erste grau-schwarz?",o:[["Rot",""],["Gelb","Gelb hält länger durch. Taucht noch einmal auf 10 m und vergleicht."],["Grün","Grün bleibt lange sichtbar. Achtet auf die erste Farbe oben links."],["Blau","Blau bleibt am längsten! Deshalb sieht das Meer blau aus."]],ok:0,why:"Genau! Wasser schluckt rotes Licht schon in den ersten Metern. Blaues Licht kommt am tiefsten. Schaltet in 50 m einmal den Scheinwerfer an: Mit weißem Licht ist das Rot plötzlich wieder da."},
+  {id:"t1b",q:"Schaut beim Abtauchen auf das Wasser und die Tiere im Bullauge: Welche Farbe bleibt in der Tiefe am längsten erhalten?",o:[["Rot","Rot verschwindet als Erstes – schon nach wenigen Metern wirkt Rotes dunkel."],["Gelb","Gelb hält nicht lange durch. Achtet auf die Farbe des Wassers."],["Blau",""],["Alle Farben bleiben gleich lang.","Achtet darauf, wie das Wasser beim Abtauchen immer blauer wird."]],ok:2,why:"Genau! Wasser schluckt rotes Licht schon in den ersten Metern, blaues Licht dringt am tiefsten. Deshalb sieht das Meer blau aus. Schaltet in 50 m einmal den Scheinwerfer an: Mit weißem Licht sind die Farben plötzlich wieder da."},
   {id:"t1c",q:"Warum leben Algen (Phytoplankton) nur in den oberen rund 200 m?",o:[["Dort ist das Wasser wärmer.","Wärme hilft, aber Algen gibt es auch in kalten Polarmeeren. Was brauchen Pflanzen unbedingt?"],["Sie brauchen Sonnenlicht für die Photosynthese.",""],["Weiter unten zerdrückt sie der Wasserdruck.","Algen bestehen fast nur aus Wasser, der Druck macht ihnen nichts aus."],["Weiter unten ist das Wasser zu salzig.","Der Salzgehalt ist oben und unten ähnlich, etwa 35 g pro Liter."]],ok:1,why:"Richtig! Ohne Licht keine Photosynthese. Die Algen sind die Nahrungsgrundlage für fast alle Tiere im Meer – auch für die in der Tiefe."}
  ],
  2:[
@@ -1477,12 +1862,11 @@ const TASKS={
  3:[
   {id:"t3a",lock:()=>!needDone(3),q:"Vergleicht eure Messwerte: Um wie viel steigt der Druck je 10 m Tiefe?",o:[["um 0,1 bar","Vergleicht 10 m und 20 m im Messprotokoll."],["um 1 bar",""],["um 10 bar","Dann wären es in 10 m schon 11 bar. Schaut nach."]],ok:1,why:"Genau! An der Oberfläche drückt nur die Luft mit 1 bar. Jede 10 m Wasser kommt 1 bar dazu."},
   {id:"t3b",num:true,lock:()=>!needDone(3),q:"Berechnet: Wie hoch ist der Druck am Meeresboden in 4000 m Tiefe? (in bar)",accept:x=>Math.abs(x-401)<=1,why:"Richtig: 1 bar Luft + 4000 : 10 = 400 bar Wasser, zusammen 401 bar. Taucht hinunter und prüft es mit dem Manometer!",no:"Noch nicht. Tipp: Luftdruck an der Oberfläche plus 1 bar für je 10 m Wasser."},
-  {id:"t3c",q:"Schaut im Bullauge auf den Styroporbecher am Greifarm. Taucht tief. Was passiert und warum?",o:[["Er schrumpft, weil der Wasserdruck die Luft in den Styroporkügelchen zusammenpresst.",""],["Er wird größer, weil er sich mit Wasser vollsaugt.","Beobachtet die Höhenangabe unter dem Becher genau."],["Er schrumpft, weil das kalte Wasser ihn schmelzen lässt.","Kälte lässt Styropor nicht schmelzen."]],ok:0,why:"Genau! Styropor besteht fast nur aus Luftbläschen. Der Druck presst sie zusammen. Der Becher bleibt auch nach dem Auftauchen klein – ein Andenken an die Tiefsee."},
   {id:"t3d",lock:()=>!needDone(3),q:"1 bar drückt mit etwa 1 kg auf jeden Quadratzentimeter. Wie viel lastet in 4000 m Tiefe auf einem Daumennagel (etwa 1 cm²)?",o:[["etwa 4 kg – so viel wie eine Katze","Das wären nur 4 bar. Es sind aber rund 400 bar."],["etwa 40 kg – so viel wie ein Kind","Das wären nur 40 bar."],["etwa 400 kg – so viel wie fünf Erwachsene",""]],ok:2,why:"Richtig! Deshalb braucht unser Tauchboot eine dicke, kugelförmige Hülle aus Titan."},
-  {id:"t3e",q:"Tiefseetiere werden vom Druck nicht zerquetscht. Warum nicht?",o:[["Sie haben einen Panzer aus Stahl.","Tiefseetiere sind meist weich und zart."],["Ihr Körper besteht fast nur aus Wasser und hat keine Lufträume. Wasser lässt sich kaum zusammendrücken.",""],["In der Tiefe gibt es gar keinen Druck.","Ihr habt den Druck doch gemessen!"]],ok:1,why:"Genau! Nur Luft lässt sich stark zusammendrücken – wie im Styroporbecher. Wale atmen Luft, deshalb drücken sich ihre Lungen beim Tauchen zusammen."}
+  {id:"t3e",q:"Tiefseetiere werden vom Druck nicht zerquetscht. Warum nicht?",o:[["Sie haben einen Panzer aus Stahl.","Tiefseetiere sind meist weich und zart."],["Ihr Körper besteht fast nur aus Wasser und hat keine Lufträume. Wasser lässt sich kaum zusammendrücken.",""],["In der Tiefe gibt es gar keinen Druck.","Ihr habt den Druck doch gemessen!"]],ok:1,why:"Genau! Nur Luft lässt sich stark zusammendrücken – wie in einem Luftballon. Wale atmen Luft, deshalb drücken sich ihre Lungen beim Tauchen zusammen."}
  ],
  4:[
-  {id:"t4a",lock:()=>nFound()<6,q:"Kronenqualle und Vampirtintenfisch sind tiefrot. Warum ist das in der Tiefe eine gute Tarnung?",o:[["Rot ist eine Warnfarbe, die Feinde abschreckt.","In der Tiefe sieht niemand die rote Farbe. Erinnert euch an die Farbkarte!"],["Rotes Licht kommt in der Tiefe nicht an. Rote Tiere wirken schwarz und sind unsichtbar.",""],["Rot hält warm.","Die Farbe hat keinen Einfluss auf die Körperwärme."]],ok:1,why:"Richtig! Ohne rotes Licht kann nichts Rotes zurückgestrahlt werden. Probiert es aus: Schaltet bei der Kronenqualle den Scheinwerfer aus und wieder an."},
+  {id:"t4a",lock:()=>nFound()<6,q:"Kronenqualle und Vampirtintenfisch sind tiefrot. Warum ist das in der Tiefe eine gute Tarnung?",o:[["Rot ist eine Warnfarbe, die Feinde abschreckt.","In der Tiefe sieht niemand die rote Farbe. Erinnert euch an Station 1: Welche Farbe verschwindet zuerst?"],["Rotes Licht kommt in der Tiefe nicht an. Rote Tiere wirken schwarz und sind unsichtbar.",""],["Rot hält warm.","Die Farbe hat keinen Einfluss auf die Körperwärme."]],ok:1,why:"Richtig! Ohne rotes Licht kann nichts Rotes zurückgestrahlt werden. Probiert es aus: Schaltet bei der Kronenqualle den Scheinwerfer aus und wieder an."},
   {id:"t4b",lock:()=>nFound()<6,q:"Viele Tiere unter 200 m können leuchten (Biolumineszenz). Wozu nutzen sie das Licht?",o:[["Nur, damit es im Meer schön aussieht.","Leuchten kostet Energie. Es muss einen Nutzen haben."],["Zum Anlocken von Beute, zum Erkennen von Partnern und zur Tarnung.",""],["Um das Wasser zu erwärmen.","Biolumineszenz ist „kaltes Licht“ und erwärmt kaum."]],ok:1,why:"Genau! Der Anglerfisch lockt mit einem Köder, Laternenfische erkennen sich an ihrem Leuchtmuster, der Beilfisch tarnt sich mit dem Bauchlicht."},
   {id:"t4c",lock:()=>nFound()<6,q:"Unter 200 m wachsen keine Algen. Wovon leben die Tiere in der Tiefe?",o:[["Von Meeresschnee (herabsinkende Reste von oben) und voneinander.",""],["Von Pflanzen, die am Tiefseeboden wachsen.","Ohne Licht können am Boden keine Pflanzen wachsen."],["Sie brauchen keine Nahrung.","Jedes Tier braucht Nahrung, auch in der Tiefe."]],ok:0,why:"Richtig! Die weißen Flocken vor dem Bullauge sind Meeresschnee. Das Leben in der Tiefe hängt also vom Leben an der Oberfläche ab."}
  ],
@@ -1508,7 +1892,7 @@ const cardsOk=()=>MCARDS.every(c=>S.cards[c.id]===c.z);
 const TIP={
  1:"Willkommen an Bord! Ich bin LOTTE, der Bordcomputer. Erster Auftrag: Wie tief kommt das Sonnenlicht ins Meer? Wählt am Autopiloten eine Messtiefe, wartet bis wir halten, und drückt am Bedienpult „Licht messen“. Wichtig: Scheinwerfer aus, sonst misst der Sensor unser eigenes Licht!",
  2:"Jetzt geht es richtig tief: Messt mit „Temperatur messen“ die Wassertemperatur bis zum Meeresboden in 4000 m. Schaut, wie sich die Kurve im Diagramm verändert.",
- 3:"Hört ihr den Rumpf knarzen? Messt mit „Druck messen“ den Wasserdruck und beobachtet im Bullauge den Styroporbecher am Greifarm.",
+ 3:"Hört ihr den Rumpf knarzen? Messt mit „Druck messen“ den Wasserdruck in den angegebenen Tiefen und findet die Regel.",
  4:"Da draußen bewegt sich etwas! Tippt Lebewesen im Bullauge an und bestimmt sie mit dem Bestimmungsschlüssel. In der Dunkelheit hilft der Scheinwerfer.",
  5:"Zeit für die Auswertung: Wir teilen das Meer in Stockwerke ein. Und wir prüfen, was der Klimawandel mit diesen Stockwerken macht."
 };
@@ -1553,9 +1937,10 @@ const BUBS=[];
 let shown={};
 function crTop(c,d){
   if(c.surf)return (.32-d/14*.36)*100-(c.fy??8);
-  if(c.floor){const ft=floorTop(d);return ft*100-(c.fy??(c.id==="dreibein"?14:4))}
+  if(c.floor){const ft=bedTop(d);return ft*100-(c.fy??(c.id==="dreibein"?14:4))}
   const [a,b]=c.band,mid=(a+b)/2,half=(b-a)/2,rel=clamp((d-mid)/half,-1,1);return c.pos[1]-rel*24;
 }
+const bedTop=d=>M.scene==="reef"?Math.min(.74,floorTop(d)):floorTop(d);
 const floorTop=d=>{const fr=FR();return 1-clamp((d-(M.maxD-fr))/fr,0,1)*.32};
 function crVisible(c,d){const [a,b]=c.band;return d>=a&&d<=b}
 function syncCrits(d){
@@ -1597,7 +1982,7 @@ function updInst(){
   else{$("#iL").textContent=fmtL(Lp)+" %";$("#iL2").textContent=Lp>=30?"hell":Lp>=1?"genug Licht für Algen":Lp>=1e-4?"Dämmerlicht":Lp>=1e-8?"nur noch für Tieraugen":"völlige Dunkelheit"}
   const segs=$("#lbar").children;const lv=Lp>0?Math.log10(Lp):-99;let cnt=0;for(let i=0;i<9;i++)if(lv>=2-i)cnt++;for(let i=0;i<9;i++){segs[i].className=U.lamp?"warn":(i<cnt?"on":"")}
   $("#iP").textContent=(P<100?de(P):th(P))+" bar";$("#ndl").setAttribute("transform",`rotate(${-130+260*clamp(P/Math.max(420,press(M.maxD)),0,1)} 22 22)`);
-  const sc=cupScale(d);$("#cup").setAttribute("transform",`translate(335 296) scale(${sc}) translate(-335 -296)`);$("#cupH").textContent=de(10*sc)+" cm";
+  drawArm();$("#iP2").textContent=M.id==="marianen"?"Becher am Greifarm: "+de(10*cupScale(d))+" cm":"Skala bis "+th(Math.max(420,press(M.maxD)))+" bar";
   const a=ambient(d,U.lamp);$("#wfm").setAttribute("values",`${a.r.toFixed(3)} 0 0 0 0  0 ${a.g.toFixed(3)} 0 0 0  0 0 ${a.b.toFixed(3)} 0 0  0 0 0 1 0`);
   const mov=moving();$("#apled").className="led "+(mov?"go":"");$("#apst").textContent=mov?((U.joyMove?U.vel>0:U.target>d)?"taucht ab …":"taucht auf …"):"angehalten";
   placeBar();updNext();
@@ -1660,6 +2045,7 @@ function measure(v){
 }
 document.querySelectorAll("[data-m]").forEach(b=>b.addEventListener("click",()=>measure(b.dataset.m)));
 $("#halt").onclick=()=>setTarget(Math.round(U.depth));
+$("#grab").onclick=armGrab;$("#armtool").onclick=armTool;$("#armpark").onclick=()=>{U.arm={...ARM0,open:true,sample:null};drawArm()};
 function renderLog(){
   const rows=D.recs;
   $("#logt").innerHTML=rows.length?`<table><thead><tr><th>Tiefe</th><th>Temp.</th><th>Licht</th><th>Druck</th><th><span class="sr">Löschen</span></th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${th(r.d)} m</td><td>${r.T==null?"–":de(r.T)+" °C"}</td><td>${r.L==null?"–":fmtL(r.L)+" %"}</td><td>${r.P==null?"–":(r.P<100?de(r.P):th(r.P))+" bar"}</td><td><button class="x" type="button" data-del="${i}" aria-label="Messwert in ${r.d} m löschen">✕</button></td></tr>`).join("")}</tbody></table>`:`<p class="empty">Noch leer. Fahrt mit dem Autopiloten zu einer Messtiefe und drückt am Bedienpult einen Messknopf.</p>`;
@@ -1710,7 +2096,7 @@ function taskHTML(t,i){
   else inner=`<div class="opts">${t.o.map((o,j)=>`<button class="opt ${done&&j===t.ok?"ok":""} ${wr.includes(j)?"no":""}" type="button" data-t="${t.id}" data-i="${j}" ${done||lock||wr.includes(j)?"disabled":""}>${esc(o[0])}</button>`).join("")}</div>`;
   const last=wr.length?wr[wr.length-1]:null;
   const fb=done?`<p class="fb ok">${esc(t.why)}</p>`:(t.num&&U.wrong[t.id]?`<p class="fb no">${esc(t.no)}</p>`:(last!=null&&t.o?`<p class="fb no">${esc(t.o[last][1]||"Noch nicht.")}</p>`:""));
-  return `<div class="task ${done?"done":""} ${lock?"lock":""}" id="task_${t.id}"><div class="q"><span class="qn">${done?"✓":i+1}</span><span>${esc(t.q)}</span></div>${lock?`<p class="hint">${t.lockMsg||(t.id.startsWith("t4")?"Wird freigeschaltet, wenn ihr mindestens 6 Lebewesen bestimmt habt.":t.id.startsWith("t5")?"Erst die Stockwerke und Merkmale zuordnen.":"Wird freigeschaltet, wenn der Messauftrag vollständig ist.")}</p>`:""}${inner}${fb}</div>`;
+  return `<div class="task ${done?"done":""} ${lock?"lock":""}" id="task_${t.id}"><div class="q"><span class="qn">${done?"✓":(t.zn||i+1)}</span><span>${esc(t.q)}</span></div>${lock?`<p class="hint">${t.lockMsg||(t.id.startsWith("t4")?"Wird freigeschaltet, wenn ihr mindestens 6 Lebewesen bestimmt habt.":t.id.startsWith("t5")?"Erst die Stockwerke und Merkmale zuordnen.":"Wird freigeschaltet, wenn der Messauftrag vollständig ist.")}</p>`:""}${inner}${fb}</div>`;
 }
 function tgtHTML(n){const nd=NEED[n];if(!nd)return "";const ok=nd.d.filter(d=>recAt(d,nd.v)).length;
   return `<div class="card"><h3>Messauftrag</h3><p>${n===1?"Messt das Sonnenlicht in diesen Tiefen. <b>Scheinwerfer aus!</b>":n===2?"Messt die Wassertemperatur in diesen Tiefen.":"Messt den Wasserdruck in diesen Tiefen."} Tippt eine Tiefe an (hier oder am Autopiloten) und drückt am Bedienpult <b>${n===1?"Licht messen":n===2?"Temperatur messen":"Druck messen"}</b>.</p>
@@ -1795,7 +2181,7 @@ function posterHTML(){const f=CR.filter(c=>D.found[c.id]);
    <label for="rep" style="font-weight:800">Unser wichtigstes Ergebnis:</label>
    <textarea id="rep" placeholder="Zum Beispiel: Das Meer ist in Stockwerke gegliedert, weil …">${esc(S.report||"")}</textarea>
    <div class="nextbar noprint"><button class="ghost" type="button" id="print">Bericht drucken</button></div></section>`}
-function renderStage(){if(M.type==="relief"&&!isAtl()){$("#stage").innerHTML=reliefStage()+lbCardHTML(lbKey());afterRelief();updNext();return}if(!isAtl()){$("#stage").innerHTML=missionStage()+lbCardHTML(lbKey());afterMission();renderTgts();return}$("#stage").innerHTML=STAGE[S.st]()+lbCardHTML(lbKey())+nextBar();renderTgts();
+function renderStage(){if(M.type==="relief"&&!isAtl()){$("#stage").innerHTML=reliefStage()+armCardHTML()+lbCardHTML(lbKey());afterRelief();updNext();return}if(!isAtl()){$("#stage").innerHTML=missionStage()+armCardHTML()+lbCardHTML(lbKey());afterMission();renderTgts();return}$("#stage").innerHTML=STAGE[S.st]()+armCardHTML()+lbCardHTML(lbKey())+nextBar();renderTgts();
   const wr=$("#warm");if(wr)wr.oninput=e=>{S.warm=+e.target.value;save();$("#warmo").textContent="+"+de(S.warm)+" °C";$("#wch").innerHTML=warmChart(S.warm);$("#wdiff").textContent=de(temp(0,S.warm)-temp(1000))+" °C"};
   const rp=$("#rep");if(rp)rp.oninput=e=>{S.report=e.target.value;save()};
   const pr=$("#print");if(pr)pr.onclick=()=>window.print();
