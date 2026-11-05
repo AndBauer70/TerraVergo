@@ -11,6 +11,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `christallers-land/` | **Christallers Land**: Planspiel zur Theorie der zentralen Orte in fünf Leveln, mit Anleitung in `LIESMICH.txt` |
 | `fakt-oder-meinung/` | **Fakt oder Meinung?**: Aussagen zum Streitfall Überfischung nach Tatsache, Meinung oder Mischform sortieren, mit Quellenkarten prüfen und nach Sprecher und Interesse fragen; drei Hilfestufen für Klasse 7–10 |
 | `kaffee-lieferkette/` | **Die Kaffee-Spur**: drei Kaffee-Lieferketten (Solino, Discounter, Marke) als Stationen und Wege auf Weltkarte und 3D-Globus, mit Preisaufteilung, Wirkungsgefüge, Stresstest, Lösungsplan und Denkwerkstatt; Begleitheft, Arbeitsblätter M1–M6 und Wissensbasis |
+| `jagonaut/` | **Jagonaut**: Forschungs-U-Boot nach dem Vorbild von JAGO (Klasse 7). Ozean-Check (fünf Ozeane benennen und nach Größe ordnen), dann acht Missionen auf Weltkarte und 3D-Globus: Stockwerke des Atlantiks, Relief des Meeresbodens (Echolot), Great Barrier Reef, Golfstrom, Humboldtstrom, Black Smoker, Arktis, Marianengraben |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 

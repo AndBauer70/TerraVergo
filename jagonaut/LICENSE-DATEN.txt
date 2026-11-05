@@ -1,0 +1,27 @@
+Kartendaten in Jagonaut (Missionsauswahl)
+=========================================
+
+Plattengrenzen (eingebettet in index.html)
+------------------------------------------
+Bird, P. (2003): An updated digital model of plate boundaries.
+Geochemistry, Geophysics, Geosystems 4(3), 1027. doi:10.1029/2001GC000252
+
+Aufbereitet von Hugo Ahlenius, Nordpil, mit GeoJSON-Daten von csterling:
+https://github.com/fraxen/tectonicplates
+
+Lizenz: Open Data Commons Attribution License (ODC-BY 1.0)
+http://opendatacommons.org/licenses/by/1.0/
+Die Bearbeiter bitten um Nennung von Hugo Ahlenius, Nordpil und Peter Bird.
+Die Linien wurden für den Erdbeben-Globus auf 0,1 Grad vereinfacht und von dort übernommen.
+
+
+Landflächen (eingebettet in index.html)
+---------------------------------------
+Natural Earth, https://www.naturalearthdata.com/
+Gemeinfrei (Public Domain). https://www.naturalearthdata.com/about/terms-of-use/
+
+
+Meeresströmungen und Tauchprofile
+---------------------------------
+Die Strömungspfeile sind schematisch gezeichnet. Temperatur-, Licht- und
+Druckprofile sind gerundete Modellwerte (siehe Bereich „Für Lehrkräfte“ in index.html).
