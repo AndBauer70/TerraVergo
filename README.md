@@ -12,6 +12,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `sachtext-auswerten/` | **Sachtexte auswerten** (GeoMethode): Methodentraining für Klasse 5 und 6. Prof. Geo und Frau Prof. Geo führen in sieben Schritten (vorher schauen, überfliegen, Wörter klären, markieren, gliedern, Stichpunkte, zusammenfassen) durch einen Sachtext über Landunter auf der Hallig Hooge; mit Textmarker, Wort-Detektiv, Formulierungshilfen und neun typischen Stolpersteinen |
 | `fakt-oder-meinung/` | **Fakt oder Meinung?**: Aussagen zum Streitfall Überfischung nach Tatsache, Meinung oder Mischform sortieren, mit Quellenkarten prüfen und nach Sprecher und Interesse fragen; drei Hilfestufen für Klasse 7–10 |
 | `kaffee-lieferkette/` | **Die Kaffee-Spur**: drei Kaffee-Lieferketten (Solino, Discounter, Marke) als Stationen und Wege auf Weltkarte und 3D-Globus, mit Preisaufteilung, Wirkungsgefüge, Stresstest, Lösungsplan und Denkwerkstatt; Begleitheft, Arbeitsblätter M1–M6 und Wissensbasis |
+| `mangroven/` | **Mangroven – sensible Ökosysteme**: forschendes Lernen für Jahrgang 7. Gezeiten-Querschnitt mit sieben Ökosystemleistungen, Hypothese, Wirkungsgefüge mit automatisch erkannten Rückkopplungen und drei Hilfestufen, Simulation über 30 Jahre mit Kipppunkt, ökologische Bewertung von Lösungen; Schwerpunkt ökologische Dimension der Nachhaltigkeit, Begleitheft und Wissensbasis |
 | `DeepDive1/` | **DeepDive1**: Forschungs-U-Boot nach dem Vorbild von JAGO (Klasse 7). Ozean-Check (fünf Ozeane benennen und nach Größe ordnen), dann acht Missionen auf Weltkarte und 3D-Globus: Stockwerke des Atlantiks, Relief des Meeresbodens (Echolot), Great Barrier Reef, Golfstrom, Humboldtstrom, Black Smoker, Arktis, Marianengraben |
 | `GeoMethode/` | **GeoMethode Kartenkompetenz** mit Frau Prof. Geo: vier eigenständige Anwendungen nach dem Ludwigsburger Modell (Dekodieren, Beschreiben, Erklären, Beurteilen) mit Formulierungshilfen und Stolpersteinen: `brocken-expedition/` (Höhenlinien, Jahrgang 5), `halbmonde-sahel/` (Isohyeten und Satellitendaten, Jahrgang 8), `strukturwandel-ruhr/` (thematische Karten, Jahrgang 9), `aletschgletscher/` (Gletscherkarten und Szenarien, Jahrgang 10) |
 
@@ -28,6 +29,7 @@ klimasimulation/               Terra Vergo
 erdbeben/                      Erdbeben-Globus
 christallers-land/             Christallers Land
 kaffee-lieferkette/            Die Kaffee-Spur
+mangroven/                     Mangroven – sensible Ökosysteme
 orientierung-breitenkreise/    Orientierung auf unserer Erde: Die Breitenkreise
 expedition-sogapalag/          Expedition Sogapalag (zwei Personen, zwei Tablets)
 sachtext-auswerten/            Sachtexte auswerten (GeoMethode)
