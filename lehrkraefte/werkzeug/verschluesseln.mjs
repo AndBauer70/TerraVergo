@@ -45,7 +45,7 @@ const APPS = [
   { id: 'kompass-raetsel', titel: 'Das Kompass-Rätsel', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'expedition-sogapalag', titel: 'Expedition Sogapalag', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'orientierung-breitenkreise', titel: 'Die Breitenkreise', stufe: 'Klasse 5 und 6', start: '' },
-  { id: 'sachtext-auswerten', titel: 'Sachtexte auswerten', stufe: 'Klasse 5 und 6', start: '' },
+  { id: 'sachtext-auswerten', titel: 'GeoMethode Sachtexte auswerten', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'geomethode-brocken', pfad: 'GeoMethode/brocken-expedition', titel: 'GeoMethode Kartenkompetenz: Die Brocken-Expedition (Jahrgang 5)', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'klimasimulation', titel: 'Terra Vergo: Das Rätsel vom Deich und Klimasimulation', stufe: 'Klasse 7 bis 10', start: 'mystery.html' },
   { id: 'christallers-land', titel: 'Christallers Land', stufe: 'Klasse 7 bis 10', start: '' },

@@ -116,7 +116,7 @@ window.TV_DOKUMENTE=[
  },
  {
   "id": "sachtext-auswerten",
-  "titel": "Sachtexte auswerten",
+  "titel": "GeoMethode Sachtexte auswerten",
   "stufe": "Klasse 5 und 6",
   "start": "../sachtext-auswerten/",
   "dokumente": [],

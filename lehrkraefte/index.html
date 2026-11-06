@@ -152,7 +152,8 @@
       grid = el('div', { 'class': 'lk-apps' });
       liste.appendChild(grid);
     }
-    var box = el('article', { 'class': 'lk-app' });
+    var geoM = app.id === 'sachtext-auswerten' || app.id.indexOf('geomethode-') === 0;
+    var box = el('article', { 'class': geoM ? 'lk-app geo-m' : 'lk-app' });
     box.appendChild(el('h4', {}, app.titel));
     var s = el('a', { 'class': 'start', href: app.start }, 'Anwendung öffnen');
     box.appendChild(s);
