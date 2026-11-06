@@ -1,5 +1,5 @@
-// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-05. Nicht von Hand ändern.
-window.TV_LK={"salz":"ALtXcA6OX91cRFjflIJFZA==","iter":600000,"id":"b43cbf9d6a2b","pruef":{"iv":"lSBYypltavbWT2Ib","ct":"B92O7M7jgQIQkN2oQDe4m0T9ckF651IkLWV+oHWbGf43LTYfyE4="}};
+// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-06. Nicht von Hand ändern.
+window.TV_LK={"salz":"9sV2HoCAg/cav+Keaidh/g==","iter":600000,"id":"5a495bc0b394","pruef":{"iv":"I/ubwqlLlx7ix7/5","ct":"t6zZzdBDwHwCLVSBXbQWR6MsbkOZql3vnsT9Xd3RbRLBSsZtXm4="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -298,7 +298,7 @@ window.TV_DOKUMENTE=[
     "titel": "Begleitheft Jagonaut",
     "href": "jagonaut/begleitheft.html",
     "typ": "html",
-    "kb": 167
+    "kb": 172
    }
   ],
   "offen": []
