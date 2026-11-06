@@ -1,5 +1,5 @@
 // Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-06. Nicht von Hand ändern.
-window.TV_LK={"salz":"9sV2HoCAg/cav+Keaidh/g==","iter":600000,"id":"5a495bc0b394","pruef":{"iv":"I/ubwqlLlx7ix7/5","ct":"t6zZzdBDwHwCLVSBXbQWR6MsbkOZql3vnsT9Xd3RbRLBSsZtXm4="}};
+window.TV_LK={"salz":"uf7VjwhCP0oLnT6pmzQjDg==","iter":600000,"id":"055721e61a4b","pruef":{"iv":"GqBb0pQP3mdVTgjf","ct":"xBymna9zrVBmRhdKAdBN1rQg388NJRgqmKBX+qsmDMdDktBWhDc="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
