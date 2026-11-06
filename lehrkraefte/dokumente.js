@@ -152,7 +152,7 @@ window.TV_DOKUMENTE=[
  },
  {
   "id": "klimasimulation",
-  "titel": "Terra Vergo: Das Rätsel vom Deich und Klimasimulation",
+  "titel": "Terra Vergo: Das Rätsel vom Deich",
   "stufe": "Klasse 7 bis 10",
   "start": "../klimasimulation/mystery.html",
   "dokumente": [
@@ -202,7 +202,7 @@ window.TV_DOKUMENTE=[
  },
  {
   "id": "rungholt",
-  "titel": "Das Rätsel von Rungholt",
+  "titel": "Die Legende von Rungholt",
   "stufe": "Klasse 7 bis 10",
   "start": "../rungholt/rungholt.html",
   "dokumente": [

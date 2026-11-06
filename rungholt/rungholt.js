@@ -1,4 +1,4 @@
-/* ===================== Mystery 2: Das Rätsel von Rungholt =====================
+/* ===================== Mystery 2: Die Legende von Rungholt =====================
    Indizien deuten und auf der Spurenkarte verorten: die Lage Rungholts und die Ursachen des Untergangs 1362.
    Die Karte (rungholt_map.svg) erzeugt gen_rungholt_map.py; RPROJ muss zur Projektion dort passen. */
 const MSPH={atmo:['Atmosphäre','var(--atmo)',1],hydro:['Hydrosphäre','var(--hydro)',1],kryo:['Kryosphäre','var(--kryo)',0],pedo:['Pedosphäre','var(--pedo)',1],bio:['Biosphäre','var(--bio)',0],mensch:['Mensch','var(--mensch)',0],litho:['Lithosphäre','#8C93A3',1]};
@@ -273,7 +273,7 @@ function showFinal(){
     <div class="dtext"><p><b>Stark gelöst!</b> Rungholt lag im heutigen Watt bei der Hallig Südfall, südöstlich von Pellworm. Dort fanden Forschende Schleusen, Brunnen, einen Seedeich mit Hafen und 2023 die Hauptkirche.</p>
     <p>Euer Wirkungsgefüge zeigt: Der Orkan vom 16. Januar 1362 war die <b>Naturgefahr</b>, er trieb die Sturmflut auf. Zur Katastrophe wurde er, weil das Land <b>verwundbar</b> war: Für den Salzhandel gruben die Menschen Torf ab, Gräben ließen das Moor sacken, das Land lag tiefer. Die Deiche waren schwach, und mit jeder Flut fraßen sich die Priele tiefer ins Land, ein Teufelskreis. Die Flut heißt bis heute „Grote Mandrenke“, das große Ertrinken.</p>
     <p class="today"><b>Und heute?</b> Heute steigt das Meer schneller als im Mittelalter. Darum wachsen die Deiche an der Nordsee: Aus Rungholt haben die Menschen gelernt, ihre Küste weniger verwundbar zu machen.</p></div></div>
-    <div class="csum" style="--n:1"><div class="m"><div>Das Rätsel von Rungholt ist <span>gelöst.</span></div></div><div class="cbtns"><button class="go" id="ovclose" type="button">Zurück zum Wirkungsgefüge</button></div></div></div>`,'ovclose');
+    <div class="csum" style="--n:1"><div class="m"><div>Die Legende von Rungholt ist <span>entschlüsselt.</span></div></div><div class="cbtns"><button class="go" id="ovclose" type="button">Zurück zum Wirkungsgefüge</button></div></div></div>`,'ovclose');
   document.getElementById('ovclose').addEventListener('click',ovClose);
 }
 function updateSolved(){document.getElementById('rzonebtn').hidden=!M.solved;if(!M.solved&&M.zones){M.zones=false;renderZones();}

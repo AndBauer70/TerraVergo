@@ -7,7 +7,7 @@ Idee, Konzept und Spieldesign: Andreas Bauer. Technische Umsetzung mit Unterstü
 Terra Vergo besteht aus **zwei eigenständigen Anwendungen**, die aufeinander aufbauen, aber auch einzeln funktionieren:
 
 - `mystery.html`: Mystery „Das Rätsel vom Deich“
-- `rungholt.html`: Mystery „Das Rätsel von Rungholt“ (Indizien auf einer Spurenkarte verorten: Wo lag Rungholt, und warum versank es 1362?)
+- `rungholt.html`: Mystery „Die Legende von Rungholt“ (Indizien auf einer Spurenkarte verorten: Wo lag Rungholt, und warum versank es 1362?)
 - `klimasimulation.html`: Klimasimulation „Der Kontrollraum“
 
 `index.html` ist die Startseite mit Links zu beiden. Jede Datei läuft für sich im Browser, über GitHub Pages oder offline. Es wird nichts installiert.
