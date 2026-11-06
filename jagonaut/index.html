@@ -540,7 +540,7 @@ details a{color:var(--sea);font-weight:700}
 <div class="wrap">
   <header class="box">
     <div class="band">
-      <svg class="mascot" viewBox="0 0 130 140" role="img" aria-label="Das Forschungs-U-Boot Jagonaut nach dem Vorbild von JAGO, mit Bordcomputer LOTTE">
+      <svg class="mascot" viewBox="0 0 130 140" role="img" aria-label="Das Forschungs-U-Boot DeepDive1 nach dem Vorbild von JAGO, mit Bordcomputer LOTTE">
         <defs><clipPath id="mclip"><rect width="130" height="140" rx="14"/></clipPath>
           <linearGradient id="mwater" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FC4EE"/><stop offset=".55" stop-color="#2F6FA8"/><stop offset="1" stop-color="#16244A"/></linearGradient></defs>
         <g clip-path="url(#mclip)" stroke="#1B1B2F" stroke-linejoin="round" stroke-linecap="round">
@@ -570,7 +570,7 @@ details a{color:var(--sea);font-weight:700}
       </svg>
       <div>
         <p class="tvlogo">Terra Vergo</p><h1 class="logo">Jagonaut</h1>
-        <p class="claim">Ozeane bedecken mehr als zwei Drittel der Erde – und doch ist die Oberfläche des Mondes genauer kartiert als der Meeresboden. Steigt ein in den Jagonaut! Unser gelbes Forschungs-U-Boot ist dem Tauchboot JAGO aus Kiel nachempfunden. Bevor es losgeht, prüft Bordcomputer LOTTE, ob ihr die fünf Ozeane kennt. Dann wählt ihr eure Mission: Ihr messt Licht, Temperatur und Druck, vermesst Gebirge unter Wasser, bestimmt Tiefseetiere und findet heraus, wie der Klimawandel das Meer verändert.</p>
+        <p class="claim">Ozeane bedecken mehr als zwei Drittel der Erde – und doch ist die Oberfläche des Mondes genauer kartiert als der Meeresboden. Steigt ein in die DeepDive1! Unser gelbes Forschungs-U-Boot ist dem Tauchboot JAGO aus Kiel nachempfunden. Bevor es losgeht, prüft Bordcomputer LOTTE, ob ihr die fünf Ozeane kennt. Dann wählt ihr eure Mission: Ihr messt Licht, Temperatur und Druck, vermesst Gebirge unter Wasser, bestimmt Tiefseetiere und findet heraus, wie der Klimawandel das Meer verändert.</p>
       </div>
       <div class="bubble" id="tip" aria-live="polite"></div>
     </div>
@@ -1053,7 +1053,7 @@ const MIS={
   cr:[cpc("laternen",{band:[400,950]}),cpc("angler",{band:[1300,2600]}),cpc("pelikan",{band:[1800,3400]}),MCR.scheibenbauch,MCR.xeno,MCR.flohkrebs],minFound:4,
   need:{v:"P",d:[0,1000,2000,4000,6000,8000,10900]},
   q:"Wie tief ist der tiefste Punkt der Ozeane – und kann dort unten noch etwas leben?",
-  intro:"Im Marianengraben geht es fast 11.000 m in die Tiefe. Der Mount Everest würde hineinpassen, und über seinem Gipfel wäre noch 2 km Wasser. Für diese Mission bekommt Jagonaut einen Spezialrumpf. Bis heute haben nur wenige Tauchboote den Grund erreicht: Trieste (1960), Deepsea Challenger (2012) und Limiting Factor (seit 2019). Am Greifarm hängen diesmal eine Farbkarte und ein Styroporbecher – beobachtet sie während der langen Fahrt nach unten.",
+  intro:"Im Marianengraben geht es fast 11.000 m in die Tiefe. Der Mount Everest würde hineinpassen, und über seinem Gipfel wäre noch 2 km Wasser. Für diese Mission bekommt die DeepDive1 einen Spezialrumpf. Bis heute haben nur wenige Tauchboote den Grund erreicht: Trieste (1960), Deepsea Challenger (2012) und Limiting Factor (seit 2019). Am Greifarm hängen diesmal eine Farbkarte und ein Styroporbecher – beobachtet sie während der langen Fahrt nach unten.",
   thema:"Tiefseegraben, Plattentektonik, Druck",
   facts:[["Tauchtiefe","bis 10.900 m"],["Druck am Grund","über 1000 bar"],["Am Greifarm","Farbkarte und Styroporbecher"]],
   tip:"Willkommen über dem Challenger-Tief! Die Fahrt nach unten ist lang – nutzt den Autopiloten und messt unterwegs den Druck.",
@@ -1354,7 +1354,7 @@ function oceanLabels(p,vis){const quiz=!ozDone(),st=quiz?ozStep():4;let s="";
 /* Ozean-Check vor der Missionsauswahl */
 function renderOzCheck(){const z=S.oz,st=ozStep();const sel=(id,arr,cur,lab)=>`<select data-oz="${id}" data-k="${lab}" aria-label="${lab==="names"?"Name für Ozean "+QNUM[id]:"Fläche für "+OCI[id].n}"><option value="">– wählen –</option>${arr.map(([v,t])=>`<option value="${v}" ${String(cur)===String(v)?"selected":""}>${t}</option>`).join("")}</select>`;
   const names=OCEANS.map(o=>[o.id,o.n]).sort((a,b)=>a[1].localeCompare(b[1])),sizes=OCEANS.map(o=>[o.a,`${o.a} Mio. km²`]).sort((a,b)=>a[0]-b[0]);
-  let h=`<h3>Ozean-Check</h3><p>Bevor Jagonaut ablegt: Kennt ihr die fünf Ozeane der Erde? Erst wenn alles stimmt, wird die Missionsauswahl freigeschaltet.</p>`;
+  let h=`<h3>Ozean-Check</h3><p>Bevor die DeepDive1 ablegt: Kennt ihr die fünf Ozeane der Erde? Erst wenn alles stimmt, wird die Missionsauswahl freigeschaltet.</p>`;
   h+=`<div class="ozstep ${st>1?"ok":""}"><b>1 · Benennt die Ozeane</b><p class="cap">Die Nummern stehen auf der Karte. Tipp: Achtet darauf, welche Kontinente einen Ozean umgeben.</p>
    ${OCEANS.slice().sort((a,b)=>QNUM[a.id]-QNUM[b.id]).map(o=>{const v=z.names[QNUM[o.id]+""]??"";const cv=Object.keys(z.names).length?z.names[o.id]:"";const cls=cv?(cv===o.id?"ok":"no"):"";return `<div class="ozrow"><span class="ozb" style="background:${o.qc}">${QNUM[o.id]}</span>${sel(o.id,names,cv,"names").replace("<select",`<select class="${cls}"`)}</div>`}).join("")}
    ${st===1&&U.ozw?`<p class="fb no">Noch nicht alles richtig. Rot markierte Ozeane prüft ihr auf der Karte noch einmal.</p>`:""}</div>`;
@@ -1402,7 +1402,7 @@ function reliefStage(){const R=relD(),k=R.prof,P=PROF[k],pos=R.pos[k],dep=pDepth
   <div class="card"><h3>So funktioniert das Echolot</h3><p>${esc(M.intro)}</p><p class="cap">Tiefe = Schallgeschwindigkeit im Wasser (etwa 1500 m/s) × Laufzeit des Echos : 2 (der Schall muss hin und zurück).</p></div>
   <div class="card dia"><div class="seg" role="group" aria-label="Profil wählen"><button type="button" data-prof="a" aria-pressed="${k==="a"}">Profil A: Südatlantik ${profDone("a")?"✓":""}</button><button type="button" data-prof="p" aria-pressed="${k==="p"}">Profil B: Westpazifik ${profDone("p")?"✓":""}</button></div>
    <p class="cap">${esc(P.sub)}</p><div id="rsvg">${reliefSVG()}</div>
-   ${profDone(k)?`<div class="terms" role="group" aria-label="Fachbegriffe">${FORMS.map(f=>`<button type="button" class="term" data-term="${f}" aria-pressed="${U.term===f}">${f}</button>`).join("")}</div><p class="cap">Beschriften: Tippt einen Fachbegriff an und dann die passende Markierung im Echolotbild.</p>`:`<p class="cap">Zieht das Forschungsschiff ALKOR an der Wasseroberfläche an die gewünschte Stelle (oder nutzt ◀ ▶).</p>`}
+   ${profDone(k)?`<div class="terms" role="group" aria-label="Fachbegriffe">${FORMS.map(f=>`<button type="button" class="term" data-term="${f}" aria-pressed="${U.term===f}">${f}</button>`).join("")}</div><p class="cap">Beschriften: Tippt einen Fachbegriff an und dann die passende Markierung im Echolotbild.</p>`:`<p class="cap">Zieht das Forschungsschiff Polaris an der Wasseroberfläche an die gewünschte Stelle (oder nutzt ◀ ▶).</p>`}
    <div class="aprow" style="color:var(--ink)"><button class="pbtn" type="button" data-rmv="-1" aria-label="Schiff nach links">◀</button><output id="rposo" class="rpos">${th(pos)} km</output><button class="pbtn" type="button" data-rmv="1" aria-label="Schiff nach rechts">▶</button><button class="go" type="button" id="ping">Echolot senden</button>${k==="a"?`<button class="ghost" type="button" id="rcore">Bohrkern ziehen</button>`:""}
     <span class="lcd" id="rlcd">${last?`Echo ${de(t,1)} s · ${th(dep)} m`:"Echo – s · – m"}</span></div>
    <p class="prog">${nsec} von ${NSEC} Abschnitten vermessen${profDone(k)?" – Profil fertig! Beschriftet jetzt die Reliefformen im Bild.":""}</p></div>
@@ -1421,7 +1421,7 @@ function alkorSVG(){return `<g class="alkor" transform="translate(31 0)"><rect x
   <path d="M2 -6v-14h20l7 14Z" fill="#F4F6FA" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/><path d="M7 -16h5M14 -16h5M21 -16h3" stroke="#1D3A6B" stroke-width="3"/>
   <path d="M-36 2 L41 2 L37 8 L-33 8Z" fill="#C2372E" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/>
   <path d="M-42 -7 L36 -7 L46 -13 L41 2 L-38 2Z" fill="#1D3A6B" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
-  <text x="-6" y="-0.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#fff" letter-spacing=".08em">ALKOR</text>
+  <text x="-6" y="-0.5" text-anchor="middle" font-size="6.5" font-weight="800" fill="#fff" letter-spacing=".06em">POLARIS</text>
   <path d="M-31 8v5" stroke="#1B1B2F" stroke-width="2"/></g>`}
 function jagoSVG(){return `<g id="jago" opacity="0"><path d="M0 0v-30" id="jcable" stroke="#1B1B2F" stroke-width="1.4"/><path d="M-6 -2h12v-7h-12Z" fill="#59627A" stroke="#1B1B2F" stroke-width="1.8"/><path d="M-3 -2h6v26h-6Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="1.6"/><path d="M-3 4h6M-3 11h6M-3 18h6" stroke="#fff" stroke-width="1.2"/><rect id="jcore" x="-2" y="24" width="4" height="0" fill="#B8A27E" stroke="#1B1B2F" stroke-width="1"/></g>`}
 function reliefSVG(){const k=relD().prof,P=PROF[k],{W,H,L,Rr,T,B}=RG,done=profDone(k);
@@ -1490,7 +1490,7 @@ function jagoDive(done){const R=relD(),P=PROF.a,x=R.pos.a,yd=rY(P,pDepth(P,x))-R
 MIS.relief={id:"relief",type:"relief",n:"Gebirge und Schluchten unter Wasser",kurz:"Relief des Meeresbodens",ort:"Südatlantik (23° S) und Westpazifik (11° N)",ll:[-15,-23],lx:-12,ly:24,col:"#8C5A2B",
   maxD:4000,TT:TT_ATL,k1:.06,k2:.0222,cr:[],minFound:0,
   q:"Wie sieht der Meeresboden aus – und wie entstehen seine Formen?",
-  intro:"Den Meeresboden kann man nicht sehen – aber hören. Das Forschungsschiff ALKOR fährt an der Oberfläche und sendet mit dem Echolot Schallwellen nach unten. An Bord: ein Schwerelot, um Bohrkerne aus dem Meeresboden zu ziehen. Aus der Zeit, bis das Echo zurückkommt, berechnet der Bordcomputer die Tiefe. So vermesst ihr zwei Profile durch den Ozean: Messt in jedem der zehn Abschnitte mindestens einmal.",
+  intro:"Den Meeresboden kann man nicht sehen – aber hören. Das Forschungsschiff Polaris fährt an der Oberfläche und sendet mit dem Echolot Schallwellen nach unten. An Bord: ein Schwerelot, um Bohrkerne aus dem Meeresboden zu ziehen. Aus der Zeit, bis das Echo zurückkommt, berechnet der Bordcomputer die Tiefe. So vermesst ihr zwei Profile durch den Ozean: Messt in jedem der zehn Abschnitte mindestens einmal.",
   thema:"Echolot, Reliefformen des Meeresbodens, Plattentektonik",
   facts:[["Messgerät","Echolot (Schall)"],["Profil A","Brasilien → Namibia, 6000 km"],["Profil B","Philippinensee → Marianengraben, 1630 km"]],
   zus:["Echolot: Tiefe aus der Laufzeit des Schalls","Schelf, Kontinentalhang und Tiefseebecken","Mittelatlantischer Rücken: Platten driften auseinander","Tiefseegraben Marianengraben: Subduktion"],
@@ -1652,7 +1652,7 @@ function drawArm(){const g=$("#armg");if(!g)return;const A=U.arm,{e,w,tip,da}=ar
    <circle cx="${f(e[0])}" cy="${f(e[1])}" r="15" fill="#9AA3B5" stroke-width="3"/><circle cx="${f(e[0])}" cy="${f(e[1])}" r="5" fill="#59627A" stroke-width="2"/>
    <circle cx="${f(w[0])}" cy="${f(w[1])}" r="10" fill="#9AA3B5" stroke-width="3"/>
    ${gear?`<path d="M${f(e[0])} ${f(e[1]+15)}v10" stroke-width="3"/>
-   <g transform="translate(${f(e[0])} ${f(e[1]+25)}) scale(${sc.toFixed(3)})"><path d="M-21 0h42l-6 52h-30Z" fill="#F7F7F2" stroke-width="3"/><path d="M-23 0h46" stroke-width="5"/><path d="M-13 18c4 3 22 3 26 0M-14 34c4 3 24 3 28 0" fill="none" stroke="#C9CDD6" stroke-width="2.5"/><text x="0" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#1E6FD0" stroke="none" font-family="Lexend,sans-serif">JN</text></g>`:""}`;
+   <g transform="translate(${f(e[0])} ${f(e[1]+25)}) scale(${sc.toFixed(3)})"><path d="M-21 0h42l-6 52h-30Z" fill="#F7F7F2" stroke-width="3"/><path d="M-23 0h46" stroke-width="5"/><path d="M-13 18c4 3 22 3 26 0M-14 34c4 3 24 3 28 0" fill="none" stroke="#C9CDD6" stroke-width="2.5"/><text x="0" y="28" text-anchor="middle" font-size="11" font-weight="800" fill="#1E6FD0" stroke="none" font-family="Lexend,sans-serif">DD1</text></g>`:""}`;
   const l=$("#armlcd");if(l)l.textContent=tl!=="greifer"?TOOLS[tl].n:A.sample?(A.sample==="probe"?"Sonde: 365 °C":A.sample==="tuete"?"Fundstück im Greifer":"Probe im Greifer"):A.open?"Greifer offen":"Greifer zu";
   const tb=$("#armtool");if(tb){const L=toolList();tb.hidden=L.length<2;tb.textContent="Werkzeug "+((U.tool||0)%L.length+1)+"/"+L.length}}
 
@@ -1742,7 +1742,7 @@ const ARMX={
    {id:"xa1",q:"Viele denken: Unten in der Tiefe ist das Meer salziger. Stimmt das? (Prüft es mit dem Wasserschöpfer in 50 m und in 3000 m.)",o:[["Nein. Oben und unten sind es rund 35–37 g Salz pro Liter. Hier in den Subtropen ist das Wasser oben sogar etwas salziger, weil viel Wasser verdunstet.",""],["Ja, unten ist es viel salziger, weil sich das Salz am Boden absetzt.","Salz ist im Wasser gelöst und setzt sich nicht ab. Vergleicht eure Wasserproben."],["Ja, unten ist das Wasser doppelt so salzig.","Vergleicht die Werte in der Probenkiste: Der Unterschied ist klein."]],ok:0,why:"Genau! Der Salzgehalt ist fast überall im Ozean ähnlich. Wo viel verdunstet, wird das Oberflächenwasser etwas salziger; wo es viel regnet oder Eis schmilzt, wird es etwas weniger salzig."},
    {id:"xa2",q:"Mit dem Planktonnetz fangt ihr in 50 m viel mehr Tiere als in 1000 m. Warum?",o:[["Oben wachsen im Sonnenlicht Algen. Davon leben die kleinen Tiere. In der Tiefe gibt es nur Meeresschnee als Nahrung.",""],["Unten ist das Wasser zu salzig.","Der Salzgehalt ist oben und unten fast gleich."],["Unten ist das Netz zu langsam.","Das Netz fängt überall gleich gut."]],ok:0,why:"Richtig! Das Leben im Meer hängt am Licht: Je tiefer, desto weniger Nahrung kommt an – und desto weniger Tiere leben dort."}]},
  relief:{exp:[
-   {id:"kern",n:"Bohrkerne: Wie alt ist der Meeresboden?",ok:a=>{const K=(D.cores||[]).map(kernInfo).filter(k=>!k.cont);return K.some(k=>k.dist<150)&&K.some(k=>k.dist>1500)},need:"Wählt Profil A, zieht ALKOR an eine Stelle im tiefen Ozean und drückt „Bohrkern ziehen“: Das Schwerelot wird hinabgelassen. Bohrt nah am Rücken und weit entfernt davon.",
+   {id:"kern",n:"Bohrkerne: Wie alt ist der Meeresboden?",ok:a=>{const K=(D.cores||[]).map(kernInfo).filter(k=>!k.cont);return K.some(k=>k.dist<150)&&K.some(k=>k.dist>1500)},need:"Wählt Profil A, zieht die Polaris an eine Stelle im tiefen Ozean und drückt „Bohrkern ziehen“: Das Schwerelot wird hinabgelassen. Bohrt nah am Rücken und weit entfernt davon.",
     res:()=>kernTab()}],
   tasks:[
    {id:"xr1",q:"Die Bohrkerne zeigen: Je weiter vom Mittelatlantischen Rücken entfernt, desto älter ist das Vulkangestein und desto dicker die Schlammschicht darüber. Was folgt daraus?",o:[["Am Rücken entsteht neuer Meeresboden. Er wandert langsam zu beiden Seiten weg und wird dabei älter.",""],["Der Schlamm rutscht vom Rücken herunter und sammelt sich am Rand.","Dann müsste das Gestein darunter überall gleich alt sein."],["Am Rand des Ozeans ist der Boden älter, weil es dort tiefer ist.","Die Tiefe allein erklärt nicht, warum das Gestein älter wird. Wo entsteht neuer Boden?"]],ok:0,why:"Genau! 1968 bohrte das Forschungsschiff Glomar Challenger im Südatlantik und fand genau dieses Muster. Das war ein wichtiger Beleg dafür, dass sich die Platten bewegen."},
@@ -1804,7 +1804,7 @@ function bojeHTML(a){const W=320,H=230;let land="",path="",lab="";
    const P=BOJE.map(b=>pr([b[0],b[1]]));
    if(a.boje){path=`<polyline class="bpath" points="${P.map(p=>p.map(v=>v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#E0393B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" pathLength="100"/>`;
     lab=BOJE.map((b,i)=>[0,4,12,24].includes(b[2])?`<circle cx="${P[i][0].toFixed(1)}" cy="${P[i][1].toFixed(1)}" r="4" fill="#FF8A1F" stroke="#1B1B2F" stroke-width="1.5"/><text x="${(P[i][0]+(b[2]===24?-6:6)).toFixed(1)}" y="${(P[i][1]+(i===0?14:b[2]===24?16:-5)).toFixed(1)}" text-anchor="${b[2]===24?"end":"start"}" font-size="10" font-weight="800" fill="#1B1B2F" paint-order="stroke" stroke="#fff" stroke-width="3">${b[2]?b[2]+" Monate":"Start"}</text>`:"").join("")}
-   else lab=`<circle cx="${P[0][0].toFixed(1)}" cy="${P[0][1].toFixed(1)}" r="5" fill="#FF8A1F" stroke="#1B1B2F" stroke-width="1.5"/><text x="${(P[0][0]+7).toFixed(1)}" y="${(P[0][1]+14).toFixed(1)}" font-size="10" font-weight="800">Jagonaut</text>`}catch(e){}
+   else lab=`<circle cx="${P[0][0].toFixed(1)}" cy="${P[0][1].toFixed(1)}" r="5" fill="#FF8A1F" stroke="#1B1B2F" stroke-width="1.5"/><text x="${(P[0][0]+7).toFixed(1)}" y="${(P[0][1]+14).toFixed(1)}" font-size="10" font-weight="800">DeepDive1</text>`}catch(e){}
   const km=a.boje?Math.round(d3.geoLength({type:"LineString",coordinates:BOJE.map(b=>[b[0],b[1]])})*6371/100)*100:0;
   return `<svg class="axsvg bmap" viewBox="0 0 ${W} ${H}" role="img" aria-label="Karte des Nordatlantiks mit dem Weg der Treibboje"><rect width="${W}" height="${H}" fill="#CFE9F8"/>${land}${path}${lab}</svg>
    ${a.boje?`<div class="aprow"><button class="ghost" type="button" data-bplay>Weg abspielen</button><span class="cap">Etwa ${th(km)} km in rund zwei Jahren – vom Kap Hatteras bis vor die Lofoten (vereinfachte Bahn).</span></div>`:""}`}
@@ -1818,7 +1818,7 @@ function eisSVG(){return `<svg class="axsvg" viewBox="0 0 240 70" role="img" ari
 function armCardHTML(){const X=ARMX[M.id];if(!X)return "";const a=AX();
   const box=(a.box||[]).slice().reverse();
   return `<div class="card armc" id="armc"><h3>Greifarm-Einsätze <span class="chip">freiwillig</span></h3>
-  <p class="cap">${M.type==="relief"?"Vom Forschungsschiff ALKOR wird ein Schwerelot an einem Seil bis zum Meeresboden hinabgelassen. Es bohrt sich in den Boden und bringt einen Kern nach oben: Knopf „Bohrkern ziehen“ beim Echolot.":"Wählt am Greifarm-Pult mit „Werkzeug“ ein Gerät und drückt die Mitte."} Die Einsätze sind ein Angebot: Die Zusatzaufgaben könnt ihr jederzeit bearbeiten, und für die Mission zählen sie nicht.</p>
+  <p class="cap">${M.type==="relief"?"Vom Forschungsschiff Polaris wird ein Schwerelot an einem Seil bis zum Meeresboden hinabgelassen. Es bohrt sich in den Boden und bringt einen Kern nach oben: Knopf „Bohrkern ziehen“ beim Echolot.":"Wählt am Greifarm-Pult mit „Werkzeug“ ein Gerät und drückt die Mitte."} Die Einsätze sind ein Angebot: Die Zusatzaufgaben könnt ihr jederzeit bearbeiten, und für die Mission zählen sie nicht.</p>
   <div class="axl">${X.exp.map(e=>{const ok=e.ok(a);return `<div class="axi ${ok?"ok":""}"><b>${ok?"✓ ":""}${esc(e.n)}</b>${e.tool?`<span class="cap">Werkzeug: ${esc(TOOLS[e.tool].n)}</span>`:""}<span class="cap">${esc(e.need)}</span>${e.res(a)||""}</div>`}).join("")}</div>
   ${M.type!=="relief"?`<div class="axbox"><b>Probenkiste</b>${box.length?`<ul>${box.map(b=>`<li><b>${esc(b.n)}</b> · ${th(b.d)} m · ${esc(b.t)}</li>`).join("")}</ul>`:`<span class="cap">Noch leer.</span>`}</div>`:""}
   <h4 class="axh">Zusatzaufgaben</h4>${X.tasks.map(taskHTML).join("")}</div>`}
@@ -1850,7 +1850,7 @@ function reliefExtraHTML(){const R=relD(),A=profDone("a"),B=A&&profDone("p");R.m
    <div class="mzl">${MERK.map((m,i)=>{const v=R.mz[i]||"";return `<div class="mzi"><p>${esc(m[1])}</p>${selF("data-mz",i,v,{ok:v===m[0]})}</div>`}).join("")}</div>
    ${merkOk()?`<p class="fb ok">Alle Merkmale richtig zugeordnet! Schelf und Kontinentalhang gehören noch zum Kontinent. Tiefseebecken, Rücken und Tiefseegraben liegen auf ozeanischer Kruste.</p>`:""}</div>`
    :`<div class="card lockc"><h3>Merkmale zuordnen</h3><p class="cap">Vermesst zuerst beide Profile. Dann ordnet ihr jeder Reliefform ihre typischen Merkmale zu.</p></div>`;
-  const kern=A?`<div class="card"><h3>Bohrkerne zuordnen</h3><p>Die ALKOR hat an drei Stellen von Profil A Bohrkerne aus dem Meeresboden gezogen. Woher stammt welcher Kern?</p>
+  const kern=A?`<div class="card"><h3>Bohrkerne zuordnen</h3><p>Die Polaris hat an drei Stellen von Profil A Bohrkerne aus dem Meeresboden gezogen. Woher stammt welcher Kern?</p>
    <div class="kzl">${KERNE.map((k,i)=>{const v=R.kz[k.id]||"",ok=v===k.f;return `<div class="kzi">${kernCol(k.L)}<div><b>Kern ${i+1}</b><span class="cap">${k.w}</span><p>${esc(k.t)}</p>${selF("data-kz",k.id,v,{ok})}${v?`<p class="fb ${ok?"ok":"no"}">${ok?esc(k.why):v==="Kontinentalhang"&&k.f==="Schelf"?"Fast! Auch der Kontinentalhang besteht aus dicken Sedimentschichten. Achtet aber auf die Wassertiefe.":"Noch nicht. Achtet auf die Wassertiefe, auf das Gestein ganz unten und auf die Dicke der Schlammschicht."}</p>`:""}</div></div>`}).join("")}</div>
    <p class="cap">Legende: hellbraun Schlamm/Ton, gelb Sand, dunkelgrau bis schwarz Basalt (ozeanische Kruste), rosa Granit (kontinentale Kruste).</p></div>`:"";
   return merk+kern}
