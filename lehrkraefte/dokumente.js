@@ -1,5 +1,5 @@
 // Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-06. Nicht von Hand ändern.
-window.TV_LK={"salz":"ndq8FBtloOcNDe/DewD65w==","iter":600000,"id":"f422bcc5e59f","pruef":{"iv":"NswN2VCSZ4p348Si","ct":"ZGyCFaxBeEIZS3eReoly4zl68tiwdIdzN1+T3ipd1BNlkxneOj4="}};
+window.TV_LK={"salz":"FtVXhOUb4PQHikwbuPw5lQ==","iter":600000,"id":"973d36fd06f9","pruef":{"iv":"yQLahX5IXN7sEj7J","ct":"+UC6jAFURYUi1QD3PiXdeNKULDOT+Fcxxob8kc8u0oJ++R3uaRU="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -271,6 +271,29 @@ window.TV_DOKUMENTE=[
     "href": "../kaffee-lieferkette/materialien.html"
    }
   ]
+ },
+ {
+  "id": "mangroven",
+  "titel": "Mangroven – sensible Ökosysteme",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../mangroven/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Mangroven",
+    "href": "mangroven/begleitheft.html",
+    "typ": "html",
+    "kb": 147
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Mangroven",
+    "href": "mangroven/wissensbasis.html",
+    "typ": "html",
+    "kb": 120
+   }
+  ],
+  "offen": []
  },
  {
   "id": "fakt-oder-meinung",

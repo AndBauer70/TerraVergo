@@ -15,7 +15,7 @@ Interaktive Lernanwendung für den Erdkundeunterricht, Jahrgang 7 (Gymnasium), e
 | 5 Bewerten | Fünf Lösungen nach vier ökologischen Kriterien, begründetes Urteil, Hinweis auf die fehlende soziale und wirtschaftliche Sicht |
 | Ergebnis | Forschungsbericht als Text zum Kopieren |
 
-Perspektive: Im Mittelpunkt steht die ökologische Dimension der Nachhaltigkeit. Soziale und wirtschaftliche Dimension sind bewusst reduziert und in der Anwendung als Lücke markiert.
+Perspektive: Im Mittelpunkt steht die ökologische Dimension der Nachhaltigkeit. Soziale, wirtschaftliche und politische Dimension sind bewusst reduziert und in der Anwendung als Lücke markiert.
 
 ## Dateien
 

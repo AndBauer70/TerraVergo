@@ -240,10 +240,12 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
 .sol .crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
 .sol .crit label{font-size:.85rem;display:grid;gap:4px}
 .sol select{padding:5px 8px}
-.triad svg{width:150px;height:auto;display:block}
+.triad svg{width:190px;height:auto;display:block}
 .t-eco{fill:var(--oeko);stroke:var(--ink);stroke-width:2.5} .t-soz{fill:var(--soz-t);stroke:var(--ink);stroke-width:2;stroke-dasharray:4 3} .t-wirt{fill:var(--wirt-t);stroke:var(--ink);stroke-width:2;stroke-dasharray:4 3}
+.t-pol{fill:var(--ver-t);stroke:var(--ink);stroke-width:2;stroke-dasharray:4 3}
 .t-other{fill:#eee}
-.t-txt{font:700 12px var(--f-body);fill:var(--ink);text-anchor:middle}
+.small-ca{font-family:var(--f-body);font-weight:800;font-size:.6em;-webkit-text-stroke:0;letter-spacing:0}
+.t-txt{font:700 11px var(--f-body);fill:var(--ink);text-anchor:middle}
 .t-txt-l{font:400 16px var(--f-comic);letter-spacing:.04em;fill:#fff;text-anchor:middle}
 
 /* Ergebnis & Lehrkraft */
@@ -258,10 +260,10 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
 <body>
 <div class="wrap">
   <header class="box hero" aria-label="Mangroven">
-    <svg class="owl" viewBox="0 0 130 140" role="img" aria-label="Avatar Professor Geo mit Lupe vor einem Mangrovenwald">
+    <svg class="owl" viewBox="0 0 130 140" role="img" aria-label="Avatar Professor Geo in indonesischer Kleidung mit Batikhemd und Peci, mit Lupe vor einem Mangrovenwald">
       <defs>
         <clipPath id="avclip"><rect x="0" y="0" width="130" height="140" rx="16"/></clipPath>
-        <pattern id="shirtdots" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#E3F4EC"/><circle cx="2" cy="2" r="1.1" fill="#0E9384"/><circle cx="5.5" cy="5.5" r="1" fill="#1E6FD0"/></pattern>
+        <pattern id="batik" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#7A4A26"/><g fill="#F3DDB3" stroke="#3B2414" stroke-width=".5"><ellipse cx="5" cy="2.3" rx="1.4" ry="2.1"/><ellipse cx="5" cy="7.7" rx="1.4" ry="2.1"/><ellipse cx="2.3" cy="5" rx="2.1" ry="1.4"/><ellipse cx="7.7" cy="5" rx="2.1" ry="1.4"/></g><circle cx="5" cy="5" r=".8" fill="#3B2414"/><circle cx="0" cy="0" r=".9" fill="#C9822F"/><circle cx="10" cy="10" r=".9" fill="#C9822F"/><circle cx="10" cy="0" r=".9" fill="#C9822F"/><circle cx="0" cy="10" r=".9" fill="#C9822F"/></pattern>
       </defs>
       <g clip-path="url(#avclip)" stroke="#1B1B2F" stroke-linejoin="round" stroke-linecap="round">
         <rect width="130" height="140" fill="#DCEFFF" stroke="none"/>
@@ -272,14 +274,17 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
         <g fill="#2F7D3B" stroke-width="1.5"><ellipse cx="12" cy="64" rx="16" ry="10"/><ellipse cx="116" cy="60" rx="16" ry="10"/></g>
         <g fill="#4FB24C" stroke-width="1.3"><ellipse cx="4" cy="58" rx="9" ry="6"/><ellipse cx="124" cy="54" rx="9" ry="6"/></g>
         <g transform="translate(22,8) scale(.9)">
-        <path d="M14 142c2-24 20-36 51-36s49 12 51 36Z" fill="url(#shirtdots)" stroke-width="3"/>
+        <path d="M14 142c2-24 20-36 51-36s49 12 51 36Z" fill="url(#batik)" stroke-width="3"/>
+        <path d="M65 117V142" fill="none" stroke-width="2"/><circle cx="65" cy="124" r="1.6" fill="#F3DDB3" stroke-width="1"/><circle cx="65" cy="134" r="1.6" fill="#F3DDB3" stroke-width="1"/>
         <rect x="55" y="88" width="20" height="18" fill="#EDB898" stroke-width="2.5"/>
         <path d="M53 104l12 13 12-13" fill="#EDB898" stroke-width="2.5"/>
-        <path d="M53 104l-7 9 12 6 7-2M77 104l7 9-12 6-7-2" fill="#E3F4EC" stroke-width="2.5"/>
+        <path d="M53 104l-7 9 12 6 7-2M77 104l7 9-12 6-7-2" fill="url(#batik)" stroke-width="2.5"/>
         <ellipse cx="39" cy="64" rx="5" ry="8" fill="#F0BFA2" stroke-width="2.5"/><ellipse cx="91" cy="64" rx="5" ry="8" fill="#F0BFA2" stroke-width="2.5"/>
         <path d="M40 58c0-18 10-30 25-30s25 12 25 30v8c0 18-11 30-25 30S40 84 40 66Z" fill="#F4C8AC" stroke-width="3"/>
         <path d="M38 62c-3-22 8-38 28-38 18 0 27 12 26 32-2-8-5-13-9-15-4 4-14 6-24 4-8-1-12 0-15 3-3 4-5 9-6 14Z" fill="#5F636B" stroke-width="3"/>
         <path d="M50 38c8 2 18 2 26-2M46 46c3-5 7-8 12-8" fill="none" stroke="#9AA0A8" stroke-width="2"/>
+        <path d="M38 44L41 20Q65 13 89 20L92 44Q65 38 38 44Z" fill="#1B1B2F" stroke-width="2.5"/>
+        <path d="M42 24Q65 18 88 24" fill="none" stroke="#5A5F73" stroke-width="2"/>
         <path d="M47 55c4-2 9-2 12 0M71 55c3-2 8-2 12 0" fill="none" stroke="#4A4E55" stroke-width="2.5"/>
         <g class="blink"><circle cx="54" cy="63" r="2.3" fill="#3E5A6E" stroke="none"/><circle cx="76" cy="63" r="2.3" fill="#3E5A6E" stroke="none"/></g>
         <rect x="44" y="57" width="19" height="12" rx="3" fill="rgba(255,255,255,.25)" stroke-width="3.5"/>
@@ -307,7 +312,6 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
     </div>
     <div class="hbtns">
       <a class="btn" href="#ergebnis">Forschungsbericht</a>
-      <a class="btn" href="#lehrkraft">Für Lehrkräfte</a>
       <a class="btn repo-only" href="begleitheft.html" target="_blank" rel="noopener" hidden>Begleitheft</a>
       <a class="btn repo-only" href="wissensbasis.html" target="_blank" rel="noopener" hidden>Wissensbasis</a>
     </div>
@@ -321,7 +325,6 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
     <a href="#simulieren" data-view="simulieren"><span class="n">4</span>Simulieren</a>
     <a href="#bewerten" data-view="bewerten"><span class="n">5</span>Bewerten</a>
     <a href="#ergebnis" data-view="ergebnis"><span class="n">✓</span>Ergebnis</a>
-    <a href="#lehrkraft" data-view="lehrkraft"><span class="n">L</span>Für Lehrkräfte</a>
   </nav>
 
 <main>
@@ -338,8 +341,8 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
       <div class="triad" data-triad></div>
       <div style="display:grid;gap:8px">
         <h3>Unser Blickwinkel: Ökologie</h3>
-        <p>Nachhaltigkeit hat drei Dimensionen: Ökologie, Soziales und Wirtschaft. In dieser Einheit untersucht ihr vor allem die <b>ökologische Dimension</b>, also die Folgen für Natur und Umwelt.</p>
-        <p class="hint">Die Lebenssituation der Menschen vor Ort und die Einkommen aus der Garnelenzucht sind genauso wichtig. Sie kommen hier nur am Rand vor. Achtet darauf, wo sie fehlen.</p>
+        <p>Nachhaltigkeit hat vier Dimensionen: Ökologie, Soziales, Wirtschaft und Politik. In dieser Einheit untersucht ihr vor allem die <b>ökologische Dimension</b>, also die Folgen für Natur und Umwelt.</p>
+        <p class="hint">Die Lebenssituation der Menschen vor Ort, die Einkommen aus der Garnelenzucht und die Regeln, die Staaten für die Küste setzen, sind genauso wichtig. Sie kommen hier nur am Rand vor. Achtet darauf, wo sie fehlen.</p>
       </div>
     </div>
   </div>
@@ -384,15 +387,15 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
     <div class="task">
       <h3>Arbeitsauftrag</h3>
       <ol>
-        <li><span class="op">Beschreibe</span>, wie sich der Lebensraum zwischen Ebbe und Flut verändert. <span class="afb">AFB I</span></li>
-        <li><span class="op">Erkläre</span> an zwei Beispielen, wie die Mangroven an Salzwasser und sauerstoffarmen Schlick angepasst sind. <span class="afb">AFB II</span></li>
+        <li><span class="op">Beschreibe</span> die Veränderungen des Lebensraums zwischen Ebbe und Flut. <span class="afb">AFB I</span></li>
+        <li><span class="op">Erkläre</span> an zwei Beispielen die Angepasstheiten von Mangroven an Salzwasser und sauerstoffarmen Schlick. <span class="afb">AFB II</span></li>
         <li><span class="op">Ordne</span> die Ökosystemleistungen nach ihrer Reichweite: Wirken sie vor Ort, an der ganzen Küste oder weltweit? <span class="afb">AFB II</span></li>
       </ol>
     </div>
   </div>
   <div class="facts">
     <div class="fact-tile"><span class="big">47 %</span><span>des weltweiten Netto-Verlusts an Mangroven (1996–2020) entfiel auf Südostasien.</span><span class="src">UNDRR / Global Mangrove Watch</span></div>
-    <div class="fact-tile"><span class="big">ca. 62 %</span><span>der Verluste durch Rodung gehen auf Aquakultur und Landwirtschaft zurück.</span><span class="src">Goldberg et al. 2020, nach UNDRR</span></div>
+    <div class="fact-tile"><span class="big"><span class="small-ca">ca.</span> 62 %</span><span>der Verluste durch Rodung gehen auf Aquakultur und Landwirtschaft zurück.</span><span class="src">Goldberg et al. 2020, nach UNDRR</span></div>
     <div class="fact-tile"><span class="big">2–10 Jahre</span><span>werden viele Garnelenteiche genutzt. Dann sind Boden und Wasser so schlecht, dass sie aufgegeben werden.</span><span class="src">The Fish Site; Tran &amp; Bui 2018</span></div>
     <div class="fact-tile"><span class="big">250 000 ha</span><span>aufgegebene Teiche gibt es allein in Indonesien, etwa die Fläche des Saarlands.</span><span class="src">Gusmawati et al. 2018, nach Frontiers 2025</span></div>
   </div>
@@ -550,7 +553,7 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
     <div class="triad" data-triad></div>
     <div style="display:grid;gap:8px">
       <h3>Was unserer Bewertung noch fehlt</h3>
-      <p>Ihr habt ökologisch bewertet. Eine vollständige Bewertung der Nachhaltigkeit braucht auch die <b>soziale</b> Dimension (zum Beispiel: Wovon leben die Familien an der Küste? Wer hat dort Rechte am Land?) und die <b>wirtschaftliche</b> Dimension (zum Beispiel: Wie viel verdienen Farmer, Händler und Supermärkte?).</p>
+      <p>Ihr habt ökologisch bewertet. Eine vollständige Bewertung der Nachhaltigkeit braucht auch die <b>soziale</b> Dimension (zum Beispiel: Wovon leben die Familien an der Küste? Wer hat dort Rechte am Land?) , die <b>wirtschaftliche</b> Dimension (zum Beispiel: Wie viel verdienen Farmer, Händler und Supermärkte?) und die <b>politische</b> Dimension (zum Beispiel: Wer macht die Regeln für die Küste, und wer kontrolliert sie?).</p>
       <label for="blindText">Eine Frage, die wir für eine vollständige Bewertung noch klären müssten:</label>
       <textarea id="blindText" placeholder="Wir müssten noch herausfinden, …"></textarea>
     </div>
@@ -585,42 +588,7 @@ th{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--mu
   </div>
 </section>
 
-<!-- LEHRKRAFT -->
-<section class="box view teacher" id="v-lehrkraft" hidden>
-  <h2>Für Lehrkräfte: Modell, Annahmen und Quellen</h2>
-  <div class="grid2">
-    <div class="card" style="display:grid;gap:8px">
-      <h3>Einordnung</h3>
-      <p>Jahrgang 7 (Gymnasium), eine Doppelstunde. KC Erdkunde Niedersachsen 2015, Kern-Thema 4 »Leben und Wirtschaften im Einfluss unterschiedlicher Klimate« mit den Aspekten »Landnutzung in den unterschiedlichen Klimazonen« und »Folgen nicht angepasster Landnutzung«.</p>
-      <p><b>Perspektive:</b> Im Mittelpunkt steht die ökologische Dimension der Nachhaltigkeit. Soziale und wirtschaftliche Dimension sind bewusst reduziert und an drei Stellen als Lücke markiert: Startseite, graue Erntekurve, „Was unserer Bewertung noch fehlt“ in Phase 5.</p>
-      <p class="hint">Ablauf, Kompetenzen, Basiskonzepte, Erwartungshorizont und Schülervorstellungen stehen im Begleitheft, Zahlen und Belege in der Wissensbasis. Beide liegen im Bereich für Lehrkräfte.</p>
-      <div class="row repo-only" hidden><a class="btn" href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a><a class="btn" href="wissensbasis.html" target="_blank" rel="noopener">Wissensbasis</a></div>
-    </div>
-    <div class="card" style="display:grid;gap:8px">
-      <h3>Simulation: Annahmen</h3>
-      <ul>
-        <li>Rodung über drei Jahre verteilt. Teiche werden nach 6 Jahren aufgegeben (Literatur: etwa 2–10 Jahre).</li>
-        <li>Rückkopplung: 60 % der aufgegebenen Fläche wird als neuer Wald gerodet.</li>
-        <li>Unter 40 % wirksamer Mangrovenfläche trägt das Meer jedes Jahr Mangroven ab, umso mehr, je weniger übrig ist.</li>
-        <li>Küstenschutz nimmt nicht linear ab. Der Fischbestand folgt der Kinderstube mit Verzögerung, Abwasser aus den Teichen senkt ihn.</li>
-        <li>Nach der Rodung geht Bodenkohlenstoff in den ersten Jahren stark verloren (bis zu etwa 45 % in 3 Jahren).</li>
-        <li>Renaturierung: 10 % der aufgegebenen Teiche pro Jahr; junge Mangroven wirken 8 Jahre lang nur zu 40 %, ihr Boden speichert danach erst gut die Hälfte des früheren Kohlenstoffs.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="card" style="display:grid;gap:8px">
-    <h3>Quellen</h3>
-    <ul class="sources">
-      <li>UNDRR/PreventionWeb: Hazard Information Profile „Loss of Mangroves“ (mit Daten von Bunting et al. 2022, Goldberg et al. 2020, FAO 2023). <a href="https://www.preventionweb.net/understanding-disaster-risk/terminology/hips/en0015">preventionweb.net</a></li>
-      <li>Donato et al. (2011): Mangroves among the most carbon-rich forests in the tropics. Nature Geoscience. <a href="https://research.fs.usda.gov/download/treesearch/38862.pdf">USDA Forest Service (PDF)</a></li>
-      <li>The Fish Site: 250,000 hectares of abandoned shrimp ponds worldwide. <a href="https://thefishsite.com/articles/250000-hectares-of-abandoned-shrimp-ponds-worldwide">thefishsite.com</a></li>
-      <li>Tran &amp; Bui (2018): Land-use changes from shrimp farming on acid sulfate soils, Can Gio (Vietnam). <a href="https://journals.umcs.pl/pjss/article/download/7041/5643">Polish Journal of Soil Science</a></li>
-      <li>Frontiers in Ecology and Evolution (2025): Emissionen aufgegebener Teiche in Indonesien. <a href="https://www.frontiersin.org/journals/ecology-and-evolution/articles/10.3389/fevo.2025.1448702/pdf">frontiersin.org</a></li>
-      <li>McIvor et al. (2012): Reduction of Wind and Swell Waves by Mangroves (zitiert nach Green Ambassador Challenge). <a href="https://greenambassadorchallenge.com/course/mangroves/lesson/three-jobs-mangroves-do-for-people">greenambassadorchallenge.com</a></li>
-      <li>Aquaculture Stewardship Council: ASC und Mangrovenschutz. <a href="https://asc-aqua.org/news/asc-labeyrie-fine-foods-and-omarsa-join-forces-to-restore-ecuadors-vital-mangrove-forests/">asc-aqua.org</a></li>
-    </ul>
-  </div>
-</section>
+
 
 </main>
   <footer class="sitefoot"><b>Mangroven – sensible Ökosysteme</b> · Idee und Konzept: Andreas Bauer · © 2026 Andreas Bauer · Simulation vereinfacht, Werte als Richtwerte<span class="repo-only" hidden> · <a href="begleitheft.html" target="_blank" rel="noopener">Begleitheft</a> · <a href="wissensbasis.html" target="_blank" rel="noopener">Wissensbasis</a> · <a href="../klimasimulation/impressum.html" target="_blank" rel="noopener">Impressum</a></span></footer>
@@ -660,11 +628,11 @@ let saveT = null;
 function save(){ clearTimeout(saveT); saveT = setTimeout(() => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {} }, 200); updateNav(); }
 
 /* ---------- Nachhaltigkeits-Dreieck ---------- */
-const triadSvg = `<svg viewBox="0 0 150 130" role="img" aria-label="Drei Dimensionen der Nachhaltigkeit, Ökologie hervorgehoben">
-  <circle cx="75" cy="44" r="38" class="t-eco"/><circle cx="46" cy="88" r="34" class="t-soz"/><circle cx="104" cy="88" r="34" class="t-wirt"/>
-  <circle cx="75" cy="44" r="38" class="t-eco"/>
-  <text x="75" y="40" class="t-txt-l">Ökologie</text><text x="75" y="57" class="t-txt-l">im Fokus</text>
-  <text x="40" y="104" class="t-txt">Soziales</text><text x="112" y="104" class="t-txt">Wirtschaft</text></svg>`;
+const triadSvg = `<svg viewBox="0 0 210 160" role="img" aria-label="Vier Dimensionen der Nachhaltigkeit, Ökologie hervorgehoben">
+  <circle cx="40" cy="114" r="34" class="t-soz"/><circle cx="170" cy="114" r="34" class="t-pol"/><circle cx="105" cy="122" r="36" class="t-wirt"/>
+  <circle cx="105" cy="48" r="42" class="t-eco"/>
+  <text x="105" y="44" class="t-txt-l">Ökologie</text><text x="105" y="62" class="t-txt-l">im Fokus</text>
+  <text x="34" y="118" class="t-txt">Soziales</text><text x="105" y="134" class="t-txt">Wirtschaft</text><text x="176" y="118" class="t-txt">Politik</text></svg>`;
 $$('[data-triad]').forEach(el => el.innerHTML = triadSvg);
 
 /* ---------- Navigation ---------- */
@@ -676,12 +644,11 @@ const TIPS = {
   modellieren: 'Erst Karte antippen, von der die Wirkung ausgeht, dann die Karte, auf die sie wirkt. Achtet auf Pfeilketten, die im Kreis laufen!',
   simulieren: 'Verändert immer nur eine Einstellung. Und denkt daran: Ein Modell ist nie die Wirklichkeit.',
   bewerten: 'Urteilt mit Belegen aus eurem Modell und der Simulation. Und schaut, welche Sicht euch noch fehlt.',
-  ergebnis: 'Hier steht euer Forschungsbericht. Kopiert ihn und macht einen Screenshot von eurem Wirkungsgefüge.',
-  lehrkraft: 'Für Lehrkräfte: Einordnung, Annahmen der Simulation und Quellen. Erwartungshorizont und Kompetenzen stehen im Begleitheft.'
+  ergebnis: 'Hier steht euer Forschungsbericht. Kopiert ihn und macht einen Screenshot von eurem Wirkungsgefüge.'
 };
 function setTip(v){ $('#tip').innerHTML = '<b class="who">Prof. Geo</b>' + esc(TIPS[v] || TIPS.start); }
 try { if (location.protocol === 'file:' || /github\.io$/.test(location.hostname)) $('#earthlab').hidden = false; $$('.repo-only').forEach(e => e.hidden = false); } catch(e) {}
-const VIEWS = ['start','entdecken','vermuten','modellieren','simulieren','bewerten','ergebnis','lehrkraft'];
+const VIEWS = ['start','entdecken','vermuten','modellieren','simulieren','bewerten','ergebnis'];
 function route(){
   let v = (location.hash || '').replace('#','');
   if (!VIEWS.includes(v)) v = 'start';
@@ -1240,7 +1207,7 @@ function buildReport(){
   const L = [];
   L.push('FORSCHUNGSBERICHT: MANGROVEN – SENSIBLE ÖKOSYSTEME');
   L.push('Leitfrage: Was passiert mit der Küste, wenn Mangrovenwälder für Garnelenteiche gerodet werden?');
-  L.push('Blickwinkel: ökologische Dimension der Nachhaltigkeit (Soziales und Wirtschaft nur am Rand).');
+  L.push('Blickwinkel: ökologische Dimension der Nachhaltigkeit (Soziales, Wirtschaft und Politik nur am Rand).');
   L.push('');
   L.push('1 · ÖKOSYSTEMLEISTUNGEN (' + state.seen.length + ' von 7 entdeckt)');
   HOTSPOTS.filter(h => state.seen.includes(h.id)).forEach(h => L.push('- ' + h.service));
@@ -1265,7 +1232,7 @@ function buildReport(){
   L.push('5 · BEWERTUNG (ökologische Kriterien: Mangrovenfläche, Fischbestand, Küstenschutz, Kohlenstoff)');
   SOLS.forEach(s => { const r = state.ratings[s.id] || {}; L.push('- ' + s.t + ': ' + CRIT.map(([k]) => r[k] || '?').join(' / ')); });
   L.push('Urteil: ' + (state.judge.trim() || '(noch kein Urteil)'));
-  L.push('Offene Frage (soziale/wirtschaftliche Dimension): ' + (state.blind.trim() || '(keine)'));
+  L.push('Offene Frage (soziale, wirtschaftliche oder politische Dimension): ' + (state.blind.trim() || '(keine)'));
   $('#report').textContent = L.join('\n');
 }
 $('#copyBtn').addEventListener('click', () => {
