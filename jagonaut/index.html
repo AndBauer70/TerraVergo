@@ -427,6 +427,37 @@ body:not(.onmap):not(.relief) header .bubble{display:none}
 .terms{display:flex;flex-wrap:wrap;gap:6px}.term{font:inherit;font-size:.82rem;font-weight:800;border:2.5px solid var(--ink);border-radius:999px;padding:4px 12px;background:#fff;box-shadow:2px 2px 0 var(--ink);cursor:pointer}
 .term[aria-pressed="true"]{background:#FFD23F;transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
 .rpos{font-weight:800;min-width:72px;text-align:center}.rlsel summary{cursor:pointer;font-size:.82rem;font-weight:700;margin-bottom:6px}
+.lect{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center}.lect .geoav{width:96px;height:auto;border:3px solid var(--ink);border-radius:16px;background:#DCEFFF;box-shadow:3px 3px 0 var(--ink)}.lect .go{margin-top:8px}
+@media (max-width:480px){.lect{grid-template-columns:64px 1fr}.lect .geoav{width:64px}}
+.port .proj{position:absolute;inset:0;border-radius:50%;z-index:8;display:grid;place-items:center;color:#A8FFE4;outline:none;
+ background:radial-gradient(circle at 50% 45%,rgba(2,28,36,.78) 0,rgba(2,28,36,.66) 55%,rgba(2,28,36,.35) 72%,rgba(2,28,36,.1) 82%);-webkit-backdrop-filter:blur(1.5px);backdrop-filter:blur(1.5px);align-items:start;padding-top:15%;text-shadow:0 0 6px rgba(70,255,200,.75)}
+.port .proj[hidden]{display:none}
+.port .proj::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(120,255,220,.06) 0 1px,transparent 1px 4px)}
+.port .proj .pin{width:68%;max-height:78%;display:grid;gap:clamp(3px,1vw,8px);justify-items:center;text-align:center;animation:projin .45s ease-out}
+@keyframes projin{0%{opacity:0;transform:translateY(6px) scale(.98);filter:blur(2px)}60%{opacity:.85}100%{opacity:1;transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){.port .proj .pin{animation:none}}
+.port .proj small{font-size:clamp(.55rem,1.2vw,.72rem);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.port .proj h4{margin:0;font-family:var(--f-comic);font-weight:400;letter-spacing:.06em;color:#DFFFF5;font-size:clamp(1.05rem,2.7vw,1.7rem);line-height:1.05}
+.port .proj p{margin:0;font-size:clamp(.66rem,1.45vw,.95rem);line-height:1.38;font-weight:600}
+.port .proj svg{width:100%;max-height:clamp(80px,19vw,175px);fill:none;stroke:#A8FFE4;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(70,255,200,.8))}
+.port .proj svg .dots{fill:#A8FFE4}.port .proj svg .lbl{fill:#DFFFF5;stroke:none;font-size:9.5px;font-weight:700;font-family:Lexend,sans-serif}.port .proj svg .lbl.c{text-anchor:middle}.port .proj svg .sm,.port .proj svg .lbl .sm{font-size:8.5px}
+.port .proj .pnav{display:flex;align-items:center;gap:10px}.port .proj .pnav span{display:flex;gap:4px}.port .proj .pnav i{width:6px;height:6px;border-radius:50%;border:1px solid #A8FFE4;display:block}.port .proj .pnav i.on{background:#A8FFE4}
+.port .proj button{font:inherit;font-weight:800;font-size:clamp(.7rem,1.4vw,.9rem);color:#DFFFF5;background:rgba(70,255,200,.12);border:1.5px solid #A8FFE4;border-radius:999px;padding:3px 12px;cursor:pointer;text-shadow:inherit;box-shadow:0 0 8px rgba(70,255,200,.35)}
+.port .proj button:disabled{opacity:.3;cursor:default}.port .proj button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.port .proj .px{position:absolute;top:13%;right:17%;padding:0 9px;font-size:1.1rem;line-height:1.5}
+.port .pfx{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .8s}
+.port .pfx1{background:rgba(2,18,52,.36)}.port .pfx2{background:radial-gradient(circle at 40% 30%,rgba(140,150,60,.35),rgba(105,118,48,.55))}
+.port .proj.small{padding-top:13%}.port .proj.small .pin{width:74%}.port .proj.small svg{max-height:52%}
+.projcap{grid-column:1/-1;border:3px solid var(--ink);border-radius:14px;background:#06222B;color:#A8FFE4;padding:10px 12px;display:grid;gap:8px;justify-items:center;text-align:center;box-shadow:3px 3px 0 var(--ink);text-shadow:0 0 6px rgba(70,255,200,.6)}
+.projcap[hidden]{display:none}.projcap p{margin:0;font-size:.86rem;line-height:1.4;font-weight:600}
+.projcap .pnav{display:flex;align-items:center;gap:10px}.projcap .pnav span{display:flex;gap:4px}.projcap .pnav i{width:6px;height:6px;border-radius:50%;border:1px solid #A8FFE4;display:block}.projcap .pnav i.on{background:#A8FFE4}
+.projcap button{font:inherit;font-weight:800;font-size:.85rem;color:#DFFFF5;background:rgba(70,255,200,.12);border:1.5px solid #A8FFE4;border-radius:999px;padding:4px 14px;cursor:pointer}.projcap button:disabled{opacity:.3}
+.port.fx-sea .pfx1,.port.fx-rain .pfx2{opacity:1}
+.stl{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.stb{display:flex;align-items:center;gap:6px;font:inherit;font-size:.82rem;font-weight:800;border:2.5px solid var(--ink);border-radius:12px;padding:6px 10px;background:#fff;box-shadow:2px 2px 0 var(--ink);cursor:pointer;text-align:left}
+.stb svg{width:22px;height:22px;flex:none;fill:none;stroke:#1B1B2F;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.stb[aria-pressed="true"]{background:#FFD8D6;transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.fzl{display:grid;gap:8px}.fzi{display:grid;grid-template-columns:minmax(150px,220px) 18px 1fr;gap:8px;align-items:center;border:2px solid var(--ink);border-radius:10px;padding:6px 10px;background:#FBF6EE}
+.fzi b{font-size:.88rem}.fzi select{font:inherit;font-size:.82rem;border:2px solid var(--ink);border-radius:8px;padding:4px;width:100%;min-width:0}.fzi select.ok{background:#D9F2E0}.fzi select.no{background:#FBE0DF}
+@media (max-width:560px){.fzi{grid-template-columns:1fr}.fzi>span{display:none}}
 .armbtns{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}.armbtns .pbtn{font-size:.78rem;padding:4px 8px}
 .armc .chip{vertical-align:middle;font-family:var(--f-body,Lexend,sans-serif);letter-spacing:.03em;background:#FFF6C9}
 .axl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
@@ -582,13 +613,15 @@ details a{color:var(--sea);font-weight:700}
         <div class="port" id="port">
           <canvas id="pc" width="560" height="560" aria-hidden="true"></canvas>
           <div class="crits" id="crits"></div>
-          <div class="glows" id="glows" aria-hidden="true"></div>
+          <div class="glows" id="glows" aria-hidden="true"></div><div class="pfx pfx1" aria-hidden="true"></div><div class="pfx pfx2" aria-hidden="true"></div>
           <svg class="armsvg" viewBox="0 0 400 400" aria-label="Steuerbarer Greifarm" role="img"><g id="armg" stroke="#1B1B2F" stroke-linejoin="round" stroke-linecap="round"></g></svg>
           <div class="lampcone"></div>
           <div class="glass"></div>
           <div class="hud" id="hud">0 m</div>
+          <div class="proj" id="proj" hidden tabindex="-1" role="dialog" aria-label="Vortrag von Prof. Geo"></div>
         </div></div>
         <svg class="dbar" id="dbar" viewBox="0 0 74 400" preserveAspectRatio="none" role="slider" tabindex="0" aria-label="Tiefenleiste: antippen, um eine Zieltiefe zu wählen" aria-valuemin="0" aria-valuemax="4000" aria-valuenow="0"></svg>
+        <div class="projcap" id="projcap" hidden aria-live="polite"></div>
         </div>
         <div class="inst side" aria-live="off">
           <div class="gauge"><small>Sonnenlicht</small><b id="iL">100 %</b><span class="sub" id="iL2">so hell wie an der Oberfläche</span>
@@ -937,18 +970,19 @@ const MIS={
   maxD:60,TT:[[0,28.5],[30,28.2],[60,27.8]],k1:.05,k2:.035,tint:[.8,1.12,1],scene:"reef",heatT:true,tr:[24,32,2],cmax:60,
   cr:["koralle","clown","schildkroete","papagei","riffhai","riesenmuschel"].map(id=>MCR[id]),minFound:5,
   need:{v:"L",d:[0,5,10,20,30,45,60]},
-  q:"Warum gibt es Korallenriffe nur in flachem, warmem, klarem Wasser – und was macht eine Hitzewelle mit ihnen?",
+  q:"Warum gibt es Korallenriffe nur in flachem, warmem, klarem Wasser – und wie setzt der Klimawandel ihnen zu?",
   intro:"Das Great Barrier Reef ist das größte Korallenriff der Erde: über 2300 km lang und aus dem All zu sehen. Hier leben Tausende Arten auf engem Raum. Ihr taucht am Außenriff entlang: Von der Oberfläche bis etwa 40 m wachsen Korallen, darunter liegt bis 60 m nur noch Sandboden.",
-  thema:"Korallenriff, Licht, Korallenbleiche",
+  thema:"Korallen und Symbiose, Licht, Folgen des Klimawandels",
   facts:[["Tauchtiefe","bis 60 m"],["Korallen","von 0 bis etwa 40 m"],["Wasser","im Sommer 28–29 °C, sehr klar"]],
-  tip:"Willkommen am Great Barrier Reef! Messt das Licht bis zum Sandboden in 60 m und achtet darauf, bis zu welcher Tiefe Korallen wachsen. Dann simuliert ihr eine Hitzewelle.",
+  tip:"Willkommen am Great Barrier Reef! Messt das Licht bis zum Sandboden in 60 m und achtet darauf, bis zu welcher Tiefe Korallen wachsen. Prof. Geo hat außerdem einen Vortrag über Korallen vorbereitet. Danach untersucht ihr, was der Klimawandel dem Riff antut.",
   tasks:[
    Object.assign({id:"r1",q:"Am Riff kommt selbst in 30 m noch viel Licht an. Trotzdem wachsen Steinkorallen fast nur in den oberen 30–40 m. Warum?",o:[["In ihrem Gewebe leben Algen. Diese brauchen viel Licht für die Photosynthese und versorgen die Koralle mit Nahrung.",""],["Weiter unten ist das Wasser zu salzig.","Der Salzgehalt ist oben und unten fast gleich."],["Korallen müssen zum Atmen auftauchen.","Korallen haben keine Lungen. Was brauchen ihre Algen?"]],ok:0,why:"Genau! Korallen und Algen leben in Symbiose: Die Algen liefern Zucker, die Koralle bietet Schutz und Nährstoffe. Deshalb gibt es Riffe nur in klarem, flachem, warmem Wasser."},lockNeed),
    {id:"r2",lock:()=>!D.heatSeen,lockMsg:"Schiebt zuerst den Hitzewellen-Regler auf mindestens +1,5 °C und beobachtet die Korallen im Bullauge.",q:"Was passiert mit den Korallen, wenn das Wasser wochenlang 1–2 °C wärmer ist als sonst?",o:[["Sie wachsen schneller, weil Wärme gut für sie ist.","Korallen leben schon nahe an ihrer Temperaturgrenze."],["Sie stoßen ihre Algen ab und werden weiß. Dauert die Hitze an, verhungern sie.",""],["Sie wandern in kühleres Wasser.","Korallen sind festgewachsen und können nicht wandern."]],ok:1,why:"Richtig, das ist die Korallenbleiche. Ohne Algen fehlt den Korallen der größte Teil ihrer Nahrung. Kühlt das Wasser rechtzeitig ab, können sie sich erholen."},
    {id:"r3",q:"Am Great Barrier Reef gab es seit 2016 fünf Massenbleichen (2016, 2017, 2020, 2022, 2024). Was bedeutet das für das Riff als Lebensraum?",o:[["Nichts, Fische brauchen keine Korallen.","Viele Rifffische finden in den Korallen Nahrung und Verstecke."],["Mit den Korallen verschwinden Nahrung und Verstecke für Tausende Arten; die Küste verliert ihren natürlichen Wellenbrecher.",""],["Das Riff wächst, weil weiße Korallen mehr Licht zurückwerfen.","Weiße Korallen sind geschwächt und sterben oft ab."]],ok:1,why:"Genau. Das Riff ist verwundbar (vulnerabel): Wenn Hitzewellen immer schneller aufeinander folgen, bleibt kaum Zeit zur Erholung."},
+   {id:"r5",q:"Das Meer nimmt einen großen Teil des CO₂ aus der Luft auf. Was passiert dadurch im Wasser?",o:[["Es bildet sich Kohlensäure: Das Wasser wird saurer, der pH-Wert sinkt. Korallen können dann schwerer Kalk bilden.",""],["Das Wasser wird salziger.","CO₂ verändert nicht den Salzgehalt, sondern den pH-Wert."],["Die Algen wachsen besser, deshalb werden die Korallen bunter.","Schaltet die Ozeanversauerung ein und schaut auf die Korallen."]],ok:0,why:"Richtig, das ist die Ozeanversauerung. Seit Beginn der Industrialisierung ist der pH-Wert der Meeresoberfläche von etwa 8,2 auf 8,1 gesunken. Das klingt wenig, bedeutet aber rund 30 % mehr Säure."},
    {id:"r4",lock:()=>!D.q.r3,lockMsg:"Erst die Frage davor beantworten.",q:"Was hilft dem Riff, sich zu erholen (Resilienz)?",o:[["Weniger Treibhausgase, sauberes Wasser ohne Dünger und Schlamm – und Pausen zwischen den Hitzewellen.",""],["Die Korallen anmalen.","Die Farbe kommt von den Algen – Anmalen hilft nicht."],["Mehr Boote, die das Wasser umrühren.","Das kühlt das Meer nicht ab."]],ok:0,why:"Richtig! Ein Riff kann sich in etwa zehn Jahren erholen, wenn es Ruhe hat. Entscheidend ist, die Erwärmung der Meere zu bremsen."}],
-  stamp:"Korallen brauchen Licht für ihre Algen. Steigt die Wassertemperatur nur 1–2 °C über das Übliche, bleichen sie aus. Häufige Hitzewellen machen das Riff verwundbar.",
-  wok:()=>!!D.heatSeen},
+  stamp:"Korallen sind Tiere, die in Symbiose mit Algen leben und dafür Licht brauchen. Erwärmung, Versauerung, Stürme, trübes Wasser und ausbleibende Nahrung setzen dem Riff zu. Folgen mehrere Belastungen dicht aufeinander, bleibt kaum Zeit zur Erholung.",
+  wok:()=>!!D.heatSeen&&folgenOk()},
  golfstrom:{id:"golfstrom",n:"Die Warmwasserheizung Europas",kurz:"Golfstrom",ort:"Vor Kap Hatteras, Nordamerika (35° N)",ll:[-74.5,35.5],lx:-17,ly:-10,col:"#E0393B",
   maxD:1000,TT:[[0,27.5],[50,26.5],[100,24.5],[200,19.5],[400,15],[600,10.5],[800,7],[1000,5.2]],k1:.06,k2:.025,flow:.35,scene:"current",tr:[0,30,5],cmax:1000,
   cr:[MCR.sargassum,MCR.fliegfisch,MCR.karett,cpc("thun",{band:[30,400]}),cpc("laternen",{band:[400,950]})],minFound:4,
@@ -1081,7 +1115,7 @@ function chainHTML(){const ch=D.chain||[];const pool=CHAIN.slice().sort((a,b)=>M
 function heatHTML(){const h=D.heat||0;return `<div class="card"><h3>Hitzewelle simulieren</h3><p>Schiebt den Regler: Um wie viel ist das Wasser wärmer als im normalen Sommer? Beobachtet die Korallen im Bullauge (zwischen 0 und 40 m) – mit Scheinwerfer seht ihr die Farben am besten.</p>
   <div class="rng"><label for="heat">wärmer als normal</label><input type="range" id="heat" min="0" max="3" step=".5" value="${h}"><output id="heato">+${de(h)} °C</output></div>
   <p class="cap" id="heatfb">${heatTxt(h)}</p></div>`}
-const heatTxt=h=>h<1?"Die Korallen sind gesund und bunt.":h<1.5?"Die Korallen stehen unter Stress und verlieren erste Algen.":h<2.5?"Korallenbleiche! Die Korallen stoßen ihre Algen ab und werden weiß.":"Schwere Bleiche: Hält die Hitze an, sterben viele Korallen.";
+const heatTxt=h=>h<1?"Die Korallen sind gesund und bunt.":h<1.5?"Die Korallen stehen unter Stress und verlieren erste Algen.":h<2?"Korallenbleiche! Die Korallen stoßen ihre Algen ab und werden weiß.":h<2.5?"Korallenbleiche! Geschwächte Korallen bekommen dunkle Flecken: ansteckende Korallenkrankheiten breiten sich aus.":"Schwere Bleiche und Krankheiten: Hält die Hitze an, sterben viele Korallen.";
 
 /* ============ Missionen: Bühne ============ */
 function mTgtHTML(){const nd=M.need,ok=nd.d.filter(d=>recAt(d,nd.v)).length;const V={L:["das Sonnenlicht","Licht messen"],T:["die Wassertemperatur","Temperatur messen"],P:["den Wasserdruck","Druck messen"]}[nd.v];
@@ -1091,9 +1125,9 @@ function mChart(){return chart(M.need.v,M.cmax||M.maxD)}
 function missionStage(){const i=ORDER.indexOf(M.id)+1;
   return `<div class="shead"><span class="num" style="background:${M.col}">${i}</span><h2>${esc(M.n)}</h2><div class="meta"><span class="chip">${esc(M.kurz)}</span><span class="chip">bis ${th(M.maxD)} m</span><span class="chip"><span id="fcount">${nFound()}</span> von ${M.cr.length} Arten · mind. ${M.minFound}</span></div></div>
   <div class="auftrag"><small>Forschungsfrage</small>${esc(M.q)}</div>
-  <div class="card"><h3>${esc(M.ort)}</h3><p>${esc(M.intro)}</p></div>
+  <div class="card"><h3>${esc(M.ort)}</h3><p>${esc(M.intro)}</p></div>${M.id==="riff"?lectHTML():""}
   <div class="two">${mTgtHTML()}<div class="card dia"><h3>${{L:"Lichtprofil",T:"Temperaturprofil",P:"Druckprofil"}[M.need.v]}</h3><div id="ch">${mChart()}</div></div></div>
-  ${M.id==="riff"?heatHTML():""}${M.widget?M.widget():""}
+  ${M.id==="riff"?stressHTML()+folgenHTML():""}${M.widget?M.widget():""}
   <div class="card"><h3>Artenkartei</h3><p class="cap">Tippt ein Lebewesen im Bullauge an und wählt die passende Beschreibung. In der Dunkelheit braucht ihr den Scheinwerfer.</p><div class="kartei" id="kartei">${karteiHTML()}</div></div>
   ${M.tasks.map(taskHTML).join("")}
   ${D.done?`<div class="stamp"><span class="ic">✓</span><div><b class="t">Mission geschafft!</b>${esc(M.stamp)}</div></div><div class="nextbar"><button class="go" type="button" data-tomap>Zur Missionsauswahl</button></div>`:""}`}
@@ -1112,7 +1146,7 @@ const mDoneNow=()=>mNeedDone()&&M.tasks.every(t=>D.q[t.id])&&nFound()>=M.minFoun
 function mCheckDone(){if(!D.done&&mDoneNow()){D.done=true;save();renderStage();renderTip();say("Mission geschafft! "+M.stamp)}}
 function mDemo(){if(M.type==="relief"){const R=relD();["a","p"].forEach(k=>{const P=PROF[k];for(let i=0;i<NSEC;i++)R.pings[k].push((i+.5)*P.len/NSEC);P.mk.forEach(m=>R.labels[m.k]=m.f)});R.mz={};MERK.forEach((m,i)=>R.mz[i]=m[0]);R.kz={};KERNE.forEach(k=>R.kz[k.id]=k.f);save();renderAll();return}M.need.d.forEach(d=>{if(!recAt(d,M.need.v)){let r=D.recs.find(x=>Math.abs(x.d-d)<=2);if(!r){r={d,T:null,L:null,P:null};D.recs.push(r)}r.T=Math.round(temp(d)*10)/10;r.P=press(d);r.L=lightPct(d)}});
   D.recs.sort((a,b)=>a.d-b.d);M.cr.forEach(c=>{if(!D.found[c.id])D.found[c.id]={d:Math.round((c.band[0]+c.band[1])/2)}});
-  D.heat=D.heat||2;D.heatSeen=true;D.probe=true;D.chain=CHAIN.slice();save();renderAll()}
+  D.heat=D.heat||2;D.heatSeen=true;D.probe=true;D.chain=CHAIN.slice();D.lect=true;D.fz={};FOLG.forEach(x=>D.fz[x.k]=x.f);save();renderAll()}
 
 /* Bestimmungskarten (Missionen) */
 function openCards(id){U.kc=id;U.cwr=[];renderCards();$("#km").hidden=false;const f=$("#kmb .opt")||$("#kmb [data-kclose]");f&&f.focus()}
@@ -1214,7 +1248,7 @@ function enterMission(id){S.m=id;M=MIS[id];D=id==="atlantik"?S:(S.mx[id]=Object.
   Object.assign(U,{depth:0,target:0,pan:0,lamp:false,wrong:{},cw:{},chW:null});
   $("#lamp").setAttribute("aria-pressed","false");$("#lampled").classList.remove("on");port.classList.remove("lamp");crits.style.transform=glows.style.transform="";
   $("#dr").max=M.maxD;$("#dr").step=M.maxD<=100?1:5;syncCrits.last="";checkEvents.floor=false;checkEvents.dark=false;$("#apz").dataset.k="";lastShownDepth=-1;
-  U.arm={...ARM0,open:true,sample:null};U.tool=0;U.trapT=0;renderAll();setTarget(0);drawArm();setTimeout(drawRivets,60);window.scrollTo({top:0})}
+  U.arm={...ARM0,open:true,sample:null};U.tool=0;U.trapT=0;U.proj=null;{const pj=$("#proj"),pc2=$("#projcap");if(pj)pj.hidden=true;if(pc2)pc2.hidden=true}renderAll();setTarget(0);drawArm();setTimeout(drawRivets,60);window.scrollTo({top:0})}
 
 /* ============ Bullauge: Szenen ============ */
 function drawPort(d,t){
@@ -1241,19 +1275,23 @@ function drawPort(d,t){
     const col=[base[0]*A.r*.95+8,base[1]*A.g*.95+7,base[2]*A.b*.95+9];
     ctx.fillStyle=`rgb(${col.map(v=>v|0)})`;ctx.beginPath();ctx.moveTo(0,H);for(let x=0;x<=W;x+=10)ctx.lineTo(x,fy(x));ctx.lineTo(W,H);ctx.closePath();ctx.fill();
     ctx.strokeStyle="#1B1B2F";ctx.lineWidth=3;ctx.beginPath();for(let x=0;x<=W;x+=10)ctx.lineTo(x,fy(x));ctx.stroke();
-    if(M.scene==="reef")drawReef(ft,A);else if(M.scene==="smoker")drawSmoker(ft,t);if(M.id==="marianen"&&U.lamp&&!(D.ax&&D.ax.tuete))drawBag(ft);
+    if(M.scene==="reef"){drawReef(ft,A);drawReefFx(t)}else if(M.scene==="smoker")drawSmoker(ft,t);if(M.id==="marianen"&&U.lamp&&!(D.ax&&D.ax.tuete))drawBag(ft);
     else if(U.lamp){ctx.fillStyle="rgba(110,90,70,.8)";for(let i=0;i<14;i++){ctx.beginPath();ctx.ellipse((i*73)%W,ft+18+(i*37)%(H-ft-10),6,3,0,0,7);ctx.fill()}}}
 }
-function drawReef(ft,A){const W=pc.width,H=pc.height,bl=bleachF(),cf=clamp((41-U.depth)/6,0,1),u=H/480*(.65+.35*cf);
-  const col=c=>{const m=c.map(v=>v+(245-v)*bl);return `rgb(${(m[0]*A.r)|0},${(m[1]*A.g)|0},${(m[2]*A.b)|0})`};
+function drawReef(ft,A){const W=pc.width,H=pc.height,bl=bleachF(),cf=clamp((41-U.depth)/6,0,1),ac=stOn("acid"),u=H/480*(.65+.35*cf)*(ac?.78:1),dis=(D.heat||0)>=2,stm=stOn("storm");
+  const col=c=>{let m=c.map(v=>v+(245-v)*bl);if(ac)m=m.map(v=>v+(165-v)*.45);return `rgb(${(m[0]*A.r)|0},${(m[1]*A.g)|0},${(m[2]*A.b)|0})`};
   const C=[[.07,"br",[231,127,166]],[.19,"brain",[200,150,60]],[.33,"table",[120,170,90]],[.47,"fan",[150,80,200]],[.6,"br",[240,140,60]],[.74,"brain",[110,160,200]],[.88,"br",[230,90,100]]];
   ctx.lineJoin=ctx.lineCap="round";
   C.forEach(([fx,k,c],i)=>{if(((i*3)%7)/7>=cf-.01)return;const x=fx*W,y=ft+4;ctx.strokeStyle="#1B1B2F";ctx.fillStyle=col(c);
+    if(stm&&i%2===1){ctx.lineWidth=3;[[-30,-4,.3],[-8,-2,-.5],[14,-5,.15],[34,-3,-.2]].forEach(([dx,dy,a])=>{ctx.save();ctx.translate(x+dx*u,y+dy*u);ctx.rotate(a);ctx.beginPath();ctx.rect(-12*u,-3*u,24*u,6*u);ctx.fill();ctx.stroke();ctx.restore()});return}
+
     if(k==="br"){const P=[[0,0,0,-60],[0,-30,-22,-58],[0,-38,24,-70],[-14,-48,-30,-80],[14,-56,10,-92]];
       [[12,"#1B1B2F"],[7,col(c)]].forEach(([w,s])=>{ctx.lineWidth=w*u;ctx.strokeStyle=s;P.forEach(([a,b,c2,d2])=>{ctx.beginPath();ctx.moveTo(x+a*u,y+b*u);ctx.lineTo(x+c2*u,y+d2*u);ctx.stroke()})})}
     else if(k==="brain"){ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(x,y,40*u,30*u,0,Math.PI,0);ctx.closePath();ctx.fill();ctx.stroke();ctx.lineWidth=2;ctx.beginPath();for(let i=-30;i<=30;i+=6)ctx.lineTo(x+i*u,y-14*u-Math.sin(i)*5*u);ctx.stroke()}
     else if(k==="table"){ctx.lineWidth=3;ctx.fillRect(x-5*u,y-36*u,10*u,36*u);ctx.strokeRect(x-5*u,y-36*u,10*u,36*u);ctx.beginPath();ctx.ellipse(x,y-40*u,46*u,9*u,0,0,7);ctx.fill();ctx.stroke()}
     else{ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,y);ctx.arc(x,y,48*u,Math.PI*1.15,Math.PI*1.85);ctx.closePath();ctx.fill();ctx.stroke();ctx.lineWidth=1.5;for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(x,y,(12+i*8)*u,Math.PI*1.18,Math.PI*1.82);ctx.stroke()}}});
+  if(dis)C.forEach(([fx],i)=>{if(i%3!==0||((i*3)%7)/7>=cf-.01||(stm&&i%2===1))return;const x=fx*W,y=ft+4;ctx.fillStyle="rgba(43,30,28,.92)";ctx.strokeStyle="#1B1B2F";ctx.lineWidth=1.5;
+    [[-8,-16,6],[6,-26,5],[-2,-38,4],[10,-10,4]].forEach(([dx,dy,r])=>{ctx.beginPath();ctx.arc(x+dx*u,y+dy*u,r*u,0,7);ctx.fill();ctx.stroke()})});
 }
 const PUFF=Array.from({length:22},(_,i)=>i/22);
 function drawSmoker(ft,t){const W=pc.width,H=pc.height,x0=W*.5,top=ft-H*.27;
@@ -1823,6 +1861,102 @@ document.addEventListener("click",e=>{if(!e.target.closest("#rcore")||U.diving)r
   say(ki.cont?`Bohrkern bei ${th(x)} km: mehrere Kilometer Sand und Ton – darunter <b>Granit</b>. Hier liegt noch kontinentale Kruste.`:`Bohrkern bei ${th(x)} km, ${th(ki.dist)} km vom Rücken: Vulkangestein ${ageTxt(ki.age)} alt, darüber Schlamm: ${sedTxt(ki.sed)}.`);renderStage()})});
 try{new ResizeObserver(drawRivets).observe($("#port"))}catch(e){window.addEventListener("resize",drawRivets)}
 
+
+/* ============ Riff: Vortrag von Prof. Geo (Projektion aufs Bullauge) ============ */
+const GEOHEAD=`<path d="M40 58c0-18 10-30 25-30s25 12 25 30v8c0 18-11 30-25 30S40 84 40 66Z"/><ellipse cx="39" cy="64" rx="5" ry="8"/><ellipse cx="91" cy="64" rx="5" ry="8"/>
+ <path d="M38 62c-3-22 8-38 28-38 18 0 27 12 26 32-2-8-5-13-9-15-4 4-14 6-24 4-8-1-12 0-15 3-3 4-5 9-6 14Z"/><path d="M47 55c4-2 9-2 12 0M71 55c3-2 8-2 12 0"/>
+ <rect x="44" y="57" width="19" height="12" rx="3"/><rect x="67" y="57" width="19" height="12" rx="3"/><path d="M63 61h4M44 61l-5-2M86 61l5-2M65 66c-1 5-3 9-4 11 2 1 5 1 7 0M55 83c5 4 14 4 20-1"/>
+ <circle cx="54" cy="63" r="1.6"/><circle cx="76" cy="63" r="1.6"/><path d="M36 104c4-6 14-8 29-8s25 2 29 8"/>`;
+const GEOAV=`<svg class="geoav" viewBox="30 20 70 92" aria-hidden="true"><g stroke="#1B1B2F" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M30 112c2-10 14-16 35-16s33 6 35 16Z" fill="#5B7BC4"/><rect x="55" y="88" width="20" height="12" fill="#EDB898"/>
+ <ellipse cx="39" cy="64" rx="5" ry="8" fill="#F0BFA2"/><ellipse cx="91" cy="64" rx="5" ry="8" fill="#F0BFA2"/>
+ <path d="M40 58c0-18 10-30 25-30s25 12 25 30v8c0 18-11 30-25 30S40 84 40 66Z" fill="#F4C8AC"/>
+ <path d="M38 62c-3-22 8-38 28-38 18 0 27 12 26 32-2-8-5-13-9-15-4 4-14 6-24 4-8-1-12 0-15 3-3 4-5 9-6 14Z" fill="#5F636B"/>
+ <circle cx="54" cy="63" r="2.3" fill="#3E5A6E" stroke="none"/><circle cx="76" cy="63" r="2.3" fill="#3E5A6E" stroke="none"/>
+ <rect x="44" y="57" width="19" height="12" rx="3" fill="rgba(255,255,255,.25)" stroke-width="3.5"/><rect x="67" y="57" width="19" height="12" rx="3" fill="rgba(255,255,255,.25)" stroke-width="3.5"/>
+ <path d="M63 61h4M44 61l-5-2M86 61l5-2M65 66c-1 5-3 9-4 11 2 1 5 1 7 0M55 83c5 4 14 4 20-1" fill="none" stroke-width="2.4"/></g></svg>`;
+const POLYP=`<path d="M76 84 L84 114 H156 L164 84"/><path d="M98 112v-8M120 112v-8M142 112v-8"/>
+ <path d="M92 100V48M148 100V48"/><path d="M92 48c0-8 56-8 56 0"/><path d="M92 100c0 4 56 4 56 0"/><ellipse cx="120" cy="44" rx="6" ry="2.5"/>
+ <path d="M104 54c0 30 32 30 32 0" stroke-dasharray="3 3"/>
+ <path d="M96 46c-8-12-20-18-30-18M106 42c-4-14-10-24-16-30M120 41V10M134 42c4-14 10-24 16-30M144 46c8-12 20-18 30-18"/>
+ <g class="dots">${[[70,29],[80,32],[92,16],[96,24],[120,14],[120,24],[148,16],[144,24],[170,29],[160,32]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.5"/>`).join("")}
+ ${[[97,60],[97,74],[97,88],[143,64],[143,78],[143,92]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.2"/>`).join("")}</g>
+ <path d="M58 28h8M62 72h52M126 44h48M146 76h28M161 100h13"/>
+ <g class="lbl"><text x="0" y="24">Fangarme mit</text><text x="0" y="35">Nesselzellen</text><text x="0" y="75">Magenraum</text>
+ <text x="177" y="47">Mund</text><text x="177" y="72">Algen im</text><text x="177" y="83">Gewebe</text><text x="177" y="104">Kalkbecher</text></g>`;
+const LECT=[
+ {h:"Hallo, hier spricht Prof. Geo!",p:"Ich projiziere euch einen kleinen Vortrag aufs Bullauge. Thema: Wie ist eine Koralle gebaut – und mit wem lebt sie zusammen?",svg:`<svg viewBox="30 20 70 92">${GEOHEAD}</svg>`},
+ {h:"Korallen sind Tiere",p:"Eine Koralle ist weder Stein noch Pflanze. Sie besteht aus Tausenden winzigen Polypen, meist nur wenige Millimeter groß. Korallen sind mit den Quallen verwandt.",
+  svg:`<svg viewBox="0 0 200 116"><path d="M100 112V60M100 80l-34-30M100 70l36-34M66 50l-14-26M66 50l8-30M136 36l-6-24M136 36l22-14"/>${[[52,24],[74,20],[130,12],[158,22],[100,60]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7"/><path d="M${x-6} ${y-6}l-4-5M${x} ${y-7}v-6M${x+6} ${y-6}l4-5"/>`).join("")}<g class="lbl"><text x="168" y="70">ein Polyp</text><text x="168" y="80">≈ 2–5 mm</text></g><path d="M108 60h56"/></svg>`},
+ {h:"Aufbau eines Polypen",p:"Mit seinen Fangarmen und den Nesselzellen fängt der Polyp nachts Plankton. Unten scheidet er Kalk aus und baut sich so einen schützenden Becher.",svg:`<svg viewBox="0 0 240 120">${POLYP}</svg>`},
+ {h:"So wächst ein Riff",p:"Viele Polypen bilden zusammen eine Kolonie mit einem gemeinsamen Kalkskelett. Sterben sie ab, wachsen neue darauf. Massige Korallen wachsen nur etwa 1 cm im Jahr, Geweihkorallen bis zu 10 cm. Ein großes Riff braucht Jahrtausende.",
+  svg:`<svg viewBox="0 0 200 110"><path d="M20 100h160"/><path d="M30 100c10-14 40-16 70-16s60 2 70 16" stroke-dasharray="4 3"/><path d="M40 84c10-14 30-16 60-16s50 2 60 16" stroke-dasharray="4 3"/><path d="M52 68c10-14 24-16 48-16s38 2 48 16"/><path d="M70 52c6-10 18-14 30-14s24 4 30 14"/>${[78,92,106,120].map(x=>`<path d="M${x} 44l-3-10M${x} 44l3-10"/>`).join("")}<g class="lbl"><text x="186" y="98">alt</text><text x="186" y="52">jung</text></g></svg>`},
+ {h:"Symbiose: Koralle und Alge",p:"Im Gewebe der Polypen leben winzige Algen. Sie betreiben Photosynthese und geben der Koralle Zucker und Sauerstoff – bis zu 90 % ihrer Nahrung. Die Koralle bietet ihnen Schutz, Kohlenstoffdioxid und Nährstoffe. Beide profitieren: Das ist Symbiose.",
+  svg:`<svg viewBox="0 0 220 112"><rect x="6" y="34" width="72" height="44" rx="10"/><rect x="142" y="34" width="72" height="44" rx="10"/><g class="lbl c"><text x="42" y="60">Koralle</text><text x="178" y="55">Alge</text><text x="178" y="67" class="sm">(Zooxanthelle)</text></g>
+   <path d="M82 46h56M132 41l6 5-6 5"/><path d="M138 68H82M88 63l-6 5 6 5"/><g class="lbl c sm"><text x="110" y="36">Schutz, CO₂, Nährstoffe</text><text x="110" y="86">Zucker, Sauerstoff</text></g>
+   <circle cx="178" cy="12" r="7"/><path d="M178 1v-4M178 23v4M167 12h-4M189 12h4M170 4l-3-3M186 4l3-3"/><path d="M178 26v6M175 29l3 3 3-3"/><g class="lbl sm"><text x="190" y="30">Licht</text></g></svg>`},
+ {h:"Was ein Riff braucht",p:"Licht für die Algen, also klares und flaches Wasser bis etwa 40 m. Wärme von etwa 20 bis 29 °C. Und sauberes, salziges Wasser mit wenig Nährstoffen. Deshalb gibt es Riffe nur in den Tropen.",
+  svg:`<svg viewBox="0 0 220 96"><circle cx="40" cy="38" r="14"/><path d="M40 16v-8M40 60v8M18 38h-8M62 38h8M24 22l-6-6M56 22l6-6M24 54l-6 6M56 54l6 6"/><rect x="104" y="12" width="12" height="44" rx="6"/><circle cx="110" cy="64" r="10"/><path d="M110 56V28"/><path d="M180 16c10 16 18 26 18 38a18 18 0 0 1-36 0c0-12 8-22 18-38Z"/>
+   <g class="lbl c sm"><text x="40" y="90">Licht</text><text x="110" y="90">20–29 °C</text><text x="180" y="90">sauber, salzig</text></g></svg>`},
+ {h:"Wenn es zu warm wird",p:"Ist das Wasser wochenlang zu warm, bilden die Algen schädliche Stoffe. Die Koralle stößt sie aus, und ihr weißes Kalkskelett schimmert durch: Korallenbleiche. Ohne Algen hungert sie. Kühlt das Wasser bald ab, kann sie neue Algen aufnehmen.",
+  svg:`<svg viewBox="0 0 220 100"><path d="M50 92V50M50 66l-20-22M50 58l22-24M30 44l-6-16M72 34l4-16"/><g class="dots">${[[44,62],[56,52],[34,48],[64,40],[28,34],[74,24],[50,74]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2"/>`).join("")}</g>
+   <path d="M96 56h30M120 50l6 6-6 6"/><g class="lbl c sm"><text x="111" y="46">zu warm</text></g><path d="M170 92V50M170 66l-20-22M170 58l22-24M150 44l-6-16M192 34l4-16" stroke-dasharray="2 3"/>
+   <g class="lbl c sm"><text x="50" y="100">mit Algen</text><text x="170" y="100">ausgebleicht</text></g></svg>`},
+ {h:"Jetzt seid ihr dran!",p:"Erwärmung ist nicht die einzige Gefahr. Schaltet unter dem Cockpit die Folgen des Klimawandels ein und findet heraus, was sie dem Riff antun. Viel Erfolg – euer Prof. Geo",svg:`<svg viewBox="30 20 70 92">${GEOHEAD}</svg>`}];
+function projOpen(i=0){U.proj=i;const p=$("#proj");if(!p)return;p.hidden=false;projRender();p.focus();say("Prof. Geo projiziert seinen Vortrag aufs Bullauge. Blättert mit ◀ ▶.")}
+function projRender(){const p=$("#proj"),cap=$("#projcap"),i=U.proj,L=LECT[i];if(!p||i==null)return;const small=$("#port").offsetWidth<420;
+  const nav=`<div class="pnav"><button type="button" data-proj="-1" ${i?"":"disabled"} aria-label="Zurück">◀</button><span>${LECT.map((_,k)=>`<i class="${k===i?"on":""}"></i>`).join("")}</span>${i<LECT.length-1?`<button type="button" data-proj="1" aria-label="Weiter">▶</button>`:`<button type="button" data-projx>Fertig</button>`}</div>`;
+  p.classList.toggle("small",small);
+  p.innerHTML=`<div class="pin" key="${i}"><small>Prof. Geo · Vortrag ${i+1}/${LECT.length}</small><h4>${esc(L.h)}</h4>${L.svg}${small?"":`<p>${esc(L.p)}</p>${nav}`}</div><button type="button" class="px" data-projx aria-label="Vortrag schließen">×</button>`;
+  if(cap){cap.hidden=!small;cap.innerHTML=small?`<p>${esc(L.p)}</p>${nav}`:""}}
+function projClose(){const p=$("#proj"),c=$("#projcap");if(p)p.hidden=true;if(c){c.hidden=true;c.innerHTML=""}U.proj=null;if(!D.lect){D.lect=true;save();renderStage()}}
+window.addEventListener("resize",()=>{if(U.proj!=null)projRender()});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-proj],[data-projx],[data-projopen]");if(!b)return;
+  if(b.hasAttribute("data-projopen")){projOpen(0);const pw=$("#port");if(pw&&pw.getBoundingClientRect().top<0)pw.scrollIntoView({behavior:RM?"auto":"smooth",block:"center"});return}
+  if(b.hasAttribute("data-projx")){projClose();return}U.proj=clamp(U.proj+ +b.dataset.proj,0,LECT.length-1);projRender();const nb=document.querySelector(`[data-proj="${b.dataset.proj}"]:not([disabled])`)||document.querySelector("#proj [data-projx]");if(nb)nb.focus()});
+document.addEventListener("keydown",e=>{if(U.proj==null||(e.target.matches&&e.target.matches("input,select,textarea")))return;
+  if(e.key==="Escape")projClose();else if(e.key==="ArrowRight"&&U.proj<LECT.length-1){U.proj++;projRender()}else if(e.key==="ArrowLeft"&&U.proj>0){U.proj--;projRender()}});
+function lectHTML(){return `<div class="card lect">${GEOAV}<div><h3>Vortrag von Prof. Geo</h3><p>Wie ist eine Koralle gebaut, und warum lebt sie mit Algen zusammen? Prof. Geo erklärt es in einem kurzen Vortrag, direkt auf das Bullauge projiziert.</p>
+  <button class="go" type="button" data-projopen>${D.lect?"Vortrag noch einmal ansehen":"Vortrag aufs Bullauge projizieren"}</button></div></div>`}
+
+/* ============ Riff unter Druck: Folgen des Klimawandels ============ */
+const STRESS=[
+ {k:"sea",n:"Meeresspiegelanstieg",ic:`<path d="M3 15c3-3 6 3 9 0s6 3 9 0M3 20c3-3 6 3 9 0s6 3 9 0"/><path d="M12 11V3M9 6l3-3 3 3"/>`,
+  see:"Das Wasser über dem Riff wird tiefer. Achtet darauf, wie hell es im Bullauge noch ist.",f:"Das Riff liegt tiefer unter der Oberfläche: Weniger Licht erreicht die Algen."},
+ {k:"storm",n:"Stärkere Stürme",ic:`<path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0M12 3c-6 0-9 4-9 8M12 21c6 0 9-4 9-8M21 6c-2-2-5-3-9-3M3 18c2 2 5 3 9 3"/>`,
+  see:"Ein Wirbelsturm ist über das Riff gezogen. Schaut euch die Korallen am Boden an.",f:"Hohe Wellen zerbrechen die Korallen: Die Riffstruktur wird zerstört."},
+ {k:"rain",n:"Veränderte Niederschläge",ic:`<path d="M6 13a4 4 0 0 1 1-8 5 5 0 0 1 9 1 3.5 3.5 0 0 1 1 7Z"/><path d="M8 16l-1 4M12 16l-1 4M16 16l-1 4"/>`,
+  see:"Nach Starkregen spülen die Flüsse Schlamm und Dünger ins Meer. Wie sieht das Wasser jetzt aus?",f:"Algenblüten und trübes Wasser verringern den Lichteinfall."},
+ {k:"curr",n:"Veränderte Meeresströmungen",ic:`<path d="M5 9c2-4 12-4 14 0M17 6l2 3-3 1M19 15c-2 4-12 4-14 0M7 18l-2-3 3-1"/>`,
+  see:"Die Strömung bringt kein frisches Wasser mehr heran. Achtet auf die kleinen hellen Punkte im Wasser: das Plankton.",f:"Das Nahrungsangebot (Plankton) bleibt aus."},
+ {k:"acid",n:"Ozeanversauerung (mehr CO₂)",ic:`<path d="M8 3h8M10 3v6l-5 10a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-10V3"/><path d="M7 16h10"/>`,
+  see:"Das Meer nimmt immer mehr CO₂ aus der Luft auf. Bis zum Jahr 2100 könnte der pH-Wert von heute etwa 8,1 auf 7,8 sinken. Vergleicht die Korallen mit vorher.",f:"Korallen bauen weniger Kalk: Sie wachsen langsamer und ihr Skelett wird instabiler."}];
+const WARM={k:"heat",n:"Erwärmung des Ozeans",f:"Korallenbleiche und mehr ansteckende Korallenkrankheiten."};
+const FOLG=[WARM,...STRESS];
+const FOPT=[2,5,0,3,1,4].map(i=>FOLG[i].f);
+const stOn=k=>!!(D.st&&D.st[k]);
+const folgenOk=()=>FOLG.every(x=>(D.fz||{})[x.k]===x.f);
+function stressHTML(){const h=D.heat||0;D.st=D.st||{};
+  return `<div class="card"><h3>Das Riff unter Druck</h3><p>Der Klimawandel setzt dem Riff auf mehreren Wegen zu. Verändert die Bedingungen einzeln und beobachtet die Korallen im Bullauge (zwischen 0 und 40 m, am besten mit Scheinwerfer).</p>
+  <div class="rng"><label for="heat">Erwärmung des Ozeans</label><input type="range" id="heat" min="0" max="3" step=".5" value="${h}"><output id="heato">+${de(h)} °C</output></div>
+  <p class="cap" id="heatfb">${heatTxt(h)}</p>
+  <div class="stl">${STRESS.map(s=>`<button type="button" class="stb" data-st="${s.k}" aria-pressed="${stOn(s.k)}"><svg viewBox="0 0 24 24" aria-hidden="true">${s.ic}</svg>${esc(s.n)}</button>`).join("")}</div>
+  <p class="cap">${Object.values(D.st).some(Boolean)?"Schaltet die Veränderungen wieder aus, um den Unterschied zu sehen.":"Tippt eine Veränderung an, um sie einzuschalten."}</p></div>`}
+function folgenHTML(){const z=D.fz=D.fz||{};
+  return `<div class="card"><h3>Folgen zuordnen</h3><p>Welche Folge hat jede Veränderung für das Riff? Nutzt eure Beobachtungen im Bullauge.</p>
+  <div class="fzl">${FOLG.map(x=>{const v=z[x.k]||"",ok=v===x.f;return `<div class="fzi"><b>${esc(x.n)}</b><span aria-hidden="true">→</span><select data-fz="${x.k}" class="${v?(ok?"ok":"no"):""}" aria-label="Folge von ${esc(x.n)}"><option value="">– Folge wählen –</option>${FOPT.map(o=>`<option ${o===v?"selected":""}>${esc(o)}</option>`).join("")}</select></div>`}).join("")}</div>
+  ${folgenOk()?`<p class="fb ok">Alles richtig! Fast alle Folgen treffen dieselbe Stelle: die Symbiose mit den Algen und den Bau des Kalkskeletts. Treten mehrere Belastungen zugleich auf, bleibt dem Riff kaum Zeit zur Erholung.</p>`:FOLG.some(x=>z[x.k]&&z[x.k]!==x.f)?`<p class="fb no">Rot markierte Zuordnungen passen noch nicht. Schaltet die Veränderung ein und schaut genau ins Bullauge.</p>`:""}
+  <p class="cap">Nach einer Grafik der US-Wetter- und Ozeanbehörde NOAA.</p></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-st]");if(!b)return;const k=b.dataset.st,s=STRESS.find(x=>x.k===k);D.st=D.st||{};D.st[k]=!D.st[k];save();
+  b.setAttribute("aria-pressed",D.st[k]);applyPfx();if(D.st[k])say(s.see);else say(`${s.n}: wieder ausgeschaltet.`)});
+document.addEventListener("change",e=>{const s=e.target.closest("[data-fz]");if(!s)return;(D.fz=D.fz||{})[s.dataset.fz]=s.value;save();renderStage();mCheckDone()});
+function applyPfx(){const p=$("#port");if(!p)return;const r=M.id==="riff";["sea","rain","acid","storm","curr"].forEach(k=>p.classList.toggle("fx-"+k,r&&stOn(k)))}
+/* Plankton und Trübung im Bullauge */
+const PLK=Array.from({length:46},(_,i)=>[(i*0.618)%1,(i*0.377+.1)%1,1+(i%3)]);
+function drawReefFx(t){const W=pc.width,H=pc.height;
+  if(!stOn("curr")){ctx.fillStyle="rgba(255,255,240,.75)";PLK.forEach(([x,y,r],i)=>{const xx=((x+t*.008*(1+i%4))%1)*W,yy=(y*H*.8+Math.sin(t*.6+i)*6);ctx.beginPath();ctx.arc(xx,yy,r*W/560,0,7);ctx.fill()})}
+  if(stOn("rain")){ctx.fillStyle="rgba(150,140,70,.55)";for(let i=0;i<70;i++){const x=((i*0.73+t*.004)%1)*W,y=((i*0.41)%1)*H;ctx.fillRect(x,y,2,2)}}}
+
 /* ============ Zustand ============ */
 const KEYS="ozeanaut-v1";
 const S0=()=>({lb:{},lbName:"",oz:OZ0(),m:null,mx:{},lay:{cur:true,pb:false},view:"map",st:1,max:1,done:{},q:{},recs:[],found:{},zones:{},cards:{},warm:0,calc:"",report:""});
@@ -2186,7 +2320,7 @@ function renderStage(){if(M.type==="relief"&&!isAtl()){$("#stage").innerHTML=rel
   const rp=$("#rep");if(rp)rp.oninput=e=>{S.report=e.target.value;save()};
   const pr=$("#print");if(pr)pr.onclick=()=>window.print();
 }
-function renderAll(){renderTop();renderStage();renderLog();drawBar();updInst()}
+function renderAll(){renderTop();renderStage();renderLog();drawBar();updInst();applyPfx()}
 function goSt(n){if(n<1||n>5||n>S.max)return;S.st=n;save();renderAll();
   const t=$(".ship");if(t&&window.scrollY>t.offsetTop)t.scrollIntoView({behavior:RM?"auto":"smooth"})}
 
