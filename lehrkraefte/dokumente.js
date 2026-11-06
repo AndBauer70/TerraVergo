@@ -1,5 +1,5 @@
 // Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-06. Nicht von Hand ändern.
-window.TV_LK={"salz":"uf7VjwhCP0oLnT6pmzQjDg==","iter":600000,"id":"055721e61a4b","pruef":{"iv":"GqBb0pQP3mdVTgjf","ct":"xBymna9zrVBmRhdKAdBN1rQg388NJRgqmKBX+qsmDMdDktBWhDc="}};
+window.TV_LK={"salz":"DrodBZ6dftfgtNjnMDUZTA==","iter":600000,"id":"0b24b479873f","pruef":{"iv":"hI+JTz0jscJJhXCB","ct":"tWY6IfQTKSDH4Ad8ZNaEAtCkjpGqbSjPCy3956kYWJ2hqAo33YE="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -288,15 +288,15 @@ window.TV_DOKUMENTE=[
   ]
  },
  {
-  "id": "jagonaut",
-  "titel": "Jagonaut",
+  "id": "DeepDive1",
+  "titel": "DeepDive1",
   "stufe": "Klasse 7 bis 10",
-  "start": "../jagonaut/",
+  "start": "../DeepDive1/",
   "dokumente": [
    {
     "art": "Begleitheft",
-    "titel": "Begleitheft Jagonaut",
-    "href": "jagonaut/begleitheft.html",
+    "titel": "Begleitheft DeepDive1",
+    "href": "DeepDive1/begleitheft.html",
     "typ": "html",
     "kb": 172
    }

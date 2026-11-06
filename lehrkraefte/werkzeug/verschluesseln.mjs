@@ -52,7 +52,7 @@ const APPS = [
   { id: 'planspiel-kartoffelhof', titel: 'Planspiel Kartoffelhof', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'kaffee-lieferkette', titel: 'Die Kaffee-Spur', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'fakt-oder-meinung', titel: 'Fakt oder Meinung?', stufe: 'Klasse 7 bis 10', start: '' },
-  { id: 'jagonaut', titel: 'Jagonaut', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'DeepDive1', titel: 'DeepDive1', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'laendlicher_raum', titel: 'Rura Viva', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'schanze', titel: 'Wer macht die Schanze?', stufe: 'Oberstufe', start: '' },
 ];

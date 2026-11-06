@@ -1,4 +1,4 @@
-Programmbibliotheken und Landflächen in Jagonaut (Missionskarte) (eingebettet in index.html)
+Programmbibliotheken und Landflächen in DeepDive1 (Missionskarte) (eingebettet in index.html)
 ===================================================================================
 
 d3-array 3.2.4 (https://d3js.org/d3-array/)
