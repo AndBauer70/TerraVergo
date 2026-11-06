@@ -1,5 +1,5 @@
 // Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-06. Nicht von Hand ändern.
-window.TV_LK={"salz":"DrodBZ6dftfgtNjnMDUZTA==","iter":600000,"id":"0b24b479873f","pruef":{"iv":"hI+JTz0jscJJhXCB","ct":"tWY6IfQTKSDH4Ad8ZNaEAtCkjpGqbSjPCy3956kYWJ2hqAo33YE="}};
+window.TV_LK={"salz":"6eFnwi2DAY68BQ3cix8rmw==","iter":600000,"id":"a562fc228c54","pruef":{"iv":"aRKNOb5IZDZg9CuU","ct":"rpwmopF2MNr4sICJgfBSeBxm80X+2elnuHKXR41XH/JlTvNOTNk="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -115,24 +115,37 @@ window.TV_DOKUMENTE=[
   ]
  },
  {
-  "id": "sensor-werkstatt",
-  "titel": "Die Sensor-Werkstatt",
+  "id": "sachtext-auswerten",
+  "titel": "Sachtexte auswerten",
   "stufe": "Klasse 5 und 6",
-  "start": "../sensor-werkstatt/",
+  "start": "../sachtext-auswerten/",
+  "dokumente": [],
+  "offen": [
+   {
+    "art": "Spickzettel für Schülerinnen und Schüler (Word)",
+    "href": "../sachtext-auswerten/Spickzettel_Sachtexte_auswerten.docx"
+   }
+  ]
+ },
+ {
+  "id": "geomethode-brocken",
+  "titel": "GeoMethode Kartenkompetenz: Die Brocken-Expedition (Jahrgang 5)",
+  "stufe": "Klasse 5 und 6",
+  "start": "../GeoMethode/brocken-expedition/",
   "dokumente": [
    {
     "art": "Begleitheft",
-    "titel": "Begleitheft Die Sensor-Werkstatt",
-    "href": "sensor-werkstatt/begleitheft.html",
+    "titel": "Begleitheft · Die Brocken-Expedition",
+    "href": "geomethode-brocken/begleitheft.html",
     "typ": "html",
-    "kb": 137
+    "kb": 14
    },
    {
     "art": "Wissensbasis",
-    "titel": "Wissensbasis Die Sensor-Werkstatt",
-    "href": "sensor-werkstatt/wissensbasis.html",
+    "titel": "Wissensbasis · Die Brocken-Expedition",
+    "href": "geomethode-brocken/wissensbasis.html",
     "typ": "html",
-    "kb": 127
+    "kb": 6
    }
   ],
   "offen": []
@@ -330,6 +343,98 @@ window.TV_DOKUMENTE=[
     "href": "../laendlicher_raum/materialien.html"
    }
   ]
+ },
+ {
+  "id": "sensor-werkstatt",
+  "titel": "Die Sensor-Werkstatt",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../sensor-werkstatt/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft Die Sensor-Werkstatt",
+    "href": "sensor-werkstatt/begleitheft.html",
+    "typ": "html",
+    "kb": 137
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis Die Sensor-Werkstatt",
+    "href": "sensor-werkstatt/wissensbasis.html",
+    "typ": "html",
+    "kb": 127
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "geomethode-sahel",
+  "titel": "GeoMethode Kartenkompetenz: Grüne Halbmonde im Sahel (Jahrgang 8)",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../GeoMethode/halbmonde-sahel/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Grüne Halbmonde im Sahel",
+    "href": "geomethode-sahel/begleitheft.html",
+    "typ": "html",
+    "kb": 14
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Grüne Halbmonde im Sahel",
+    "href": "geomethode-sahel/wissensbasis.html",
+    "typ": "html",
+    "kb": 8
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "geomethode-ruhr",
+  "titel": "GeoMethode Kartenkompetenz: Kohle, Kumpel, Campus (Jahrgang 9)",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../GeoMethode/strukturwandel-ruhr/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Kohle, Kumpel, Campus",
+    "href": "geomethode-ruhr/begleitheft.html",
+    "typ": "html",
+    "kb": 14
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Kohle, Kumpel, Campus",
+    "href": "geomethode-ruhr/wissensbasis.html",
+    "typ": "html",
+    "kb": 9
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "geomethode-aletsch",
+  "titel": "GeoMethode Kartenkompetenz: Der schwindende Riese (Jahrgang 10)",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../GeoMethode/aletschgletscher/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Der schwindende Riese",
+    "href": "geomethode-aletsch/begleitheft.html",
+    "typ": "html",
+    "kb": 14
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Der schwindende Riese",
+    "href": "geomethode-aletsch/wissensbasis.html",
+    "typ": "html",
+    "kb": 7
+   }
+  ],
+  "offen": []
  },
  {
   "id": "schanze",

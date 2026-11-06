@@ -13,6 +13,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `fakt-oder-meinung/` | **Fakt oder Meinung?**: Aussagen zum Streitfall Überfischung nach Tatsache, Meinung oder Mischform sortieren, mit Quellenkarten prüfen und nach Sprecher und Interesse fragen; drei Hilfestufen für Klasse 7–10 |
 | `kaffee-lieferkette/` | **Die Kaffee-Spur**: drei Kaffee-Lieferketten (Solino, Discounter, Marke) als Stationen und Wege auf Weltkarte und 3D-Globus, mit Preisaufteilung, Wirkungsgefüge, Stresstest, Lösungsplan und Denkwerkstatt; Begleitheft, Arbeitsblätter M1–M6 und Wissensbasis |
 | `DeepDive1/` | **DeepDive1**: Forschungs-U-Boot nach dem Vorbild von JAGO (Klasse 7). Ozean-Check (fünf Ozeane benennen und nach Größe ordnen), dann acht Missionen auf Weltkarte und 3D-Globus: Stockwerke des Atlantiks, Relief des Meeresbodens (Echolot), Great Barrier Reef, Golfstrom, Humboldtstrom, Black Smoker, Arktis, Marianengraben |
+| `GeoMethode/` | **GeoMethode Kartenkompetenz** mit Frau Prof. Geo: vier eigenständige Anwendungen nach dem Ludwigsburger Modell (Dekodieren, Beschreiben, Erklären, Beurteilen) mit Formulierungshilfen und Stolpersteinen: `brocken-expedition/` (Höhenlinien, Jahrgang 5), `halbmonde-sahel/` (Isohyeten und Satellitendaten, Jahrgang 8), `strukturwandel-ruhr/` (thematische Karten, Jahrgang 9), `aletschgletscher/` (Gletscherkarten und Szenarien, Jahrgang 10) |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -30,6 +31,7 @@ kaffee-lieferkette/            Die Kaffee-Spur
 orientierung-breitenkreise/    Orientierung auf unserer Erde: Die Breitenkreise
 expedition-sogapalag/          Expedition Sogapalag (zwei Personen, zwei Tablets)
 sachtext-auswerten/            Sachtexte auswerten (GeoMethode)
+GeoMethode/                    GeoMethode Kartenkompetenz: vier Anwendungen für Jahrgang 5, 8, 9 und 10
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus
 .gitattributes                 einheitliche Zeilenenden
@@ -81,7 +83,7 @@ An den alten Stellen (z. B. `erdbeben/begleitheft.html`) liegen kleine Weiterlei
 node lehrkraefte/werkzeug/verschluesseln.mjs
 ```
 
-Das Werkzeug fragt nach dem Passwort, verschiebt die neue Fassung nach `_lehrkraefte-originale/`, verschlüsselt alles neu und setzt die Weiterleitungen. **Passwort ändern:** dasselbe Kommando mit dem neuen Passwort. Eine neue Anwendung wird in der Liste `APPS` am Anfang des Werkzeugs ergänzt.
+Das Werkzeug fragt nach dem Passwort, verschiebt die neue Fassung nach `_lehrkraefte-originale/`, verschlüsselt alles neu und setzt die Weiterleitungen. **Passwort ändern:** dasselbe Kommando mit dem neuen Passwort. Eine neue Anwendung wird in der Liste `APPS` am Anfang des Werkzeugs ergänzt. Liegt sie in einem Unterordner (wie `GeoMethode/aletschgletscher/`), bekommt der Eintrag zusätzlich das Feld `pfad`.
 
 Achtung beim Hochladen ohne Git: den Ordner `_lehrkraefte-originale/` nie mit hochladen.
 

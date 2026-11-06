@@ -45,7 +45,8 @@ const APPS = [
   { id: 'kompass-raetsel', titel: 'Das Kompass-Rätsel', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'expedition-sogapalag', titel: 'Expedition Sogapalag', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'orientierung-breitenkreise', titel: 'Die Breitenkreise', stufe: 'Klasse 5 und 6', start: '' },
-  { id: 'sensor-werkstatt', titel: 'Die Sensor-Werkstatt', stufe: 'Klasse 5 und 6', start: '' },
+  { id: 'sachtext-auswerten', titel: 'Sachtexte auswerten', stufe: 'Klasse 5 und 6', start: '' },
+  { id: 'geomethode-brocken', pfad: 'GeoMethode/brocken-expedition', titel: 'GeoMethode Kartenkompetenz: Die Brocken-Expedition (Jahrgang 5)', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'klimasimulation', titel: 'Terra Vergo: Das Rätsel vom Deich und Klimasimulation', stufe: 'Klasse 7 bis 10', start: 'mystery.html' },
   { id: 'christallers-land', titel: 'Christallers Land', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'rungholt', titel: 'Das Rätsel von Rungholt', stufe: 'Klasse 7 bis 10', start: 'rungholt.html' },
@@ -54,13 +55,17 @@ const APPS = [
   { id: 'fakt-oder-meinung', titel: 'Fakt oder Meinung?', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'DeepDive1', titel: 'DeepDive1', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'laendlicher_raum', titel: 'Rura Viva', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'sensor-werkstatt', titel: 'Die Sensor-Werkstatt', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'geomethode-sahel', pfad: 'GeoMethode/halbmonde-sahel', titel: 'GeoMethode Kartenkompetenz: Grüne Halbmonde im Sahel (Jahrgang 8)', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'geomethode-ruhr', pfad: 'GeoMethode/strukturwandel-ruhr', titel: 'GeoMethode Kartenkompetenz: Kohle, Kumpel, Campus (Jahrgang 9)', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'geomethode-aletsch', pfad: 'GeoMethode/aletschgletscher', titel: 'GeoMethode Kartenkompetenz: Der schwindende Riese (Jahrgang 10)', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'schanze', titel: 'Wer macht die Schanze?', stufe: 'Oberstufe', start: '' },
 ];
 
 // Welche Dateien geschützt werden
 const SCHUTZ = /^(begleitheft\.html|wissensbasis\.html|loesung[^/]*\.html|begleitheft\.pdf|begleitheft\.docx)$/i;
 const NUR_ARCHIV = ['docs/wissensbasis.md']; // wird nur aus der Veröffentlichung genommen
-const OFFEN = [{ datei: 'materialien.html', art: 'Arbeitsblätter' }, { datei: 'LIESMICH.txt', art: 'Anleitung' }];
+const OFFEN = [{ datei: 'materialien.html', art: 'Arbeitsblätter' }, { datei: 'LIESMICH.txt', art: 'Anleitung' }, { datei: 'Spickzettel_Sachtexte_auswerten.docx', art: 'Spickzettel für Schülerinnen und Schüler (Word)' }];
 
 const huelleName = (name) => name.replace(/\.pdf$/i, '-pdf.html').replace(/\.docx$/i, '-word.html');
 const art = (name) =>
@@ -90,9 +95,16 @@ function webNamen() {
 }
 
 // Ordner auf der Platte, unabhängig von Groß- und Kleinschreibung
+// Ein Anwendungsordner kann auch verschachtelt liegen (Feld pfad, z. B. GeoMethode/aletschgletscher)
 function ordnerAufPlatte(id) {
-  const hit = fs.readdirSync(ROOT).find((n) => n.toLowerCase() === id.toLowerCase());
-  return hit ? path.join(ROOT, hit) : null;
+  let dir = ROOT;
+  for (const teil of id.split('/')) {
+    if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return null;
+    const hit = fs.readdirSync(dir).find((n) => n.toLowerCase() === teil.toLowerCase());
+    if (!hit) return null;
+    dir = path.join(dir, hit);
+  }
+  return dir;
 }
 
 async function passwortHolen() {
@@ -126,9 +138,12 @@ function linksUmschreiben(html, appWeb, appId, geschuetzt, webZuId) {
     if (!p) return m;
     const ziel = posix.normalize(posix.join(appWeb, p));
     if (ziel.startsWith('..')) return m;
-    const [kopf, ...tail] = ziel.split('/');
-    const zielId = webZuId[kopf.toLowerCase()];
-    const name = tail.join('/');
+    const teile = ziel.split('/');
+    let zielId, name = '';
+    for (let k = teile.length - 1; k >= 1 && !zielId; k--) {
+      const kopf = teile.slice(0, k).join('/').toLowerCase();
+      if (webZuId[kopf]) { zielId = webZuId[kopf]; name = teile.slice(k).join('/'); }
+    }
     let neu;
     if (zielId && geschuetzt.has(`${zielId}/${name.toLowerCase()}`)) {
       neu = posix.relative(hier, `lehrkraefte/${zielId}/${huelleName(name)}`);
@@ -204,11 +219,16 @@ function stub(ziel, titel) {
 // ---------- Hauptprogramm ----------
 const web = webNamen();
 const webZuId = {};
-for (const a of APPS) { a.web = web[a.id.toLowerCase()] || a.id; webZuId[a.web.toLowerCase()] = a.id; }
+for (const a of APPS) {
+  a.ordner = a.pfad || a.id;
+  const [oben, ...rest] = a.ordner.split('/');
+  a.web = [web[oben.toLowerCase()] || oben, ...rest].join('/');
+  webZuId[a.web.toLowerCase()] = a.id;
+}
 
 // 1. Einsammeln
 for (const a of APPS) {
-  const dir = ordnerAufPlatte(a.id);
+  const dir = ordnerAufPlatte(a.ordner);
   if (!dir) continue;
   const kandidaten = fs.readdirSync(dir).filter((n) => SCHUTZ.test(n)).concat(NUR_ARCHIV.filter((n) => fs.existsSync(path.join(dir, n))));
   for (const n of kandidaten) {
@@ -244,7 +264,7 @@ const cfg = { salz: salz.toString('base64'), iter: ITER, id: crypto.createHash('
 const erzeugt = new Set();
 const uebersicht = [];
 for (const { a, dateien } of liste) {
-  const appDir = ordnerAufPlatte(a.id);
+  const appDir = ordnerAufPlatte(a.ordner);
   const appLink = `../../${a.web}/${a.start}`;
   const eintrag = { id: a.id, titel: a.titel, stufe: a.stufe, start: `../${a.web}/${a.start}`, dokumente: [], offen: [] };
   for (const n of dateien) {
@@ -266,7 +286,7 @@ for (const { a, dateien } of liste) {
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, huelle({ titel, artName: art(n), appTitel: a.titel, appLink, typ, datei: n, enc: verschluesseln(key, daten), cfg }));
     erzeugt.add(path.resolve(out));
-    if (typ === 'html' && appDir) fs.writeFileSync(path.join(appDir, n), stub(`../lehrkraefte/${a.id}/${hn}`, titel));
+    if (typ === 'html' && appDir) fs.writeFileSync(path.join(appDir, n), stub(posix.relative(a.web, `lehrkraefte/${a.id}/${hn}`), titel));
     eintrag.dokumente.push({ art: art(n), titel, href: `${a.id}/${hn}`, typ, kb: Math.round(roh.length / 1024) });
     log(`verschlüsselt: lehrkraefte/${a.id}/${hn}`);
   }
