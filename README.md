@@ -14,6 +14,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `kaffee-lieferkette/` | **Die Kaffee-Spur**: drei Kaffee-Lieferketten (Solino, Discounter, Marke) als Stationen und Wege auf Weltkarte und 3D-Globus, mit Preisaufteilung, Wirkungsgefüge, Stresstest, Lösungsplan und Denkwerkstatt; Begleitheft, Arbeitsblätter M1–M6 und Wissensbasis |
 | `mangroven/` | **Mangroven – sensible Ökosysteme**: forschendes Lernen für Jahrgang 7. Gezeiten-Querschnitt mit sieben Ökosystemleistungen, Hypothese, Wirkungsgefüge mit automatisch erkannten Rückkopplungen und drei Hilfestufen, Simulation über 30 Jahre mit Kipppunkt, ökologische Bewertung von Lösungen; Schwerpunkt ökologische Dimension der Nachhaltigkeit, Begleitheft und Wissensbasis |
 | `DeepDive1/` | **DeepDive1**: Forschungs-U-Boot nach dem Vorbild von JAGO (Klasse 7). Ozean-Check (fünf Ozeane benennen und nach Größe ordnen), dann acht Missionen auf Weltkarte und 3D-Globus: Stockwerke des Atlantiks, Relief des Meeresbodens (Echolot), Great Barrier Reef, Golfstrom, Humboldtstrom, Black Smoker, Arktis, Marianengraben |
+| `klima-hotspots/` | **Hotspot-Expedition**: Entdeckungstour zu 25 Hotspots des Klimawandels in Atmosphäre, Hydrosphäre, Kryosphäre, Biosphäre und Pedosphäre (Klasse 7–10) auf Weltkarte und 3D-Globus. Start im Basislager Mauna Loa mit der echten Keeling-Kurve (NOAA/Scripps, Monatswerte seit 1958, Lupe für den Jahresgang), dazu IPCC-Fakten mit Vertrauensgrad, 38 Wechselwirkungen als Pfeile, Kipp-Thermometer (1–4,5 °C), Forschungspass und Expeditionsbericht; ohne Begleitmaterial im Bereich für Lehrkräfte |
 | `GeoMethode/` | **GeoMethode Kartenkompetenz** mit Frau Prof. Geo: vier eigenständige Anwendungen nach dem Ludwigsburger Modell (Dekodieren, Beschreiben, Erklären, Beurteilen) mit Formulierungshilfen und Stolpersteinen: `brocken-expedition/` (Höhenlinien, Jahrgang 5), `halbmonde-sahel/` (Isohyeten und Satellitendaten, Jahrgang 8), `strukturwandel-ruhr/` (thematische Karten, Jahrgang 9), `aletschgletscher/` (Gletscherkarten und Szenarien, Jahrgang 10) |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
@@ -30,6 +31,7 @@ erdbeben/                      Erdbeben-Globus
 christallers-land/             Christallers Land
 kaffee-lieferkette/            Die Kaffee-Spur
 mangroven/                     Mangroven – sensible Ökosysteme
+klima-hotspots/                Hotspot-Expedition (Klimawandel, fünf Sphären, Keeling-Kurve)
 orientierung-breitenkreise/    Orientierung auf unserer Erde: Die Breitenkreise
 expedition-sogapalag/          Expedition Sogapalag (zwei Personen, zwei Tablets)
 sachtext-auswerten/            Sachtexte auswerten (GeoMethode)
