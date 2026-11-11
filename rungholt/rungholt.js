@@ -320,8 +320,8 @@ function wEval(){const nodes=wNodes();const E=M.wedges.filter(([a,b])=>nodes.inc
   for(const [a,b] of E){const A=WN(a),B=WN(b);
     if(A.fake||B.fake){const F=A.fake?A:B;shaky.push(`„${F.t}“ gehört nicht in die Kette. ${F.h}`);continue;}
     if(['handel','salz','graeben','orkan','meer'].includes(a)&&b==='untergang')shaky.push(`„${A.t}“ führt nicht direkt zum Untergang. Was liegt dazwischen? Nutzt die Zustandskarten.`);
-    else if(a==='orkan'&&b==='hoehe')shaky.push('Senkt der Orkan das Land? Prüft, was der Sturm wirklich verändert.');
-    else if(a==='untergang')shaky.push('Der Untergang ist das Ende der Kette. Prüft die Pfeilrichtung: Was ist Ursache, was Wirkung?');
+    else if(a==='orkan'&&b==='hoehe')shaky.push('Senkt der Orkan das Land? Prüft die tatsächlichen Veränderungen durch den Sturm.');
+    else if(a==='untergang')shaky.push('Der Untergang ist das Ende der Kette. Prüft die Pfeilrichtung auf Ursache und Wirkung.');
     else if(fwd(b,a)&&!fwd(a,b))shaky.push(`Prüft die Richtung bei „${A.t} → ${B.t}“: Was ist Ursache, was Wirkung?`);}
   /* Je-desto: Vorzeichen der erwarteten Pfeile */
   const want={};for(const I of WIDEAS)if(I.e)for(const [a,b,sg] of I.e)want[a+'>'+b]=sg;for(const [a,b,sg] of WSOL)want[a+'>'+b]=sg;

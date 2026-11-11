@@ -2069,7 +2069,7 @@ function stepForward(){
     openModal({
       burst: 'STOPP!', tone: 'info', title: msg,
       html: `<p>Melde das der Expeditionsleiterin. Sie weiß nicht, wo man durchkommt.</p>
-        <p class="note">Bestimme mit dem Kompass, in welcher Himmelsrichtung ${esc(what)} liegt: Dreh den Ring, bis die Nadel im Haus ist, und lies am Pfeil ab.</p>
+        <p class="note">Bestimme mit dem Kompass die Himmelsrichtung, in der ${esc(what)} liegt: Dreh den Ring, bis die Nadel im Haus ist, und lies am Pfeil ab.</p>
         <p>Zum Beispiel: „Basiscamp, hier Forscher. Im Nordosten ist ${esc(what)}. Ich komme nicht weiter. Kommen!“</p>`,
       actions: [{label: 'Ich melde es', cls: 'btn-yellow'}], dismiss: () => {}
     });
@@ -2196,7 +2196,7 @@ function describeView(){
     html: (list.length
       ? `<ul class="seen">${list.map(it => `<li><b>${esc(it.what)}</b><span>${esc(it.where)}, ab etwa ${it.m.toLocaleString('de-DE')} m</span></li>`).join('')}</ul>`
       : '<p>Vor dir liegt nur Wiese und lichter Dschungel.</p>')
-      + `<p class="note">„Vor dir“ ist keine Himmelsrichtung! Bestimme mit dem Kompass, wohin du schaust, bevor du funkst.</p>`,
+      + `<p class="note">„Vor dir“ ist keine Himmelsrichtung! Bestimme mit dem Kompass deine Blickrichtung, bevor du funkst.</p>`,
     actions: [{label: 'Verstanden', cls: 'btn-yellow'}], dismiss: () => {}
   });
 }

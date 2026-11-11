@@ -104,7 +104,7 @@ GM.init({
   bubble:'Achtet auf die Farben der Linien. Auf Gletscherkarten bedeutet Blau etwas anderes, als ihr vielleicht denkt.',
   map:{win:'all',call:'setState',args:['2023']},
   tasks:[
-   {type:'mark',title:'Die Aufgabe genau lesen',tag:'Strategie',q:'Markiert <b>Operator</b>, <b>Legendenbegriffe</b> und <b>Raum oder Zeit</b>.',text:'[Ermittelt|op] mithilfe des [Gletscherrands um 1860|leg] und des [Maßstabs|leg], wie weit sich die Zunge des [Großen Aletschgletschers|raum] bis [2023|raum] zurückgezogen hat.',tip:'„Ermitteln“ heißt: ein Ergebnis aus Material gewinnen, hier durch Messen und Rechnen.',why:'Genau. Ihr braucht nur zwei Gletscherstände und die Maßstabsleiste. Die Zukunftsszenarien spielen hier noch keine Rolle.'},
+   {type:'mark',title:'Die Aufgabe genau lesen',tag:'Strategie',q:'Markiert <b>Operator</b>, <b>Legendenbegriffe</b> und <b>Raum oder Zeit</b>.',text:'[Ermittelt|op] mithilfe des [Gletscherrands um 1860|leg] und des [Maßstabs|leg] den Rückzug der Zunge des [Großen Aletschgletschers|raum] bis [2023|raum].',tip:'„Ermitteln“ heißt: ein Ergebnis aus Material gewinnen, hier durch Messen und Rechnen.',why:'Genau. Ihr braucht nur zwei Gletscherstände und die Maßstabsleiste. Die Zukunftsszenarien spielen hier noch keine Rolle.'},
    {type:'mc',title:'Blaue und braune Höhenlinien',tag:'1a',q:'Warum sind manche Höhenlinien blau und andere braun?',opts:[
     {t:'Blaue Höhenlinien liegen auf der Oberfläche des Gletschereises, braune auf Fels und Boden.',ok:true},
     {t:'Blaue Linien zeigen, wie tief das Wasser ist.',fb:'Auf dieser Karte gibt es keine Tiefenlinien. Blau kennzeichnet hier das Eis, nicht das Wasser.',stein:'Farben nach Alltagserfahrung gedeutet (Blau = Wasser) statt nach der Legende.'},
@@ -165,7 +165,7 @@ GM.init({
     {t:'Der Gletscher fließt in warmen Jahren bergauf zurück.',fb:'Eis fließt immer talwärts. Der Rückzug entsteht durch Schmelzen an der Zunge, nicht durch Rückwärtsfließen.',stein:'„Rückzug“ wörtlich als Bewegung des Eises gedeutet.'},
     {t:'Es schneit oben heute gar nicht mehr.',fb:'Oben schneit es weiterhin, 2025 gewannen die höchsten Messstellen sogar Schnee. Entscheidend ist die Bilanz aus Gewinn und Verlust.'}],why:'Genau. Wenn das Zehrgebiet mehr verliert, als das Nährgebiet nachliefert, ist die Bilanz negativ und der Gletscher schrumpft.'},
    {type:'order',title:'Die Wirkungskette an der Moosfluh',tag:'Erklären',map:{win:'zunge'},q:'Über der Zunge rutscht seit 2016 der Hang der Moosfluh. Bringt die Wirkungskette in die richtige Reihenfolge.',items:['Die Temperaturen in den Alpen steigen.','Der Gletscher wird dünner: Am Aletschwald liegt die Eisoberfläche heute gut 200 m tiefer als um 1860.','Das Eis drückt nicht mehr gegen den Talhang und stützt ihn nicht mehr.','Der Hang beginnt zu rutschen, im Herbst 2016 stellenweise bis 80 cm pro Tag.','Wanderwege werden gesperrt, Bergbahnen müssen gesichert werden.'],tip:'Fragt bei jedem Satz: Was folgt daraus?',why:'Richtig. Gletscherschwund verändert also nicht nur das Eis, sondern das ganze Gebirge darum herum.'},
-   {type:'write',title:'Zwei Folgen erklären',tag:'Erklären',dim:'Erklären',q:'Erklärt, warum sich die Zunge zurückzieht und warum dadurch an der Moosfluh der Hang rutscht.',
+   {type:'write',title:'Zwei Folgen erklären',tag:'Erklären',dim:'Erklären',q:'Erklärt den Rückzug der Gletscherzunge und die dadurch ausgelöste Hangrutschung an der Moosfluh.',
     sum:'Bausteine',parts:['Ursache: Erwärmung','Prozess am Gletscher','Folge am Hang','Verknüpfung'],
     words:['Nährgebiet','Zehrgebiet','Massenbilanz','negativ','Erwärmung','schmilzt','dünner','stützt nicht mehr','Gegendruck','rutscht','Gletscher fließt rückwärts'],
     tests:['wärm|temperatur|klima','schmilz|zehr|bilanz|abschmelz','stütz|druck|halt|gegendruck|widerlager','weil|dadurch|deshalb|daher|folglich|sodass'],labels:['Ursache','Prozess','Folge Hang','Verknüpfung'],
@@ -180,7 +180,7 @@ GM.init({
    {t:'Nur eine Ursache genannt',p:'Erklären heißt auch Folgen verknüpfen: Erwärmung → Eisverlust → Hangrutschung → Folgen für Menschen.',str:'<b>Formulierungshilfen:</b> „Erklären“: <i>dadurch</i>, <i>folglich</i>, <i>je … desto</i>.'},
    {t:'Kurzfristiges verlängert',p:'Mehr Schmelzwasser heute heißt nicht mehr Wasser für immer.'}],
   doneBubble:'Hervorragend erklärt! Nun zur großen Frage: Hat der Gletscher eine Zukunft? Dafür prüft ihr die Modellrechnungen genau.'},
- {s:4,title:'Hat der Gletscher eine Zukunft?',short:'Szenarien beurteilen',intro:'Beurteilt die Szenarienkarten: Was können sie aussagen, was nicht? Und was folgt daraus für unser Handeln?',
+ {s:4,title:'Hat der Gletscher eine Zukunft?',short:'Szenarien beurteilen',intro:'Beurteilt Aussagekraft und Grenzen der Szenarienkarten. Und was folgt daraus für unser Handeln?',
   bubble:'Modelle sagen nicht die Zukunft voraus. Sie zeigen, was unter bestimmten Annahmen passiert. Gerade darin liegt eine gute Nachricht: Die Annahmen können wir beeinflussen.',
   map:{win:'all'},
   tasks:[

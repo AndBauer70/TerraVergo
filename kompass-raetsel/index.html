@@ -612,7 +612,7 @@ const ST=[
   function step1(){const b=$('#st1',el);
    if(kOK(1)){b.innerHTML=`<h3>Schritt 1 · Kreuzung 1 ✓</h3><p>Alle vier Wegweiser stimmen.</p>`;return}
    b.innerHTML=`<h3>Schritt 1 · Kreuzung 1</h3><p>Ihr steht an der ersten Kreuzung, gleich hinter der Brücke über den Bach. Hier ist <b>Norden oben</b>, so wie ihr es aus dem Atlas kennt. Auf den Wegweisern ist die Schrift verwittert.</p>
-    <ol class="howto"><li>Prüft mit dem Kompass: Wohin zeigt die rote Nadelspitze?</li><li>Tippt einen Wegweiser mit „?“ an und wählt hier die passende Himmelsrichtung.</li></ol>
+    <ol class="howto"><li>Prüft mit dem Kompass die Richtung der roten Nadelspitze.</li><li>Tippt einen Wegweiser mit „?“ an und wählt hier die passende Himmelsrichtung.</li></ol>
     <div class="helpline">Merkspruch im Uhrzeigersinn: <b>N</b>ie <b>O</b>hne <b>S</b>eife <b>W</b>aschen</div>${pal(1)}`;wirePal(b)}
   function step2(){const b=$('#st2',el);
    if(!kOK(1)){b.className='card step lock';b.innerHTML=`<h3>Schritt 2 · Kreuzung 2</h3><p class="cap">Wird frei, sobald die Wegweiser an Kreuzung 1 stimmen.</p>`;return}

@@ -147,7 +147,7 @@ GM.init({
   bubble:'Erst die Aufgabe, dann die Karte! Markiert zuerst, worum es in der Aufgabe geht.',
   map:{win:'all',layers:{tint:false}},
   tasks:[
-   {type:'mark',title:'Die Aufgabe genau lesen',tag:'Strategie',q:'Markiert in der Aufgabe den <b>Operator</b> (gelb), die Wörter aus der <b>Legende</b> (blau) und den <b>Raum</b> (grün).',text:'[Bestimmt|op] mithilfe der [Höhenangabe|leg] am [Gipfel|leg], wie hoch der [Brocken|raum] ist.',tip:'Tipp: Der Operator steht meist am Anfang. Sucht in der Legende nach Wörtern, die auch in der Aufgabe stehen.',why:'Genau so! „Bestimmt“ sagt, was ihr tun sollt. „Höhenangabe“ und „Gipfel“ stehen auch in der Legende. „Brocken“ ist der Raum. Jetzt wisst ihr, welches Kartenzeichen ihr sucht: das schwarze Dreieck mit der Zahl.'},
+   {type:'mark',title:'Die Aufgabe genau lesen',tag:'Strategie',q:'Markiert in der Aufgabe den <b>Operator</b> (gelb), die Wörter aus der <b>Legende</b> (blau) und den <b>Raum</b> (grün).',text:'[Bestimmt|op] mithilfe der [Höhenangabe|leg] am [Gipfel|leg] die Höhe des Berges [Brocken|raum].',tip:'Tipp: Der Operator steht meist am Anfang. Sucht in der Legende nach Wörtern, die auch in der Aufgabe stehen.',why:'Genau so! „Bestimmt“ sagt, was ihr tun sollt. „Höhenangabe“ und „Gipfel“ stehen auch in der Legende. „Brocken“ ist der Raum. Jetzt wisst ihr, welches Kartenzeichen ihr sucht: das schwarze Dreieck mit der Zahl.'},
    {type:'match',title:'Kartenzeichen entschlüsseln',tag:'1a',q:'Ordnet jedem Kartenzeichen seine Bedeutung zu. Schaut dazu in die Legende unter der Karte.',map:{legend:['hl','gipfel','bach','weg','bahn','ort']},
     rows:[{sym:SYM.hl.replace(/32/g,'40'),ans:'Höhenlinie'},{sym:SYM.gipfel,ans:'Gipfel mit Höhenangabe'},{sym:SYM.bach.replace(/32 8/,'40 8'),ans:'Fluss oder Bach'},{sym:SYM.weg.replace('H32','H40'),ans:'Wanderweg'},{sym:SYM.bahn.replace(/H32/g,'H40'),ans:'Brockenbahn'},{sym:SYM.ort.replace(/17/g,'22'),ans:'Ort'}],
     choices:['Höhenlinie','Wanderweg','Gipfel mit Höhenangabe','Fluss oder Bach','Straße','Brockenbahn','Ort','Grenze'],
@@ -179,7 +179,7 @@ GM.init({
    {t:'„Viele Linien heißt: Der Berg ist hoch.“',p:'Wie hoch ein Ort ist, verraten die <b>Höhenzahlen</b>. Wie eng die Linien liegen, sagt etwas anderes: wie steil es ist.',str:'<b>Höhenlinien lesen:</b> Erst die Zahlen suchen, dann den Abstand der Linien prüfen.'},
    {t:'Beim Maßstab verrechnet',p:'Die meisten verstehen, dass die Karte verkleinert. Schwierig ist das Rechnen mit den vielen Nullen.',str:'<b>Maßstab Schritt für Schritt:</b> Bei 1 : 100 000 einfach merken: 1 cm auf der Karte = 1 km in echt.'}],
   doneBubble:'Klasse! Jetzt sprecht ihr die Sprache der Karte. In Stufe 2 beschreibt ihr, wie das Gelände aussieht.'},
- {s:2,title:'Wie sieht das Gelände aus?',short:'steil oder flach?',intro:'Jetzt nutzt ihr die Höhenlinien, um das Gelände zu beschreiben: Wo ist es steil, wo flach, und wie verlaufen die Wege?',
+ {s:2,title:'Wie sieht das Gelände aus?',short:'steil oder flach?',intro:'Jetzt nutzt ihr die Höhenlinien, um das Gelände zu beschreiben: steile und flache Bereiche sowie den Verlauf der Wege.',
   bubble:'Die wichtigste Regel für Höhenlinien: Liegen sie eng beieinander, ist der Hang steil. Liegen sie weit auseinander, ist es flach.',
   map:{win:'all',layers:{tint:false,hl:true}},
   tasks:[
@@ -215,7 +215,7 @@ GM.init({
     {t:'Die Höhenlinien bilden dort eine Spitze, die bergauf zeigt.',ok:true},
     {t:'Die Höhenlinien bilden eine Spitze, die bergab zeigt.',fb:'Eine Spitze, die bergab zeigt, ist ein Bergrücken. Wasser fließt dort zu beiden Seiten weg.',stein:'Tal und Bergrücken verwechselt: Beide sehen wie ein „V“ aus, nur in umgekehrter Richtung.'},
     {t:'Im Tal gibt es keine Höhenlinien.',fb:'Doch, auch Täler haben Höhenlinien. Sie knicken dort nur ein.'}],why:'Richtig. Wo die Höhenlinien eine Spitze bergauf bilden, liegt ein Tal. Das Wasser fließt immer quer zu den Höhenlinien bergab.'},
-   {type:'write',title:'Kurz, aber anstrengend',tag:'Erklären',dim:'Erklären',q:'Erklärt, warum der Eckerlochstieg anstrengender ist als der Goetheweg, obwohl er kürzer ist.',
+   {type:'write',title:'Kurz, aber anstrengend',tag:'Erklären',dim:'Erklären',q:'Erklärt die größere Anstrengung auf dem kürzeren Eckerlochstieg im Vergleich zum Goetheweg.',
     sum:'So baut ihr eine Erklärung',parts:['Was beobachten wir?','Welche Zahlen belegen es?','Warum ist das so? (weil …)'],ex:['Der Weg zur Burg ist kurz,','aber er steigt auf 1 km um 200 m an,','deshalb kommt man schnell aus der Puste.'],
     starts:['Der Eckerlochstieg ist zwar kürzer,','Er überwindet','Auf der Karte sieht man,','Deshalb','weil'],
     words:['etwa 5 km','etwa 8 km','rund 500 Höhenmeter','rund 340 Höhenmeter','Höhenlinien','eng beieinander','steiler','flacher','Torfhaus liegt schon hoch'],

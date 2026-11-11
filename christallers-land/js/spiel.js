@@ -43,8 +43,8 @@ const LEVELS = [
     name: 'Das Auto', R: 5, goods: { b: { reach: 2, thr: 60 }, a: { reach: 3, thr: 120 }, g: { reach: 4, thr: 200 } }, hier: true, minSupply: 1, flucht: false, start: 2,
     story: 'Fast jeder Haushalt hat jetzt ein Auto. Die Menschen fahren weiter (größere Reichweite), aber die Läden sind größer geworden und brauchen mehr Kunden (höhere Schwelle). Dein altes Netz ist geladen.',
     mission: 'Baue ein tragfähiges Netz für die neue Zeit: alle Haushalte versorgt, alle Läden über der Schwelle.',
-    hint: 'Entferne Läden, bis die übrigen genug Kunden haben. Mit Reichweite 2 deckt eine Bäckerei 19 Felder ab. Prüfe danach, ob noch Lücken bleiben.',
-    insight: (s) => `<p>Mit dem Auto genügen ${s.shops} Einrichtungen, wo vorher viel mehr nötig waren. Größere Reichweite und höhere Schwellen führen zur <span class="term">Konzentration</span>: Die Versorgung zieht sich in weniger, größere Orte zurück, kleine Orte verlieren Bäcker, Arzt und Schule.</p><p>So lässt sich mit Christaller erklären, warum in vielen Dörfern seit den 1960er-Jahren Läden schließen, während Supermärkte und Fachmarktzentren in den Mittelzentren wachsen.</p>`,
+    hint: 'Entferne Läden, bis die übrigen genug Kunden haben. Mit Reichweite 2 deckt eine Bäckerei 19 Felder ab. Prüfe danach die Versorgung auf verbleibende Lücken.',
+    insight: (s) => `<p>Mit dem Auto genügen ${s.shops} Einrichtungen, wo vorher viel mehr nötig waren. Größere Reichweite und höhere Schwellen führen zur <span class="term">Konzentration</span>: Die Versorgung zieht sich in weniger, größere Orte zurück, kleine Orte verlieren Bäcker, Arzt und Schule.</p><p>So lässt sich mit Christaller die Schließung von Läden in vielen Dörfern seit den 1960er-Jahren und das Wachstum von Supermärkten und Fachmarktzentren in den Mittelzentren erklären.</p>`,
   },
 ];
 

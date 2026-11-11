@@ -707,7 +707,7 @@ const SCENES={
     ['f','Und ich bin Frau Prof. Geo. Ich kenne die typischen Stolpersteine beim Auswerten. Wann immer ihr gleich stolpern könntet, rufe ich: '+ALARM],
     ['m','Unser Text führt uns an die Nordsee, auf die Hallig Hooge in Schleswig-Holstein. Wir gehen in <b>sieben Schritten</b> vor – wie richtige Detektive.'],
     ['f','Oben findet ihr jederzeit den <b>Spickzettel</b> mit allen Schritten, die <b>Formulierungshilfen</b> für eure Sätze und eure <b>Stolperstein-Sammlung</b>.']],
- 1:[['m','Bevor wir lesen, ermitteln wir: Was verraten <b>Überschrift, Vorspann, Bild und Karte</b> schon über den Text?'],
+ 1:[['m','Bevor wir lesen, ermitteln wir die Hinweise, die <b>Überschrift, Vorspann, Bild und Karte</b> schon auf den Text geben.'],
     ['f',ALARM+'Viele springen sofort in den Text und lesen los. Wer vorher schaut, versteht hinterher viel schneller.'],
     ['m','Und in Erdkunde fragen wir immer zuerst: <b>Wo</b> liegt das eigentlich? Schaut auf die Karten!']],
  2:[['m','Jetzt lest ihr den ganzen Text <b>einmal zügig</b> durch – noch ohne Stift. Ihr wollt nur wissen: Worum geht es?'],
@@ -854,7 +854,7 @@ function stepTasks(){
       '<textarea class="txt" id="sum" data-sum="1" placeholder="Der Sachtext handelt von …" spellcheck="true">'+esc(S.sum)+'</textarea>'+
       '<div class="row"><button type="button" class="go" data-sumcheck="1">Checkliste prüfen</button>'+(S.sumChecked?'<span class="sm"><b>'+cnt+' von 7</b> erfüllt</span>':'')+'</div>'+
       (S.sumChecked?'<ul class="checks">'+ch.map(c=>'<li class="'+(c.ok?'on':'no')+'"><i>'+(c.ok?'✓':'!')+'</i><span>'+esc(c.t)+(c.ok?'':'<small>'+esc(c.h)+'</small>')+'</span></li>').join('')+'</ul>'+
-        '<details><summary class="sm" style="cursor:pointer;font-weight:800">Prof. Geos Beispiel-Zusammenfassung ansehen</summary><div class="result" style="margin-top:6px">'+esc(MODEL_SUM)+'</div><p class="sm muted" style="margin-top:4px">Vergleiche: Was hast du anders gemacht? Beides kann richtig sein.</p></details>':'')+
+        '<details><summary class="sm" style="cursor:pointer;font-weight:800">Prof. Geos Beispiel-Zusammenfassung ansehen</summary><div class="result" style="margin-top:6px">'+esc(MODEL_SUM)+'</div><p class="sm muted" style="margin-top:4px">Vergleiche dein Vorgehen mit dem Beispiel. Beides kann richtig sein.</p></details>':'')+
       stoneBox('ab')+stoneBox('mein'));
   }
   if(n===8){

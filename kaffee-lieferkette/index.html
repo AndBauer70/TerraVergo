@@ -932,7 +932,7 @@ const CHAIN_MAR={
 const CHAIN_SOL={
  countries:['231','262','276'],days:'rund 3 Wochen',daysRed:'rund 5 Wochen',
  say:'Solino geht einen anderen Weg: Der Kaffee wird schon in Äthiopien geröstet und verpackt. Nach Deutschland reist ein fertiges Päckchen.',
- end:'Ein Herkunftsland, eine Rösterei im Anbauland, ein Seeweg. Vergleicht in der Weg-Bilanz: Wer hat den kürzesten Weg, und wer ist am verwundbarsten?',
+ end:'Ein Herkunftsland, eine Rösterei im Anbauland, ein Seeweg. Vergleicht in der Weg-Bilanz die Länge der Wege und die Verwundbarkeit der Beteiligten.',
  order:['s1','s2','s3','s4','s5','s6'],
  stations:[
   {id:'s1',type:'anbau',name:'Kaffeegärten im Bergland von Illubabor',short:'Illubabor',place:'Illubabor, Südwest-Äthiopien',ll:[35.70,8.20],gz:2.8,
@@ -1578,7 +1578,7 @@ function renderPlan(){const cards=S.plan.map(id=>SOLUTIONS.cards.find(c=>c.id===
     else if(lv.size>=2)fb+=` Ihr verbindet ${lv.size} Ebenen: Das ist wichtig, weil einzelne Käuferinnen und Käufer allein die Regeln der Kette nicht ändern.`;
   }
   $('#plan').innerHTML=`<div><h3 class="comic-h">Euer Plan (${cards.length}/3)</h3>${cards.length?`<ul>${cards.map(c=>`<li><b>${esc(c.t)}</b>: ${c.more}</li>`).join('')}</ul>`:''}
-    <div class="check"><b>Prof. Geo prüft:</b> ${fb}</div>${cards.length?`<p class="hint">Wirkt an den Stationen: ${[...st].map(x=>STYPE[x]).join(', ')}. Prüft jede Lösung auch kritisch: Wer bezahlt sie? Wen erreicht sie nicht?</p>`:''}</div>
+    <div class="check"><b>Prof. Geo prüft:</b> ${fb}</div>${cards.length?`<p class="hint">Wirkt an den Stationen: ${[...st].map(x=>STYPE[x]).join(', ')}. Prüft jede Lösung auch kritisch auf ihre Finanzierung und darauf, wen sie nicht erreicht.</p>`:''}</div>
     <div class="tri">${triSVG(cov)}</div>`;}
 function renderCalc(){const c=S.calc;const el=$('#calc');
   const opt=sel=>KEYS.map(k=>`<option value="${k}"${k===sel?' selected':''}>${esc(PACKS[k].short)}</option>`).join('');
