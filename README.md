@@ -16,6 +16,11 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `DeepDive1/` | **DeepDive1**: Forschungs-U-Boot nach dem Vorbild von JAGO (Klasse 7). Ozean-Check (fünf Ozeane benennen und nach Größe ordnen), dann acht Missionen auf Weltkarte und 3D-Globus: Stockwerke des Atlantiks, Relief des Meeresbodens (Echolot), Great Barrier Reef, Golfstrom, Humboldtstrom, Black Smoker, Arktis, Marianengraben |
 | `klima-hotspots/` | **Hotspot-Expedition**: Entdeckungstour zu 25 Hotspots des Klimawandels in Atmosphäre, Hydrosphäre, Kryosphäre, Biosphäre und Pedosphäre (Klasse 7–10) auf Weltkarte und 3D-Globus. Start im Basislager Mauna Loa mit der echten Keeling-Kurve (NOAA/Scripps, Monatswerte seit 1958, Lupe für den Jahresgang), dazu IPCC-Fakten mit Vertrauensgrad, 38 Wechselwirkungen als Pfeile, Kipp-Thermometer (1–4,5 °C), Forschungspass und Expeditionsbericht; ohne Begleitmaterial im Bereich für Lehrkräfte |
 | `GeoMethode/` | **GeoMethode Kartenkompetenz** mit Frau Prof. Geo: vier eigenständige Anwendungen nach dem Ludwigsburger Modell (Dekodieren, Beschreiben, Erklären, Beurteilen) mit Formulierungshilfen und Stolpersteinen: `brocken-expedition/` (Höhenlinien, Jahrgang 5), `halbmonde-sahel/` (Isohyeten und Satellitendaten, Jahrgang 8), `strukturwandel-ruhr/` (thematische Karten, Jahrgang 9), `aletschgletscher/` (Gletscherkarten und Szenarien, Jahrgang 10) |
+| `murenalarm/` | **Murenalarm in Bergried**: Naturgefahren in den Bayerischen Alpen für Jahrgang 5 (LehrplanPLUS Geo 5 LB 3). Kopfkino, Szene mit Wildbach und Schutzwald, Wirkungsgefüge, Gefahrenkarte zeichnen, Schutzmaßnahmen sortieren, Simulation über fünf Sommer, Empfehlung an die Bürgermeisterin; Begleitheft und Wissensbasis |
+| `stadtlabor/` | **Stadtlabor 2040**: Stadt und Umland für Jahrgang 5 (Geo 5 LB 5). Karte im Kopf, Kartieren mit Formular und Diagramm, Stadt und Umland mit Zeitregler, Planspiel Straßenumbau mit sechs Kennzahlen und fünf Interessen, Planen in Stufen, Zukunftskarte; Begleitheft und Wissensbasis |
+| `plastikmeer/` | **Das Plastikmeer**: Gemüse aus Almería für Jahrgang 7 (Geo 7 LB 4). Mystery, Raum mit Zeitregler, Wasserbilanz-Simulation bis 2045 mit Kipppunkt Versalzung, lebendiges Diagramm, Tatsache oder Meinung, Einkaufsratgeber; Begleitheft und Wissensbasis |
+| `trassenstreit/` | **Trassenstreit im Inntal**: Brenner-Nordzulauf für Jahrgang 7 (Geo 7 LB 5). Korridorkarte, Meinungslinie vorher und nachher, sieben Rollen, Tatsache oder Meinung, gewichtete Kriterienmatrix für vier konstruierte Trassen, Verhandlung in drei Runden, Stellungnahme; Begleitheft und Wissensbasis |
+| `zwei-inseln/` | **Zwei Inseln, ein Sturm**: Hurrikan Matthew 2016 in Haiti und Kuba für Jahrgang 10 (Geo 10 LB 7). Kopfkino, Best Track auf Karte und Globus, Satellitenbild, Datenvergleich, Außenseiter, Mystery, Resilienz-Simulation über fünf Saisons, Resilienzplan; Begleitheft und Wissensbasis |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -35,6 +40,11 @@ klima-hotspots/                Hotspot-Expedition (Klimawandel, fünf Sphären, 
 orientierung-breitenkreise/    Orientierung auf unserer Erde: Die Breitenkreise
 expedition-sogapalag/          Expedition Sogapalag (zwei Personen, zwei Tablets)
 sachtext-auswerten/            Sachtexte auswerten (GeoMethode)
+murenalarm/                    Murenalarm in Bergried
+stadtlabor/                    Stadtlabor 2040
+plastikmeer/                   Das Plastikmeer
+trassenstreit/                 Trassenstreit im Inntal
+zwei-inseln/                   Zwei Inseln, ein Sturm
 GeoMethode/                    GeoMethode Kartenkompetenz: vier Anwendungen für Jahrgang 5, 8, 9 und 10
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus

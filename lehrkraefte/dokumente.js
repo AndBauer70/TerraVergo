@@ -1,5 +1,5 @@
-// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-06. Nicht von Hand ändern.
-window.TV_LK={"salz":"FtVXhOUb4PQHikwbuPw5lQ==","iter":600000,"id":"973d36fd06f9","pruef":{"iv":"yQLahX5IXN7sEj7J","ct":"+UC6jAFURYUi1QD3PiXdeNKULDOT+Fcxxob8kc8u0oJ++R3uaRU="}};
+// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-11. Nicht von Hand ändern.
+window.TV_LK={"salz":"AEYyeNBrbYOSCbVBlDHCZA==","iter":600000,"id":"8139f30c6935","pruef":{"iv":"4e69CAAKGA+r1UTt","ct":"vq2TL7d0Ox6sk16VHMg9s9pg1I0502Kq9qAH+xQ5pdYy2KTBmuU="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -126,6 +126,52 @@ window.TV_DOKUMENTE=[
     "href": "../sachtext-auswerten/Spickzettel_Sachtexte_auswerten.docx"
    }
   ]
+ },
+ {
+  "id": "murenalarm",
+  "titel": "Murenalarm in Bergried",
+  "stufe": "Klasse 5 und 6",
+  "start": "../murenalarm/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Murenalarm in Bergried",
+    "href": "murenalarm/begleitheft.html",
+    "typ": "html",
+    "kb": 127
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Murenalarm in Bergried",
+    "href": "murenalarm/wissensbasis.html",
+    "typ": "html",
+    "kb": 114
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "stadtlabor",
+  "titel": "Stadtlabor 2040",
+  "stufe": "Klasse 5 und 6",
+  "start": "../stadtlabor/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Stadtlabor 2040",
+    "href": "stadtlabor/begleitheft.html",
+    "typ": "html",
+    "kb": 122
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Stadtlabor 2040",
+    "href": "stadtlabor/wissensbasis.html",
+    "typ": "html",
+    "kb": 111
+   }
+  ],
+  "offen": []
  },
  {
   "id": "geomethode-brocken",
@@ -386,6 +432,75 @@ window.TV_DOKUMENTE=[
     "href": "sensor-werkstatt/wissensbasis.html",
     "typ": "html",
     "kb": 127
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "plastikmeer",
+  "titel": "Das Plastikmeer",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../plastikmeer/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Das Plastikmeer",
+    "href": "plastikmeer/begleitheft.html",
+    "typ": "html",
+    "kb": 123
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Das Plastikmeer",
+    "href": "plastikmeer/wissensbasis.html",
+    "typ": "html",
+    "kb": 118
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "trassenstreit",
+  "titel": "Trassenstreit im Inntal",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../trassenstreit/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Trassenstreit im Inntal",
+    "href": "trassenstreit/begleitheft.html",
+    "typ": "html",
+    "kb": 123
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Trassenstreit im Inntal",
+    "href": "trassenstreit/wissensbasis.html",
+    "typ": "html",
+    "kb": 120
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "zwei-inseln",
+  "titel": "Zwei Inseln, ein Sturm",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../zwei-inseln/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Zwei Inseln, ein Sturm",
+    "href": "zwei-inseln/begleitheft.html",
+    "typ": "html",
+    "kb": 122
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Zwei Inseln, ein Sturm",
+    "href": "zwei-inseln/wissensbasis.html",
+    "typ": "html",
+    "kb": 118
    }
   ],
   "offen": []
