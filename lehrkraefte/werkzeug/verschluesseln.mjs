@@ -49,6 +49,7 @@ const APPS = [
   { id: 'murenalarm', titel: 'Murenalarm in Bergried', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'stadtlabor', titel: 'Stadtlabor 2040', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'geomethode-brocken', pfad: 'GeoMethode/brocken-expedition', titel: 'GeoMethode Kartenkompetenz: Die Brocken-Expedition (Jahrgang 5)', stufe: 'Klasse 5 und 6', start: '' },
+  { id: 'geomethode-graphen', pfad: 'GeoMethode/graphen-lesen', titel: 'GeoMethode Graphen lesen und beschreiben (Jahrgang 5 bis 7)', stufe: 'Klasse 5 und 6', start: '' },
   { id: 'klimasimulation', titel: 'Terra Vergo: Das Rätsel vom Deich', stufe: 'Klasse 7 bis 10', start: 'mystery.html' },
   { id: 'christallers-land', titel: 'Christallers Land', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'rungholt', titel: 'Die Legende von Rungholt', stufe: 'Klasse 7 bis 10', start: 'rungholt.html' },

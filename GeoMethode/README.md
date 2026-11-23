@@ -12,3 +12,7 @@ Vier eigenständige Lernanwendungen, die Kartenkompetenz nach dem Ludwigsburger 
 Die Strategien (Aufgabe markieren, Fenster- und Lupen-Strategie, Umordnen, Maßstab Schritt für Schritt, Höhenlinien lesen) und die Schülerschwierigkeiten folgen der Darstellung „Strategien zum Verstehen von Karten“ des Projekts Textverstehen im Fach der Universität Münster.
 
 Begleithefte und Wissensbasen liegen nach dem Verschlüsseln im Bereich für Lehrkräfte (`lehrkraefte/geomethode-…/`).
+
+## Graphen lesen
+
+`graphen-lesen/`: Methodentraining Diagrammkompetenz für Jahrgang 5 bis 7 mit Frau Prof. Geo. Zehn Stationen über die Treppe Orientieren, Ablesen, Verlauf benennen, Beschreiben; Begleitheft verschlüsselt unter `lehrkraefte/geomethode-graphen/`.

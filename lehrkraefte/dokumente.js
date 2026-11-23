@@ -1,5 +1,5 @@
-// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-11. Nicht von Hand ändern.
-window.TV_LK={"salz":"AEYyeNBrbYOSCbVBlDHCZA==","iter":600000,"id":"8139f30c6935","pruef":{"iv":"4e69CAAKGA+r1UTt","ct":"vq2TL7d0Ox6sk16VHMg9s9pg1I0502Kq9qAH+xQ5pdYy2KTBmuU="}};
+// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-23. Nicht von Hand ändern.
+window.TV_LK={"salz":"hfZ7vnFxbNB09DBTSuE5Dg==","iter":600000,"id":"b11cddf1fd53","pruef":{"iv":"Adc+Wuxg/CxsLCE4","ct":"bawOMgzW0nh09BqzCAzONAX4/VteStwgkf5rRoxRHupGFMmr/TY="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -192,6 +192,22 @@ window.TV_DOKUMENTE=[
     "href": "geomethode-brocken/wissensbasis.html",
     "typ": "html",
     "kb": 6
+   }
+  ],
+  "offen": []
+ },
+ {
+  "id": "geomethode-graphen",
+  "titel": "GeoMethode Graphen lesen und beschreiben (Jahrgang 5 bis 7)",
+  "stufe": "Klasse 5 und 6",
+  "start": "../GeoMethode/graphen-lesen/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Graphen lesen",
+    "href": "geomethode-graphen/begleitheft.html",
+    "typ": "html",
+    "kb": 181
    }
   ],
   "offen": []

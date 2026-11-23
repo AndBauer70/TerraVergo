@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fieberthermometer des Klimawandels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  /* Arbeitsheft-Stil wie „Wer macht die Schanze?“: Papier, Stationsreiter, Panels, Materialkarten. Ocker = Bergteam, Petrol = Meeresteam, Blau = gemeinsam */
+  --paper:#F1F3F2; --surface:#FBFBFA; --sunk:#E6E9E8;
+  --ink:#1A2126; --ink-2:#4A545B; --ink-3:#6E7880; --line:#D2D7D8; --line-2:#B3BBBE;
+  --berg:#8A5A14; --berg-soft:#F2E9DA; --meer:#1F5C66; --meer-soft:#DCE8E9; --joint:#2A549E; --joint-soft:#E1E7F3;
+  --ok:#2C7444; --ok-soft:#DFEEE3; --bad:#A33A25; --bad-soft:#F4E2DD; --warn:#9A6A10; --good:#2C7444; --cold:#2A6FB0;
+  --accent:var(--ink); --accent-soft:var(--sunk); --accent-ink:#FFFFFF;
+  --hm-land:#E8ECEA; --hm-water:#C8D8DF; --hm-water-t:#7895A2; --hm-line:#B9C1C4; --hm-green:#CFE0CA; --hm-rock:#D9D6CF; --hm-label:#68727A;
+  --hm-veil:rgba(241,243,242,.94); --hm-veil-m:rgba(241,243,242,.78);
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --paper:#111517; --surface:#181D20; --sunk:#20262A; --ink:#E3E8EA; --ink-2:#A8B1B6; --ink-3:#87919A; --line:#2D3539; --line-2:#465156;
+  --berg:#E2B46A; --berg-soft:#2C2416; --meer:#7EC1CB; --meer-soft:#1C3236; --joint:#90AEEE; --joint-soft:#1D2A44;
+  --ok:#74C98E; --ok-soft:#1A3123; --bad:#EE8E79; --bad-soft:#3A2019; --warn:#E3B055; --good:#74C98E; --cold:#7FB2EC;
+  --accent-ink:#0B1A1D;
+  --hm-land:#182024; --hm-water:#1C3039; --hm-water-t:#6A8796; --hm-line:#34404A; --hm-green:#1C2F24; --hm-rock:#262B2E; --hm-label:#8A949C;
+  --hm-veil:rgba(17,21,23,.9); --hm-veil-m:rgba(17,21,23,.74); color-scheme:dark}}
+body[data-role="berg"]{--accent:var(--berg);--accent-soft:var(--berg-soft)}
+body[data-role="meer"]{--accent:var(--meer);--accent-soft:var(--meer-soft)}
+body[data-zone="joint"]{--accent:var(--joint);--accent-soft:var(--joint-soft)}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 48px}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-display);font-weight:700;text-transform:uppercase}
+h1{font-size:clamp(2.1rem,5.4vw,3.4rem);line-height:.92;letter-spacing:.005em}
+h1 .lo{color:var(--meer)} h1 .hi{color:var(--berg)}
+h2{font-size:1.5rem;letter-spacing:.03em;line-height:1.05}
+h3{font-size:1.15rem;letter-spacing:.04em;line-height:1.1}
+p{margin:0}
+a{color:var(--accent)}
+.muted{color:var(--ink-3)}
+.small{font-size:13.5px}
+.eyebrow,.lbl{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:18px;align-items:start}
+.btn{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;padding:8px 14px;border-radius:6px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);line-height:1.3;min-height:40px}
+.btn:hover:not(:disabled){border-color:var(--ink-3)}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.btn.accent{color:var(--accent-ink)}}
+.btn.accent:hover:not(:disabled){filter:brightness(1.08)}
+.btn.ghost{background:var(--surface)}
+.btn.sm{padding:5px 10px;min-height:34px;font-size:13.5px}
+.btn:disabled{opacity:.45;cursor:default}
+.link{background:none;border:0;padding:0;color:var(--ink-3);text-decoration:underline;font-size:13.5px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px 18px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.notice{border:1px solid var(--line-2);border-left:4px solid var(--warn);background:var(--surface);padding:10px 14px;border-radius:6px;font-size:14px}
+
+/* Kopf mit schematischer Karte */
+.hero{position:relative;overflow:hidden;isolation:isolate;border:1px solid var(--line);border-radius:8px;background:var(--hm-land);min-height:290px;display:grid;align-items:end;margin-bottom:18px}
+.hero-map{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,var(--hm-veil) 0%,var(--hm-veil) 36%,transparent 68%)}
+.hero-in{padding:28px 22px 22px;max-width:640px;display:grid;gap:10px}
+.hero .lede{max-width:60ch;color:var(--ink-2)}
+.hero .note{font-size:13px;color:var(--ink-3)}
+@media (max-width:760px){.hero::before{background:var(--hm-veil-m)}.hero{min-height:0}}
+.hero-map text{font-family:var(--f-body)}
+.hm-land{fill:var(--hm-land)} .hm-water{fill:var(--hm-water)} .hm-rock{fill:var(--hm-rock)} .hm-green{fill:var(--hm-green)}
+.hm-c{fill:none;stroke:var(--hm-line);stroke-width:1.2}
+.hm-lat{stroke:var(--hm-line);stroke-width:1;stroke-dasharray:4 6}
+.hm-dist{font-family:var(--f-display)!important;font-weight:600;font-size:15px;letter-spacing:.18em;fill:var(--hm-label)}
+.hm-water-t{font-style:italic;font-size:17px;letter-spacing:.06em;fill:var(--hm-water-t)}
+.hm-small{font-family:var(--f-mono)!important;font-size:10.5px;fill:var(--hm-label)}
+.hm-halo{paint-order:stroke;stroke:var(--hm-land);stroke-width:4px;stroke-linejoin:round}
+.hm-arrow-b{fill:none;stroke:var(--berg);stroke-width:3;stroke-linecap:round}
+.hm-arrow-m{fill:none;stroke:var(--meer);stroke-width:3;stroke-linecap:round}
+.hm-name-b{font-family:var(--f-display)!important;font-weight:700;font-size:20px;letter-spacing:.08em;fill:var(--berg)}
+.hm-name-m{font-family:var(--f-display)!important;font-weight:700;font-size:20px;letter-spacing:.08em;fill:var(--meer)}
+.hm-band{fill:var(--berg);fill-opacity:.28}
+.hm-cod{fill:var(--meer);fill-opacity:.35}
+
+/* Lobby */
+.lobby{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.codein{font-family:var(--f-mono);font-size:1.5rem;letter-spacing:.3em;text-transform:uppercase;width:8ch;padding:6px 10px;border:1px solid var(--line-2);border-radius:6px;background:var(--surface)}
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.rolecard{text-align:left;border:1px solid var(--line);border-top:5px solid var(--accent);background:var(--surface);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rolecard[data-r="berg"]{--accent:var(--berg)} .rolecard[data-r="meer"]{--accent:var(--meer)}
+.rolecard:hover{border-color:var(--accent)}
+.rolecard h3{color:var(--accent);font-size:1.6rem}
+.bigcode{font-family:var(--f-mono);font-size:2.3rem;letter-spacing:.25em;font-weight:600}
+.ablauf{margin:0;padding-left:20px;display:grid;gap:6px;max-width:84ch}
+
+/* Kopfleiste und Stationsreiter */
+.apphead{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding-bottom:8px}
+.apphead .who-am-i{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.rolebadge{font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.navbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line);margin-bottom:16px}
+.steps{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.steps button{flex:none;display:inline-flex;align-items:baseline;gap:7px;font-family:var(--f-display);font-weight:700;font-size:15.5px;letter-spacing:.05em;text-transform:uppercase;padding:9px 11px 6px;color:var(--ink-3);border:0;border-bottom:3px solid transparent;background:transparent}
+.steps button .n{font-family:var(--f-mono);font-size:11.5px;font-weight:600;letter-spacing:0}
+.steps button:hover:not(:disabled){color:var(--ink-2)}
+.steps button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.steps button.done .n::after{content:" ✓";color:var(--ok)}
+.steps button:disabled{opacity:.5;cursor:default}
+.steps .sep{flex:none;width:1px;background:var(--line-2);margin:8px 6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:2px 10px;border:1px solid var(--line-2);border-radius:999px;background:var(--surface)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:var(--ink-3)}
+.chip.ok .dot{background:var(--ok)} .chip.wait .dot{background:var(--warn)}
+.localbar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:10px 12px;border:1px dashed var(--line-2);border-radius:6px;background:var(--sunk);margin-bottom:16px;font-size:14px}
+
+/* Schritt-Kopf */
+.stephead{margin-bottom:16px}
+.ph{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.stepno{font-family:var(--f-mono);font-weight:600;font-size:13px;min-width:26px;height:26px;padding:0 5px;display:inline-grid;place-items:center;border-radius:4px;background:var(--accent);color:#fff;flex:none}
+@media (prefers-color-scheme: dark){.stepno{color:var(--accent-ink)}}
+.intro{max-width:76ch;color:var(--ink-2)}
+
+/* Material */
+.fact{border:1px solid var(--line);border-radius:6px;background:var(--surface);min-width:0;display:grid}
+.fact .mat-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;padding:7px 12px;border-bottom:1px solid var(--line);background:var(--sunk);border-radius:6px 6px 0 0}
+.mid{font-family:var(--f-mono);font-weight:600;font-size:12px;color:#fff;background:var(--accent);padding:1px 6px;border-radius:4px}
+@media (prefers-color-scheme: dark){.mid{color:var(--accent-ink)}}
+.fact .src{font-size:12.5px;color:var(--ink-3)}
+.fact .mat-b{padding:10px 12px 12px;font-size:14.5px;line-height:1.55}
+
+/* Aufgaben */
+.task{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;background:var(--surface);padding:12px 14px 14px;display:flex;flex-direction:column;gap:9px}
+.task > b{font-family:var(--f-display);font-size:1.12rem;letter-spacing:.04em;text-transform:uppercase}
+.task > p{font-size:14.5px;max-width:80ch}
+.op{font-weight:700}
+.afb{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:6px;white-space:nowrap;font-weight:500;text-transform:none;letter-spacing:0}
+.check{border-radius:6px;padding:12px 14px;background:var(--ok-soft);border:1px solid color-mix(in srgb,var(--ok) 35%,transparent)}
+.check > b{color:var(--ok);font-family:var(--f-display);text-transform:uppercase;letter-spacing:.04em;font-size:1.08rem}
+.check p{font-size:14.5px;max-width:84ch}
+textarea,input[type=text],input[type=number]{font-size:14.5px;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:6px;padding:7px 9px;min-width:0}
+textarea{width:100%;min-height:84px;resize:vertical;line-height:1.45}
+textarea.short{min-height:58px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);margin:0}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line-2);border-radius:6px;overflow:hidden;background:var(--surface)}
+.seg button{font-weight:700;font-size:13.5px;padding:6px 11px;background:transparent;color:var(--ink-2);border:0;border-left:1px solid var(--line-2);line-height:1.3}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.choice{display:grid;gap:6px}
+.choice button{text-align:left;border:1px solid var(--line-2);background:var(--surface);border-radius:6px;padding:8px 12px;font-size:14.5px}
+.choice button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent);background:var(--accent-soft);font-weight:700}
+
+/* Diagramme und Tabellen */
+.chart svg{width:100%;height:auto;display:block}
+.chart text{font-family:var(--f-mono);font-size:11px;fill:var(--ink-3)}
+.chart .lbl{fill:var(--ink);font-size:11.5px;text-transform:none;letter-spacing:0}
+.ax{stroke:var(--line);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2);align-items:center}
+.sw{display:inline-block;width:14px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.kpi{background:var(--sunk);border-radius:6px;padding:8px 12px;display:flex;flex-direction:column;gap:2px}
+.kpi .eyebrow{font-size:10.5px}
+.kpi .v{font-family:var(--f-mono);font-weight:600;font-size:1.25rem}
+.species{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}
+.sp{text-align:left;border:1px solid var(--line-2);background:var(--surface);border-radius:6px;padding:9px 11px;display:flex;flex-direction:column;gap:4px}
+.sp[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent);background:var(--accent-soft)}
+.sp .wing{height:9px;border-radius:5px}
+.sites{display:flex;flex-wrap:wrap;gap:8px}
+table{border-collapse:collapse;width:100%}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top;font-size:14px}
+.tbl thead th{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.tbl td.n{text-align:right;font-family:var(--f-mono);white-space:nowrap}
+.status{display:inline-block;font-family:var(--f-mono);font-weight:600;font-size:11.5px;padding:1px 7px;border-radius:4px;white-space:nowrap}
+.st-up{background:color-mix(in srgb,var(--cold) 16%,transparent);color:var(--cold)}
+.st-eq{background:var(--sunk);color:var(--ink-3)}
+.st-down{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.st-gone{background:var(--bad-soft);color:var(--bad)}
+.st-new{background:var(--ok-soft);color:var(--ok)}
+.vgrid th,.vgrid td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;font-size:14px}
+.vgrid thead th{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.vbadge{font-family:var(--f-mono);font-weight:600;font-size:12.5px;padding:2px 8px;border-radius:4px}
+.locked{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-style:italic;font-size:14px}
+
+/* Mustertabelle */
+.mt{overflow-x:auto}
+.mt table{min-width:860px;background:var(--surface);border-radius:8px}
+.mt th,.mt td{border:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left;font-size:14px}
+.mt thead th{font-family:var(--f-display);font-size:1.12rem;text-transform:uppercase;letter-spacing:.04em;background:var(--sunk)}
+.mt thead th.b{color:var(--berg)} .mt thead th.m{color:var(--meer)} .mt thead th.j{color:var(--joint)}
+.mt tbody th{width:20%;background:var(--sunk);font-weight:700}
+.mt td{width:26.6%}
+.mt td.mine{box-shadow:inset 0 0 0 2px var(--accent)}
+.mt td .ro{white-space:pre-wrap}
+.mt td textarea{min-height:72px}
+.syn{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px}
+.sync{border:1px solid var(--line);border-radius:6px;padding:9px 11px;background:var(--surface);display:flex;flex-direction:column;gap:6px;font-size:14px}
+.sync.hl{border-color:var(--joint);box-shadow:inset 4px 0 0 var(--joint)}
+.sync .seg button{font-size:12.5px;padding:4px 9px}
+.grouph{font-family:var(--f-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:8px}
+.steck .f{display:flex;flex-direction:column;gap:5px}
+.steck label b{font-family:var(--f-display);font-size:1.08rem;text-transform:uppercase;letter-spacing:.04em}
+.who{font-size:11.5px;color:var(--ink-3);font-family:var(--f-mono)}
+.out{white-space:pre-wrap}
+.src-list{font-size:13.5px;color:var(--ink-2);display:grid;gap:3px;padding-left:18px;margin:0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:6px;z-index:30;max-width:calc(100% - 32px);font-size:14px}
+@media (max-width:480px){.panel{padding:14px 12px 16px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app" class="wrap"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>/* morphdom 2.7.4, MIT License, Patrick Steele-Idem */
+(function(global,factory){typeof exports==="object"&&typeof module!=="undefined"?module.exports=factory():typeof define==="function"&&define.amd?define(factory):(global=global||self,global.morphdom=factory())})(this,function(){"use strict";var DOCUMENT_FRAGMENT_NODE=11;function morphAttrs(fromNode,toNode){var toNodeAttrs=toNode.attributes;var attr;var attrName;var attrNamespaceURI;var attrValue;var fromValue;if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE||fromNode.nodeType===DOCUMENT_FRAGMENT_NODE){return}for(var i=toNodeAttrs.length-1;i>=0;i--){attr=toNodeAttrs[i];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;attrValue=attr.value;if(attrNamespaceURI){attrName=attr.localName||attrName;fromValue=fromNode.getAttributeNS(attrNamespaceURI,attrName);if(fromValue!==attrValue){if(attr.prefix==="xmlns"){attrName=attr.name}fromNode.setAttributeNS(attrNamespaceURI,attrName,attrValue)}}else{fromValue=fromNode.getAttribute(attrName);if(fromValue!==attrValue){fromNode.setAttribute(attrName,attrValue)}}}var fromNodeAttrs=fromNode.attributes;for(var d=fromNodeAttrs.length-1;d>=0;d--){attr=fromNodeAttrs[d];attrName=attr.name;attrNamespaceURI=attr.namespaceURI;if(attrNamespaceURI){attrName=attr.localName||attrName;if(!toNode.hasAttributeNS(attrNamespaceURI,attrName)){fromNode.removeAttributeNS(attrNamespaceURI,attrName)}}else{if(!toNode.hasAttribute(attrName)){fromNode.removeAttribute(attrName)}}}}var range;var NS_XHTML="http://www.w3.org/1999/xhtml";var doc=typeof document==="undefined"?undefined:document;var HAS_TEMPLATE_SUPPORT=!!doc&&"content"in doc.createElement("template");var HAS_RANGE_SUPPORT=!!doc&&doc.createRange&&"createContextualFragment"in doc.createRange();function createFragmentFromTemplate(str){var template=doc.createElement("template");template.innerHTML=str;return template.content.childNodes[0]}function createFragmentFromRange(str){if(!range){range=doc.createRange();range.selectNode(doc.body)}var fragment=range.createContextualFragment(str);return fragment.childNodes[0]}function createFragmentFromWrap(str){var fragment=doc.createElement("body");fragment.innerHTML=str;return fragment.childNodes[0]}function toElement(str){str=str.trim();if(HAS_TEMPLATE_SUPPORT){return createFragmentFromTemplate(str)}else if(HAS_RANGE_SUPPORT){return createFragmentFromRange(str)}return createFragmentFromWrap(str)}function compareNodeNames(fromEl,toEl){var fromNodeName=fromEl.nodeName;var toNodeName=toEl.nodeName;var fromCodeStart,toCodeStart;if(fromNodeName===toNodeName){return true}fromCodeStart=fromNodeName.charCodeAt(0);toCodeStart=toNodeName.charCodeAt(0);if(fromCodeStart<=90&&toCodeStart>=97){return fromNodeName===toNodeName.toUpperCase()}else if(toCodeStart<=90&&fromCodeStart>=97){return toNodeName===fromNodeName.toUpperCase()}else{return false}}function createElementNS(name,namespaceURI){return!namespaceURI||namespaceURI===NS_XHTML?doc.createElement(name):doc.createElementNS(namespaceURI,name)}function moveChildren(fromEl,toEl){var curChild=fromEl.firstChild;while(curChild){var nextChild=curChild.nextSibling;toEl.appendChild(curChild);curChild=nextChild}return toEl}function syncBooleanAttrProp(fromEl,toEl,name){if(fromEl[name]!==toEl[name]){fromEl[name]=toEl[name];if(fromEl[name]){fromEl.setAttribute(name,"")}else{fromEl.removeAttribute(name)}}}var specialElHandlers={OPTION:function(fromEl,toEl){var parentNode=fromEl.parentNode;if(parentNode){var parentName=parentNode.nodeName.toUpperCase();if(parentName==="OPTGROUP"){parentNode=parentNode.parentNode;parentName=parentNode&&parentNode.nodeName.toUpperCase()}if(parentName==="SELECT"&&!parentNode.hasAttribute("multiple")){if(fromEl.hasAttribute("selected")&&!toEl.selected){fromEl.setAttribute("selected","selected");fromEl.removeAttribute("selected")}parentNode.selectedIndex=-1}}syncBooleanAttrProp(fromEl,toEl,"selected")},INPUT:function(fromEl,toEl){syncBooleanAttrProp(fromEl,toEl,"checked");syncBooleanAttrProp(fromEl,toEl,"disabled");if(fromEl.value!==toEl.value){fromEl.value=toEl.value}if(!toEl.hasAttribute("value")){fromEl.removeAttribute("value")}},TEXTAREA:function(fromEl,toEl){var newValue=toEl.value;if(fromEl.value!==newValue){fromEl.value=newValue}var firstChild=fromEl.firstChild;if(firstChild){var oldValue=firstChild.nodeValue;if(oldValue==newValue||!newValue&&oldValue==fromEl.placeholder){return}firstChild.nodeValue=newValue}},SELECT:function(fromEl,toEl){if(!toEl.hasAttribute("multiple")){var selectedIndex=-1;var i=0;var curChild=fromEl.firstChild;var optgroup;var nodeName;while(curChild){nodeName=curChild.nodeName&&curChild.nodeName.toUpperCase();if(nodeName==="OPTGROUP"){optgroup=curChild;curChild=optgroup.firstChild}else{if(nodeName==="OPTION"){if(curChild.hasAttribute("selected")){selectedIndex=i;break}i++}curChild=curChild.nextSibling;if(!curChild&&optgroup){curChild=optgroup.nextSibling;optgroup=null}}}fromEl.selectedIndex=selectedIndex}}};var ELEMENT_NODE=1;var DOCUMENT_FRAGMENT_NODE$1=11;var TEXT_NODE=3;var COMMENT_NODE=8;function noop(){}function defaultGetNodeKey(node){if(node){return node.getAttribute&&node.getAttribute("id")||node.id}}function morphdomFactory(morphAttrs){return function morphdom(fromNode,toNode,options){if(!options){options={}}if(typeof toNode==="string"){if(fromNode.nodeName==="#document"||fromNode.nodeName==="HTML"||fromNode.nodeName==="BODY"){var toNodeHtml=toNode;toNode=doc.createElement("html");toNode.innerHTML=toNodeHtml}else{toNode=toElement(toNode)}}else if(toNode.nodeType===DOCUMENT_FRAGMENT_NODE$1){toNode=toNode.firstElementChild}var getNodeKey=options.getNodeKey||defaultGetNodeKey;var onBeforeNodeAdded=options.onBeforeNodeAdded||noop;var onNodeAdded=options.onNodeAdded||noop;var onBeforeElUpdated=options.onBeforeElUpdated||noop;var onElUpdated=options.onElUpdated||noop;var onBeforeNodeDiscarded=options.onBeforeNodeDiscarded||noop;var onNodeDiscarded=options.onNodeDiscarded||noop;var onBeforeElChildrenUpdated=options.onBeforeElChildrenUpdated||noop;var skipFromChildren=options.skipFromChildren||noop;var addChild=options.addChild||function(parent,child){return parent.appendChild(child)};var childrenOnly=options.childrenOnly===true;var fromNodesLookup=Object.create(null);var keyedRemovalList=[];function addKeyedRemoval(key){keyedRemovalList.push(key)}function walkDiscardedChildNodes(node,skipKeyedNodes){if(node.nodeType===ELEMENT_NODE){var curChild=node.firstChild;while(curChild){var key=undefined;if(skipKeyedNodes&&(key=getNodeKey(curChild))){addKeyedRemoval(key)}else{onNodeDiscarded(curChild);if(curChild.firstChild){walkDiscardedChildNodes(curChild,skipKeyedNodes)}}curChild=curChild.nextSibling}}}function removeNode(node,parentNode,skipKeyedNodes){if(onBeforeNodeDiscarded(node)===false){return}if(parentNode){parentNode.removeChild(node)}onNodeDiscarded(node);walkDiscardedChildNodes(node,skipKeyedNodes)}function indexTree(node){if(node.nodeType===ELEMENT_NODE||node.nodeType===DOCUMENT_FRAGMENT_NODE$1){var curChild=node.firstChild;while(curChild){var key=getNodeKey(curChild);if(key){fromNodesLookup[key]=curChild}indexTree(curChild);curChild=curChild.nextSibling}}}indexTree(fromNode);function handleNodeAdded(el){onNodeAdded(el);var curChild=el.firstChild;while(curChild){var nextSibling=curChild.nextSibling;var key=getNodeKey(curChild);if(key){var unmatchedFromEl=fromNodesLookup[key];if(unmatchedFromEl&&compareNodeNames(curChild,unmatchedFromEl)){curChild.parentNode.replaceChild(unmatchedFromEl,curChild);morphEl(unmatchedFromEl,curChild)}else{handleNodeAdded(curChild)}}else{handleNodeAdded(curChild)}curChild=nextSibling}}function cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey){while(curFromNodeChild){var fromNextSibling=curFromNodeChild.nextSibling;if(curFromNodeKey=getNodeKey(curFromNodeChild)){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}}function morphEl(fromEl,toEl,childrenOnly){var toElKey=getNodeKey(toEl);if(toElKey){delete fromNodesLookup[toElKey]}if(!childrenOnly){var beforeUpdateResult=onBeforeElUpdated(fromEl,toEl);if(beforeUpdateResult===false){return}else if(beforeUpdateResult instanceof HTMLElement){fromEl=beforeUpdateResult;indexTree(fromEl)}morphAttrs(fromEl,toEl);onElUpdated(fromEl);if(onBeforeElChildrenUpdated(fromEl,toEl)===false){return}}if(fromEl.nodeName!=="TEXTAREA"){morphChildren(fromEl,toEl)}else{specialElHandlers.TEXTAREA(fromEl,toEl)}}function morphChildren(fromEl,toEl){var skipFrom=skipFromChildren(fromEl,toEl);var curToNodeChild=toEl.firstChild;var curFromNodeChild=fromEl.firstChild;var curToNodeKey;var curFromNodeKey;var fromNextSibling;var toNextSibling;var matchingFromEl;outer:while(curToNodeChild){toNextSibling=curToNodeChild.nextSibling;curToNodeKey=getNodeKey(curToNodeChild);while(!skipFrom&&curFromNodeChild){fromNextSibling=curFromNodeChild.nextSibling;if(curToNodeChild.isSameNode&&curToNodeChild.isSameNode(curFromNodeChild)){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}curFromNodeKey=getNodeKey(curFromNodeChild);var curFromNodeType=curFromNodeChild.nodeType;var isCompatible=undefined;if(curFromNodeType===curToNodeChild.nodeType){if(curFromNodeType===ELEMENT_NODE){if(curToNodeKey){if(curToNodeKey!==curFromNodeKey){if(matchingFromEl=fromNodesLookup[curToNodeKey]){if(fromNextSibling===matchingFromEl){isCompatible=false}else{fromEl.insertBefore(matchingFromEl,curFromNodeChild);if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=matchingFromEl;curFromNodeKey=getNodeKey(curFromNodeChild)}}else{isCompatible=false}}}else if(curFromNodeKey){isCompatible=false}isCompatible=isCompatible!==false&&compareNodeNames(curFromNodeChild,curToNodeChild);if(isCompatible){morphEl(curFromNodeChild,curToNodeChild)}}else if(curFromNodeType===TEXT_NODE||curFromNodeType==COMMENT_NODE){isCompatible=true;if(curFromNodeChild.nodeValue!==curToNodeChild.nodeValue){curFromNodeChild.nodeValue=curToNodeChild.nodeValue}}}if(isCompatible){curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling;continue outer}if(curFromNodeKey){addKeyedRemoval(curFromNodeKey)}else{removeNode(curFromNodeChild,fromEl,true)}curFromNodeChild=fromNextSibling}if(curToNodeKey&&(matchingFromEl=fromNodesLookup[curToNodeKey])&&compareNodeNames(matchingFromEl,curToNodeChild)){if(!skipFrom){addChild(fromEl,matchingFromEl)}morphEl(matchingFromEl,curToNodeChild)}else{var onBeforeNodeAddedResult=onBeforeNodeAdded(curToNodeChild);if(onBeforeNodeAddedResult!==false){if(onBeforeNodeAddedResult){curToNodeChild=onBeforeNodeAddedResult}if(curToNodeChild.actualize){curToNodeChild=curToNodeChild.actualize(fromEl.ownerDocument||doc)}addChild(fromEl,curToNodeChild);handleNodeAdded(curToNodeChild)}}curToNodeChild=toNextSibling;curFromNodeChild=fromNextSibling}cleanupFromEl(fromEl,curFromNodeChild,curFromNodeKey);var specialElHandler=specialElHandlers[fromEl.nodeName];if(specialElHandler){specialElHandler(fromEl,toEl)}}var morphedNode=fromNode;var morphedNodeType=morphedNode.nodeType;var toNodeType=toNode.nodeType;if(!childrenOnly){if(morphedNodeType===ELEMENT_NODE){if(toNodeType===ELEMENT_NODE){if(!compareNodeNames(fromNode,toNode)){onNodeDiscarded(fromNode);morphedNode=moveChildren(fromNode,createElementNS(toNode.nodeName,toNode.namespaceURI))}}else{morphedNode=toNode}}else if(morphedNodeType===TEXT_NODE||morphedNodeType===COMMENT_NODE){if(toNodeType===morphedNodeType){if(morphedNode.nodeValue!==toNode.nodeValue){morphedNode.nodeValue=toNode.nodeValue}return morphedNode}else{morphedNode=toNode}}}if(morphedNode===toNode){onNodeDiscarded(fromNode)}else{if(toNode.isSameNode&&toNode.isSameNode(morphedNode)){return}morphEl(morphedNode,toNode,childrenOnly);if(keyedRemovalList){for(var i=0,len=keyedRemovalList.length;i<len;i++){var elToRemove=fromNodesLookup[keyedRemovalList[i]];if(elToRemove){removeNode(elToRemove,elToRemove.parentNode,false)}}}}if(!childrenOnly&&morphedNode!==fromNode&&fromNode.parentNode){if(morphedNode.actualize){morphedNode=morphedNode.actualize(fromNode.ownerDocument||doc)}fromNode.parentNode.replaceChild(morphedNode,fromNode)}return morphedNode}}var morphdom=morphdomFactory(morphAttrs);return morphdom});
+</script>
+<script>
+/* =====================================================================
+   Fieberthermometer des Klimawandels
+   Zwei Tablets: Bergteam (Tagfalter, Alpen) und Meeresteam (Kabeljau, Nordatlantik)
+   Datenmodell (online):
+     games/CODE                 Metadaten
+     games/CODE/teams/berg|meer Antworten, Messungen, erledigte Schritte (schreibt nur das jeweilige Team)
+     games/CODE/joint/<feld>    gemeinsame Felder (Mustertabelle Spalte 3, Syndrom), je Feld ein Dokument
+   ===================================================================== */
+
+// ---------------- Rollen ----------------
+const ROLE={
+  berg:{name:'Bergteam',long:'Tagfalter im Nationalpark Berchtesgaden',partner:'meer',
+    intro:'Ihr untersucht, wie Tagfalter in den Alpen auf die Erwärmung reagieren. Grundlage ist eine Feldstudie aus dem Nationalpark Berchtesgaden (Ashe-Jepson 2026).'},
+  meer:{name:'Meeresteam',long:'Atlantischer Kabeljau in Nordsee und Nordatlantik',partner:'berg',
+    intro:'Ihr untersucht, wie der Kabeljau im Nordatlantik auf die Erwärmung reagiert. Grundlage sind eine Übersichtsstudie (Drinkwater 2005) und eine Langzeitanalyse der Nordsee (Weijerman et al. 2005).'}
+};
+const STEPS=[
+  {id:'s1',n:1,t:'Das Thermometer'},
+  {id:'s2',n:2,t:'Messen & auswerten'},
+  {id:'s3',n:3,t:'Ausweichen oder anpassen?'},
+  {id:'s4',n:4,t:'Verlierer & Gewinner'}
+];
+const JSTEPS=[
+  {id:'m',n:5,t:'Zusammenführen'},
+  {id:'syn',n:6,t:'Ein neues Syndrom?'},
+  {id:'end',n:'✦',t:'Ergebnis'}
+];
+
+// ---------------- Fachdaten: Berg ----------------
+const LAPSE=0.6; // °C pro 100 m, typischer Mittelwert (Artikel: 4–9,8 °C pro 1000 m)
+const SITES=[{id:'tal',h:820,t:'Bergwiese 820 m'},{id:'mitte',h:1320,t:'Alm 1320 m'},{id:'hoch',h:1825,t:'Hochalm 1825 m'}];
+const SPEC=[
+  {id:'manto',name:'Gelbgefleckter Mohrenfalter',lat:'Erebia manto',size:'klein',col:'dunkel',buf:0.07,shift:195,real:true,sites:['mitte','hoch'],wing:'#3a2a1c',w:38},
+  {id:'ligea',name:'Weißbindiger Mohrenfalter',lat:'Erebia ligea',size:'mittel',col:'dunkel',buf:0.12,shift:121,real:true,sites:['tal','mitte','hoch'],wing:'#4b3222',w:55},
+  {id:'mod_d',name:'Modellart D',lat:'mittelgroß, hell',size:'mittel',col:'hell',buf:0.33,shift:70,real:false,sites:['tal','mitte','hoch'],wing:'#e9dfb8',w:58},
+  {id:'mod_c',name:'Modellart C',lat:'groß, hell',size:'groß',col:'hell',buf:0.52,shift:30,real:false,sites:['tal','mitte'],wing:'#f4f1e6',w:80}
+];
+const MIN_PTS=6;
+
+// ---------------- Fachdaten: Meer ----------------
+// Bodentemperatur (°C, Jahresmittel) und Änderung des Nachwuchses je °C Oberflächenerwärmung,
+// aus Abb. 4 bei Drinkwater (2005) abgelesen und gerundet.
+const STOCKS=[
+  {id:'NC',name:'Nördlicher Kabeljau (Labrador/Neufundland)',bt:1.5,dr:0.4,lat:52},
+  {id:'WG',name:'Westgrönland',bt:2.5,dr:1.4,lat:64},
+  {id:'NE',name:'Nordost-Arktis (Barentssee)',bt:4,dr:0.8,lat:72},
+  {id:'IC',name:'Island',bt:6,dr:0.35,lat:65},
+  {id:'FA',name:'Färöer',bt:7,dr:0.1,lat:62},
+  {id:'GB',name:'Georges Bank',bt:8,dr:0.0,lat:41},
+  {id:'NS',name:'Nordsee',bt:9,dr:-0.9,lat:56},
+  {id:'IS',name:'Irische See',bt:10,dr:-0.9,lat:54},
+  {id:'CS',name:'Keltische See',bt:11,dr:-0.4,lat:50}
+];
+const SIMSTOCKS=[
+  {id:'AR',name:'Arktische Schelfmeere',bt:-0.5,lat:77,model:true},
+  {id:'NE',name:'Barentssee',bt:4,lat:72},
+  {id:'WG',name:'Westgrönland',bt:2.5,lat:64},
+  {id:'IC',name:'Island',bt:6,lat:65},
+  {id:'FA',name:'Färöer',bt:7,lat:62},
+  {id:'NS',name:'Nordsee',bt:9,lat:56},
+  {id:'IS',name:'Irische See',bt:10,lat:54},
+  {id:'CS',name:'Keltische See',bt:11,lat:50}
+];
+
+// ---------------- Mustertabelle ----------------
+const MROWS=[
+  {k:'thermo',t:'Fieberthermometer',q:'Woran lässt sich die Erwärmung an der Art ablesen?'},
+  {k:'richtung',t:'Ausweichrichtung',q:'Wohin weicht die Art aus? Wie weit?'},
+  {k:'mech',t:'Mechanismus',q:'Welcher körperliche Grund steckt dahinter?'},
+  {k:'anpass',t:'Anpassung vor Ort?',q:'Warum passt sich die Art nicht einfach an?'},
+  {k:'verlierer',t:'Hauptverlierer',q:'Wer ist am stärksten gefährdet und warum?'},
+  {k:'gewinner',t:'Gewinner & Nachrücker',q:'Wer profitiert oder rückt nach?'},
+  {k:'grenze',t:'Grenzen & Barrieren',q:'Wo endet das Ausweichen?'},
+  {k:'mensch',t:'Weitere menschliche Einflüsse',q:'Was verstärkt das Problem zusätzlich?'},
+  {k:'mass',t:'Maßnahmen',q:'Was könnte helfen?'}
+];
+
+// ---------------- WBGU-Syndrome ----------------
+const SYN=[
+  {g:'Nutzungssyndrome',id:'landflucht',n:'Landflucht-Syndrom',d:'Umweltdegradation durch Aufgabe traditioneller Landnutzungsformen.'},
+  {g:'Nutzungssyndrome',id:'dustbowl',n:'Dust-Bowl-Syndrom',d:'Nicht nachhaltige industrielle Bewirtschaftung von Böden und Gewässern.'},
+  {g:'Nutzungssyndrome',id:'katanga',n:'Katanga-Syndrom',d:'Umweltdegradation durch Abbau nicht erneuerbarer Ressourcen.'},
+  {g:'Nutzungssyndrome',id:'tourismus',n:'Massentourismus-Syndrom',d:'Erschließung und Schädigung von Naturräumen für Erholungszwecke.'},
+  {g:'Nutzungssyndrome',id:'erde',n:'Verbrannte-Erde-Syndrom',d:'Umweltzerstörung durch militärische Nutzung.'},
+  {g:'Nutzungssyndrome',id:'sahel',n:'Sahel-Syndrom',d:'Landwirtschaftliche Übernutzung marginaler Standorte durch arme Bevölkerung.'},
+  {g:'Nutzungssyndrome',id:'raubbau',n:'Raubbau-Syndrom',d:'Übernutzung natürlicher Ökosysteme, z. B. Abholzung von Wäldern oder Überfischung.'},
+  {g:'Entwicklungssyndrome',id:'aralsee',n:'Aralsee-Syndrom',d:'Umweltschädigung durch zielgerichtete Naturraumgestaltung in Großprojekten.'},
+  {g:'Entwicklungssyndrome',id:'gruene',n:'Grüne-Revolution-Syndrom',d:'Umweltdegradation durch Verbreitung standortfremder landwirtschaftlicher Produktionsverfahren.'},
+  {g:'Entwicklungssyndrome',id:'tiger',n:'Kleine-Tiger-Syndrom',d:'Vernachlässigung ökologischer Standards bei sehr schnellem Wirtschaftswachstum.'},
+  {g:'Entwicklungssyndrome',id:'favela',n:'Favela-Syndrom',d:'Umweltdegradation durch ungeregelte Verstädterung.'},
+  {g:'Entwicklungssyndrome',id:'suburbia',n:'Suburbia-Syndrom',d:'Landschaftsschädigung durch geplante Ausdehnung von Städten und Infrastruktur.'},
+  {g:'Entwicklungssyndrome',id:'havarie',n:'Havarie-Syndrom',d:'Einzelne vom Menschen verursachte Umweltkatastrophen mit langfristigen Folgen.'},
+  {g:'Senkensyndrome',id:'schornstein',n:'Hoher-Schornstein-Syndrom',d:'Umweltdegradation durch weiträumige, diffuse Verteilung meist langlebiger Stoffe (z. B. Treibhausgase).'},
+  {g:'Senkensyndrome',id:'muell',n:'Müllkippen-Syndrom',d:'Umweltverbrauch durch geregelte und ungeregelte Ablagerung von Abfällen.'},
+  {g:'Senkensyndrome',id:'altlasten',n:'Altlasten-Syndrom',d:'Örtliche Verseuchung, vor allem an früheren Industriestandorten.'}
+];
+const SYNOPT=[['u','Ursache'],['k','Kopplung'],['n','passt nicht']];
+const STECK=[
+  {k:'st_name',t:'Name des Syndroms',q:'Ein treffender Name nach WBGU-Art, z. B. nach einem typischen Ort oder Bild.',short:true},
+  {k:'st_leit',t:'Leitsymptom',q:'Das Kernproblem in einem Satz.',short:true},
+  {k:'st_natur',t:'Symptome in der Natursphäre',q:'Welche Veränderungen zeigen sich in Atmosphäre, Hydrosphäre, Biosphäre?'},
+  {k:'st_anthro',t:'Symptome in der Anthroposphäre',q:'Wo ist der Mensch beteiligt: als Verursacher, Betroffener, Handelnder?'},
+  {k:'st_kette',t:'Kernmechanismus (Wirkungskette)',q:'Ursache → … → Folge. Nutzt „→ verstärkt“ und „⊣ schwächt“.'},
+  {k:'st_dispo',t:'Disposition: Wer ist besonders verwundbar?',q:'Welche Arten und Räume sind besonders anfällig? Nutzt Exposition, Sensitivität, Anpassungskapazität.'},
+  {k:'st_kopp',t:'Kopplung mit anderen Syndromen',q:'Welche WBGU-Syndrome verstärken das Muster?'},
+  {k:'st_steuer',t:'Ansatzpunkte zum Gegensteuern',q:'Wo kann man in die Wirkungskette eingreifen?'},
+  {k:'st_kritik',t:'Kritische Reflexion',q:'Ist das ein Syndrom im Sinne des WBGU oder „nur“ ein ökologisches Muster? Was spricht dafür, was dagegen?'}
+];
+
+const HERO_SVG=`<svg class="hero-map" viewBox="0 0 1350 450" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+  <rect class="hm-land" x="0" y="0" width="1350" height="450"/>
+  <g transform="translate(300 100) scale(.75)">
+  <path class="hm-green" d="M560 450 L640 330 L700 300 L760 230 L800 205 L820 160 L850 120 L880 160 L905 175 L940 240 L990 300 L1040 360 L1080 450 Z"/>
+  <path class="hm-rock" d="M760 230 L800 205 L820 160 L850 120 L880 160 L905 175 L930 220 L880 215 L840 225 L800 235 Z"/>
+  <path class="hm-c" d="M640 330 Q820 315 990 300"/><path class="hm-c" d="M700 300 Q820 285 950 255"/><path class="hm-c" d="M760 230 Q840 222 930 220"/>
+  <path class="hm-band" d="M712 292 L760 230 L790 212 L915 196 L940 240 L945 250 Q840 268 712 292 Z"/>
+  <line class="hm-lat" x1="600" y1="300" x2="1010" y2="300"/><line class="hm-lat" x1="600" y1="214" x2="1010" y2="214"/>
+  <text class="hm-small hm-halo" x="604" y="296">820 m</text><text class="hm-small hm-halo" x="604" y="210">1825 m</text>
+  <path class="hm-arrow-b" d="M700 270 L700 196 M690 208 L700 194 L710 208"/>
+  <text class="hm-name-b hm-halo" x="640" y="168">BERCHTESGADEN</text>
+  <text class="hm-small hm-halo" x="641" y="184">Tagfalter · bergauf</text>
+  </g>
+  <path class="hm-water" d="M1060 0 L1350 0 L1350 450 L1120 450 Q1100 400 1130 360 Q1170 330 1150 290 Q1120 250 1150 210 Q1180 170 1150 120 Q1110 70 1060 0 Z"/>
+  <path class="hm-land" d="M1230 450 L1235 400 Q1250 360 1290 350 Q1300 320 1275 300 Q1265 270 1300 250 L1350 240 L1350 450 Z"/>
+  <path class="hm-land" d="M1188 300 Q1210 270 1235 290 Q1245 320 1222 345 Q1196 350 1188 300 Z"/>
+  <ellipse class="hm-land" cx="1210" cy="150" rx="26" ry="14"/>
+  <path class="hm-land" d="M1250 0 L1350 0 L1350 60 Q1310 80 1285 60 Q1262 40 1250 0 Z"/>
+  <line class="hm-lat" x1="1120" y1="330" x2="1350" y2="330"/><line class="hm-lat" x1="1140" y1="215" x2="1350" y2="215"/><line class="hm-lat" x1="1110" y1="100" x2="1350" y2="100"/>
+  <text class="hm-small hm-halo" x="1346" y="326" text-anchor="end">55° N</text><text class="hm-small hm-halo" x="1346" y="211" text-anchor="end">65° N</text><text class="hm-small hm-halo" x="1346" y="96" text-anchor="end">75° N</text>
+  <ellipse class="hm-cod" cx="1270" cy="378" rx="9" ry="4"/><ellipse class="hm-cod" cx="1255" cy="392" rx="9" ry="4"/>
+  <ellipse class="hm-cod" cx="1230" cy="88" rx="9" ry="4"/><ellipse class="hm-cod" cx="1250" cy="104" rx="9" ry="4"/><ellipse class="hm-cod" cx="1270" cy="90" rx="9" ry="4"/>
+  <path class="hm-arrow-m" d="M1180 380 L1180 130 M1170 142 L1180 128 L1190 142"/>
+  <text class="hm-water-t" x="1262" y="420" text-anchor="middle">Nordsee</text>
+  <text class="hm-water-t" x="1300" y="130" text-anchor="middle">Barentssee</text>
+  <text class="hm-small hm-halo" x="1210" y="175" text-anchor="middle">Island</text>
+  <text class="hm-name-m hm-halo" x="1176" y="40" text-anchor="end">NORDATLANTIK</text>
+  <text class="hm-small hm-halo" x="1176" y="56" text-anchor="end">Kabeljau · polwärts</text>
+  <text class="hm-small hm-halo" x="1346" y="444" text-anchor="end">schematisch, nicht maßstäblich</text>
+</svg>`;
+// ---------------- Hilfen ----------------
+const $=s=>document.querySelector(s);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const fmt=(x,d=1)=>(Math.round(x*10**d)/10**d).toLocaleString('de-DE',{minimumFractionDigits:d,maximumFractionDigits:d});
+const sgn=(x,d=1)=>(x>0?'+':x<0?'−':'±')+fmt(Math.abs(x),d);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function store(k,v){try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null;}}
+let toastTimer;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,3500);}
+function linreg(pts){const n=pts.length;if(n<2)return null;let sx=0,sy=0,sxx=0,sxy=0;for(const [x,y] of pts){sx+=x;sy+=y;sxx+=x*x;sxy+=x*y;}const den=n*sxx-sx*sx;if(Math.abs(den)<1e-9)return null;const b=(n*sxy-sx*sy)/den;return {b,a:(sy-b*sx)/n};}
+function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+
+// ---------------- Zustand ----------------
+const ui={screen:'lobby',mode:null,code:null,role:null,tab:'s1',dbState:'loading',joinError:'',staleNote:false,
+  b2sp:'manto',sim:{dT:1.5,barrier:false,fish:false},showSyn:false};
+let data=freshData();
+function freshData(){return {teams:{berg:{ans:{},done:{},meas:{}},meer:{ans:{},done:{},meas:{}}},joint:{}};}
+let db=null, unsubs=[], dirtyOwn=false, drafts={};
+const team=r=>data.teams[r]||(data.teams[r]={ans:{},done:{},meas:{}});
+const TA=(r,k)=>{const v=team(r).ans[k];return v===undefined?'':v;};
+const J=k=>k in drafts?drafts[k]:((data.joint[k]&&data.joint[k].v)||'');
+const Jby=k=>(data.joint[k]&&data.joint[k].by)||'';
+const isDone=(r,s)=>!!team(r).done[s];
+const bothDone=s=>isDone('berg',s)&&isDone('meer',s);
+
+// ---------------- Speichern ----------------
+const queue={};
+function put(path,obj){
+  if(ui.mode!=='online'||!db) return;
+  const e=queue[path]||(queue[path]={busy:false,next:null});
+  e.next=obj; if(!e.busy) flush(path);
+}
+async function flush(path){
+  const e=queue[path]; e.busy=true;
+  while(e.next){
+    const o=e.next; e.next=null;
+    try{ await db.doc(path).set(o); }
+    catch(err){
+      if(err&&err.code==='unavailable'){ await sleep(600+Math.random()*700); try{ await db.doc(path).set(o); continue; }catch(e2){} }
+      toast(err&&err.code==='revoked'?'Kein Zugriff mehr auf diese Sitzung.':'Speichern hat nicht geklappt. Bitte erneut versuchen.');
+    }
+  }
+  e.busy=false;
+}
+let teamTimer=null;
+function saveTeam(now){
+  dirtyOwn=true;
+  clearTimeout(teamTimer);
+  const go=()=>{ if(ui.role==='berg'||ui.role==='meer') put(`games/${ui.code}/teams/${ui.role}`,JSON.parse(JSON.stringify(team(ui.role)))); };
+  if(now) go(); else teamTimer=setTimeout(go,650);
+}
+const jointTimers={};
+const jointPending={};
+function saveJoint(k,v,now){
+  drafts[k]=v; jointPending[k]=true;
+  clearTimeout(jointTimers[k]);
+  const go=()=>{ jointPending[k]=false;
+    if(ui.mode!=='online'){ data.joint[k]={v,by:ui.role,t:Date.now()}; delete drafts[k]; return; }
+    put(`games/${ui.code}/joint/${k}`,{v,by:ui.role||'',t:Date.now()});
+  };
+  if(now) go(); else jointTimers[k]=setTimeout(go,700);
+}
+function setAns(k,v,now){ team(ui.role).ans[k]=v; saveTeam(now); }
+function setDone(s,val){ team(ui.role).done[s]=val; saveTeam(true); }
+
+// ---------------- Verbindung ----------------
+function newCode(){const a='ABCDEFGHJKMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<4;i++)s+=a[Math.floor(Math.random()*a.length)];return s;}
+function stopSubs(){unsubs.forEach(u=>{try{u()}catch(e){}});unsubs=[];}
+function docsOf(snap){ if(!snap) return []; if(Array.isArray(snap.docs)) return snap.docs; const out=[]; if(snap.forEach) snap.forEach(d=>out.push(d)); return out; }
+function docId(d){ return d.id || (d.ref&&d.ref.id) || ''; }
+let staleTimer=null;
+function subscribe(code){
+  stopSubs(); ui.staleNote=false; clearTimeout(staleTimer);
+  staleTimer=setTimeout(()=>{ui.staleNote=true;render();},10000);
+  unsubs.push(db.doc('games/'+code).onSnapshot(snap=>{
+    clearTimeout(staleTimer); ui.staleNote=false;
+    if(!snap.exists && !(snap.metadata&&snap.metadata.fromCache)){ ui.joinError='Zu diesem Code gibt es keine Sitzung.'; leave(true); return; }
+    ui.loaded=true; render();
+  },()=>{clearTimeout(staleTimer);toast('Verbindung verloren. Seite neu öffnen.');}));
+  unsubs.push(db.collection(`games/${code}/teams`).onSnapshot(snap=>{
+    for(const d of docsOf(snap)){
+      const id=docId(d); if(id!=='berg'&&id!=='meer') continue;
+      if(id===ui.role && dirtyOwn) continue; // eigene, lokal bearbeitete Daten nicht überschreiben
+      const v=d.data()||{}; data.teams[id]={ans:v.ans||{},done:v.done||{},meas:v.meas||{}};
+    }
+    render();
+  },()=>{}));
+  unsubs.push(db.collection(`games/${code}/joint`).onSnapshot(snap=>{
+    for(const d of docsOf(snap)){
+      const id=docId(d); const v=d.data()||{}; data.joint[id]=v;
+      const focused=document.activeElement&&document.activeElement.dataset&&document.activeElement.dataset.k===id;
+      if(id in drafts && !jointPending[id] && (drafts[id]===v.v || !focused)) delete drafts[id];
+    }
+    render();
+  },()=>{}));
+}
+async function createGame(){
+  if(!db){toast('Zwei-Tablet-Modus ist hier nicht verfügbar.');return;}
+  const code=newCode();
+  try{ await db.doc('games/'+code).set({v:1,app:'fieberthermometer',createdAt:Date.now()}); }
+  catch(e){ toast(e&&e.code==='quota_exceeded'?'Speicher voll: alte Sitzungen müssen gelöscht werden.':'Sitzung konnte nicht angelegt werden.'); return; }
+  enter(code,'online');
+}
+function joinGame(raw){
+  const code=(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4);
+  if(code.length!==4){ui.joinError='Der Code hat 4 Zeichen.';render();return;}
+  if(!db){toast('Zwei-Tablet-Modus ist hier nicht verfügbar.');return;}
+  ui.joinError=''; enter(code,'online');
+}
+function enter(code,mode){
+  ui.code=code; ui.mode=mode; ui.role=null; ui.loaded=mode!=='online'; ui.screen='role';
+  data=freshData(); drafts={}; dirtyOwn=false;
+  if(mode==='online'){ store('ft-last',code); subscribe(code); }
+  else { ui.role='berg'; ui.screen='app'; ui.tab='s1'; document.body.dataset.role='berg'; }
+  render();
+}
+function leave(keepErr){
+  stopSubs(); clearTimeout(staleTimer);
+  ui.screen='lobby'; ui.code=null; ui.role=null; ui.mode=null; if(!keepErr) ui.joinError='';
+  document.body.dataset.role=''; document.body.dataset.zone=''; render();
+}
+function takeRole(r){
+  ui.role=r; ui.screen='app'; dirtyOwn=false;
+  ui.tab = r==='beob' ? 'obs' : firstOpenTab(r);
+  document.body.dataset.role = r==='beob'?'':r;
+  if(ui.mode==='online') store('ft-role-'+ui.code,r);
+  render(); window.scrollTo(0,0);
+}
+function firstOpenTab(r){ for(const s of STEPS) if(!isDone(r,s.id)) return s.id; if(!isDone(r,'m')) return 'm'; return 'syn'; }
+
+// ---------------- Darstellung ----------------
+function render(){
+  const app=$('#app');
+  // Fokus und Cursor merken, damit Mitschreiben des Partners nicht stört
+  const ae=document.activeElement; let keep=null;
+  if(ae&&ae.dataset&&ae.dataset.k&&(ae.tagName==='TEXTAREA'||ae.tagName==='INPUT')) keep={k:ae.dataset.k,t:ae.dataset.t,s:ae.selectionStart,e:ae.selectionEnd};
+  const html = ui.screen==='lobby'?viewLobby():ui.screen==='role'?viewRole():viewApp();
+  if(window.morphdom){
+    window.morphdom(app,'<div id="app" class="wrap">'+html+'</div>',{
+      onBeforeElUpdated:(from,to)=>{
+        if(from===document.activeElement && (from.tagName==='TEXTAREA'||from.tagName==='INPUT')){
+          // Feld, in dem gerade getippt oder gezogen wird, nicht anfassen
+          if(from.tagName==='INPUT' && from.type!=='range'){ for(const at of ['disabled']) { if(to.hasAttribute(at)) from.setAttribute(at,''); else from.removeAttribute(at);} }
+          return false;
+        }
+        if(from.tagName==='TEXTAREA' && from.value!==to.value) from.value=to.value;
+        return true;
+      }
+    });
+    keep=null;
+  } else app.innerHTML=html;
+  document.body.dataset.zone = (ui.screen==='app' && ['m','syn','end'].includes(ui.tab)) ? 'joint' : '';
+  if(keep){ const el=app.querySelector(`[data-k="${keep.k}"][data-t="${keep.t}"]`); if(el){ el.focus({preventScroll:true}); try{el.setSelectionRange(keep.s,keep.e);}catch(e){} } }
+}
+
+function viewLobby(){
+  const last=store('ft-last');
+  const dbMsg= ui.dbState==='loading' ? '<p class="muted">Verbindung wird aufgebaut …</p>'
+    : ui.dbState==='off' ? `<div class="notice"><b>Der Zwei-Tablet-Modus ist in dieser Ansicht nicht verfügbar.</b> Dafür müssen beide Geräte bei claude.ai angemeldet sein und Zugriff auf diese Seite haben. Ihr könnt aber auf einem Gerät beide Rollen nacheinander bearbeiten.</div>` : '';
+  const on=ui.dbState==='on';
+  return `
+  <header class="hero">${HERO_SVG}
+    <div class="hero-in">
+      <p class="eyebrow">Globaler Wandel · Geographie / Biologie · Sek. II · 2 Tablets</p>
+      <h1>Fieberthermometer <span class="hi">des</span> <span class="lo">Klimawandels</span></h1>
+      <p class="lede">Zwei ganz verschiedene Tiere in zwei ganz verschiedenen Räumen: Tagfalter im Hochgebirge und Kabeljau im Nordatlantik. Erst arbeitet jedes Team für sich, dann führt ihr zusammen. Zeigen beide dasselbe Muster des globalen Wandels? Und gibt es dafür schon einen Namen?</p>
+      <p class="note">Zwei Tablets werden über einen Sitzungscode verbunden. Eingaben werden automatisch gespeichert.</p>
+    </div>
+  </header>
+  ${dbMsg}
+  <div class="lobby" style="margin-top:18px">
+    <section class="panel stack">
+      <span class="eyebrow">Tablet 1</span><h2>Neue Sitzung</h2>
+      <p class="muted">Ihr bekommt einen Code mit 4 Zeichen. Den gebt ihr am zweiten Tablet ein.</p>
+      <div><button class="btn accent" data-a="create" ${on?'':'disabled'}>Sitzung anlegen</button></div>
+    </section>
+    <section class="panel stack">
+      <span class="eyebrow">Tablet 2</span><h2>Beitreten</h2>
+      <form class="row" data-form="join">
+        <label for="joincode" class="muted" style="width:100%">Code vom anderen Tablet</label>
+        <input id="joincode" class="codein" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="····">
+        <button class="btn" type="submit" ${on?'':'disabled'}>Beitreten</button>
+      </form>
+      ${ui.joinError?`<p style="color:var(--bad)">${esc(ui.joinError)}</p>`:''}
+      ${last&&on?`<button class="link" data-a="rejoin" data-code="${esc(last)}">Zurück zu Sitzung ${esc(last)}</button>`:''}
+    </section>
+    <section class="panel stack">
+      <span class="eyebrow">Ein Gerät</span><h2>Beide Rollen</h2>
+      <p class="muted">Zum Ausprobieren oder ohne Anmeldung: Beide Rollen auf einem Tablet. Die Ergebnisse bleiben nur, solange die Seite offen ist.</p>
+      <div><button class="btn ghost" data-a="local">Auf einem Gerät arbeiten</button></div>
+    </section>
+  </div>
+  <section class="panel" style="margin-top:18px">
+    <span class="lbl">Ablauf</span><h2>Drei Phasen</h2>
+    <ol class="ablauf">
+      <li><b>Schritte 1–4, getrennt:</b> Jedes Team untersucht seine Art – vom „Fieberthermometer“ über Messdaten und Simulation bis zur Verwundbarkeit. Die Aufgaben sind auf beiden Tablets gleich aufgebaut.</li>
+      <li><b>Schritt 5, gemeinsam:</b> In einer Mustertabelle füllt jedes Team seine Spalte. Erst wenn beide abgegeben haben, sehen sie die Spalte des anderen und formulieren das gemeinsame Muster.</li>
+      <li><b>Schritt 6, Vertiefung:</b> Passt eines der 16 Syndrome des globalen Wandels (WBGU)? Wenn nicht: Beschreibt das Muster selbst als neues Syndrom.</li>
+    </ol>
+    <p class="muted small">Zeitbedarf: ca. 90 Minuten für Schritte 1–5, ca. 45 Minuten für die Vertiefung.</p>
+  </section>
+  ${sourcesBlock()}`;
+}
+function sourcesBlock(){
+  return `<section class="panel" style="margin-top:18px"><span class="lbl">Quellen</span><ul class="src-list">
+    <li>Ashe-Jepson, E. (2026): Butterflies with low thermoregulatory capacity show greatest upwards range shifts along an elevational gradient. Communications Biology 9, 1002. doi:10.1038/s42003-026-10534-z</li>
+    <li>Kerner, J. M. et al. (2022): Höhenverschiebungen alpiner Tagfalter im Nationalpark Berchtesgaden, zitiert nach Ashe-Jepson (2026)</li>
+    <li>Drinkwater, K. F. (2005): The response of Atlantic cod (Gadus morhua) to future climate change. ICES Journal of Marine Science 62, 1327–1337</li>
+    <li>Weijerman, M., Lindeboom, H. & Zuur, A. F. (2005): Regime shifts in marine ecosystems of the North Sea and Wadden Sea. Marine Ecology Progress Series 298, 21–39</li>
+    <li>WBGU (1996): Welt im Wandel – Herausforderung für die deutsche Wissenschaft. Jahresgutachten 1996 (Syndromkonzept)</li>
+  </ul><p class="muted small">„Modellart C“ und „Modellart D“ sind erfundene Vergleichsarten mit Modellwerten, die den Trend der Studie nachbilden. Alle Messpunkte in Schritt 2 (Berg) werden vom Programm erzeugt.</p></section>`;
+}
+
+function viewRole(){
+  if(ui.mode==='online'&&!ui.loaded){
+    return `<div class="stack" style="padding-top:30px"><span class="eyebrow">Sitzung ${esc(ui.code)}</span><h2>Sitzung wird geladen …</h2>
+    ${ui.staleNote?'<p class="notice">Die Sitzung ist gerade nicht erreichbar. Prüft die Internetverbindung.</p>':''}
+    <div><button class="btn ghost" data-a="leave">Zurück</button></div></div>`;
+  }
+  const remembered=store('ft-role-'+ui.code);
+  const card=r=>`<button class="rolecard" data-r="${r}" data-a="role" data-role="${r}">
+    <span class="eyebrow">Rolle</span><h3>${ROLE[r].name}</h3><p><b>${ROLE[r].long}</b></p><p class="muted">${ROLE[r].intro}</p></button>`;
+  return `<div class="stack" style="padding-top:22px">
+    <span class="eyebrow">Sitzungscode</span><div class="bigcode">${esc(ui.code)}</div>
+    <p class="muted">Diesen Code am zweiten Tablet unter „Beitreten“ eingeben. Dann wählt jedes Tablet eine Rolle.</p>
+    ${remembered?`<p>Dieses Tablet war zuletzt <b>${remembered==='beob'?'Beobachtung':ROLE[remembered].name}</b>.</p>`:''}
+    <div class="roles">${card('berg')}${card('meer')}
+      <button class="rolecard" data-a="role" data-role="beob"><span class="eyebrow">Lehrkraft / Beamer</span><h3>Beobachten</h3><p class="muted">Sieht den Fortschritt und alle Antworten beider Teams sowie einen Erwartungshorizont. Schreibt nicht mit.</p></button>
+    </div>
+    <div><button class="link" data-a="leave">Andere Sitzung wählen</button></div></div>`;
+}
+
+// ---------------- App-Rahmen ----------------
+function viewApp(){
+  const r=ui.role, beob=r==='beob', local=ui.mode==='local';
+  const p=beob?null:ROLE[r].partner;
+  const partnerChip = beob||local ? '' : (()=>{const n=STEPS.filter(s=>isDone(p,s.id)).length;return `<span class="chip ${n>=4?'ok':'wait'}"><span class="dot"></span>${ROLE[p].name}: ${n}/4 Schritte</span>`;})();
+  const top=`<div class="apphead">
+      <div class="who-am-i"><span class="eyebrow" style="width:100%">Fieberthermometer des Klimawandels</span><span class="rolebadge">${beob?'Beobachtung':ROLE[r].name}</span>${beob?'':`<span class="muted small">${ROLE[r].long}</span>`}</div>
+      <div class="row">${local?'<span class="chip">ein Gerät</span>':`<span class="chip num">Code ${esc(ui.code)}</span>`}${partnerChip}
+        ${local||beob?'':'<button class="link" data-a="switchrole">Rolle wechseln</button>'}
+        ${beob?'<button class="link" data-a="switchrole">Rolle wählen</button>':''}
+        <button class="link" data-a="leave">Verlassen</button></div>
+  </div>
+  ${beob?'<div class="navbar"></div>':`<div class="navbar">${navSteps()}</div>`}
+  ${ui.staleNote?'<p class="notice" style="margin-bottom:12px">Die Verbindung ist langsam. Angezeigte Daten sind evtl. nicht aktuell.</p>':''}
+  ${local?`<div class="localbar"><b>Ein Gerät:</b> Jetzt arbeitet
+    <span class="seg">${['berg','meer'].map(x=>`<button data-a="localrole" data-role="${x}" aria-pressed="${ui.role===x}">${ROLE[x].name}</button>`).join('')}</span>
+    <span class="muted small">Für die Schritte 1–4 die Rolle wechseln. Ab Schritt 5 arbeitet ihr gemeinsam.</span></div>`:''}`;
+  let body=''; matNo=0;
+  if(beob) body= ui.tab==='end' ? `<div style="margin-bottom:12px"><button class="btn ghost sm" data-a="tab" data-tab="obs">← zurück zur Übersicht</button></div>`+viewEnd() : viewObserver();
+  else if(ui.tab==='s1') body= r==='berg'?viewB1():viewM1();
+  else if(ui.tab==='s2') body= r==='berg'?viewB2():viewM2();
+  else if(ui.tab==='s3') body= r==='berg'?viewB3():viewM3();
+  else if(ui.tab==='s4') body= r==='berg'?viewB4():viewM4();
+  else if(ui.tab==='m') body=viewMuster();
+  else if(ui.tab==='syn') body=viewSyn();
+  else body=viewEnd();
+  return top+body;
+}
+function navSteps(){
+  const r=ui.role;
+  const own=STEPS.map(s=>`<button data-a="tab" data-tab="${s.id}" aria-current="${ui.tab===s.id}" class="${isDone(r,s.id)?'done':''}"><span class="n">${s.n}</span>${s.t}</button>`).join('');
+  const mOpen=bothDone('s4')||ui.mode==='local'&&bothDone('s4');
+  const synOpen=bothDone('m');
+  const j=JSTEPS.map(s=>{
+    const open = s.id==='m'?mOpen : synOpen;
+    const done = s.id==='m'?bothDone('m'):(s.id==='syn'?!!J('syn_reveal'):false);
+    return `<button data-a="tab" data-tab="${s.id}" aria-current="${ui.tab===s.id}" class="${done?'done':''}" ${open?'':'disabled title="Noch gesperrt"'}><span class="n">${s.n}</span>${s.t}${open?'':' 🔒'}</button>`;
+  }).join('');
+  return `<nav class="steps" aria-label="Schritte">${own}<span class="sep"></span>${j}</nav>`;
+}
+
+// ---------------- Bausteine ----------------
+function ta(k,ph,cls){ return `<textarea data-t="team" data-k="${k}" class="${cls||''}" placeholder="${esc(ph||'')}">${esc(TA(ui.role,k))}</textarea>`; }
+function jta(k,ph,cls){ const by=Jby(k); return `<textarea data-t="joint" data-k="${k}" class="${cls||''}" placeholder="${esc(ph||'')}">${esc(J(k))}</textarea>${by?`<span class="who">zuletzt: ${by==='berg'?'Bergteam':by==='meer'?'Meeresteam':'—'}</span>`:''}`; }
+function choice(k,opts){ const cur=TA(ui.role,k); return `<div class="choice">${opts.map(([v,t])=>`<button data-a="pick" data-k="${k}" data-v="${v}" aria-pressed="${cur===v}">${t}</button>`).join('')}</div>`; }
+function seg(k,opts,joint){ const cur=joint?J(k):TA(ui.role,k); return `<span class="seg">${opts.map(([v,t])=>`<button data-a="${joint?'jpick':'pick'}" data-k="${k}" data-v="${v}" aria-pressed="${cur===v}">${t}</button>`).join('')}</span>`; }
+let matNo=0;
+function fact(html,src){ matNo++; return `<div class="fact"><div class="mat-h"><span class="mid">M${matNo}</span>${src?`<span class="src">${src}</span>`:''}</div><div class="mat-b">${html}</div></div>`; }
+function stepHead(s,title,lead,lbl){ return `<section class="panel stephead"><div class="ph"><span class="stepno">${s}</span><h2>${title}</h2><span class="lbl">${lbl||ROLE[ui.role].name+' · '+ROLE[ui.role].long}</span></div>${lead?`<p class="intro">${lead}</p>`:''}</section>`; }
+function stepFoot(sid,ready,missing,checkHtml){
+  const d=isDone(ui.role,sid);
+  const idx=STEPS.findIndex(s=>s.id===sid);
+  const next= idx<3 ? `<button class="btn ghost" data-a="tab" data-tab="${STEPS[idx+1].id}">Weiter zu Schritt ${idx+2} →</button>`
+    : (bothDone('s4')?'<button class="btn ghost" data-a="tab" data-tab="m">Zum Zusammenführen →</button>':`<span class="muted">Schritt 5 öffnet sich, wenn auch das ${ROLE[ROLE[ui.role].partner].name} Schritt 4 abgeschlossen hat.</span>`);
+  return `<section class="stack" style="margin-top:22px">
+    ${d?`<div class="check stack"><b>Abgleich: So sehen es die Studien</b>${checkHtml}</div>`:''}
+    <div class="row">
+      ${d?`<span class="chip ok"><span class="dot"></span>Schritt abgeschlossen</span><button class="link" data-a="undone" data-s="${sid}">wieder öffnen</button>${next}`
+        :`<button class="btn accent" data-a="done" data-s="${sid}" ${ready?'':'disabled'}>Schritt abschließen und Abgleich anzeigen</button>${ready?'':`<span class="muted small">${missing}</span>`}`}
+    </div></section>`;
+}
+const filled=(k,min=12)=>TA(ui.role,k).trim().length>=min;
+
+// ===================== BERG =====================
+function viewB1(){
+  const m=+(TA('berg','b1_m')||195), lr=+(TA('berg','b1_lr')||0.6);
+  const ready=filled('b1_hyp')&&filled('b1_grob')&&!!TA('berg','b1_choice');
+  return stepHead(1,'Ein Berg als Thermometer','Am Berg wird es mit jedem Höhenmeter kühler. Wer der Wärme ausweichen will, muss nach oben. Wie weit eine Art nach oben gewandert ist, wirkt deshalb wie eine Anzeige auf einem Thermometer.')+
+  `<div class="grid2">
+    <div class="stack">
+      ${fact('<b>Tagfalter sind wechselwarm (ektotherm).</b> Ihre Körpertemperatur hängt von der Umgebung ab. Sie steuern sie vor allem durch Verhalten: Sie sonnen sich mit geöffneten Flügeln, suchen Schatten oder ändern ihre Flugzeit. Auch <b>Größe</b> und <b>Färbung</b> spielen eine Rolle: Dunkle Flügel nehmen mehr Sonnenstrahlung auf, große Körper heizen sich langsamer auf.','Ashe-Jepson 2026')}
+      ${fact('<b>Das Untersuchungsgebiet:</b> Nationalpark Berchtesgaden, 600 bis 2700 m hoch. Untersucht wurden 9 Bergwiesen zwischen 820 und 1825 m. 568 Falter aus 36 Arten wurden gemessen. Außerdem wurde ausgewertet, wie weit sich die Arten in den 10 Jahren davor in der Höhe verschoben haben.','Ashe-Jepson 2026; Höhenverschiebungen nach Kerner et al. 2022')}
+      ${fact('<b>Wie stark kühlt es mit der Höhe ab?</b> In den Alpen sinkt die Lufttemperatur je nach Luftfeuchte um 4 bis 9,8 °C pro 1000 m. Ein üblicher Mittelwert ist etwa 0,6 °C pro 100 m.','Ashe-Jepson 2026, Diskussion')}
+    </div>
+    <div class="stack">
+      <section class="panel stack">
+        <h3>Das Fieberthermometer ablesen</h3>
+        <p class="muted small">Der Gelbgefleckte Mohrenfalter (<i>Erebia manto</i>) lebt heute rund <b>195 m höher</b> als 10 Jahre zuvor. Welcher Erwärmung entspricht das?</p>
+        <label class="small">Höhenverschiebung: <b class="num">${m} m</b></label>
+        <input type="range" min="0" max="300" step="5" value="${m}" data-a="range" data-k="b1_m">
+        <label class="small">Temperaturabnahme pro 100 m</label>
+        ${seg('b1_lr',[['0.4','0,4 °C'],['0.6','0,6 °C'],['0.98','0,98 °C']])}
+        <div class="kpis"><div class="kpi"><span class="eyebrow">entspricht etwa</span><span class="v">${fmt(m/100*lr,1)} °C</span><span class="muted small">Erwärmung in 10 Jahren</span></div></div>
+      </section>
+      <div class="task"><b>Aufgabe 1 · Grenzen des Thermometers<span class="afb">AFB II</span></b>
+        <p>Stellt nun 121 m ein: So weit ist der Weißbindige Mohrenfalter (<i>Erebia ligea</i>) im selben Gebiet und Zeitraum gewandert. Gleiche Erwärmung, anderes Ergebnis. <span class="op">Erläutert</span>, warum die Höhenverschiebung nur ein grobes Fieberthermometer ist. Nennt mindestens zwei Gründe.</p>
+        ${ta('b1_grob','z. B. Abkühlung mit der Höhe schwankt, …')}
+      </div>
+    </div>
+  </div>
+  <div class="task" style="margin-top:18px"><b>Aufgabe 2 · Hypothese<span class="afb">AFB II</span></b>
+    <p><span class="op">Stellt eine Hypothese auf</span>: Welche Falter müssten am stärksten nach oben ausweichen?</p>
+    ${choice('b1_choice',[['kd','Kleine, dunkle Arten'],['gh','Große, helle Arten'],['gleich','Alle Arten gleich stark']])}
+    ${ta('b1_hyp','Begründet eure Vermutung mit Größe, Farbe und Verhalten …')}
+  </div>`+
+  stepFoot('s1',ready,'Bitte beide Aufgaben bearbeiten.',
+  `<p>Das „Fieberthermometer“ ist ungenau: Die Abkühlung mit der Höhe schwankt (4 bis 9,8 °C pro 1000 m). Arten reagieren unterschiedlich empfindlich. Lebensraum, Wiesenpflege und Zufall spielen mit. Die Verschiebung zeigt deshalb nicht direkt die Erwärmung, sondern wie stark eine Art auf sie reagiert.</p>
+   <p>Die Studie bestätigt die Vermutung „klein und dunkel“ teilweise: Kleine, dunkle Arten haben die höchsten Körpertemperaturen und sind bei Hitze am stärksten gefährdet. Prüft das in Schritt 2 genauer.</p>`);
+}
+
+function measFor(id){ return (team('berg').meas[id])||[]; }
+function catchButterfly(spId,siteId){
+  const sp=SPEC.find(s=>s.id===spId), site=SITES.find(s=>s.id===siteId);
+  if(!sp.sites.includes(siteId)){ toast(`${sp.name}: auf der ${site.t} nicht gefunden. Versucht eine andere Höhe.`); return; }
+  const base=25.5-(site.h-820)/100*LAPSE;
+  const ta_=clamp(base+(Math.random()*10-5),11.5,29.8);
+  const tb=29+(1-sp.buf)*(ta_-20)+gauss()*0.45;
+  const m=team('berg').meas; (m[spId]=m[spId]||[]).push([Math.round(ta_*10)/10,Math.round(tb*10)/10,siteId]);
+  saveTeam(); render();
+}
+function spFit(id){ const p=measFor(id).map(x=>[x[0],x[1]]); if(p.length<MIN_PTS) return null; const sites=new Set(measFor(id).map(x=>x[2])); if(sites.size<2) return null; return linreg(p); }
+function scatterB(id){
+  const pts=measFor(id), f=spFit(id);
+  const W=520,H=300,L=42,R=12,T=12,B=36, x0=10,x1=32,y0=16,y1=42;
+  const xs=x=>L+(W-L-R)*(x-x0)/(x1-x0), ys=y=>T+(H-T-B)*(1-(y-y0)/(y1-y0));
+  let g='';
+  for(let x=10;x<=32;x+=4) g+=`<line class="ax" x1="${xs(x)}" x2="${xs(x)}" y1="${T}" y2="${H-B}"/><text x="${xs(x)}" y="${H-B+16}" text-anchor="middle">${x}</text>`;
+  for(let y=16;y<=42;y+=4) g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${ys(y)}" y2="${ys(y)}"/><text x="${L-6}" y="${ys(y)+4}" text-anchor="end">${y}</text>`;
+  g+=`<line x1="${xs(16)}" y1="${ys(16)}" x2="${xs(32)}" y2="${ys(32)}" stroke="var(--muted)" stroke-dasharray="5 4" stroke-width="1.5"/><text x="${xs(31)}" y="${ys(31)+16}" text-anchor="end">Körper = Luft</text>`;
+  const colSite={tal:'var(--good)',mitte:'var(--warn)',hoch:'var(--cold)'};
+  for(const [a,b,s] of pts) g+=`<circle cx="${xs(a)}" cy="${ys(b)}" r="4.5" fill="${colSite[s]}" fill-opacity=".85"/>`;
+  if(f) g+=`<line x1="${xs(11)}" y1="${ys(f.a+f.b*11)}" x2="${xs(30)}" y2="${ys(f.a+f.b*30)}" stroke="var(--berg)" stroke-width="3"/>`;
+  g+=`<text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle">Lufttemperatur (°C)</text><text transform="translate(12 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle">Körpertemperatur (°C)</text>`;
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Körpertemperatur gegen Lufttemperatur">${g}</svg>
+  <div class="legend"><span><span class="sw" style="background:var(--good)"></span>820 m</span><span><span class="sw" style="background:var(--warn)"></span>1320 m</span><span><span class="sw" style="background:var(--cold)"></span>1825 m</span><span><span class="sw" style="background:var(--berg)"></span>Ausgleichsgerade</span></div></div>`;
+}
+function scatterShift(){
+  const W=520,H=280,L=46,R=14,T=14,B=38, x0=0,x1=0.6,y0=0,y1=220;
+  const xs=x=>L+(W-L-R)*(x-x0)/(x1-x0), ys=y=>T+(H-T-B)*(1-(y-y0)/(y1-y0));
+  let g='';
+  for(let x=0;x<=0.6001;x+=0.1) g+=`<line class="ax" x1="${xs(x)}" x2="${xs(x)}" y1="${T}" y2="${H-B}"/><text x="${xs(x)}" y="${H-B+16}" text-anchor="middle">${fmt(x,1)}</text>`;
+  for(let y=0;y<=220;y+=50) g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${ys(y)}" y2="${ys(y)}"/><text x="${L-6}" y="${ys(y)+4}" text-anchor="end">${y}</text>`;
+  const pts=SPEC.map(s=>{const f=spFit(s.id);return f?[1-f.b,s.shift,s]:null;}).filter(Boolean);
+  const lr=linreg(pts.map(p=>[p[0],p[1]]));
+  if(lr&&pts.length>=3) g+=`<line x1="${xs(0)}" y1="${ys(lr.a)}" x2="${xs(0.6)}" y2="${ys(clamp(lr.a+lr.b*0.6,0,220))}" stroke="var(--berg)" stroke-width="2.5" stroke-dasharray="6 4"/>`;
+  for(const [x,y,s] of pts){ g+=`<circle cx="${xs(clamp(x,0,0.6))}" cy="${ys(y)}" r="7" fill="${s.wing}" stroke="var(--ink)" stroke-width="1.5"/><text class="lbl" x="${xs(clamp(x,0,0.6))+10}" y="${ys(y)+4}">${s.real?s.lat:s.name}</text>`; }
+  g+=`<text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle">Puffer (Thermoregulation) = 1 − Steigung</text><text transform="translate(12 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle">Höhenverschiebung in 10 Jahren (m)</text>`;
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Puffer gegen Höhenverschiebung">${g}</svg></div>`;
+}
+function viewB2(){
+  const sp=SPEC.find(s=>s.id===ui.b2sp)||SPEC[0];
+  const fitted=SPEC.filter(s=>spFit(s.id)).length;
+  const f=spFit(sp.id), n=measFor(sp.id).length;
+  const allFit=fitted===SPEC.length;
+  const ready=allFit&&filled('b2_zus',20)&&filled('b2_erkl',20);
+  return stepHead(2,'Feldmessung auf der Bergwiese','Ihr fangt Falter auf drei Höhenstufen und messt sofort Körper- und Lufttemperatur. Daraus berechnet ihr, wie gut eine Art ihre Körpertemperatur von der Luft entkoppeln kann.')+
+  `<div class="grid2">
+    <div class="stack">
+      ${fact('<b>So wurde gemessen:</b> Der Falter wird im Netz festgehalten, ohne ihn mit der Hand zu berühren. Ein Thermoelement misst sofort die Körpertemperatur, daneben wird die Lufttemperatur notiert.<br><b>Die Steigung</b> der Ausgleichsgeraden zeigt, wie stark der Körper der Luft folgt. Steigung 1: kein Puffer. Steigung 0: perfekter Puffer. <b>Puffer = 1 − Steigung.</b>','Ashe-Jepson 2026, Methoden (vereinfacht)')}
+      <div class="species">${SPEC.map(s=>{const ff=spFit(s.id);return `<button class="sp" data-a="b2sp" data-id="${s.id}" aria-pressed="${s.id===sp.id}">
+        <span class="wing" style="background:${s.wing};width:${s.w}%;border:1px solid var(--line)"></span>
+        <b>${s.name}</b><span class="muted small">${s.real?`<i>${s.lat}</i> · `:''}${s.size}, ${s.col}</span>
+        <span class="small num">${ff?`Puffer ${fmt(1-ff.b,2)}`:`${measFor(s.id).length}/${MIN_PTS} Fänge`}</span></button>`;}).join('')}</div>
+      <section class="panel stack">
+        <h3>Fangen: ${sp.name}</h3>
+        <p class="muted small">Tippt auf eine Wiese. Nicht jede Art kommt in jeder Höhe vor. Ihr braucht mindestens ${MIN_PTS} Fänge aus mindestens zwei Höhen.</p>
+        <div class="sites">${SITES.map(s=>`<button class="btn sm ghost" data-a="catch" data-site="${s.id}">🦋 ${s.t}</button>`).join('')}</div>
+        <div class="kpis">
+          <div class="kpi"><span class="eyebrow">Fänge</span><span class="v">${n}</span></div>
+          <div class="kpi"><span class="eyebrow">Steigung</span><span class="v">${f?fmt(f.b,2):'–'}</span></div>
+          <div class="kpi"><span class="eyebrow">Puffer</span><span class="v">${f?fmt(1-f.b,2):'–'}</span></div>
+        </div>
+        ${n?`<button class="link" data-a="clearsp">Messreihe dieser Art löschen</button>`:''}
+      </section>
+    </div>
+    <section class="panel stack"><h3>Körper- gegen Lufttemperatur</h3>${scatterB(sp.id)}
+      <p class="muted small">Liegt die Gerade flacher als die gestrichelte Linie, puffert die Art Temperaturschwankungen ab.</p></section>
+  </div>
+  <section class="panel stack" style="margin-top:18px">
+    <h3>Puffer und Höhenverschiebung</h3>
+    ${allFit?scatterShift()+`<p class="muted small">Höhenverschiebungen: <i>E. manto</i> +195 m und <i>E. ligea</i> +121 m laut Studie; Modellarten C und D mit Modellwerten.</p>`
+      :`<p class="locked">🔒 Erscheint, wenn ihr für alle vier Arten einen Puffer bestimmt habt (${fitted}/4).</p>`}
+  </section>
+  <div class="grid2" style="margin-top:18px">
+    <div class="task"><b>Aufgabe 3 · Beschreiben<span class="afb">AFB I</span></b><p><span class="op">Beschreibt</span> den Zusammenhang zwischen Puffer und Höhenverschiebung.</p>${ta('b2_zus','Je … desto …')}</div>
+    <div class="task"><b>Aufgabe 4 · Erklären<span class="afb">AFB II</span></b><p><span class="op">Erklärt</span> den Zusammenhang. Bezieht Größe und Farbe der Arten ein.</p>${ta('b2_erkl','Arten mit schwachem Puffer …')}</div>
+  </div>`+
+  stepFoot('s2',ready,allFit?'Bitte beide Aufgaben bearbeiten.':'Erst alle vier Arten messen.',
+  `<p><b>Ergebnis der Studie:</b> Arten mit schwacher Thermoregulation haben sich in 10 Jahren am stärksten nach oben verschoben (statistisch signifikant). <i>Erebia manto</i> hat einen Puffer von nur 0,07 und ist um rund 195 m gewandert, <i>Erebia ligea</i> (0,12) um rund 121 m.</p>
+   <p><b>Erklärung:</b> Wer seine Körpertemperatur kaum steuern kann, ist der Lufttemperatur ausgeliefert. Steigt sie, bleibt nur der Umzug in kühlere Höhen. Dunkle Arten haben bei gleicher Luft immer höhere Körpertemperaturen als helle. In tiefen Lagen vermeiden große Arten Überhitzung besser als kleine. <b>Kleine, dunkle Arten</b> sind daher bei Hitze besonders gefährdet.</p>
+   <p class="muted small">Feinheit: Auch große Arten haben sich tendenziell stärker verschoben (knapp nicht signifikant). Die Farbe selbst hatte keinen messbaren Einfluss auf die Verschiebung.</p>`);
+}
+
+function bandArea(lo,hi){ lo=clamp(lo,600,2700); hi=clamp(hi,600,2700); if(hi<=lo) return 0; const F=h=>-((2700-h)**2)/2; return F(hi)-F(lo); }
+function viewB3(){
+  const s=ui.sim, need=s.dT/LAPSE*100, real=s.barrier?need*0.5:need;
+  const bands=[{n:'Kleine, dunkle Arten',lo:1400,hi:2200,c:'#4b3222'},{n:'Große, helle Arten',lo:800,hi:1500,c:'#d9cfa8'}];
+  const W=520,H=320,L=48,R=14,T=12,B=26, ys=h=>T+(H-T-B)*(1-(h-600)/2100), cx=(L+W-R)/2, half=(W-L-R)/2;
+  const xl=h=>cx-half*(2700-h)/2100, xr=h=>cx+half*(2700-h)/2100;
+  let g=`<defs><clipPath id="mtn"><polygon points="${xl(600)},${ys(600)} ${cx},${ys(2700)} ${xr(600)},${ys(600)}"/></clipPath>
+   <pattern id="forest" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M5 1 L9 9 L1 9 Z" fill="var(--good)" fill-opacity=".55"/></pattern></defs>`;
+  for(let h=600;h<=2700;h+=300) g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${ys(h)}" y2="${ys(h)}"/><text x="${L-6}" y="${ys(h)+4}" text-anchor="end">${h}</text>`;
+  g+=`<polygon points="${xl(600)},${ys(600)} ${cx},${ys(2700)} ${xr(600)},${ys(600)}" fill="var(--surface-2)" stroke="var(--muted)" stroke-width="1.5"/>`;
+  g+=`<g clip-path="url(#mtn)">`;
+  if(s.barrier) g+=`<rect x="${L}" y="${ys(1650)}" width="${W-L-R}" height="${ys(1250)-ys(1650)}" fill="url(#forest)"/>`;
+  for(const b of bands){ g+=`<rect x="${L}" y="${ys(b.hi+real)}" width="${W-L-R}" height="${Math.max(0,ys(b.lo+real)-ys(b.hi+real))}" fill="${b.c}" fill-opacity=".85"/>`; }
+  g+=`</g>`;
+  for(const b of bands){ g+=`<rect x="${xl(b.lo)-2}" y="${ys(b.hi)}" width="${xr(b.lo)-xl(b.lo)+4}" height="${ys(b.lo)-ys(b.hi)}" fill="none" stroke="var(--ink)" stroke-dasharray="4 4" stroke-width="1" opacity=".5"/>`; }
+  g+=`<text x="${W-R}" y="${ys(2700)+12}" text-anchor="end">Gipfel 2700 m</text><text transform="translate(12 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle">Höhe (m)</text>`;
+  const rows=bands.map(b=>{const a0=bandArea(b.lo,b.hi),a1=bandArea(b.lo+real,b.hi+real);return `<tr><td><span class="sw" style="background:${b.c};border:1px solid var(--line)"></span>${b.n}</td><td class="n">${b.lo}–${b.hi} m</td><td class="n">${Math.round(b.lo+real)}–${Math.round(Math.min(b.hi+real,2700))} m</td><td class="n">${Math.round(a1/a0*100)} %</td></tr>`;}).join('');
+  const ready=!!TA('berg','b3_resp')&&filled('b3_beg',20)&&filled('b3_roll',15);
+  return stepHead(3,'Ausweichen, anpassen oder aussterben?','Auf Erwärmung können Arten auf drei Arten reagieren: Sie passen sich vor Ort an, sie wandern in passende Gebiete aus, oder sie sterben lokal aus. Die Simulation zeigt, was das Ausweichen am Berg bedeutet.')+
+  `<div class="grid2">
+    <section class="panel stack">
+      <h3>Simulation: Der Berg wird wärmer</h3>
+      <label class="small">Erwärmung: <b class="num">+${fmt(s.dT,1)} °C</b></label>
+      <input type="range" min="0" max="4" step="0.25" value="${s.dT}" data-a="sim" data-k="dT">
+      <label class="row small"><input type="checkbox" data-a="simchk" data-k="barrier" ${s.barrier?'checked':''}> Waldgürtel zwischen den Bergwiesen (Barriere)</label>
+      <div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Bergprofil mit Lebensräumen">${g}</svg></div>
+      <div class="legend"><span>gestrichelt: heutiger Lebensraum</span><span>farbig: nach der Erwärmung</span>${s.barrier?'<span><span class="sw" style="background:var(--good);opacity:.55"></span>Wald</span>':''}</div>
+    </section>
+    <div class="stack">
+      <div class="kpis">
+        <div class="kpi"><span class="eyebrow">nötige Verschiebung</span><span class="v">${Math.round(need)} m</span></div>
+        <div class="kpi"><span class="eyebrow">erreichte Verschiebung</span><span class="v">${Math.round(real)} m</span></div>
+        <div class="kpi"><span class="eyebrow">Rückstand</span><span class="v" style="color:${need-real>1?'var(--bad)':'inherit'}">${Math.round(need-real)} m</span></div>
+      </div>
+      <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Gruppe</th><th>heute</th><th>danach</th><th>Fläche</th></tr></thead><tbody>${rows}</tbody></table></div>
+      <p class="muted small">Modell: Der Berg wird nach oben schmaler, also gibt es oben weniger Fläche. Annahme 0,6 °C pro 100 m. Mit Waldbarriere gelingt nur die Hälfte der nötigen Verschiebung.</p>
+      ${fact('<b>Kein Hinweis auf Anpassung vor Ort:</b> Innerhalb einer Art unterschieden sich Thermoregulation und Hitzetoleranz (CTmax 44,0–47,1 °C) zwischen tiefen und hohen Wiesen nicht. Die Merkmale scheinen innerhalb der Art festgelegt zu sein. Unterschiede entlang des Hangs entstehen, weil <b>andere Arten</b> dort leben (Artenwechsel).','Ashe-Jepson 2026')}
+      ${fact('<b>Barrieren:</b> Im Nationalpark liegen die Bergwiesen oft isoliert, getrennt von dichtem Wald, den viele Falter nicht durchqueren.','Ashe-Jepson 2026, Diskussion')}
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="task"><b>Aufgabe 5 · Entscheiden<span class="afb">AFB III</span></b><p><span class="op">Beurteilt</span>, welche Reaktion bei den Tagfaltern überwiegt.</p>
+      ${choice('b3_resp',[['aus','Ausweichen (Umverteilung der Arten)'],['anp','Anpassung vor Ort'],['tod','Lokales Aussterben']])}
+      ${ta('b3_beg','Begründet mit Belegen aus der Studie …','short')}</div>
+    <div class="task"><b>Aufgabe 6 · Die Rolltreppe<span class="afb">AFB II</span></b><p>Stellt die Erwärmung auf +4 °C. Forscher sprechen von einer „Rolltreppe ins Aussterben“. <span class="op">Erklärt</span> das Bild mit der Simulation.</p>${ta('b3_roll','Oben am Berg …')}</div>
+  </div>`+
+  stepFoot('s3',ready,'Bitte beide Aufgaben bearbeiten.',
+  `<p><b>Ausweichen überwiegt.</b> Die Studie folgert, dass Tagfalter auf den Klimawandel vor allem durch Umverteilung der Arten reagieren, nicht durch Anpassung vor Ort.</p>
+   <p><b>Rolltreppe ins Aussterben:</b> Die Arten werden nach oben „geschoben“, aber der Berg wird nach oben schmaler und endet am Gipfel. Der Lebensraum schrumpft, bis er verschwindet. Barrieren wie Wald verstärken das: Die Arten hinken der Erwärmung hinterher.</p>`);
+}
+
+function vRow(k,label){
+  return `<tr><th>${label}</th>
+    <td>${seg(k+'_E',[['0','niedrig'],['1','mittel'],['2','hoch']])}</td>
+    <td>${seg(k+'_S',[['0','niedrig'],['1','mittel'],['2','hoch']])}</td>
+    <td>${seg(k+'_A',[['0','niedrig'],['1','mittel'],['2','hoch']])}</td>
+    <td>${vBadge(k)}</td></tr>`;
+}
+function vBadge(k,r){
+  r=r||ui.role; const E=TA(r,k+'_E'),S=TA(r,k+'_S'),A=TA(r,k+'_A');
+  if(E===''||S===''||A==='') return '<span class="muted small">–</span>';
+  const v=+E + +S + (2-+A);
+  const [t,c]= v>=5?['hoch','var(--bad)']:v>=3?['mittel','var(--warn)']:['niedrig','var(--good)'];
+  return `<span class="vbadge" style="background:color-mix(in srgb,${c} 18%,transparent);color:${c}">${t}</span>`;
+}
+function vTable(groups){
+  return `<div style="overflow-x:auto"><table class="vgrid" style="min-width:640px"><thead><tr><th></th><th>Exposition</th><th>Sensitivität</th><th>Anpassungs&shy;kapazität</th><th>Verwundbarkeit</th></tr></thead><tbody>${groups.map(([k,l])=>vRow(k,l)).join('')}</tbody></table></div>
+  <p class="muted small">Verwundbarkeit steigt mit Exposition und Sensitivität und sinkt mit der Anpassungskapazität.</p>`;
+}
+const vComplete=(keys)=>keys.every(k=>['_E','_S','_A'].every(s=>TA(ui.role,k+s)!==''));
+function viewB4(){
+  const ready=vComplete(['b4_kd','b4_gh'])&&filled('b4_gew',15)&&filled('b4_mass',15);
+  return stepHead(4,'Verlierer, Gewinner und was hilft','Nicht alle Arten trifft die Erwärmung gleich. Bewertet die Verwundbarkeit zweier Gruppen mit dem Dreiklang aus Exposition, Sensitivität und Anpassungskapazität.')+
+  `<div class="grid2">
+    <div class="stack">
+      ${fact('<b>Artenwechsel entlang des Hangs:</b> Oben leben eher kleine, dunkle Arten, unten eher große, helle. Dunkle Arten haben bei gleicher Luft immer höhere Körpertemperaturen. Kleine Arten heizen sich schneller auf und sind in heißen Lagen schlechter vor Überhitzung geschützt.','Ashe-Jepson 2026')}
+      ${fact('<b>Prognose der Studie:</b> Mit fortschreitender Erwärmung werden sich die Faltergemeinschaften verändern. Kleine und dunkle Arten werden überproportional verloren gehen, große und helle Arten profitieren eher.','Ashe-Jepson 2026, Fazit')}
+      ${fact('<b>Empfehlungen:</b> gut vernetzte Lebensräume, damit Arten wandern können; Korridore durch Waldgebiete; Umsiedlung (Translokation), wo Lebensräume nicht verbunden werden können; Arten mit schwacher Thermoregulation in Hochlagen gezielt schützen.','Ashe-Jepson 2026, Diskussion')}
+    </div>
+    <div class="stack">
+      <section class="panel stack"><h3>Verwundbarkeit bewerten</h3>
+        ${vTable([['b4_kd','Kleine, dunkle Hochlagenarten (z. B. <i>E. manto</i>)'],['b4_gh','Große, helle Arten tieferer Lagen']])}</section>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="task"><b>Aufgabe 7 · Gewinner<span class="afb">AFB II</span></b><p><span class="op">Erläutert</span>, wer gewinnt und wer nachrückt. Wie verändert sich die Faltergemeinschaft auf einer Wiese in 1300 m Höhe?</p>${ta('b4_gew','')}</div>
+    <div class="task"><b>Aufgabe 8 · Maßnahmen<span class="afb">AFB III</span></b><p><span class="op">Beurteilt</span>, welche Schutzmaßnahmen sinnvoll sind, wenn Arten eher wandern als sich anpassen? Warum reicht es nicht, die heutigen Fundorte zu schützen?</p>${ta('b4_mass','')}</div>
+  </div>`+
+  stepFoot('s4',ready,'Bitte Tabelle und beide Aufgaben bearbeiten.',
+  `<p><b>Kleine, dunkle Hochlagenarten:</b> hohe Exposition (sie leben schon oben, Ausweichraum fehlt), hohe Sensitivität (schwacher Puffer, Überhitzung), geringe Anpassungskapazität (keine Anpassung innerhalb der Art) → <b>hohe Verwundbarkeit</b>.</p>
+   <p><b>Große, helle Arten:</b> können von unten nachrücken und vermeiden Überhitzung besser → eher Gewinner. Die Gemeinschaft wird „wärmeliebender“ (Thermophilisierung).</p>
+   <p><b>Maßnahmen:</b> Wenn Arten wandern, muss Naturschutz Wanderwege sichern: vernetzte Wiesen, Korridore, notfalls Umsiedlung. Schutzgebiete allein an heutigen Fundorten werden zur Falle.</p>`);
+}
+
+// ===================== MEER =====================
+function viewM1(){
+  const t=+(TA('meer','m1_t')||8);
+  const zone = t<0?['unter 0 °C: an der Kältegrenze, Wachstum stark verringert','st-up'] : t<5?['kalt: Erwärmung fördert den Nachwuchs','st-up'] : t<=8.5?['mittel: kaum Zusammenhang zwischen Temperatur und Nachwuchs','st-eq'] : t<=12?['warm: Erwärmung verringert den Nachwuchs','st-down'] : ['über 12 °C: kein Kabeljaubestand bekannt','st-gone'];
+  const incub= t>=1&&t<=14 ? Math.round(42*Math.pow(8/42,(t-1)/13)) : null;
+  const ready=filled('m1_hyp')&&filled('m1_hist')&&!!TA('meer','m1_choice');
+  return stepHead(1,'Ein Ozean als Thermometer','Der Kabeljau lebt fast im ganzen Nordatlantik, aber nur in einem bestimmten Temperaturfenster. Wo er auftaucht oder verschwindet, zeigt deshalb, wie warm das Wasser geworden ist.')+
+  `<div class="grid2">
+    <div class="stack">
+      ${fact('<b>Kabeljau ist wechselwarm (ektotherm).</b> Seine Körpertemperatur entspricht dem Wasser. Er kommt bei −1 bis über 20 °C vor, meist aber bei 0 bis 12 °C. Wachstum, Laichzeit, Entwicklung der Eier und Überleben der Jungfische hängen von der Temperatur ab.','Drinkwater 2005')}
+      ${fact('<b>Die 12-°C-Grenze:</b> Es gibt keinen Kabeljaubestand in Gebieten, in denen die Bodentemperatur im Jahresmittel über 12 °C liegt. Warum, ist nicht ganz geklärt. Möglicherweise überleben Eier und Larven das warme Wasser nicht.','Drinkwater 2005')}
+      ${fact('<b>Ein historisches Experiment:</b> Als sich der Nordatlantik in den 1920er- und 1930er-Jahren erwärmte, breitete sich der Kabeljau vor Westgrönland von der Südspitze bis zur Disko-Insel aus, rund 1000 km nach Norden. Vor Island verlagerten sich Laichplätze nach Norden. Mit der Abkühlung in den 1960er-Jahren kehrte sich das wieder um.','Drinkwater 2005')}
+    </div>
+    <div class="stack">
+      <section class="panel stack">
+        <h3>Das Temperaturfenster erkunden</h3>
+        <label class="small">Bodentemperatur (Jahresmittel): <b class="num">${fmt(t,1)} °C</b></label>
+        <input type="range" min="-1" max="14" step="0.5" value="${t}" data-a="range" data-k="m1_t">
+        <p><span class="status ${zone[1]}">${zone[0]}</span></p>
+        <div class="kpis">
+          <div class="kpi"><span class="eyebrow">Eier brauchen bis zum Schlupf</span><span class="v">${incub?incub+' Tage':'–'}</span><span class="muted small">8 Tage bei 14 °C, 42 Tage bei 1 °C (Zwischenwerte geschätzt)</span></div>
+          <div class="kpi"><span class="eyebrow">schnellstes Wachstum</span><span class="v">10–15 °C</span><span class="muted small">bei kleinen Fischen; große Fische bei niedrigeren Temperaturen</span></div>
+        </div>
+      </section>
+      <div class="task"><b>Aufgabe 1 · Das historische Thermometer<span class="afb">AFB II</span></b>
+        <p><span class="op">Erläutert</span>: Was zeigt die Ausbreitung nach Grönland in den 1920er/30er-Jahren und ihre Umkehr in den 1960ern über die Reaktion des Kabeljaus auf Temperatur?</p>
+        ${ta('m1_hist','Der Kabeljau reagiert …')}
+      </div>
+    </div>
+  </div>
+  <div class="task" style="margin-top:18px"><b>Aufgabe 2 · Hypothese<span class="afb">AFB II</span></b>
+    <p><span class="op">Stellt eine Hypothese auf</span>: Welche Kabeljaubestände sind durch weitere Erwärmung am stärksten gefährdet?</p>
+    ${choice('m1_choice',[['sued','Die südlichen Bestände in warmem Wasser (z. B. Nordsee, Keltische See)'],['nord','Die nördlichen Bestände in kaltem Wasser (z. B. Barentssee, Grönland)'],['gleich','Alle Bestände gleich stark']])}
+    ${ta('m1_hyp','Begründet eure Vermutung mit dem Temperaturfenster …')}
+  </div>`+
+  stepFoot('s1',ready,'Bitte beide Aufgaben bearbeiten.',
+  `<p>Die Ausbreitung nach Norden bei Erwärmung und der Rückzug bei Abkühlung zeigen: Der Kabeljau <b>folgt seinem Temperaturfenster</b>, und zwar innerhalb weniger Jahrzehnte und in beide Richtungen. Seine Verbreitung ist ein empfindliches Thermometer für den Ozean.</p>
+   <p>Gefährdet sind vor allem die <b>südlichen Bestände</b>, die schon nahe an der warmen Grenze leben. Prüft das in Schritt 2 mit den Daten.</p>`);
+}
+function probed(){ return team('meer').meas.probe||[]; }
+function chartStocks(){
+  const pr=probed(); const pts=STOCKS.filter(s=>pr.includes(s.id));
+  const W=520,H=300,L=46,R=14,T=12,B=38, x0=0,x1=14,y0=-1.5,y1=2;
+  const xs=x=>L+(W-L-R)*(x-x0)/(x1-x0), ys=y=>T+(H-T-B)*(1-(y-y0)/(y1-y0));
+  let g=`<rect x="${xs(12)}" y="${T}" width="${xs(14)-xs(12)}" height="${H-T-B}" fill="var(--bad)" fill-opacity=".12"/><text x="${xs(13)}" y="${T+14}" text-anchor="middle" style="fill:var(--bad)">kein</text><text x="${xs(13)}" y="${T+28}" text-anchor="middle" style="fill:var(--bad)">Bestand</text>`;
+  for(let x=0;x<=14;x+=2) g+=`<line class="ax" x1="${xs(x)}" x2="${xs(x)}" y1="${T}" y2="${H-B}"/><text x="${xs(x)}" y="${H-B+16}" text-anchor="middle">${x}</text>`;
+  for(let y=-1.5;y<=2.001;y+=0.5) g+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${ys(y)}" y2="${ys(y)}" ${Math.abs(y)<1e-6?'stroke-width="2" style="stroke:var(--muted)"':''}/><text x="${L-6}" y="${ys(y)+4}" text-anchor="end">${fmt(y,1)}</text>`;
+  if(pts.length===STOCKS.length){ const lr=linreg(pts.map(s=>[s.bt,s.dr])); g+=`<line x1="${xs(0.5)}" y1="${ys(lr.a+lr.b*0.5)}" x2="${xs(11.5)}" y2="${ys(lr.a+lr.b*11.5)}" stroke="var(--meer)" stroke-width="2.5" stroke-dasharray="6 4"/>`; }
+  for(const s of pts){ const c=s.dr>0.2?'var(--cold)':s.dr<-0.2?'var(--warn)':'var(--muted)'; g+=`<circle cx="${xs(s.bt)}" cy="${ys(s.dr)}" r="7" fill="${c}" stroke="var(--ink)" stroke-width="1.2"/><text class="lbl" x="${xs(s.bt)+9}" y="${ys(s.dr)-8}">${s.id}</text>`; }
+  g+=`<text x="${(L+W-R)/2}" y="${H-4}" text-anchor="middle">Bodentemperatur des Bestands (°C, Jahresmittel)</text><text transform="translate(12 ${(T+H-B)/2}) rotate(-90)" text-anchor="middle">Nachwuchs-Änderung je °C</text>`;
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Nachwuchs-Reaktion gegen Bodentemperatur">${g}</svg></div>`;
+}
+function viewM2(){
+  const pr=probed(), all=pr.length===STOCKS.length;
+  const est=TA('meer','m2_est');
+  const ready=all&&est!==''&&filled('m2_zus',20)&&filled('m2_erkl',20);
+  return stepHead(2,'Bestände im Temperaturfenster','Ihr ruft für neun Kabeljaubestände die Daten ab: Wie warm ist ihr Lebensraum, und wie reagiert ihr Nachwuchs, wenn das Oberflächenwasser wärmer wird?')+
+  `<div class="grid2">
+    <div class="stack">
+      ${fact('<b>Nachwuchs (Rekrutierung)</b> ist die Zahl der Jungfische, die in den befischbaren Bestand hineinwachsen. Für jeden Bestand wurde berechnet, wie sich der Nachwuchs ändert, wenn die Oberflächentemperatur um 1 °C steigt. Positive Werte: mehr Nachwuchs. Negative Werte: weniger.','Drinkwater 2005 nach Planque & Frédou 1999; Werte aus Abb. 4 abgelesen und gerundet')}
+      <section class="panel stack"><h3>Daten abrufen</h3>
+        <p class="muted small">Tippt auf einen Bestand, um ihn ins Diagramm zu übernehmen.</p>
+        <div class="sites">${STOCKS.map(s=>`<button class="btn sm ${pr.includes(s.id)?'':'ghost'}" data-a="probe" data-id="${s.id}" ${pr.includes(s.id)?'disabled':''}>${s.id} · ${s.name}</button>`).join('')}</div>
+        <p class="small num">${pr.length}/${STOCKS.length} Bestände</p>
+      </section>
+    </div>
+    <section class="panel stack"><h3>Temperatur und Nachwuchs</h3>${chartStocks()}
+      <div class="legend"><span><span class="sw" style="background:var(--cold)"></span>Erwärmung fördert</span><span><span class="sw" style="background:var(--muted)"></span>kaum Wirkung</span><span><span class="sw" style="background:var(--warn)"></span>Erwärmung schadet</span>${all?'<span><span class="sw" style="background:var(--meer)"></span>Trend</span>':''}</div></section>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="task"><b>Aufgabe 3 · Ablesen<span class="afb">AFB I</span></b>
+      <p><span class="op">Bestimmt</span>: Ab welcher Bodentemperatur schadet Erwärmung dem Nachwuchs? Schätzt den Wert.</p>
+      <div class="row"><input type="number" step="0.5" min="0" max="14" style="width:110px" data-t="team" data-k="m2_est" value="${esc(est)}" ${all?'':'disabled'}> <span>°C</span></div>
+      ${ta('m2_zus','Beschreibt den Zusammenhang: Je …, desto …')}
+    </div>
+    <div class="task"><b>Aufgabe 4 · Erklären<span class="afb">AFB II</span></b><p><span class="op">Erklärt</span>: Warum profitieren kalte Bestände von Erwärmung, während warme Bestände leiden? Nutzt das Temperaturfenster aus Schritt 1.</p>${ta('m2_erkl','')}</div>
+  </div>`+
+  stepFoot('s2',ready,all?'Bitte beide Aufgaben bearbeiten.':'Erst alle neun Bestände abrufen.',
+  `<p><b>Ergebnis:</b> Bei Bodentemperaturen <b>unter etwa 5 °C</b> steigt der Nachwuchs mit der Erwärmung, <b>über etwa 8,5 °C</b> sinkt er. Dazwischen gibt es kaum einen Zusammenhang. Der Trend ist deutlich (r² = 0,75).${est!==''?` Eure Schätzung: ${esc(est)} °C.`:''}</p>
+   <p><b>Erklärung:</b> Jeder Bestand liegt an einer anderen Stelle im Temperaturfenster. Kalte Bestände rücken durch Erwärmung zum Optimum hin (schnelleres Wachstum, besserer Nachwuchs). Warme Bestände rücken an die obere Grenze bei 12 °C heran. Entscheidend ist also nicht die Erwärmung allein, sondern <b>wie nah ein Bestand schon an seiner Grenze lebt</b>.</p>`);
+}
+function stockStatus(bt,dT,fish){
+  const t=bt+dT;
+  if(bt<0) return t>=1?['Neubesiedlung möglich','st-new']:['zu kalt, kein Bestand','st-eq'];
+  if(t>12) return ['verschwindet','st-gone'];
+  if(t>8.5) return fish?['starker Rückgang','st-gone']:['Rückgang','st-down'];
+  if(t>=5) return ['kaum Änderung','st-eq'];
+  return ['Zunahme','st-up'];
+}
+function viewM3(){
+  const s=ui.sim;
+  const W=540,rowH=34,L=178,R=16,T=26,H=T+SIMSTOCKS.length*rowH+30, x0=-2,x1=16;
+  const xs=x=>L+(W-L-R)*(x-x0)/(x1-x0);
+  let g=`<rect x="${xs(-2)}" y="${T-8}" width="${xs(5)-xs(-2)}" height="${H-T-22}" fill="var(--cold)" fill-opacity=".08"/>
+    <rect x="${xs(8.5)}" y="${T-8}" width="${xs(12)-xs(8.5)}" height="${H-T-22}" fill="var(--warn)" fill-opacity=".12"/>
+    <rect x="${xs(12)}" y="${T-8}" width="${xs(16)-xs(12)}" height="${H-T-22}" fill="var(--bad)" fill-opacity=".13"/>
+    <text x="${xs(1.5)}" y="${T-12}" text-anchor="middle">Erwärmung fördert</text><text x="${xs(10.25)}" y="${T-12}" text-anchor="middle">schadet</text><text x="${xs(14)}" y="${T-12}" text-anchor="middle" style="fill:var(--bad)">&gt; 12 °C</text>`;
+  for(let x=0;x<=16;x+=2) g+=`<line class="ax" x1="${xs(x)}" x2="${xs(x)}" y1="${T-8}" y2="${H-30}"/><text x="${xs(x)}" y="${H-14}" text-anchor="middle">${x}</text>`;
+  SIMSTOCKS.forEach((st,i)=>{
+    const y=T+i*rowH+rowH/2, t1=st.bt+s.dT, [lab]=stockStatus(st.bt,s.dT,s.fish);
+    g+=`<text class="lbl" x="${L-8}" y="${y+4}" text-anchor="end">${st.name}${st.model?'*':''}</text>`;
+    g+=`<line x1="${xs(st.bt)}" y1="${y}" x2="${xs(t1)}" y2="${y}" stroke="var(--meer)" stroke-width="3"/>`;
+    g+=`<circle cx="${xs(st.bt)}" cy="${y}" r="5" fill="var(--surface)" stroke="var(--meer)" stroke-width="2"/>`;
+    g+=`<circle cx="${xs(clamp(t1,-2,16))}" cy="${y}" r="7" fill="${lab.includes('verschw')||lab.includes('stark')?'var(--bad)':lab.includes('Rück')?'var(--warn)':lab.includes('Zunahme')||lab.includes('Neu')?'var(--cold)':'var(--muted)'}"/>`;
+  });
+  g+=`<text x="${(L+W-R)/2}" y="${H}" text-anchor="middle">Bodentemperatur (°C)</text>`;
+  const counts={gone:0,down:0,up:0};
+  const rows=SIMSTOCKS.map(st=>{const [lab,cls]=stockStatus(st.bt,s.dT,s.fish); if(cls==='st-gone')counts.gone++; else if(cls==='st-down')counts.down++; else if(cls==='st-up'||cls==='st-new')counts.up++; return `<tr><td>${st.name}${st.model?'*':''}</td><td class="n">${st.lat}° N</td><td><span class="status ${cls}">${lab}</span></td></tr>`;}).join('');
+  const ready=!!TA('meer','m3_resp')&&filled('m3_beg',20)&&filled('m3_fish',15);
+  return stepHead(3,'Ausweichen, anpassen oder aussterben?','Auf Erwärmung können Arten auf drei Arten reagieren: Sie passen sich vor Ort an, sie wandern in passende Gebiete aus, oder sie sterben lokal aus. Die Simulation zeigt, was das für die Kabeljaubestände bedeutet.')+
+  `<div class="grid2">
+    <section class="panel stack">
+      <h3>Simulation: Der Nordatlantik wird wärmer</h3>
+      <label class="small">Erwärmung des Bodenwassers: <b class="num">+${fmt(s.dT,1)} °C</b></label>
+      <input type="range" min="0" max="4" step="0.25" value="${s.dT}" data-a="sim" data-k="dT">
+      <label class="row small"><input type="checkbox" data-a="simchk" data-k="fish" ${s.fish?'checked':''}> Fischerei wie bisher (Fangdruck bleibt hoch)</label>
+      <div class="chart"><svg viewBox="0 0 ${W} ${H+6}" role="img" aria-label="Bestände im Temperaturfenster">${g}</svg></div>
+      <p class="muted small">Leerer Kreis: heute · voller Kreis: nach der Erwärmung. Gleichmäßige Erwärmung aller Gebiete wie in den Szenarien bei Drinkwater (2005). *Modellannahme: Neubesiedlung ab etwa 1 °C.</p>
+    </section>
+    <div class="stack">
+      <div class="kpis">
+        <div class="kpi"><span class="eyebrow">verschwinden / stark</span><span class="v" style="color:var(--bad)">${counts.gone}</span></div>
+        <div class="kpi"><span class="eyebrow">Rückgang</span><span class="v" style="color:var(--warn)">${counts.down}</span></div>
+        <div class="kpi"><span class="eyebrow">Zunahme / neu</span><span class="v" style="color:var(--cold)">${counts.up}</span></div>
+      </div>
+      <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Bestand</th><th>Breite</th><th>Folge</th></tr></thead><tbody>${rows}</tbody></table></div>
+      ${fact('<b>Prognose bis 2100:</b> Die Bestände in der Keltischen und Irischen See werden voraussichtlich verschwinden, die in der südlichen Nordsee zurückgehen. Der Kabeljau breitet sich entlang Grönlands und Labradors nach Norden aus, besiedelt größere Teile der Barentssee und vielleicht arktische Schelfmeere. Laichplätze verschieben sich nach Norden.','Drinkwater 2005')}
+      ${fact('<b>Erwärmung und Fischerei:</b> Für die Nordsee wurde geschätzt, dass schon eine Erwärmung um 0,25 °C den Nachwuchs um 30 % verringert. Bleibt die Fischerei auf dem damaligen Niveau, geht der Bestand schneller zurück als durch die Erwärmung allein.','Drinkwater 2005 nach Clark et al. 2003')}
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="task"><b>Aufgabe 5 · Entscheiden<span class="afb">AFB III</span></b><p><span class="op">Beurteilt</span>, welche Reaktion beim Kabeljau überwiegt.</p>
+      ${choice('m3_resp',[['aus','Ausweichen (Verlagerung nach Norden)'],['anp','Anpassung vor Ort'],['tod','Lokales Aussterben']])}
+      ${ta('m3_beg','Begründet mit Belegen aus Schritt 1–3 …','short')}</div>
+    <div class="task"><b>Aufgabe 6 · Zwei Ursachen<span class="afb">AFB II</span></b><p>Schaltet „Fischerei wie bisher“ ein und aus. <span class="op">Erklärt</span>, wie Erwärmung und Überfischung zusammenwirken.</p>${ta('m3_fish','')}</div>
+  </div>`+
+  stepFoot('s3',ready,'Bitte beide Aufgaben bearbeiten.',
+  `<p><b>Ausweichen überwiegt</b> auf der Ebene der Art: Der Kabeljau verlagert seine Verbreitung und seine Laichplätze nach Norden. Für die südlichen Bestände bedeutet das allerdings <b>lokales Aussterben</b>, weil sie nicht weiter ausweichen können. Anpassung vor Ort zeigt sich in den Quellen nicht. Dass sich die Verbreitung in den 1960ern bei Abkühlung zurückverlagerte, spricht für Ausweichen statt Anpassung.</p>
+   <p><b>Zwei Ursachen:</b> Erwärmung verringert den Nachwuchs, Fischerei entnimmt die erwachsenen Fische. Ein geschwächter Bestand kann Verluste nicht mehr ausgleichen. Beides zusammen beschleunigt den Rückgang.</p>`);
+}
+function viewM4(){
+  const ready=vComplete(['m4_sued','m4_nord'])&&filled('m4_gew',15)&&filled('m4_mass',15);
+  return stepHead(4,'Verlierer, Gewinner und ein Kipppunkt','Nicht alle Bestände trifft die Erwärmung gleich. Bewertet die Verwundbarkeit zweier Gruppen und schaut euch an, was in der Nordsee Ende der 1980er-Jahre geschah.')+
+  `<div class="grid2">
+    <div class="stack">
+      ${fact('<b>Regimewechsel in der Nordsee:</b> Eine Auswertung von 73 Langzeit-Datenreihen ergab sprunghafte Veränderungen des Ökosystems um <b>1979</b> und <b>1988</b>. Der Wechsel 1988 hing vor allem mit der Temperatur zusammen: Die Wassertemperatur stieg sprunghaft, mehr warmes Atlantikwasser strömte ein. Gleichzeitig gingen die Anlandungen von Kabeljau und Schellfisch sowie die Ruderfußkrebse der Gattung <i>Calanus</i> (wichtige Nahrung für Fischlarven) stark zurück.','Weijerman, Lindeboom & Zuur 2005')}
+      ${fact('<b>Neuer stabiler Zustand:</b> Die Umweltfaktoren lösten den Wechsel aus, die Lebensgemeinschaft hielt das Ökosystem danach in einem <b>neuen stabilen Zustand</b>. Das Ökosystem kehrte nicht zum alten Zustand zurück. Die Autoren vermuten ein Zusammenspiel aus Ozean, Klima, menschlichen Eingriffen und atmosphärischen Schwankungen.','Weijerman, Lindeboom & Zuur 2005')}
+      ${fact('<b>Gewinner im Norden:</b> Für viele kalte Bestände wird schnelleres Wachstum erwartet. Insgesamt könnte die Kabeljau-Produktion im Nordatlantik sogar steigen, aber an anderen Orten als heute. Die Prognose ist unsicher, weil Nahrung, Räuber und Fischerei mitspielen.','Drinkwater 2005')}
+    </div>
+    <div class="stack">
+      <section class="panel stack"><h3>Verwundbarkeit bewerten</h3>
+        ${vTable([['m4_sued','Südliche Bestände (Keltische See, Irische See, südliche Nordsee)'],['m4_nord','Nördliche Bestände (Barentssee, Westgrönland)']])}</section>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="task"><b>Aufgabe 7 · Gewinner und Kipppunkt<span class="afb">AFB II</span></b><p><span class="op">Erläutert</span>, wer gewinnt und wer verliert. Warum kann man den Wechsel von 1988 als Kipppunkt bezeichnen?</p>${ta('m4_gew','')}</div>
+    <div class="task"><b>Aufgabe 8 · Maßnahmen<span class="afb">AFB III</span></b><p><span class="op">Beurteilt</span>: Was kann man tun, wenn der Kabeljau nach Norden zieht? Denkt an Fangquoten, Schutzgebiete und die Fischerei in verschiedenen Ländern.</p>${ta('m4_mass','')}</div>
+  </div>`+
+  stepFoot('s4',ready,'Bitte Tabelle und beide Aufgaben bearbeiten.',
+  `<p><b>Südliche Bestände:</b> hohe Exposition (schon nahe 12 °C), hohe Sensitivität (Nachwuchs sinkt mit Erwärmung, zusätzlich Fangdruck), geringe Anpassungskapazität (kein kälteres Gebiet in Reichweite) → <b>hohe Verwundbarkeit</b>. <b>Nördliche Bestände</b> profitieren eher: mehr Nachwuchs, schnelleres Wachstum, neue Lebensräume.</p>
+   <p><b>Kipppunkt:</b> 1988 änderte sich das Ökosystem sprunghaft statt allmählich und blieb im neuen Zustand. Die Lebensgemeinschaft stabilisierte den neuen Zustand selbst.</p>
+   <p><b>Maßnahmen:</b> Fangquoten an Temperatur und Nachwuchs anpassen, um den Bestand widerstandsfähiger zu machen; Schutz von Laich- und Aufwuchsgebieten; internationale Abkommen, weil Bestände über Grenzen hinweg wandern.</p>`);
+}
+
+// ===================== ZUSAMMENFÜHREN =====================
+function viewMuster(){
+  if(!bothDone('s4')) return `<div class="panel stack"><h2>Noch gesperrt</h2><p>Schritt 5 öffnet sich, wenn beide Teams Schritt 4 abgeschlossen haben.</p></div>`;
+  const r=ui.role, p=ROLE[r].partner, local=ui.mode==='local';
+  const reveal=bothDone('m');
+  const mySub=isDone(r,'m');
+  const cell=(who)=>{
+    return MROWS.map(row=>{
+      const k='mt_'+row.k;
+      if(who===r && !mySub) return `<textarea data-t="team" data-k="${k}" placeholder="${esc(row.q)}">${esc(TA(r,k))}</textarea>`;
+      if(who===r || reveal) return `<div class="ro">${esc(TA(who,k))||'<span class="muted">–</span>'}</div>`;
+      return `<div class="locked">🔒 sichtbar, wenn beide abgegeben haben</div>`;
+    });
+  };
+  const cb=cell('berg'), cm=cell('meer');
+  const myFilled=MROWS.filter(row=>TA(r,'mt_'+row.k).trim().length>=3).length;
+  const body=MROWS.map((row,i)=>`<tr><th>${row.t}<br><span class="muted small" style="font-weight:400">${row.q}</span></th>
+    <td class="${r==='berg'&&!mySub?'mine':''}">${cb[i]}</td><td class="${r==='meer'&&!mySub?'mine':''}">${cm[i]}</td>
+    <td>${reveal?jta('mj_'+row.k,'Was ist gleich?'):'<div class="locked">🔒</div>'}</td></tr>`).join('');
+  const dT=+(TA(r,'conv')||1);
+  return stepHead(5,'Die Mustertabelle',`Jedes Team füllt zuerst <b>nur seine eigene Spalte</b> – ohne sich abzusprechen. Erst wenn beide abgegeben haben, werden die Spalten nebeneinander sichtbar. Dann formuliert ihr gemeinsam das Muster in der dritten Spalte.${local?' (Ein Gerät: Wechselt oben die Rolle, um die zweite Spalte zu füllen.)':''}`,'Gemeinsam · Bergteam und Meeresteam')+`
+  <div class="row" style="margin-bottom:12px">
+    <span class="chip ${isDone('berg','m')?'ok':'wait'}"><span class="dot"></span>Bergteam: ${isDone('berg','m')?'abgegeben':'schreibt'}</span>
+    <span class="chip ${isDone('meer','m')?'ok':'wait'}"><span class="dot"></span>Meeresteam: ${isDone('meer','m')?'abgegeben':'schreibt'}</span>
+    ${mySub?(reveal?'':`<span class="muted small">Ihr habt abgegeben. Wartet auf das ${ROLE[p].name}.</span><button class="link" data-a="unsubmit">Spalte wieder bearbeiten</button>`)
+      :`<button class="btn accent sm" data-a="submitcol" ${myFilled>=MROWS.length?'':'disabled'}>Unsere Spalte abgeben</button><span class="muted small">${myFilled}/${MROWS.length} Zeilen ausgefüllt</span>`}
+  </div>
+  <div class="mt"><table><thead><tr><th></th><th class="b">Tagfalter · Alpen</th><th class="m">Kabeljau · Nordatlantik</th><th class="j">Gemeinsames Muster</th></tr></thead><tbody>${body}</tbody></table></div>
+  ${reveal?`
+  <div class="grid2" style="margin-top:18px">
+    <section class="panel stack">
+      <h3>Umrechner: Höhe und Breite</h3>
+      <p class="muted small">Gleiche Erwärmung, verschiedene Fluchtwege. Grobe Faustregel: Am Berg etwa 0,6 °C pro 100 m. Nach Norden in Europa grob 0,5–0,7 °C pro Breitengrad (≈ 111 km), regional sehr unterschiedlich.</p>
+      <label class="small">Erwärmung: <b class="num">+${fmt(dT,1)} °C</b></label>
+      <input type="range" min="0" max="4" step="0.25" value="${dT}" data-a="range" data-k="conv">
+      <div class="kpis">
+        <div class="kpi"><span class="eyebrow">bergauf</span><span class="v">≈ ${Math.round(dT/0.6*100)} m</span></div>
+        <div class="kpi"><span class="eyebrow">polwärts</span><span class="v">≈ ${Math.round(dT/0.7*111)}–${Math.round(dT/0.5*111)} km</span></div>
+      </div>
+      <p class="muted small">Im Meer kommt eine dritte Richtung hinzu: in die Tiefe, wo das Wasser kühler ist.</p>
+    </section>
+    <div class="stack">
+      <div class="task"><b>Gleich ist …<span class="afb">AFB III</span></b><p><span class="op">Formuliert</span> das gemeinsame Muster in zwei bis drei Sätzen.</p>${jta('m_gleich','Bei beiden Arten …')}</div>
+      <div class="task"><b>Verschieden ist …<span class="afb">AFB III</span></b><p><span class="op">Vergleicht</span>: Was unterscheidet die beiden Fälle (Mechanismus, Raum, Geschwindigkeit, menschliche Einflüsse)?</p>${jta('m_versch','')}</div>
+    </div>
+  </div>
+  <section class="stack" style="margin-top:18px">
+    ${J('m_check')?`<div class="check stack"><b>Abgleich: Das gemeinsame Muster</b>
+      <p><b>Gleich:</b> Zwei wechselwarme Arten können ihre Körpertemperatur nicht selbst halten. Ihre Temperaturmerkmale sind festgelegt, sie passen sich vor Ort kaum an. Sie folgen deshalb ihrem Temperaturfenster: bergauf bzw. polwärts. Am stärksten verlieren diejenigen, die schon an der warmen Grenze leben und nicht weiter ausweichen können. Wärmeliebendere Arten oder Bestände rücken nach. Das Ausweichen endet an Barrieren: Gipfel und Wald, Arktis und Tiefsee.</p>
+      <p><b>Verschieden:</b> Der Mechanismus (Verhalten, Größe und Farbe in der Luft gegenüber Wasser und Nachwuchs), die Richtung (Höhe gegenüber Breite und Tiefe), die Distanzen (Hunderte Meter gegenüber Hunderte Kilometer) und die zusätzlichen menschlichen Einflüsse (Lebensraumzerschneidung, Almwirtschaft gegenüber Überfischung). Im Meer zeigt sich zudem ein sprunghafter Regimewechsel.</p></div>`
+      :`<div><button class="btn ghost" data-a="jset" data-k="m_check" data-v="1" ${J('m_gleich').trim().length>15&&J('m_versch').trim().length>15?'':'disabled'}>Abgleich anzeigen</button></div>`}
+    <div><button class="btn accent" data-a="tab" data-tab="syn">Weiter zur Vertiefung: Ein neues Syndrom? →</button></div>
+  </section>`:''}`;
+}
+
+// ===================== SYNDROM =====================
+function viewSyn(){
+  if(!bothDone('m')) return `<div class="panel stack"><h2>Noch gesperrt</h2><p>Die Vertiefung öffnet sich, wenn beide Teams ihre Spalte der Mustertabelle abgegeben haben.</p></div>`;
+  const reveal=!!J('syn_reveal');
+  let lastG='';
+  const cards=SYN.map(s=>{
+    const head = s.g!==lastG ? `<div class="grouph" style="grid-column:1/-1">${s.g}</div>`:''; lastG=s.g;
+    const hl = reveal && ['schornstein','raubbau','landflucht'].includes(s.id);
+    return head+`<div class="sync ${hl?'hl':''}"><b>${s.n}</b><span class="small muted">${s.d}</span>${seg('syn_'+s.id,SYNOPT,true)}</div>`;
+  }).join('');
+  const marked=SYN.filter(s=>J('syn_'+s.id)).length;
+  return stepHead(6,'Ein neues Syndrom des globalen Wandels?',`Der Wissenschaftliche Beirat der Bundesregierung Globale Umweltveränderungen (WBGU) hat 1996 16 typische Muster beschrieben, in denen Mensch und Umwelt sich gegenseitig schädigen: die <b>Syndrome des globalen Wandels</b>. Sie sind wie Krankheitsbilder aufgebaut: mit Leitsymptom, Symptomen und einem Beziehungsgeflecht, das in vielen Räumen der Erde gleich funktioniert. Beide Tablets bearbeiten dieselben Felder.`,'Vertiefung · gemeinsam')+`
+  <section class="stack">
+    <div class="ph"><span class="stepno">6a</span><h2>Passt eines der 16 Syndrome?</h2></div>
+    <p class="muted">Ordnet jedes Syndrom ein: Ist es eine <b>Ursache</b> des Musters, eine <b>Kopplung</b> (verstärkt es zusätzlich) oder <b>passt es nicht</b>?</p>
+    <div class="syn">${cards}</div>
+    <div class="task"><b>Aufgabe · Fazit<span class="afb">AFB III</span></b><p><span class="op">Prüft</span>: Beschreibt eines der 16 Syndrome das Muster aus der Mustertabelle selbst? Begründet.</p>${jta('syn_fazit','')}</div>
+    ${reveal?`<div class="check stack"><b>Abgleich: Fachliche Einordnung</b>
+      <p><b>Keines der 16 Syndrome beschreibt das Muster selbst.</b> Die Syndrome sind nach menschlichen Ursachen geordnet (Nutzung, Entwicklung, Senken). Die Umverteilung der Arten ist dort nur eine Folge unter vielen.</p>
+      <p><b>Ursache:</b> Das <b>Hoher-Schornstein-Syndrom</b> beschreibt die weiträumige Verteilung langlebiger Stoffe wie Treibhausgase. Es ist die gemeinsame Ursache der Erwärmung in Alpen und Nordatlantik, mit Fernwirkung weit weg von den Quellen.</p>
+      <p><b>Kopplung:</b> Beim Kabeljau das <b>Raubbau-Syndrom</b> (Überfischung). Bei den Faltern kommt das <b>Landflucht-Syndrom</b> in Frage: Werden Almen nicht mehr beweidet, wachsen sie zu Wald zu, und die Barrieren zwischen den Bergwiesen werden größer. Diskutabel ist auch das Massentourismus-Syndrom im Hochgebirge.</p>
+      <p><b>Folgerung:</b> Das Muster „Arten folgen ihrem Temperaturfenster“ ist bisher kein eigenes Syndrom. In der Forschung gibt es Begriffe für Teile davon: Umverteilung der Arten (<i>species redistribution</i>), Rolltreppe ins Aussterben (<i>escalator to extinction</i>), Thermophilisierung. Ihr könnt es nun selbst als Syndrom beschreiben.</p></div>`
+     :`<div class="row"><button class="btn ghost" data-a="jset" data-k="syn_reveal" data-v="1" ${marked>=10&&J('syn_fazit').trim().length>15?'':'disabled'}>Fachliche Einordnung anzeigen</button><span class="muted small">${marked}/16 eingeordnet${marked>=10?'':' (mind. 10)'}, Fazit nötig</span></div>`}
+  </section>
+  ${reveal?`<section class="stack steck" style="margin-top:26px">
+    <div class="ph"><span class="stepno">6b</span><h2>Euer Syndrom-Steckbrief</h2></div>
+    <p class="muted" style="max-width:78ch">Beschreibt das Muster nach dem Vorbild des WBGU. Wichtig: Ein Syndrom beschreibt immer ein Zusammenspiel von Mensch und Natur. Klärt, wo der Mensch im Beziehungsgeflecht vorkommt.</p>
+    <div class="grid2">${STECK.map(f=>`<label class="f"><b>${f.t}</b><span class="muted small">${f.q}</span>${jta(f.k,'',f.short?'short':'')}</label>`).join('')}</div>
+    <div><button class="btn accent" data-a="tab" data-tab="end">Zum Ergebnis →</button></div>
+  </section>`:''}`;
+}
+
+// ===================== ERGEBNIS =====================
+function resultText(){
+  const L=[];
+  L.push('FIEBERTHERMOMETER DES KLIMAWANDELS – Ergebnis');
+  if(ui.code&&ui.mode==='online') L.push('Sitzung '+ui.code);
+  L.push('');
+  L.push('MUSTERTABELLE');
+  for(const row of MROWS){
+    L.push('## '+row.t);
+    L.push('Tagfalter: '+(TA('berg','mt_'+row.k)||'–'));
+    L.push('Kabeljau: '+(TA('meer','mt_'+row.k)||'–'));
+    L.push('Muster: '+(J('mj_'+row.k)||'–'));
+    L.push('');
+  }
+  L.push('Gleich ist: '+(J('m_gleich')||'–'));
+  L.push('Verschieden ist: '+(J('m_versch')||'–'));
+  L.push('');
+  L.push('EINORDNUNG DER WBGU-SYNDROME');
+  for(const s of SYN){ const v=J('syn_'+s.id); if(v) L.push(`- ${s.n}: ${({u:'Ursache',k:'Kopplung',n:'passt nicht'})[v]}`); }
+  L.push('Fazit: '+(J('syn_fazit')||'–'));
+  L.push('');
+  L.push('SYNDROM-STECKBRIEF');
+  for(const f of STECK) L.push(`${f.t}: ${J(f.k)||'–'}`);
+  return L.join('\n');
+}
+function viewEnd(){
+  const name=J('st_name')||'Unser Syndrom';
+  return `<section class="panel stephead"><div class="ph"><span class="stepno">✦</span><h2>${esc(name)}</h2><span class="lbl">Ergebnis · Syndrom-Steckbrief</span></div>${J('st_leit')?`<p class="intro">${esc(J('st_leit'))}</p>`:''}</section>
+  <div class="row" style="margin-bottom:14px"><button class="btn accent" data-a="copy">Ergebnis als Text kopieren</button><span class="muted small">Zum Einfügen in ein Dokument oder eine Mail an die Lehrkraft.</span></div>
+  <section class="panel stack"><h3>Syndrom-Steckbrief</h3>
+    <table class="tbl"><tbody>${STECK.map(f=>`<tr><th style="width:28%">${f.t}</th><td class="out">${esc(J(f.k))||'<span class="muted">–</span>'}</td></tr>`).join('')}</tbody></table></section>
+  <section class="panel stack" style="margin-top:16px"><h3>Das gemeinsame Muster</h3>
+    <p><b>Gleich ist:</b> <span class="out">${esc(J('m_gleich'))||'–'}</span></p>
+    <p><b>Verschieden ist:</b> <span class="out">${esc(J('m_versch'))||'–'}</span></p>
+    <div class="mt"><table><thead><tr><th></th><th class="b">Tagfalter</th><th class="m">Kabeljau</th><th class="j">Muster</th></tr></thead><tbody>
+    ${MROWS.map(row=>`<tr><th>${row.t}</th><td class="out">${esc(TA('berg','mt_'+row.k))}</td><td class="out">${esc(TA('meer','mt_'+row.k))}</td><td class="out">${esc(J('mj_'+row.k))}</td></tr>`).join('')}
+    </tbody></table></div></section>
+  ${sourcesBlock()}`;
+}
+
+// ===================== BEOBACHTUNG =====================
+const OBS_KEYS={
+  berg:[['s1','Hypothese',['b1_choice','b1_hyp','b1_grob']],['s2','Messung',['b2_zus','b2_erkl']],['s3','Reaktion',['b3_resp','b3_beg','b3_roll']],['s4','Verwundbarkeit',['b4_gew','b4_mass']]],
+  meer:[['s1','Hypothese',['m1_choice','m1_hyp','m1_hist']],['s2','Daten',['m2_est','m2_zus','m2_erkl']],['s3','Reaktion',['m3_resp','m3_beg','m3_fish']],['s4','Verwundbarkeit',['m4_gew','m4_mass']]]
+};
+const KEYLABEL={b1_choice:'Wahl',b1_hyp:'Hypothese',b1_grob:'Grenzen des Thermometers',b2_zus:'Zusammenhang',b2_erkl:'Erklärung',b3_resp:'Reaktion',b3_beg:'Begründung',b3_roll:'Rolltreppe',b4_gew:'Gewinner',b4_mass:'Maßnahmen',
+  m1_choice:'Wahl',m1_hyp:'Hypothese',m1_hist:'Historisches Thermometer',m2_est:'Schätzung Grenze (°C)',m2_zus:'Zusammenhang',m2_erkl:'Erklärung',m3_resp:'Reaktion',m3_beg:'Begründung',m3_fish:'Zwei Ursachen',m4_gew:'Gewinner & Kipppunkt',m4_mass:'Maßnahmen'};
+const VALLABEL={kd:'klein, dunkel',gh:'groß, hell',gleich:'alle gleich',sued:'südliche Bestände',nord:'nördliche Bestände',aus:'Ausweichen',anp:'Anpassung vor Ort',tod:'Lokales Aussterben'};
+function viewObserver(){
+  const col=r=>`<section class="panel stack" style="--accent:var(--${r})"><h2 style="color:var(--${r})">${ROLE[r].name}</h2>
+    <p class="muted small">${ROLE[r].long}</p>
+    ${OBS_KEYS[r].map(([s,t,keys])=>`<div class="stack" style="gap:6px"><div class="row"><b>Schritt ${s.slice(1)} · ${t}</b><span class="status ${isDone(r,s)?'st-new':'st-eq'}">${isDone(r,s)?'abgeschlossen':'offen'}</span></div>
+      ${keys.map(k=>{const v=TA(r,k);return `<p class="small"><span class="muted">${KEYLABEL[k]}:</span> <span class="out">${esc(VALLABEL[v]||v)||'–'}</span></p>`;}).join('')}</div>`).join('')}
+    <div class="row"><b>Mustertabelle</b><span class="status ${isDone(r,'m')?'st-new':'st-eq'}">${isDone(r,'m')?'abgegeben':'offen'}</span></div>
+  </section>`;
+  return `<section class="panel stephead"><div class="ph"><span class="stepno">◎</span><h2>Fortschritt beider Teams</h2><span class="lbl">Beobachtung · Sitzung ${esc(ui.code||'')}</span></div></section>
+  <div class="grid2">${col('berg')}${col('meer')}</div>
+  <section class="panel stack" style="margin-top:18px"><h3>Gemeinsam</h3>
+    <p><b>Gleich ist:</b> <span class="out">${esc(J('m_gleich'))||'–'}</span></p>
+    <p><b>Verschieden ist:</b> <span class="out">${esc(J('m_versch'))||'–'}</span></p>
+    <p><b>Syndrom:</b> ${esc(J('st_name'))||'–'} · ${esc(J('st_leit'))}</p>
+    <div class="row"><button class="btn ghost sm" data-a="obsview" data-v="end">Ergebnisseite öffnen</button></div>
+  </section>
+  <section class="panel stack" style="margin-top:18px"><h3>Erwartungshorizont (Kurzfassung)</h3>
+    <ol class="stack" style="gap:6px;margin:0;padding-left:20px">
+      <li><b>AFB I:</b> Beide Arten sind wechselwarm. Tagfalter: Puffer = 1 − Steigung; schwach puffernde Arten (<i>E. manto</i> 0,07; +195 m) verschieben sich am stärksten. Kabeljau: Temperaturfenster 0–12 °C; Nachwuchs steigt unter ca. 5 °C, sinkt über ca. 8,5 °C mit Erwärmung.</li>
+      <li><b>AFB II:</b> Keine Anpassung innerhalb der Arten → Umverteilung (Ausweichen). Verwundbarkeit = Exposition, Sensitivität, Anpassungskapazität: kleine, dunkle Hochlagenarten und südliche Kabeljaubestände am stärksten gefährdet. Barrieren: Gipfel/Wald bzw. Arktis/Tiefe. Kopplung beim Kabeljau mit Überfischung; Nordsee-Regimewechsel 1988 als Kipppunkt.</li>
+      <li><b>AFB III:</b> Isomorphes Muster in verschiedenen Räumen mit verschiedenen Mechanismen. Kein WBGU-Syndrom beschreibt es; Hoher Schornstein als Ursache, Raubbau (Kabeljau) und ggf. Landflucht (Almaufgabe → Wald als Barriere) als Kopplung. Steckbrief mit Natur- und Anthroposphäre, kritische Reflexion, ob ein rein ökologisches Muster ein Syndrom im Sinne des WBGU sein kann.</li>
+    </ol></section>`;
+}
+
+// ===================== Ereignisse =====================
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-a]'); if(!b||b.disabled) return;
+  const a=b.dataset.a;
+  if(['range','sim','simchk'].includes(a)) return;
+  if(a==='create') createGame();
+  else if(a==='rejoin') joinGame(b.dataset.code);
+  else if(a==='local') enter('LOKAL','local');
+  else if(a==='leave') leave();
+  else if(a==='role') takeRole(b.dataset.role);
+  else if(a==='switchrole'){ ui.screen='role'; ui.role=null; document.body.dataset.role=''; render(); }
+  else if(a==='localrole'){ ui.role=b.dataset.role; document.body.dataset.role=ui.role; if(['s1','s2','s3','s4'].includes(ui.tab)) ui.tab=firstOpenTab(ui.role); render(); window.scrollTo(0,0); }
+  else if(a==='tab'){ ui.tab=b.dataset.tab; render(); window.scrollTo(0,0); }
+  else if(a==='obsview'){ ui.tab=b.dataset.v; render(); window.scrollTo(0,0); }
+  else if(a==='pick'){ setAns(b.dataset.k,b.dataset.v,true); render(); }
+  else if(a==='jpick'){ const cur=J(b.dataset.k); saveJoint(b.dataset.k, cur===b.dataset.v?'':b.dataset.v, true); render(); }
+  else if(a==='jset'){ saveJoint(b.dataset.k,b.dataset.v,true); render(); }
+  else if(a==='done'){ setDone(b.dataset.s,true); render(); }
+  else if(a==='undone'){ setDone(b.dataset.s,false); render(); }
+  else if(a==='b2sp'){ ui.b2sp=b.dataset.id; render(); }
+  else if(a==='catch') catchButterfly(ui.b2sp,b.dataset.site);
+  else if(a==='clearsp'){ team('berg').meas[ui.b2sp]=[]; saveTeam(true); render(); }
+  else if(a==='probe'){ const m=team('meer').meas; m.probe=[...(m.probe||[]),b.dataset.id]; saveTeam(true); render(); }
+  else if(a==='submitcol'){ setDone('m',true); render(); }
+  else if(a==='unsubmit'){ setDone('m',false); render(); }
+  else if(a==='copy'){ try{ await navigator.clipboard.writeText(resultText()); toast('Ergebnis kopiert.'); }catch(err){ toast('Kopieren wurde vom Browser blockiert.'); } }
+});
+document.addEventListener('input',e=>{
+  const el=e.target;
+  if(el.dataset.a==='range'){ setAns(el.dataset.k,el.value); render(); return; }
+  if(el.dataset.a==='sim'){ ui.sim[el.dataset.k]=+el.value; render(); return; }
+  if(el.dataset.t==='team'){ setAns(el.dataset.k,el.value); maybeRefreshButtons(); return; }
+  if(el.dataset.t==='joint'){ saveJoint(el.dataset.k,el.value); maybeRefreshButtons(); return; }
+});
+document.addEventListener('change',e=>{
+  const el=e.target;
+  if(el.dataset.a==='simchk'){ ui.sim[el.dataset.k]=el.checked; render(); }
+});
+document.addEventListener('focusout',e=>{
+  const el=e.target;
+  if(el.dataset&&el.dataset.t==='joint') saveJoint(el.dataset.k,el.value,true);
+  if(el.dataset&&el.dataset.t==='team') saveTeam(true);
+});
+document.addEventListener('submit',e=>{ if(e.target.dataset.form==='join'){ e.preventDefault(); joinGame($('#joincode').value); } });
+// Freigabe-Knöpfe aktualisieren, ohne beim Tippen neu zu zeichnen
+let refreshTimer=null;
+function maybeRefreshButtons(){ clearTimeout(refreshTimer); refreshTimer=setTimeout(()=>render(),900); }
+
+// ===================== Start =====================
+render();
+(async()=>{
+  for(let i=0;i<30&&!(window.claude&&window.claude.use);i++) await sleep(100);
+  try{ db = window.claude && window.claude.use ? await window.claude.use('db') : null; }catch(e){ db=null; }
+  ui.dbState = db ? 'on' : 'off';
+  if(ui.screen==='lobby') render();
+})();
+setTimeout(()=>{ if(ui.dbState==='loading'){ ui.dbState='off'; if(ui.screen==='lobby') render(); } },11000);
+</script>
+</body></html>
