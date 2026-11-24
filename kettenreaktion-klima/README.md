@@ -16,7 +16,11 @@ Angeregt von einem Schulbuch-Schaubild (Welthungerhilfe/Westermann), das hier be
 | 6 Beurteilen | Grenzen des Modells (sechs Aussagen), Antwort auf die Leitfrage, Regler vorher/nachher |
 | Ergebnis | Bericht zum Kopieren und Drucken, Quellenliste |
 
-**Forschertagebuch:** `forschertagebuch.pdf` (9 Seiten A4, Skizzenseite quer) zum Importieren in GoodNotes; `forschertagebuch.html` ist die Druckvorlage. Neu erzeugen: HTML im Browser öffnen und als PDF drucken (Hintergrundgrafiken an).
+**Material für Lehrkräfte** (nur über den Bereich für Lehrkräfte verlinkt, nicht in der Anwendung):
+
+- `forschertagebuch.pdf`: 9 Seiten A4 (Skizzenseite quer) zum Import in GoodNotes; Vorlage `forschertagebuch.html`
+- `materialien.html` und `materialien.pdf`: Materialheft M1–M17 mit Hebelkarten und Elementkarten zum Ausschneiden
+- Begleitheft: verschlüsselt unter `lehrkraefte/kettenreaktion-klima/`, Original in `_lehrkraefte-originale/kettenreaktion-klima/`
 
 ## Quellen der Materialien
 
@@ -24,4 +28,4 @@ IPCC AR6 Synthesebericht 2023, WGI und WGII; IPCC SRCCL 2019; Forster u. a. 2026
 
 Keine externen Ressourcen, keine Cookies; Eingaben nur im `localStorage` des Browsers.
 
-Dateien: `index.html`, `forschertagebuch.pdf`, `forschertagebuch.html`, `LICENSE-SCHRIFTEN.txt`. © 2026 Andreas Bauer, technische Umsetzung mit Unterstützung von Claude (Anthropic).
+Dateien: `index.html`, `forschertagebuch.pdf`, `forschertagebuch.html`, `materialien.html`, `materialien.pdf`, `LICENSE-SCHRIFTEN.txt`. © 2026 Andreas Bauer, technische Umsetzung mit Unterstützung von Claude (Anthropic).

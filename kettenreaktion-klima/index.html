@@ -402,7 +402,6 @@ section.view>*{min-width:0}
       <div class="bubble" id="tip" aria-live="polite"></div>
     </div>
     <div class="hbtns">
-      <a class="btn" href="forschertagebuch.pdf" target="_blank" rel="noopener">Forschertagebuch (PDF)</a>
       <a class="btn" href="#ergebnis">Ergebnis</a>
     </div>
     <div class="tv-el-row" id="earthlab" hidden><a class="tv-el" href="../index.html"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#7FC4EE"/><path d="M4 6c2-1 4 0 4 2s-2 2-1 4-2 3-3 1-1-6 0-7zM12 4c2 0 3 1 3 2s-2 1-1 3 0 3-1 2-2-3-2-4 0-3 1-3z" fill="#4FB24C" stroke="#1B1B2F" stroke-width=".8"/><circle cx="10" cy="10" r="8" fill="none" stroke="#1B1B2F" stroke-width="1.6"/></svg>Zum Earth-Lab</a></div>
@@ -430,8 +429,7 @@ section.view>*{min-width:0}
     <svg viewBox="0 0 60 70" aria-hidden="true"><rect x="6" y="4" width="46" height="62" rx="5" fill="#FFF3A6" stroke="#1B1B2F" stroke-width="3"/><path d="M6 4h8v62H6" fill="#D9480F" stroke="#1B1B2F" stroke-width="3"/><path d="M22 20h22M22 30h22M22 40h16" stroke="#1B1B2F" stroke-width="2.5" stroke-linecap="round"/><circle cx="40" cy="52" r="7" fill="#fff" stroke="#1B1B2F" stroke-width="2.5"/><path d="M45 57l6 6" stroke="#1B1B2F" stroke-width="3" stroke-linecap="round"/></svg>
     <div style="display:grid;gap:6px">
       <b>Forschertagebuch</b>
-      <p class="small" style="color:var(--ink)">Ladet das Forschertagebuch als PDF herunter und öffnet es in GoodNotes (Teilen → „In GoodNotes öffnen“ oder Importieren). Dort haltet ihr Datenbelege, eure Skizze, Pfeil-Begründungen und euren Sprechzettel fest.</p>
-      <div class="row"><a class="btn primary" href="forschertagebuch.pdf" target="_blank" rel="noopener">Forschertagebuch öffnen (PDF)</a><a class="btn small" href="forschertagebuch.html" target="_blank" rel="noopener">Druckfassung (HTML)</a></div>
+      <p class="small" style="color:var(--ink)">Euer Forschertagebuch bekommt ihr von eurer Lehrkraft, zum Beispiel für GoodNotes. Dort haltet ihr Datenbelege, eure Skizze, Pfeil-Begründungen und euren Sprechzettel fest.</p>
     </div>
   </div>
   <ol class="start-steps">
@@ -1172,7 +1170,7 @@ const S = TV.store('kettenreaktion-klima-v1', () => ({txt:{}, def:{}, cur:'KW', 
 if (!S.st.def) S.st.def = {};
 
 const TIPS = {
-  start:'Willkommen im Forschungslabor! Heute baut ihr aus echten Daten ein Wirkungsgefüge. Holt euch zuerst das Forschertagebuch.',
+  start:'Willkommen im Forschungslabor! Heute baut ihr aus echten Daten ein Wirkungsgefüge. Legt euer Forschertagebuch bereit.',
   vermutung:'Hier gibt es kein Richtig oder Falsch. Haltet fest, was ihr jetzt denkt, dann seht ihr am Ende, was ihr dazugelernt habt.',
   archiv:'Formuliert Elemente kurz und als Veränderung: „Meeresspiegel steigt“ statt nur „Meer“. Die Zahl im Material ist euer Beweis.',
   gefuege:'Tippt zuerst die Ursache an, dann die Wirkung. Sucht Kreisläufe: Wo kommt eine Pfeilkette zu ihrem Anfang zurück?',

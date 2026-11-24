@@ -63,6 +63,7 @@ const APPS = [
   { id: 'plastikmeer', titel: 'Das Plastikmeer', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'trassenstreit', titel: 'Trassenstreit im Inntal', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'zwei-inseln', titel: 'Zwei Inseln, ein Sturm', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'kettenreaktion-klima', titel: 'Kettenreaktion Klima', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'geomethode-sahel', pfad: 'GeoMethode/halbmonde-sahel', titel: 'GeoMethode Kartenkompetenz: Grüne Halbmonde im Sahel (Jahrgang 8)', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'geomethode-ruhr', pfad: 'GeoMethode/strukturwandel-ruhr', titel: 'GeoMethode Kartenkompetenz: Kohle, Kumpel, Campus (Jahrgang 9)', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'geomethode-aletsch', pfad: 'GeoMethode/aletschgletscher', titel: 'GeoMethode Kartenkompetenz: Der schwindende Riese (Jahrgang 10)', stufe: 'Klasse 7 bis 10', start: '' },
@@ -72,7 +73,7 @@ const APPS = [
 // Welche Dateien geschützt werden
 const SCHUTZ = /^(begleitheft\.html|wissensbasis\.html|loesung[^/]*\.html|begleitheft\.pdf|begleitheft\.docx)$/i;
 const NUR_ARCHIV = ['docs/wissensbasis.md']; // wird nur aus der Veröffentlichung genommen
-const OFFEN = [{ datei: 'materialien.html', art: 'Arbeitsblätter' }, { datei: 'LIESMICH.txt', art: 'Anleitung' }, { datei: 'Spickzettel_Sachtexte_auswerten.docx', art: 'Spickzettel für Schülerinnen und Schüler (Word)' }];
+const OFFEN = [{ datei: 'materialien.html', art: 'Arbeitsblätter' }, { datei: 'materialien.pdf', art: 'Materialheft als PDF (für GoodNotes)' }, { datei: 'LIESMICH.txt', art: 'Anleitung' }, { datei: 'Spickzettel_Sachtexte_auswerten.docx', art: 'Spickzettel für Schülerinnen und Schüler (Word)' }, { datei: 'forschertagebuch.pdf', art: 'Forschertagebuch für Schülerinnen und Schüler (PDF, für GoodNotes)' }];
 
 const huelleName = (name) => name.replace(/\.pdf$/i, '-pdf.html').replace(/\.docx$/i, '-word.html');
 const art = (name) =>
