@@ -97,6 +97,26 @@ a:focus-visible{outline:3px solid #FF6B3D;outline-offset:3px;border-radius:10px}
 footer{text-align:center;color:var(--muted);font-size:.85rem}
 footer a{color:var(--ink);font-weight:700}
 @media (prefers-reduced-motion:reduce){.app,.app:hover{transition:none;transform:none}}
+
+/* Ticker: neueste Anwendungen */
+.ticker{display:flex;align-items:stretch;background:var(--paper);border:3px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);overflow:hidden;min-height:50px}
+.t-lab{flex:none;display:flex;align-items:center;gap:6px;background:var(--logo);color:#fff;font-family:var(--f-comic);font-size:1.25rem;letter-spacing:.06em;padding:4px 14px 2px;border-right:3px solid var(--ink);white-space:nowrap}
+.t-lab i{font-style:normal;display:inline-block;animation:t-blink 1.6s steps(2) infinite}
+@keyframes t-blink{50%{opacity:.35}}
+.t-view{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%)}
+.t-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:t-run var(--t-dur,60s) linear infinite}
+.ticker:hover .t-track,.ticker:focus-within .t-track,.ticker.paused .t-track{animation-play-state:paused}
+@keyframes t-run{to{transform:translateX(-50%)}}
+.t-track li{flex:none;display:flex;align-items:center;padding:0 6px}
+.t-track .it{display:inline-flex;align-items:center;gap:8px;color:var(--ink);padding:5px 12px;white-space:nowrap;font-size:.9rem;cursor:default}
+.t-track .it b{font-family:var(--f-comic);font-weight:400;font-size:1.2rem;letter-spacing:.04em;-webkit-text-stroke:.6px var(--ink)}
+.t-track .it .q{color:var(--muted)}
+.t-track .dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink);flex:none}
+.t-track .sep{color:var(--muted);font-weight:800}
+.t-pause{flex:none;border:none;border-left:3px solid var(--ink);background:var(--action);font:800 .8rem var(--f-body);padding:0 12px;cursor:pointer;color:var(--ink)}
+.t-pause:hover{background:var(--narr)}
+@media (max-width:560px){.t-lab{font-size:1rem;padding:4px 10px 2px}.t-lab span{display:none}.t-track .it .q{display:none}}
+@media (prefers-reduced-motion:reduce){.t-track{animation:none}.t-view{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.t-track li[aria-hidden]{display:none}.t-pause,.t-lab i{display:none}}
 </style>
 </head>
 <body>
@@ -141,6 +161,13 @@ footer a{color:var(--ink);font-weight:700}
       </svg>
     </div>
   </header>
+
+  <!-- Ticker: neueste Anwendungen. Reihenfolge in NEU (Skript unten) anpassen: href der Karte eintragen, Titel und Farbe kommen automatisch von der Karte. -->
+  <section class="ticker" id="ticker" aria-label="Neu im Earth-Lab">
+    <span class="t-lab"><i aria-hidden="true">★</i>Neu<span> im Earth-Lab</span></span>
+    <div class="t-view"><ul class="t-track" id="tickerTrack"></ul></div>
+    <button class="t-pause" type="button" id="tickerPause" aria-pressed="false">Pause</button>
+  </section>
 
   <main class="grades">
 
@@ -806,6 +833,26 @@ footer a{color:var(--ink);font-weight:700}
   </footer>
 </div>
 
+<script>
+/* Ticker: neueste Anwendungen zuerst */
+(function(){
+  const NEU=['kettenreaktion-klima/','GeoMethode/graphen-lesen/','zwei-inseln/','trassenstreit/','plastikmeer/','stadtlabor/','murenalarm/','klima-hotspots/'];
+  const track=document.getElementById('tickerTrack'), box=document.getElementById('ticker'), btn=document.getElementById('tickerPause');
+  if(!track) return;
+  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const items=NEU.map(h=>{
+    const a=document.querySelector('a.app[href="'+h+'"]'); if(!a) return '';
+    const h3=a.querySelector('h3'), q=a.querySelector('p b'), col=(h3&&h3.style.color)||'var(--logo)';
+    return '<span class="it"><span class="dot" style="background:'+col+'"></span><b style="color:'+col+'">'+esc(h3?h3.textContent.trim():h)+'</b>'+(q?'<span class="q">'+esc(q.textContent.trim())+'</span>':'')+'</span>';
+  }).filter(Boolean);
+  if(!items.length){box.hidden=true;return;}
+  const one=items.map(i=>'<li>'+i+'</li><li class="sep" aria-hidden="true">✦</li>').join('');
+  const copy=items.map(i=>'<li aria-hidden="true">'+i+'</li><li class="sep" aria-hidden="true">✦</li>').join('');
+  track.innerHTML=one+copy;
+  requestAnimationFrame(()=>{ track.style.setProperty('--t-dur',Math.max(25,track.scrollWidth/2/70)+'s'); });
+  btn.addEventListener('click',()=>{const p=box.classList.toggle('paused');btn.setAttribute('aria-pressed',p);btn.textContent=p?'Weiter':'Pause';});
+})();
+</script>
 <script src="assets/vendor/d3-array.min.js"></script>
 <script src="assets/vendor/d3-geo.min.js"></script>
 <script src="assets/land110.js"></script>
