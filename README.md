@@ -22,6 +22,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `plastikmeer/` | **Das Plastikmeer**: Gemüse aus Almería für Jahrgang 7 (Geo 7 LB 4). Mystery, Raum mit Zeitregler, Wasserbilanz-Simulation bis 2045 mit Kipppunkt Versalzung, lebendiges Diagramm, Tatsache oder Meinung, Einkaufsratgeber; Begleitheft und Wissensbasis |
 | `trassenstreit/` | **Trassenstreit im Inntal**: Brenner-Nordzulauf für Jahrgang 7 (Geo 7 LB 5). Korridorkarte, Meinungslinie vorher und nachher, sieben Rollen, Tatsache oder Meinung, gewichtete Kriterienmatrix für vier konstruierte Trassen, Verhandlung in drei Runden, Stellungnahme; Begleitheft und Wissensbasis |
 | `zwei-inseln/` | **Zwei Inseln, ein Sturm**: Hurrikan Matthew 2016 in Haiti und Kuba für Jahrgang 10 (Geo 10 LB 7). Kopfkino, Best Track auf Karte und Globus, Satellitenbild, Datenvergleich, Außenseiter, Mystery, Resilienz-Simulation über fünf Saisons, Resilienzplan; Begleitheft und Wissensbasis |
+| `kettenreaktion-klima/` | **Kettenreaktion Klima**: vernetzt denken für Jahrgang 8 bis 10. Aus 17 Datenbelegen (M1–M17) eigene Elemente ableiten, ein Wirkungsgefüge vom Klimawandel bis zu Hunger und Flucht bauen, Rückkopplungen und sechs Hebel finden, roten Faden, Sprechzettel und Präsentationsmodus für den freien Vortrag, Grenzen des Modells; Forschertagebuch als PDF für GoodNotes |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -46,6 +47,7 @@ stadtlabor/                    Stadtlabor 2040
 plastikmeer/                   Das Plastikmeer
 trassenstreit/                 Trassenstreit im Inntal
 zwei-inseln/                   Zwei Inseln, ein Sturm
+kettenreaktion-klima/          Kettenreaktion Klima (Wirkungsgefüge Klimawandel und Flucht, Forschertagebuch)
 GeoMethode/                    GeoMethode Kartenkompetenz: vier Anwendungen für Jahrgang 5, 8, 9 und 10; dazu GeoMethode/graphen-lesen/ (Graphen lesen, Jahrgang 5 bis 7)
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus
