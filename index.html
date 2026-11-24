@@ -105,7 +105,7 @@ footer a{color:var(--ink);font-weight:700}
 @keyframes t-blink{50%{opacity:.35}}
 .t-view{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%)}
 .t-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:t-run var(--t-dur,60s) linear infinite}
-.ticker:hover .t-track,.ticker:focus-within .t-track,.ticker.paused .t-track{animation-play-state:paused}
+.ticker.paused .t-track{animation-play-state:paused}
 @keyframes t-run{to{transform:translateX(-50%)}}
 .t-track li{flex:none;display:flex;align-items:center;padding:0 6px}
 .t-track .it{display:inline-flex;align-items:center;gap:8px;color:var(--ink);padding:5px 12px;white-space:nowrap;font-size:.9rem;cursor:default}
