@@ -64,6 +64,7 @@ const APPS = [
   { id: 'trassenstreit', titel: 'Trassenstreit im Inntal', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'zwei-inseln', titel: 'Zwei Inseln, ein Sturm', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'kettenreaktion-klima', titel: 'Kettenreaktion Klima', stufe: 'Klasse 7 bis 10', start: '' },
+  { id: 'volle-netze', titel: 'Volle Netze', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'geomethode-sahel', pfad: 'GeoMethode/halbmonde-sahel', titel: 'GeoMethode Kartenkompetenz: Grüne Halbmonde im Sahel (Jahrgang 8)', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'geomethode-ruhr', pfad: 'GeoMethode/strukturwandel-ruhr', titel: 'GeoMethode Kartenkompetenz: Kohle, Kumpel, Campus (Jahrgang 9)', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'geomethode-aletsch', pfad: 'GeoMethode/aletschgletscher', titel: 'GeoMethode Kartenkompetenz: Der schwindende Riese (Jahrgang 10)', stufe: 'Klasse 7 bis 10', start: '' },

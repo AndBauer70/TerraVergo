@@ -1,5 +1,5 @@
 // Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-24. Nicht von Hand ändern.
-window.TV_LK={"salz":"Ue2S6HV2vI/2daSbUU13xw==","iter":600000,"id":"97e2e4f93dd1","pruef":{"iv":"K5jhaVzNpUTqWuWB","ct":"Ifl23USRdgZ8m5ZO0hAJl76hoBPa36J6dOLl6LpPFuGS9T5Lv4U="}};
+window.TV_LK={"salz":"aSJjMixap/7KO50LvcXDjg==","iter":600000,"id":"f25d8a2426ef","pruef":{"iv":"PDRD/QtRnNJwKL66","ct":"sifEtJX+xMMTofuY4lGMnKrmNfm32bQKUz30Yj0sTdsI3MCTZqo="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -549,6 +549,22 @@ window.TV_DOKUMENTE=[
     "href": "../kettenreaktion-klima/forschertagebuch.pdf"
    }
   ]
+ },
+ {
+  "id": "volle-netze",
+  "titel": "Volle Netze",
+  "stufe": "Klasse 7 bis 10",
+  "start": "../volle-netze/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Volle Netze",
+    "href": "volle-netze/begleitheft.html",
+    "typ": "html",
+    "kb": 135
+   }
+  ],
+  "offen": []
  },
  {
   "id": "geomethode-sahel",
