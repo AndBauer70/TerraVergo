@@ -1,5 +1,5 @@
-// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-24. Nicht von Hand ändern.
-window.TV_LK={"salz":"aSJjMixap/7KO50LvcXDjg==","iter":600000,"id":"f25d8a2426ef","pruef":{"iv":"PDRD/QtRnNJwKL66","ct":"sifEtJX+xMMTofuY4lGMnKrmNfm32bQKUz30Yj0sTdsI3MCTZqo="}};
+// Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-25. Nicht von Hand ändern.
+window.TV_LK={"salz":"VEb8THRcrFOhBdebNs55tQ==","iter":600000,"id":"d4f405a596a4","pruef":{"iv":"9NjmpEkjHpJeWuqt","ct":"Ca16tm25J5fWm6EwzyLlKq3e4vqzQAbuLWcCU8G5eHBokzzTG88="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -657,5 +657,41 @@ window.TV_DOKUMENTE=[
    }
   ],
   "offen": []
+ },
+ {
+  "id": "mitteldeutscherevier",
+  "titel": "Revier im Wandel",
+  "stufe": "Oberstufe",
+  "start": "../mitteldeutscherevier/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft · Revier im Wandel",
+    "href": "mitteldeutscherevier/begleitheft.html",
+    "typ": "html",
+    "kb": 149
+   },
+   {
+    "art": "Wissensbasis",
+    "titel": "Wissensbasis · Revier im Wandel",
+    "href": "mitteldeutscherevier/wissensbasis.html",
+    "typ": "html",
+    "kb": 116
+   }
+  ],
+  "offen": [
+   {
+    "art": "Arbeitsblätter",
+    "href": "../mitteldeutscherevier/materialien.html"
+   },
+   {
+    "art": "Materialheft als PDF (für GoodNotes)",
+    "href": "../mitteldeutscherevier/materialien.pdf"
+   },
+   {
+    "art": "Forschertagebuch für Schülerinnen und Schüler (PDF, für GoodNotes)",
+    "href": "../mitteldeutscherevier/forschertagebuch.pdf"
+   }
+  ]
  }
 ];

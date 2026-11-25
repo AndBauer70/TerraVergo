@@ -24,6 +24,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `zwei-inseln/` | **Zwei Inseln, ein Sturm**: Hurrikan Matthew 2016 in Haiti und Kuba für Jahrgang 10 (Geo 10 LB 7). Kopfkino, Best Track auf Karte und Globus, Satellitenbild, Datenvergleich, Außenseiter, Mystery, Resilienz-Simulation über fünf Saisons, Resilienzplan; Begleitheft und Wissensbasis |
 | `kettenreaktion-klima/` | **Kettenreaktion Klima**: vernetzt denken für Jahrgang 8 bis 10. Aus 17 Datenbelegen (M1–M17) eigene Elemente ableiten, ein Wirkungsgefüge vom Klimawandel bis zu Hunger und Flucht bauen, Rückkopplungen und sechs Hebel finden, roten Faden, Sprechzettel und Präsentationsmodus für den freien Vortrag, Grenzen des Modells; Forschertagebuch als PDF für GoodNotes |
 | `volle-netze/` | **Volle Netze**: Fischerei-Rollenspiel für 2 bis 6 Crews, Jahrgang 7 bis 10, an einem Gerät oder mit je einem Tablet pro Crew (direkte WLAN-Verbindung per QR-Kopplung, ohne Server). Boote kaufen, auf Hochsee, Küste und Hafen verteilen, handeln und Bilanz ziehen; der Fischbestand bleibt bis zur Auswertung verborgen. Auswertung mit Bestandskurven, Rangliste und Wirkungsgefüge, Aufgaben zu Allmende, Regeln und Transfer aufs Klima; Spielleitung mit Fangquote; eigenständig, angelehnt an die Spielidee von Fish Banks, Ltd.; Begleitheft |
+| `mitteldeutscherevier/` | **Revier im Wandel**: Strukturwandel im Mitteldeutschen Braunkohlerevier für die Oberstufe (KC Niedersachsen FM 2, RM 1). Einstieg „Party im Tagebau“, 12 Materialien als Chancen und Risiken, offengelegtes Szenario-Modell 2026–2045 mit sechs einstellbaren Hebeln („weiter mit Kohle“, „Tourismusregion“, „neue Industrie“, „Mix“), Kipppunkten und Hebeltest, Kriterien-Matrix und Argumentationswippe, Präsentationsmodus, Urteilsbildung zur Rolle des Tourismus. Forschertagebuch und Materialheft als PDF; Begleitheft und Wissensbasis im Bereich für Lehrkräfte. |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -50,6 +51,7 @@ trassenstreit/                 Trassenstreit im Inntal
 zwei-inseln/                   Zwei Inseln, ein Sturm
 kettenreaktion-klima/          Kettenreaktion Klima (Wirkungsgefüge Klimawandel und Flucht, Forschertagebuch)
 volle-netze/                   Volle Netze (Fischerei-Rollenspiel zur Allmende)
+mitteldeutscherevier/          Revier im Wandel (Strukturwandel Mitteldeutsches Revier, Zukunftsszenarien und Hebel)
 GeoMethode/                    GeoMethode Kartenkompetenz: vier Anwendungen für Jahrgang 5, 8, 9 und 10; dazu GeoMethode/graphen-lesen/ (Graphen lesen, Jahrgang 5 bis 7)
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus

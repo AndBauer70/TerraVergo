@@ -845,6 +845,29 @@ footer a{color:var(--ink);font-weight:700}
             <span class="go">Stationen starten →</span>
           </div>
         </a>
+        <a class="app" href="mitteldeutscherevier/">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="85" fill="#DCEFFF"/>
+              <circle cx="372" cy="14" r="18" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M0 58L60 54L96 74L0 85Z" fill="#8A5A36" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M90 85Q170 60 250 66T400 62V85Z" fill="#5DA9E9" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M150 76q8-4 16 0t16 0M260 74q8-4 16 0t16 0" fill="none" stroke="#fff" stroke-width="1.8"/>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <rect x="30" y="34" width="40" height="18" rx="3" fill="#E8A600"/><path d="M44 34L40 10M56 34L60 10M40 10H60M60 18L102 40M56 24L98 46" fill="none"/>
+                <circle cx="106" cy="44" r="12" fill="#C9C2B4"/><path d="M106 32v24M94 44h24" fill="none" stroke-width="1.4"/>
+                <path d="M300 64V40l14 22Z" fill="#fff"/><path d="M292 66h28l-4 5h-20Z" fill="#A23E12"/>
+              </g>
+              <g transform="translate(140 10) rotate(-3)"><rect width="150" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="75" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">KOHLE → SEENLAND</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Strukturwandel</span>
+            <h3 style="color:#A23E12;-webkit-text-stroke:1px #1B1B2F">Revier im Wandel</h3>
+            <p><b style="color:#1B1B2F">Welche Rolle spielt der Tourismus für den Strukturwandel im Mitteldeutschen Revier?</b> Zwölf Materialien als Chancen und Risiken auswerten, Zukunftsszenarien von „weiter mit Kohle“ bis „Tourismusregion“ mit eigenen Hebeln bis 2045 rechnen und die Hebel nach Kriterien und auf der Argumentationswippe beurteilen.</p>
+            <span class="go">Zukunft rechnen →</span>
+          </div>
+        </a>
         <!-- Weitere Anwendungen für die Oberstufe: einen Block kopieren und href, Bild und Texte anpassen. -->
       </div>
     </section>
@@ -859,7 +882,7 @@ footer a{color:var(--ink);font-weight:700}
 <script>
 /* Ticker: neueste Anwendungen zuerst */
 (function(){
-  const NEU=['volle-netze/','kettenreaktion-klima/','GeoMethode/graphen-lesen/','zwei-inseln/','trassenstreit/','plastikmeer/','stadtlabor/','murenalarm/','klima-hotspots/'];
+  const NEU=['mitteldeutscherevier/','volle-netze/','kettenreaktion-klima/','GeoMethode/graphen-lesen/','zwei-inseln/','trassenstreit/','plastikmeer/','stadtlabor/','murenalarm/','klima-hotspots/'];
   const track=document.getElementById('tickerTrack'), box=document.getElementById('ticker'), btn=document.getElementById('tickerPause');
   if(!track) return;
   const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
