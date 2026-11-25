@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prof. Geos Erdlabor</title>
+<meta name="description" content="Prof. Geos Erdlabor: interaktive Lernanwendungen für den Erdkundeunterricht – Terra Vergo mit dem Mystery „Das Rätsel vom Deich“ und der Klimasimulation, der Erdbeben-Globus, die Klimazonen der Erde, das Kompass-Rätsel, das Funk-Abenteuer Expedition Sogapalag, die Breitenkreise, die Sensor-Werkstatt, die Hotspot-Expedition zu den Brennpunkten des Klimawandels und das Planspiel Christallers Land sowie die GeoMethode „Sachtexte auswerten“.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23C2E4FB' stroke='%231B1B2F' stroke-width='3'/%3E%3Cpath d='M9 11q4-3 7 0t1 6q-4 2-6-1zM18 18q4-1 6 3-2 4-5 2z' fill='%23F4EBD3' stroke='%231B1B2F' stroke-width='1.5'/%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Bangers";src:url("assets/fonts/bangers-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Lexend";src:url("assets/fonts/lexend-latin-400-normal.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Lexend";src:url("assets/fonts/lexend-latin-700-normal.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Lexend";src:url("assets/fonts/lexend-latin-800-normal.woff2") format("woff2");font-weight:800;font-display:swap}
+
+/* Farben und Formen wie in Terra Vergo und dem Erdbeben-Globus */
+:root{
+  --sky:#B9E2FF; --paper:#FFFFFF; --ink:#1B1B2F; --muted:#4A5266;
+  --action:#FFD23F; --narr:#FFF3A6; --logo:#FF5A3C;
+  --kryo:#4FB6E8; --hydro:#1E6FD0; --atmo:#C2408F; --land:#F4EBD3;
+  --f-comic:"Bangers","Impact","Arial Black",sans-serif;
+  --f-body:"Lexend","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--sky);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;
+  background-image:radial-gradient(rgba(27,27,47,.10) 1.3px,transparent 1.6px);background-size:11px 11px}
+.wrap{max-width:1280px;margin:0 auto;padding:18px 16px 56px;display:grid;gap:18px}
+.box{background:var(--paper);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);padding:16px;min-width:0}
+a:focus-visible{outline:3px solid #FF6B3D;outline-offset:3px;border-radius:10px}
+
+/* Kopf */
+.head{display:grid;justify-items:center;text-align:center;padding:26px 16px 10px}
+.tag{display:inline-block;background:var(--action);border:2.5px solid var(--ink);border-radius:8px;padding:3px 10px;font-weight:800;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.logo{font-family:var(--f-comic);font-weight:400;font-size:clamp(2.8rem,8vw,5rem);line-height:.95;letter-spacing:.03em;color:var(--logo);
+  -webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink);transform:rotate(-2deg);margin:16px 0 8px}
+.lead{max-width:62ch;margin:0;color:var(--muted);font-size:1rem}
+/* Kopf kompakt: Text links, Globus rechts */
+.head{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto auto;align-content:center;align-items:center;justify-items:start;text-align:left;column-gap:28px;padding:14px 28px 12px}
+.head>:not(.scene){grid-column:1}
+.head .logo{margin:8px 0 6px;transform-origin:left center}
+.head .scene{grid-column:2;grid-row:1 / span 4;width:clamp(120px,30vw,370px);margin:0}
+@media (max-width:560px){
+  .head{column-gap:12px;padding:12px 14px 10px}
+  .head .logo{font-size:2.15rem;-webkit-text-stroke:1.5px var(--ink);text-shadow:3px 3px 0 var(--ink);margin:6px 0 4px}
+  .head .lead{font-size:.86rem;line-height:1.35}
+  .head>.tag{grid-column:1 / -1;font-size:.68rem;letter-spacing:.08em;white-space:nowrap}
+  .head .scene{grid-row:2 / span 2;width:118px}
+  .head .lk-link{grid-column:1 / -1;font-size:.78rem;padding:4px 10px 4px 8px;margin-top:8px}
+}
+
+/* Link zum Bereich für Lehrkräfte */
+.lk-link{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:5px 12px 5px 9px;background:var(--paper);color:var(--ink);text-decoration:none;
+  font-weight:800;font-size:.84rem;letter-spacing:.02em;border:2.5px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--logo);transition:transform .15s ease,box-shadow .15s ease}
+.lk-link svg{width:16px;height:16px;flex:none}
+.lk-link:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--logo);background:var(--narr)}
+.lk-link:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--logo)}
+@media (prefers-reduced-motion:reduce){.lk-link,.lk-link:hover{transition:none;transform:none}}
+
+/* Globus mit Satellit */
+.scene{width:min(100%,560px);margin:6px auto 0}
+.scene svg{display:block;width:100%;height:auto;overflow:visible}
+.scene .land{fill:var(--land);stroke:var(--ink);stroke-width:1.1;stroke-linejoin:round}
+.scene .grat{fill:none;stroke:#8FC2E8;stroke-width:.6}
+.scene .atmo{fill:none;stroke:var(--atmo);stroke-width:9;stroke-opacity:.45}
+.scene .orbit{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:6 7;stroke-linecap:round;opacity:.55}
+/* Expeditionsrouten: unterschiedlich blass gestrichelt (rot = Polarstern, blau = Tara Polar Station) */
+.scene .route{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.scene .route.ps{stroke:#E0393B;stroke-width:1.8;stroke-dasharray:7 4;opacity:.62}
+.scene .route.ps-back{stroke:#E0393B;stroke-width:1.6;stroke-dasharray:4 4;opacity:.32}
+.scene .route.tara{stroke:var(--hydro);stroke-width:1.9;stroke-dasharray:7 4;opacity:.75}
+.scene .route.tara-drift{stroke:var(--hydro);stroke-width:1.9;stroke-dasharray:2.5 4;opacity:.45}
+
+/* Anwendungen */
+.sec-h{font-family:var(--f-comic);font-weight:400;font-size:1.75rem;letter-spacing:.04em;line-height:1;margin:0 0 4px}
+.sub{color:var(--muted);font-size:.9rem;margin:0}
+.apps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:14px}
+@media (min-width:760px){.apps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.grades{display:grid;gap:18px}
+.soon{justify-self:stretch;margin-top:8px;border:3px dashed var(--ink);border-radius:16px;padding:18px 20px;background:repeating-linear-gradient(-45deg,#FFFFFF 0 12px,#F3F8FD 12px 24px);color:var(--muted)}
+.soon p{margin:0}
+.soon b{color:var(--ink)}
+.grade{display:grid;justify-items:start;gap:6px}
+.grade>.apps{justify-self:stretch}
+.grade-h{display:inline-block;font-family:var(--f-comic);font-weight:400;font-size:1.45rem;letter-spacing:.05em;line-height:1.1;background:var(--narr);border:2.5px solid var(--ink);border-radius:10px;padding:4px 14px 2px;box-shadow:3px 3px 0 var(--ink);margin:0 0 2px}
+.grade .apps{margin-top:8px}
+@media (min-width:1100px){.apps.three{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.app{display:flex;flex-direction:column;background:var(--paper);border:3px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);
+  overflow:hidden;color:inherit;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease}
+.app:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.app:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.pic{aspect-ratio:400/85;border-bottom:3px solid var(--ink);position:relative;overflow:hidden}
+.pic svg{display:block;width:100%;height:100%}
+.body .tag{font-size:.68rem;padding:2px 8px}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;flex:1}
+.app h3{font-family:var(--f-comic);font-weight:400;font-size:2rem;letter-spacing:.03em;line-height:1;margin:0}
+.app p{margin:0;color:var(--muted)}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px}
+.app.geo-m{background:#E3F4E6}.app.geo-m .body{background:#E3F4E6;border-radius:0 0 13px 13px}.tag.gm{background:#2FA84F;color:#fff}
+.tag.duo{display:inline-flex;align-items:center;gap:5px;background:#E0393B;color:#fff}
+.tag.duo svg{width:17px;height:12px;flex:none}
+.go{margin-top:auto;background:var(--action);border:2.5px solid var(--ink);border-radius:10px;padding:7px 14px;font-weight:800;box-shadow:2px 2px 0 var(--ink)}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem}
+footer a{color:var(--ink);font-weight:700}
+@media (prefers-reduced-motion:reduce){.app,.app:hover{transition:none;transform:none}}
+
+/* Ticker: neueste Anwendungen */
+.ticker{display:flex;align-items:stretch;background:var(--paper);border:3px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);overflow:hidden;min-height:50px}
+.t-lab{flex:none;display:flex;align-items:center;gap:6px;background:var(--logo);color:#fff;font-family:var(--f-comic);font-size:1.25rem;letter-spacing:.06em;padding:4px 14px 2px;border-right:3px solid var(--ink);white-space:nowrap}
+.t-lab i{font-style:normal;display:inline-block;animation:t-blink 1.6s steps(2) infinite}
+@keyframes t-blink{50%{opacity:.35}}
+.t-view{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%)}
+.t-track{display:flex;width:max-content;margin:0;padding:0;list-style:none;animation:t-run var(--t-dur,60s) linear infinite}
+.ticker.paused .t-track{animation-play-state:paused}
+@keyframes t-run{to{transform:translateX(-50%)}}
+.t-track li{flex:none;display:flex;align-items:center;padding:0 6px}
+.t-track .it{display:inline-flex;align-items:center;gap:8px;color:var(--ink);padding:5px 12px;white-space:nowrap;font-size:.9rem;cursor:default}
+.t-track .it b{font-family:var(--f-comic);font-weight:400;font-size:1.2rem;letter-spacing:.04em;-webkit-text-stroke:.6px var(--ink)}
+.t-track .it .q{color:var(--muted)}
+.t-track .dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--ink);flex:none}
+.t-track .sep{color:var(--muted);font-weight:800}
+.t-pause{flex:none;border:none;border-left:3px solid var(--ink);background:var(--action);font:800 .8rem var(--f-body);padding:0 12px;cursor:pointer;color:var(--ink)}
+.t-pause:hover{background:var(--narr)}
+@media (max-width:560px){.t-lab{font-size:1rem;padding:4px 10px 2px}.t-lab span{display:none}.t-track .it .q{display:none}}
+@media (prefers-reduced-motion:reduce){.t-track{animation:none}.t-view{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.t-track li[aria-hidden]{display:none}.t-pause,.t-lab i{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="box head">
+    <span class="tag">Terra Vergo · Erdkunde interaktiv</span>
+    <h1 class="logo">Prof. Geos Erdlabor</h1>
+    <p class="lead">Interaktive Lernanwendungen für den Erdkundeunterricht – direkt im Browser, ohne Installation und ohne Anmeldung.</p>
+    <a class="lk-link" href="lehrkraefte/"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="1.5" fill="#FFD23F" stroke="#1B1B2F" stroke-width="1.6"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="#1B1B2F" stroke-width="1.6"/></svg>Für Lehrkräfte</a>
+    <div class="scene">
+      <svg id="scene" viewBox="0 0 560 360" role="img" aria-label="Die Erde dreht sich von West nach Ost, ein Satellit umkreist sie auf einer gestrichelt angedeuteten Umlaufbahn. Blass gestrichelte Linien deuten die Fahrten des Forschungseisbrechers Polarstern in die Antarktis sowie Anfahrt und Drift der Tara Polar Station in der Arktis an.">
+        <defs>
+          <radialGradient id="g-ocean" cx="38%" cy="32%" r="78%"><stop offset="0" stop-color="#E6F5FF"/><stop offset=".6" stop-color="#C2E4FB"/><stop offset="1" stop-color="#93C9EE"/></radialGradient>
+          <radialGradient id="g-shade" cx="40%" cy="34%" r="72%"><stop offset=".55" stop-color="#1B1B2F" stop-opacity="0"/><stop offset="1" stop-color="#1B1B2F" stop-opacity=".2"/></radialGradient>
+          <g id="sat">
+            <rect x="-30" y="-7" width="20" height="14" rx="2" fill="#4FB6E8" stroke="#1B1B2F" stroke-width="2.2"/>
+            <path d="M-23.3-7v14M-16.6-7v14" stroke="#1B1B2F" stroke-width="1.2"/>
+            <rect x="10" y="-7" width="20" height="14" rx="2" fill="#4FB6E8" stroke="#1B1B2F" stroke-width="2.2"/>
+            <path d="M16.6-7v14M23.3-7v14" stroke="#1B1B2F" stroke-width="1.2"/>
+            <path d="M-10 0h-1M10 0h1" stroke="#1B1B2F" stroke-width="2.4"/>
+            <rect x="-9" y="-9" width="18" height="18" rx="3" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.4"/>
+            <path d="M0-9v-7" stroke="#1B1B2F" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="0" cy="-17" r="2.6" fill="#E0393B" stroke="#1B1B2F" stroke-width="1.5"/>
+          </g>
+        </defs>
+        <g transform="rotate(-16 280 180)">
+          <ellipse class="orbit" cx="280" cy="180" rx="236" ry="62"/>
+        </g>
+        <g id="back"></g>
+        <circle cx="287" cy="187" r="128" fill="#000" opacity=".45"/>
+        <circle class="atmo" cx="280" cy="180" r="139"/>
+        <circle cx="280" cy="180" r="128" fill="url(#g-ocean)"/>
+        <path id="grat" class="grat"/>
+        <path id="land" class="land"/>
+        <g id="routes">
+          <path id="r-tara-drift" class="route tara-drift"><title>Tara Polar Station: erwartete Drift mit dem Meereis (Transpolardrift) bis zur Framstraße, 2026–2027</title></path>
+          <path id="r-ps-back" class="route ps-back"><title>Polarstern: geplante Rückfahrt Punta Arenas – Bremerhaven, Mai 2027</title></path>
+          <path id="r-tara" class="route tara"><title>Tara Polar Station: Anfahrt Lorient – Tromsø – Kirkenes – Nordostpassage – Eisscholle bei 82°24′ N, 155°03′ O (Juli bis September 2026)</title></path>
+          <path id="r-ps" class="route ps"><title>Polarstern, Antarktis-Saison 2026/27: Bremerhaven – Las Palmas – Walvis Bay – Neumayer-Station III – Amundsensee – Punta Arenas – Antarktische Halbinsel</title></path>
+        </g>
+        <circle cx="280" cy="180" r="128" fill="url(#g-shade)"/>
+        <circle cx="280" cy="180" r="128" fill="none" stroke="#1B1B2F" stroke-width="3"/>
+        <g transform="rotate(-16 280 180)">
+          <path class="orbit" d="M44 180 A236 62 0 0 0 516 180"/>
+        </g>
+        <g id="front"></g>
+      </svg>
+    </div>
+  </header>
+
+  <!-- Ticker: neueste Anwendungen. Reihenfolge in NEU (Skript unten) anpassen: href der Karte eintragen, Titel und Farbe kommen automatisch von der Karte. -->
+  <section class="ticker" id="ticker" aria-label="Neu im Earth-Lab">
+    <span class="t-lab"><i aria-hidden="true">★</i>Neu<span> im Earth-Lab</span></span>
+    <div class="t-view"><ul class="t-track" id="tickerTrack"></ul></div>
+    <button class="t-pause" type="button" id="tickerPause" aria-pressed="false">Pause</button>
+  </section>
+
+  <main class="grades">
+
+    <section class="box grade" aria-labelledby="klasse-5-6">
+      <h2 class="grade-h" id="klasse-5-6">Klasse 5 und 6</h2>
+      <p class="sub">Wählt eine Anwendung – sie öffnet sich direkt im Browser.</p>
+      <div class="apps three">
+        <a class="app" href="Erdbeben/">
+          <div class="pic" style="background:#CBE9FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M8 22 H118 l5 -10 l6 20 l6 -16 l6 12 l6 -8 l6 4 H250 l4 -6 l4 8 l4 -4 H392" fill="none" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M0 85 V52 Q60 44 120 54 Q170 62 198 50 L206 85Z" fill="#F4EBD3" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M206 85 L198 50 Q250 40 300 52 T400 48 V85Z" fill="#EADFC2" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M198 50 L206 85" stroke="#C84B3A" stroke-width="3.5"/>
+              <g stroke="#1B1B2F" stroke-width="1.8"><circle cx="140" cy="68" r="4.5" fill="#E0393B"/><circle cx="260" cy="70" r="5.5" fill="#E0393B"/><circle cx="170" cy="78" r="4" fill="#1E6FD0"/><circle cx="330" cy="66" r="4" fill="#FFB020"/><circle cx="203" cy="64" r="7.5" fill="#FFB020"/></g>
+              <circle cx="203" cy="64" r="15" fill="none" stroke="#1B1B2F" stroke-width="2" opacity=".5"/><circle cx="203" cy="64" r="24" fill="none" stroke="#1B1B2F" stroke-width="2" opacity=".25"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Seismik</span>
+            <h3>Erdbeben-Globus</h3>
+            <p>Echte Erdbebendaten auf Weltkarte und 3D-Globus: Wo bebt es, wie tief liegen die Hypozentren, und was haben Plattengrenzen und Tiefseegräben damit zu tun?</p>
+            <span class="go">Globus öffnen →</span>
+          </div>
+        </a>
+        <a class="app" href="klimazonen/">
+          <div class="pic" style="background:#E8F4FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs><clipPath id="kz-g"><circle cx="58" cy="43" r="34"/></clipPath></defs>
+              <g clip-path="url(#kz-g)"><rect x="20" y="8" width="80" height="9" fill="#5BB8F5"/><rect x="20" y="17" width="80" height="10" fill="#2FB24C"/><rect x="20" y="27" width="80" height="8" fill="#F2A900"/><rect x="20" y="35" width="80" height="16" fill="#E0393B"/><rect x="20" y="51" width="80" height="8" fill="#F2A900"/><rect x="20" y="59" width="80" height="10" fill="#2FB24C"/><rect x="20" y="69" width="80" height="9" fill="#5BB8F5"/></g>
+              <circle cx="58" cy="43" r="34" fill="none" stroke="#1B1B2F" stroke-width="3"/><path d="M24 43 H92" stroke="#1B1B2F" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <g transform="translate(128 10)"><path d="M0 0 V64 H120" fill="none" stroke="#1B1B2F" stroke-width="2"/>
+                <g fill="#1E6FD0" stroke="#1B1B2F" stroke-width="1.2"><rect x="4.0" y="46" width="7" height="18"/><rect x="13.6" y="50" width="7" height="14"/><rect x="23.2" y="48" width="7" height="16"/><rect x="32.8" y="52" width="7" height="12"/><rect x="42.4" y="50" width="7" height="14"/><rect x="52.0" y="44" width="7" height="20"/><rect x="61.6" y="38" width="7" height="26"/><rect x="71.2" y="40" width="7" height="24"/><rect x="80.8" y="46" width="7" height="18"/><rect x="90.4" y="48" width="7" height="16"/><rect x="100.0" y="44" width="7" height="20"/><rect x="109.6" y="44" width="7" height="20"/></g>
+                <path d="M7 44 C30 40 45 22 62 14 S100 30 116 44" fill="none" stroke="#E0393B" stroke-width="3" stroke-linecap="round"/></g>
+              <g transform="translate(270 31)"><rect width="118" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="59" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".5">1.332 Stationen</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Klimazonen</span>
+            <h3>Klimazonen der Erde</h3>
+            <p>1.332 Klimastationen mit echten Normalwerten 1991–2020 auf Weltkarte und 3D-Globus: Temperaturzonen einschalten, Ausreißer wie Bogotá oder die Zugspitze entdecken und herausfinden, was eine Klimazone ausmacht.</p>
+            <span class="go">Karte öffnen →</span>
+          </div>
+        </a>
+        <a class="app" href="kompass-raetsel/">
+          <div class="pic" style="background:#D6F0D2">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 70 Q80 58 160 66 T300 62 T400 68 V85 H0Z" fill="#9FD89A" stroke="#1B1B2F" stroke-width="2.5"/>
+              <path d="M40 92 Q62 74 50 62 Q40 52 58 40" fill="none" stroke="#E2C48F" stroke-width="10" stroke-linecap="round"/>
+              <g stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"><rect x="128" y="22" width="5" height="46" fill="#A0673A"/>
+                <path d="M110 24 h36 l8 7 -8 7 h-36z" fill="#F4EBD3"/><path d="M152 42 h-36 l-8 7 8 7 h36z" fill="#F4EBD3"/>
+                <circle cx="214" cy="58" r="10" fill="#2FB24C"/><circle cx="246" cy="60" r="7" fill="#2FB24C"/></g>
+              <g font-family="Bangers,Impact,sans-serif" font-size="12" text-anchor="middle" fill="#1B1B2F"><text x="128" y="35">?</text><text x="134" y="53">?</text></g>
+              <g transform="translate(336 42)"><circle r="36" fill="#FFFFFF" stroke="#1B1B2F" stroke-width="3"/><circle r="29" fill="none" stroke="#1B1B2F" stroke-width="1.3" stroke-dasharray="2 4"/>
+                <g font-family="Bangers,Impact,sans-serif" font-size="12" text-anchor="middle" fill="#1B1B2F"><text y="-19">N</text><text y="27">S</text><text x="23" y="4">O</text><text x="-23" y="4">W</text></g>
+                <g transform="rotate(14)"><path d="M0 -26 L6 0 L-6 0Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="1.8" stroke-linejoin="round"/><path d="M0 26 L6 0 L-6 0Z" fill="#FFFFFF" stroke="#1B1B2F" stroke-width="1.8" stroke-linejoin="round"/></g>
+                <circle r="3.5" fill="#FFD23F" stroke="#1B1B2F" stroke-width="1.6"/></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Orientierung</span>
+            <h3 style="color:#F2A900;-webkit-text-stroke:1px #1B1B2F">Das Kompass-Rätsel</h3>
+            <p><b style="color:#1B1B2F">Warum zeigt der Kompass nach Norden?</b> Ein Forschungsauftrag: Himmelsrichtungen bestimmen, den Kompass einnorden und dem Erdmagnetfeld auf die Spur kommen.</p>
+            <span class="go">Rätsel starten →</span>
+          </div>
+        </a>
+        <a class="app" href="expedition-sogapalag/">
+          <div class="pic" style="background:#CDEEFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 50 Q60 40 120 46 T240 44 T400 46 V85 H0Z" fill="#9FD27A"/>
+              <path d="M0 60 L160 52 L240 52 L400 60 V85 H0Z" fill="#4FB0E6" opacity=".9"/>
+              <path d="M0 70 L400 64 V85 H0Z" fill="#86B874"/>
+              <g stroke="#1B1B2F" stroke-width="2.4" stroke-linejoin="round"><path d="M150 52 L182 10 L214 52Z" fill="#A2724A"/><path d="M182 10 L214 52 L190 52Z" fill="#7C5332"/><path d="M182 10 L174 21 L180 19 L184 23 L190 18Z" fill="#fff"/><path d="M200 52 L226 20 L252 52Z" fill="#A2724A"/></g>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><path d="M96 70 C95 56 97 46 101 38" fill="none" stroke-width="5"/><path d="M96 70 C95 56 97 46 101 38" fill="none" stroke="#9A6236" stroke-width="2"/><g fill="#2FA14A"><path d="M101 38 C92 31 82 33 77 40 C87 36 94 36 101 38Z"/><path d="M101 38 C110 30 120 31 125 37 C115 35 108 36 101 38Z"/><path d="M101 38 C97 28 103 22 110 20 C105 27 104 32 101 38Z"/></g></g>
+              <g stroke="#1B1B2F" stroke-width="2"><circle cx="292" cy="62" r="9" fill="#24572B"/><circle cx="306" cy="58" r="10" fill="#2E6A33"/><circle cx="320" cy="63" r="9" fill="#24572B"/></g>
+              <g fill="#E0393B"><circle cx="296" cy="58" r="1.6"/><circle cx="310" cy="55" r="1.6"/><circle cx="318" cy="61" r="1.6"/></g>
+              <g transform="translate(26 14)" stroke="#1B1B2F" stroke-linejoin="round"><rect x="5" y="0" width="8" height="5" rx="1.5" fill="#E0393B" stroke-width="2"/><rect x="0" y="5" width="18" height="30" rx="6" fill="#fff" stroke-width="2.4"/><rect x="2" y="16" width="14" height="17" rx="4" fill="#3AA5DD" stroke="none"/></g>
+              <g transform="translate(360 44)"><rect x="-26" y="-36" width="52" height="72" rx="8" fill="#E2F2FC" stroke="#1B1B2F" stroke-width="2.5"/><circle r="21" fill="#FFFAF0" stroke="#1B1B2F" stroke-width="2.5"/><path d="M-7 8 V-10 H-11 L0 -19 L11 -10 H7 V8Z" fill="none" stroke="#E0393B" stroke-width="2" stroke-dasharray="3 2"/><g transform="rotate(-24)"><path d="M0 -15 L4 0 L-4 0Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="1.5"/><path d="M0 15 L4 0 L-4 0Z" fill="#fff" stroke="#1B1B2F" stroke-width="1.5"/></g><path d="M0 -40 L6 -32 L-6 -32Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="1.5"/></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag">Terra Vergo · Orientierung</span><span class="tag duo"><svg viewBox="0 0 20 14" aria-hidden="true"><circle cx="6" cy="4" r="3" fill="#fff"/><path d="M0.5 14 C0.5 9 3 7.5 6 7.5 S11.5 9 11.5 14Z" fill="#fff"/><circle cx="14" cy="4" r="3" fill="#fff"/><path d="M8.5 14 C8.5 9 11 7.5 14 7.5 S19.5 9 19.5 14Z" fill="#fff"/></svg>Für 2 Personen · 2 Tablets</span></span>
+            <h3 style="color:#2FA14A;-webkit-text-stroke:1px #1B1B2F">Expedition Sogapalag</h3>
+            <p><b style="color:#1B1B2F">Zu zweit und nur per Funk.</b> Der Forscher sieht den Dschungel mit eigenen Augen und bestimmt Richtungen mit dem Kompass. Die Expeditionsleiterin hat eine alte Karte ohne Furten und Brücken. Nur mit Anweisungen und Rückmeldungen kommt er ins Basiscamp, bevor das Wasser ausgeht.</p>
+            <span class="go">Expedition starten →</span>
+          </div>
+        </a>
+        <a class="app" href="orientierung-breitenkreise/">
+          <div class="pic" style="background:#DDEFFC">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs><clipPath id="bk-g"><circle cx="56" cy="43" r="34"/></clipPath></defs>
+              <circle cx="56" cy="43" r="34" fill="#C2E4FB"/>
+              <g clip-path="url(#bk-g)" fill="#F4EBD3" stroke="#1B1B2F" stroke-width="1.5" stroke-linejoin="round"><path d="M30 20 q10 -8 22 -4 q8 6 2 14 q-10 6 -18 2 q-8 -4 -6 -12z"/><path d="M60 46 q10 -4 16 4 q2 12 -8 18 q-8 -2 -10 -10 q-2 -8 2 -12z"/></g>
+              <ellipse cx="56" cy="27" rx="27" ry="6" fill="none" stroke="#E0393B" stroke-width="3" stroke-dasharray="0" clip-path="url(#bk-g)"/>
+              <path d="M22 43 H90" stroke="#1B1B2F" stroke-width="1.2" stroke-dasharray="4 3"/>
+              <circle cx="56" cy="43" r="34" fill="none" stroke="#1B1B2F" stroke-width="3"/>
+              <path d="M104 43 h18 m-6 -6 l6 6 l-6 6" fill="none" stroke="#1B1B2F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <g transform="translate(134 14)"><rect width="104" height="58" fill="#C2E4FB" stroke="#1B1B2F" stroke-width="2.5"/>
+                <g stroke="#8FC2E8" stroke-width="1"><path d="M0 14.5 H104 M0 43.5 H104 M26 0 V58 M52 0 V58 M78 0 V58"/></g>
+                <path d="M8 10 q14 -6 26 2 q4 8 -6 12 q-12 0 -20 -4z M60 8 q20 -4 34 4 q2 10 -10 12 q-18 2 -24 -6z" fill="#F4EBD3" stroke="#1B1B2F" stroke-width="1.4" stroke-linejoin="round"/>
+                <path d="M0 22 H104" stroke="#E0393B" stroke-width="3"/></g>
+              <g transform="translate(250 6)"><path d="M10 74 A92 92 0 0 1 132 74 L104 30 A44 44 0 0 0 38 30 Z" fill="#C2E4FB" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M24 52 A66 66 0 0 1 118 52" fill="none" stroke="#E0393B" stroke-width="3"/>
+                <path d="M38 30 L10 74 M71 18 V74 M104 30 L132 74" stroke="#8FC2E8" stroke-width="1" fill="none"/></g>
+              <g transform="translate(330 4)"><rect width="62" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="31" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".5">50° N</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Orientierung auf unserer Erde</span>
+            <h3 style="color:#1E6FD0;-webkit-text-stroke:1px #1B1B2F">Die Breitenkreise</h3>
+            <p><b style="color:#1B1B2F">Gerade oder gebogen?</b> Am drehbaren Globus prüfen, wie ein Breitenkreis wirklich aussieht, Papier als Zylinder, Kegel und Ebene an den Globus legen und herausfinden, warum Welt- und Europakarte die Breitenkreise unterschiedlich zeichnen.</p>
+            <span class="go">Globus drehen →</span>
+          </div>
+        </a>
+        <a class="app geo-m" href="sachtext-auswerten/">
+          <div class="pic" style="background:#FFF3D6">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g transform="translate(26 8) rotate(-3)"><rect width="150" height="72" rx="6" fill="#FFFDF2" stroke="#1B1B2F" stroke-width="2.5"/>
+                <rect x="10" y="9" width="96" height="7" rx="2" fill="#1B1B2F"/>
+                <g fill="#C9CED8"><rect x="10" y="24" width="128" height="4" rx="2"/><rect x="10" y="34" width="120" height="4" rx="2"/><rect x="10" y="44" width="130" height="4" rx="2"/><rect x="10" y="54" width="100" height="4" rx="2"/><rect x="10" y="64" width="116" height="4" rx="2"/></g>
+                <g fill="#FFE45C"><rect x="34" y="22" width="34" height="8" rx="2"/><rect x="74" y="42" width="40" height="8" rx="2"/><rect x="18" y="52" width="26" height="8" rx="2"/></g>
+                <path d="M100 32 q4 4 8 0 t8 0 t8 0" fill="none" stroke="#E0393B" stroke-width="1.8"/></g>
+              <g transform="translate(184 18) rotate(-35)" stroke="#1B1B2F" stroke-linejoin="round"><rect x="0" y="0" width="12" height="44" rx="3" fill="#FFE45C" stroke-width="2.4"/><rect x="0" y="-9" width="12" height="11" rx="2" fill="#1B1B2F" stroke-width="2"/><path d="M2 44h8l-1 7h-6Z" fill="#FFC400" stroke-width="2"/></g>
+              <path d="M220 66 Q250 58 280 66 T340 66 T400 66 V85 H220Z" fill="#4C83B5" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M262 68 Q282 40 302 40 Q322 40 340 68Z" fill="#8CC07A" stroke="#1B1B2F" stroke-width="2.4"/>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><rect x="288" y="34" width="22" height="13" fill="#B5503C"/><path d="M285 36l14-12 14 12Z" fill="#C9A35A"/></g>
+              <g transform="translate(212 8)"><rect width="62" height="22" rx="11" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="31" y="16" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="14" fill="#fff" letter-spacing=".5">7 Schritte</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag gm">GeoMethode</span><span class="tag">Raum Deutschland</span></span>
+            <h3 style="color:#FFB020;-webkit-text-stroke:1px #1B1B2F">Sachtexte auswerten</h3>
+            <p><b style="color:#1B1B2F">Wie knackt man einen Sachtext?</b> Prof. Geo und Frau Prof. Geo führen in sieben Schritten durch einen Text über Landunter auf der Hallig Hooge – mit Textmarker, Wort-Detektiv, Formulierungshilfen und den typischen Stolpersteinen.</p>
+            <span class="go">Text knacken →</span>
+          </div>
+        </a>
+        <a class="app geo-m" href="GeoMethode/brocken-expedition/">
+          <div class="pic" style="background:#F6F0E0">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <ellipse cx="120" cy="50" rx="110" ry="36" fill="none" stroke="#A0673A" stroke-width="2.2"/>
+              <ellipse cx="122" cy="48" rx="95" ry="31" fill="none" stroke="#A0673A" stroke-width="1.2"/>
+              <ellipse cx="124" cy="46" rx="80" ry="26" fill="none" stroke="#A0673A" stroke-width="2.2"/>
+              <ellipse cx="126" cy="44" rx="65" ry="21" fill="none" stroke="#A0673A" stroke-width="1.2"/>
+              <ellipse cx="128" cy="42" rx="50" ry="16" fill="none" stroke="#A0673A" stroke-width="2.2"/>
+              <ellipse cx="130" cy="40" rx="35" ry="11" fill="none" stroke="#A0673A" stroke-width="1.2"/>
+              <ellipse cx="132" cy="38" rx="20" ry="6" fill="none" stroke="#A0673A" stroke-width="2.2"/>
+              <path d="M124 30 L132 42 L116 42Z" fill="#1B1B2F"/><text x="138" y="40" font-family="Lexend,sans-serif" font-size="11" font-weight="800" fill="#1B1B2F">1141</text>
+              <path d="M18 80 C60 72 90 60 124 42" fill="none" stroke="#E0393B" stroke-width="3" stroke-dasharray="7 4"/>
+              <g transform="translate(250 34)" stroke="#1B1B2F" stroke-width="2.4" stroke-linejoin="round"><path d="M0 46 L40 6 L62 26 L80 12 L120 46Z" fill="#E6B97E"/><path d="M10 36 H110 M20 26 H60 M30 16 H50" fill="none" stroke="#1E6FD0" stroke-width="2" stroke-dasharray="4 3"/></g>
+              <g transform="translate(296 6)"><rect width="96" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="48" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".5">1 : 100 000</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag gm">GeoMethode</span><span class="tag">Kartenkompetenz · Harz</span></span>
+            <h3 style="color:#FFB020;-webkit-text-stroke:1px #1B1B2F">Die Brocken-Expedition</h3>
+            <p><b style="color:#1B1B2F">Welcher Weg auf den Brocken passt zu uns?</b> Mit Frau Prof. Geo Höhenlinien lesen: Das Flut-Modell füllt den Harz mit Wasser, das Profil-Werkzeug schneidet den Berg auf, und mit dem Maßstab rechnet ihr Entfernungen und Höhenmeter aus.</p>
+            <span class="go">Expedition starten →</span>
+          </div>
+        </a>
+        <a class="app geo-m" href="GeoMethode/graphen-lesen/">
+          <div class="pic" style="background:#EAF2FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g stroke="#D2DCEB" stroke-width="1"><path d="M58 8V76M86 8V76M114 8V76M142 8V76M170 8V76M198 8V76M226 8V76M30 22H250M30 40H250M30 58H250"/></g>
+              <path d="M30 76H252M30 76V6" fill="none" stroke="#1B1B2F" stroke-width="2.4"/><path d="M258 76l-9-5v10ZM30 0l-5 9h10Z" fill="#1B1B2F"/>
+              <path d="M34 62C64 62 84 70 108 54C130 38 146 18 170 18C196 18 214 40 246 50" fill="none" stroke="#1E8FE0" stroke-width="4" stroke-linecap="round"/>
+              <path d="M170 76V18H30" fill="none" stroke="#E0393B" stroke-width="2.2" stroke-dasharray="6 4"/><circle cx="170" cy="18" r="5" fill="#E0393B" stroke="#fff" stroke-width="2"/>
+              <g font-family="Lexend,sans-serif" font-size="12" font-weight="800" fill="#1B1B2F" stroke="#1B1B2F" stroke-width="2">
+                <rect x="276" y="44" width="58" height="20" rx="10" fill="#FFF3A6"/><rect x="340" y="44" width="52" height="20" rx="10" fill="#FFF3A6"/></g>
+              <g font-family="Lexend,sans-serif" font-size="11.5" font-weight="800" fill="#1B1B2F" text-anchor="middle"><text x="305" y="58">steigt</text><text x="366" y="58">fällt</text></g>
+              <g transform="translate(282 8) rotate(-3)"><rect width="104" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="52" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">Hochpunkt</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag gm">GeoMethode</span><span class="tag">Diagramme · Klasse 5–7</span></span>
+            <h3 style="color:#FFB020;-webkit-text-stroke:1px #1B1B2F">Graphen lesen</h3>
+            <p><b style="color:#1B1B2F">Was erzählt uns ein Graph?</b> Mit Frau Prof. Geo in zehn Stationen Achsen verstehen, Werte ablesen, den Verlauf mit Fachbegriffen benennen und in eigenen Sätzen beschreiben – von der Wüste über Nordsee und Zugspitze bis zum Eis der Arktis.</p>
+            <span class="go">Graphen knacken →</span>
+          </div>
+        </a>
+              <a class="app" href="murenalarm/">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 85V52L40 14L70 40L110 6L160 50L200 30L240 60V85Z" fill="#B7BCC6" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M110 6L102 18L110 16L118 20Z" fill="#fff" stroke="#1B1B2F" stroke-width="1.4"/>
+              <path d="M0 60Q50 56 90 62L120 85H0Z" fill="#2F7D3B" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M112 22Q120 44 140 60Q160 74 200 84" fill="none" stroke="#8A5A36" stroke-width="12" stroke-linecap="round"/>
+              <g fill="#6B3E26" stroke="#1B1B2F" stroke-width="1.2"><circle cx="150" cy="66" r="4"/><circle cx="170" cy="74" r="3"/><circle cx="135" cy="54" r="3"/></g>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><path d="M250 84V62L266 50L282 62V84Z" fill="#FFD9C2"/><path d="M290 84V64L304 54L318 64V84Z" fill="#FFD9C2"/><path d="M326 84V60L344 48L362 60V84Z" fill="#FFD9C2"/></g>
+              <g transform="translate(282 10) rotate(-3)"><rect width="96" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="48.0" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">MURE!</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Naturgefahren</span>
+            <h3 style="color:#8A5A36;-webkit-text-stroke:1px #1B1B2F">Murenalarm in Bergried</h3>
+            <p><b style="color:#1B1B2F">Wie kann ein Alpendorf mit Muren leben?</b> Im Kopfkino eine Gewitternacht erleben, Wildbach und Schutzwald erkunden, eine Gefahrenkarte zeichnen und das Dorf fünf Sommer lang schützen. Zum Schluss eine Empfehlung an die Bürgermeisterin.</p>
+            <span class="go">Dorf schützen →</span>
+          </div>
+        </a>
+        <a class="app" href="stadtlabor/">
+          <div class="pic" style="background:#FFF0F5">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect x="0" y="56" width="400" height="29" fill="#8C97A8" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M0 70H400" stroke="#fff" stroke-width="2" stroke-dasharray="14 10"/>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><rect x="10" y="20" width="50" height="36" fill="#FCE1EB"/><rect x="66" y="10" width="44" height="46" fill="#DDEBFB"/><rect x="116" y="24" width="56" height="32" fill="#FFF3A6"/><rect x="178" y="14" width="40" height="42" fill="#DDF4E2"/></g>
+              <g stroke="#1B1B2F" stroke-width="1.8"><circle cx="236" cy="40" r="14" fill="#4FB24C"/><circle cx="276" cy="38" r="15" fill="#2F7D3B"/><circle cx="316" cy="40" r="14" fill="#4FB24C"/></g>
+              <g stroke="#6B3E26" stroke-width="3"><path d="M236 54V58M276 53V58M316 54V58"/></g>
+              <g transform="translate(318 10) rotate(-3)"><rect width="70" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="35.0" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">2040</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Stadt</span>
+            <h3 style="color:#D9437A;-webkit-text-stroke:1px #1B1B2F">Stadtlabor 2040</h3>
+            <p><b style="color:#1B1B2F">Wie wird unsere Straße lebenswerter, ohne dass jemand verliert?</b> Den Schulweg aus dem Gedächtnis zeichnen, eine Straße kartieren, Stadt und Umland vergleichen und im Planspiel 20 Meter Straßenbreite neu verteilen: für Bäume, Rad, Bus und Läden.</p>
+            <span class="go">Straße planen →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+    <section class="box grade" aria-labelledby="klasse-7-10">
+      <h2 class="grade-h" id="klasse-7-10">Klasse 7 bis 10</h2>
+      <p class="sub">Wählt eine Anwendung – sie öffnet sich direkt im Browser.</p>
+      <div class="apps three">
+        <a class="app" href="klimasimulation/mystery.html">
+          <div class="pic" style="background:#FFF3A6">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g stroke="#1B1B2F" stroke-opacity=".12" stroke-width="1"><path d="M0 21H400M0 42H400M0 63H400"/><path d="M40 0V85M80 0V85M120 0V85M160 0V85M200 0V85M240 0V85M280 0V85"/></g>
+              <g stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round">
+                <g transform="rotate(-6 46 34)"><rect x="16" y="12" width="60" height="44" rx="5" fill="#FFFFFF"/><path d="M16 17a5 5 0 0 1 5-5h50a5 5 0 0 1 5 5v6H16Z" fill="#9FD8F5"/><path d="M24 33H66M24 41H60M24 49H52" stroke-width="2" stroke-opacity=".35"/></g>
+                <g transform="rotate(5 140 52)"><rect x="110" y="32" width="60" height="44" rx="5" fill="#FFFFFF"/><path d="M110 37a5 5 0 0 1 5-5h50a5 5 0 0 1 5 5v6H110Z" fill="#1E6FD0"/><path d="M118 53H160M118 61H154M118 69H146" stroke-width="2" stroke-opacity=".35"/></g>
+                <g transform="rotate(-4 228 32)"><rect x="198" y="10" width="60" height="44" rx="5" fill="#FFFFFF"/><path d="M198 15a5 5 0 0 1 5-5h50a5 5 0 0 1 5 5v6H198Z" fill="#E0393B"/><path d="M206 31H248M206 39H242M206 47H234" stroke-width="2" stroke-opacity=".35"/></g>
+              </g>
+              <g fill="none" stroke="#1B1B2F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M74 44Q94 60 108 54"/><path d="M100 49l8 5-9 3"/>
+                <path d="M172 46Q186 30 196 30"/><path d="M188 25l8 5-8 5"/>
+              </g>
+              <g transform="translate(292 30)"><circle r="19" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.5"/><text y="10" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="30" fill="#1B1B2F">?</text></g>
+              <g stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round">
+                <rect x="322" y="6" width="64" height="79" rx="4" fill="#B8C2D3"/>
+                <rect x="328" y="12" width="52" height="12" rx="3" fill="#1B1B2F"/>
+                <rect x="330" y="30" width="13" height="16" rx="2" fill="#FFFFFF" stroke-width="1.8"/><rect x="347.5" y="30" width="13" height="16" rx="2" fill="#FFFFFF" stroke-width="1.8"/><rect x="365" y="30" width="13" height="16" rx="2" fill="#FFFFFF" stroke-width="1.8"/>
+                <circle cx="354" cy="64" r="9" fill="#FFD23F"/><path d="M350 65h8v6h-8Z" fill="#1B1B2F" stroke-width="1"/><path d="M351 65v-3a3 3 0 0 1 6 0v3" fill="none" stroke-width="1.8"/>
+              </g>
+              <g font-family="Bangers,Impact,sans-serif" font-size="13" text-anchor="middle" fill="#1B1B2F"><text x="336.5" y="43">?</text><text x="354" y="43">?</text><text x="371.5" y="43">?</text></g>
+              <text x="354" y="21.5" text-anchor="middle" font-family="Lexend,Arial,sans-serif" font-weight="800" font-size="6.5" letter-spacing=".8" fill="#FFFFFF">KONTROLLRAUM</text>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Mystery</span>
+            <h3 style="color:#1E6FD0;-webkit-text-stroke:1px #1B1B2F">Das Rätsel vom Deich</h3>
+            <p><b style="color:#1B1B2F">Warum muss der Deich an der Nordseeküste wachsen, wenn in Grönland das Eis schmilzt?</b> 21 Karten zu einem Wirkungsgefüge verbinden, Prof. Geos Prüfung bestehen und das Codewort für den Kontrollraum knacken. Gut als Einstieg vor der Klimasimulation.</p>
+            <span class="go">Mystery starten →</span>
+          </div>
+        </a>
+        <a class="app" href="klimasimulation/klimasimulation.html">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 48 Q30 42 60 49 T120 47 T170 50 V85 H0Z" fill="#1E6FD0" stroke="#1B1B2F" stroke-width="2.5"/>
+              <path d="M0 58 Q30 54 60 59 T120 57 T160 60" fill="none" stroke="#9CCFF0" stroke-width="2"/>
+              <path d="M118 85 L162 36 H214 L262 85Z" fill="#8FD18F" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M260 85 V64 Q330 58 400 64 V85Z" fill="#BFE3A8" stroke="#1B1B2F" stroke-width="2.5"/>
+              <g stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"><path d="M292 64 V48 L306 36 L320 48 V64Z" fill="#FFFFFF"/><rect x="302" y="53" width="8" height="11" fill="#A65A4A"/><path d="M288 50 L306 33 L324 50" fill="none"/></g>
+              <path d="M4 40 H156" stroke="#E0393B" stroke-width="2.2" stroke-dasharray="6 5"/>
+              <g transform="translate(206 8)"><rect width="58" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="29" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".5">+1 M</text></g>
+              <g transform="translate(366 8)" stroke="#1B1B2F" stroke-width="2.2"><rect x="-5" y="0" width="10" height="44" rx="5" fill="#FFFFFF"/><rect x="-2" y="14" width="4" height="32" fill="#E0393B" stroke="none"/><circle cx="0" cy="50" r="8" fill="#E0393B"/></g>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><path d="M34 46 l10 -22 l11 22z M58 47 l7 -14 l8 14z" fill="#FFFFFF"/></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Klimasimulation</span>
+            <h3 style="color:#FF5A3C;-webkit-text-stroke:1px #1B1B2F">Klimasimulation</h3>
+            <p><b style="color:#1B1B2F">Der Kontrollraum.</b> Die Erde von 2025 bis 2075 steuern: Klimafonds planen, Münzen für Klimaschutz und Anpassung einsetzen und 24 Kipp-Elemente auf Weltkarte und 3D-Globus im Blick behalten – mit Wechselwirkungen und Kettenreaktionen. Am besten nach dem Mystery.</p>
+            <span class="go">Simulation starten →</span>
+          </div>
+        </a>
+        <a class="app" href="christallers-land/">
+          <div class="pic" style="background:#E3F1D3">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g stroke="#1B1B2F" stroke-width=".8" stroke-opacity=".3"><polygon points="10.6,-13.5 10.6,-2.0 0.6,3.8 -9.3,-2.0 -9.3,-13.5 0.6,-19.2" fill="#BADDA2"/><polygon points="30.5,-13.5 30.5,-2.0 20.5,3.8 10.6,-2.0 10.6,-13.5 20.5,-19.2" fill="#BADDA2"/><polygon points="50.4,-13.5 50.4,-2.0 40.4,3.8 30.5,-2.0 30.5,-13.5 40.4,-19.2" fill="#BADDA2"/><polygon points="70.3,-13.5 70.3,-2.0 60.4,3.8 50.4,-2.0 50.4,-13.5 60.4,-19.2" fill="#BADDA2"/><polygon points="90.2,-13.5 90.2,-2.0 80.3,3.8 70.3,-2.0 70.3,-13.5 80.3,-19.2" fill="#E3F1D3"/><polygon points="110.2,-13.5 110.2,-2.0 100.2,3.8 90.2,-2.0 90.2,-13.5 100.2,-19.2" fill="#E3F1D3"/><polygon points="130.1,-13.5 130.1,-2.0 120.1,3.8 110.2,-2.0 110.2,-13.5 120.1,-19.2" fill="#E3F1D3"/><polygon points="150.0,-13.5 150.0,-2.0 140.0,3.8 130.1,-2.0 130.1,-13.5 140.0,-19.2" fill="#CFE8B8"/><polygon points="169.9,-13.5 169.9,-2.0 160.0,3.8 150.0,-2.0 150.0,-13.5 160.0,-19.2" fill="#CFE8B8"/><polygon points="189.8,-13.5 189.8,-2.0 179.9,3.8 169.9,-2.0 169.9,-13.5 179.9,-19.2" fill="#CFE8B8"/><polygon points="209.8,-13.5 209.8,-2.0 199.8,3.8 189.8,-2.0 189.8,-13.5 199.8,-19.2" fill="#BADDA2"/><polygon points="229.7,-13.5 229.7,-2.0 219.7,3.8 209.8,-2.0 209.8,-13.5 219.7,-19.2" fill="#BADDA2"/><polygon points="249.6,-13.5 249.6,-2.0 239.6,3.8 229.7,-2.0 229.7,-13.5 239.6,-19.2" fill="#BADDA2"/><polygon points="269.5,-13.5 269.5,-2.0 259.6,3.8 249.6,-2.0 249.6,-13.5 259.6,-19.2" fill="#BADDA2"/><polygon points="289.4,-13.5 289.4,-2.0 279.5,3.8 269.5,-2.0 269.5,-13.5 279.5,-19.2" fill="#BADDA2"/><polygon points="309.3,-13.5 309.3,-2.0 299.4,3.8 289.4,-2.0 289.4,-13.5 299.4,-19.2" fill="#CFE8B8"/><polygon points="0.6,3.8 0.6,15.2 -9.3,21.0 -19.3,15.2 -19.3,3.7 -9.3,-2.0" fill="#BADDA2"/><polygon points="20.5,3.8 20.5,15.2 10.6,21.0 0.6,15.2 0.6,3.7 10.6,-2.0" fill="#BADDA2"/><polygon points="40.4,3.8 40.4,15.2 30.5,21.0 20.5,15.2 20.5,3.7 30.5,-2.0" fill="#BADDA2"/><polygon points="60.4,3.8 60.4,15.2 50.4,21.0 40.4,15.2 40.4,3.7 50.4,-2.0" fill="#BADDA2"/><polygon points="80.3,3.8 80.3,15.2 70.3,21.0 60.4,15.2 60.4,3.7 70.3,-2.0" fill="#BADDA2"/><polygon points="100.2,3.8 100.2,15.2 90.2,21.0 80.3,15.2 80.3,3.7 90.2,-2.0" fill="#E3F1D3"/><polygon points="120.1,3.8 120.1,15.2 110.2,21.0 100.2,15.2 100.2,3.7 110.2,-2.0" fill="#E3F1D3"/><polygon points="140.0,3.8 140.0,15.2 130.1,21.0 120.1,15.2 120.1,3.7 130.1,-2.0" fill="#CFE8B8"/><polygon points="160.0,3.8 160.0,15.2 150.0,21.0 140.0,15.2 140.0,3.7 150.0,-2.0" fill="#CFE8B8"/><polygon points="179.9,3.8 179.9,15.2 169.9,21.0 160.0,15.2 160.0,3.7 169.9,-2.0" fill="#CFE8B8"/><polygon points="199.8,3.8 199.8,15.2 189.8,21.0 179.9,15.2 179.9,3.7 189.8,-2.0" fill="#BADDA2"/><polygon points="219.7,3.8 219.7,15.2 209.8,21.0 199.8,15.2 199.8,3.7 209.8,-2.0" fill="#BADDA2"/><polygon points="239.6,3.8 239.6,15.2 229.7,21.0 219.7,15.2 219.7,3.7 229.7,-2.0" fill="#BADDA2"/><polygon points="259.6,3.8 259.6,15.2 249.6,21.0 239.6,15.2 239.6,3.7 249.6,-2.0" fill="#BADDA2"/><polygon points="279.5,3.8 279.5,15.2 269.5,21.0 259.6,15.2 259.6,3.7 269.5,-2.0" fill="#BADDA2"/><polygon points="299.4,3.8 299.4,15.2 289.4,21.0 279.5,15.2 279.5,3.7 289.4,-2.0" fill="#CFE8B8"/><polygon points="10.6,21.0 10.6,32.5 0.6,38.2 -9.3,32.5 -9.3,21.0 0.6,15.2" fill="#BADDA2"/><polygon points="30.5,21.0 30.5,32.5 20.5,38.2 10.6,32.5 10.6,21.0 20.5,15.2" fill="#BADDA2"/><polygon points="50.4,21.0 50.4,32.5 40.4,38.2 30.5,32.5 30.5,21.0 40.4,15.2" fill="#BADDA2"/><polygon points="70.3,21.0 70.3,32.5 60.4,38.2 50.4,32.5 50.4,21.0 60.4,15.2" fill="#BADDA2"/><polygon points="90.2,21.0 90.2,32.5 80.3,38.2 70.3,32.5 70.3,21.0 80.3,15.2" fill="#E3F1D3"/><polygon points="110.2,21.0 110.2,32.5 100.2,38.2 90.2,32.5 90.2,21.0 100.2,15.2" fill="#E3F1D3"/><polygon points="130.1,21.0 130.1,32.5 120.1,38.2 110.2,32.5 110.2,21.0 120.1,15.2" fill="#E3F1D3"/><polygon points="150.0,21.0 150.0,32.5 140.0,38.2 130.1,32.5 130.1,21.0 140.0,15.2" fill="#CFE8B8"/><polygon points="169.9,21.0 169.9,32.5 160.0,38.2 150.0,32.5 150.0,21.0 160.0,15.2" fill="#CFE8B8"/><polygon points="189.8,21.0 189.8,32.5 179.9,38.2 169.9,32.5 169.9,21.0 179.9,15.2" fill="#BADDA2"/><polygon points="209.8,21.0 209.8,32.5 199.8,38.2 189.8,32.5 189.8,21.0 199.8,15.2" fill="#BADDA2"/><polygon points="229.7,21.0 229.7,32.5 219.7,38.2 209.8,32.5 209.8,21.0 219.7,15.2" fill="#BADDA2"/><polygon points="249.6,21.0 249.6,32.5 239.6,38.2 229.7,32.5 229.7,21.0 239.6,15.2" fill="#BADDA2"/><polygon points="269.5,21.0 269.5,32.5 259.6,38.2 249.6,32.5 249.6,21.0 259.6,15.2" fill="#CFE8B8"/><polygon points="289.4,21.0 289.4,32.5 279.5,38.2 269.5,32.5 269.5,21.0 279.5,15.2" fill="#CFE8B8"/><polygon points="309.3,21.0 309.3,32.5 299.4,38.2 289.4,32.5 289.4,21.0 299.4,15.2" fill="#CFE8B8"/><polygon points="0.6,38.2 0.6,49.8 -9.3,55.5 -19.3,49.8 -19.3,38.2 -9.3,32.5" fill="#BADDA2"/><polygon points="20.5,38.2 20.5,49.8 10.6,55.5 0.6,49.8 0.6,38.2 10.6,32.5" fill="#BADDA2"/><polygon points="40.4,38.2 40.4,49.8 30.5,55.5 20.5,49.8 20.5,38.2 30.5,32.5" fill="#BADDA2"/><polygon points="60.4,38.2 60.4,49.8 50.4,55.5 40.4,49.8 40.4,38.2 50.4,32.5" fill="#BADDA2"/><polygon points="80.3,38.2 80.3,49.8 70.3,55.5 60.4,49.8 60.4,38.2 70.3,32.5" fill="#BADDA2"/><polygon points="100.2,38.2 100.2,49.8 90.2,55.5 80.3,49.8 80.3,38.2 90.2,32.5" fill="#E3F1D3"/><polygon points="120.1,38.2 120.1,49.8 110.2,55.5 100.2,49.8 100.2,38.2 110.2,32.5" fill="#E3F1D3"/><polygon points="140.0,38.2 140.0,49.8 130.1,55.5 120.1,49.8 120.1,38.2 130.1,32.5" fill="#CFE8B8"/><polygon points="160.0,38.2 160.0,49.8 150.0,55.5 140.0,49.8 140.0,38.2 150.0,32.5" fill="#CFE8B8"/><polygon points="179.9,38.2 179.9,49.8 169.9,55.5 160.0,49.8 160.0,38.2 169.9,32.5" fill="#CFE8B8"/><polygon points="199.8,38.2 199.8,49.8 189.8,55.5 179.9,49.8 179.9,38.2 189.8,32.5" fill="#BADDA2"/><polygon points="219.7,38.2 219.7,49.8 209.8,55.5 199.8,49.8 199.8,38.2 209.8,32.5" fill="#BADDA2"/><polygon points="239.6,38.2 239.6,49.8 229.7,55.5 219.7,49.8 219.7,38.2 229.7,32.5" fill="#CFE8B8"/><polygon points="259.6,38.2 259.6,49.8 249.6,55.5 239.6,49.8 239.6,38.2 249.6,32.5" fill="#CFE8B8"/><polygon points="279.5,38.2 279.5,49.8 269.5,55.5 259.6,49.8 259.6,38.2 269.5,32.5" fill="#CFE8B8"/><polygon points="299.4,38.2 299.4,49.8 289.4,55.5 279.5,49.8 279.5,38.2 289.4,32.5" fill="#CFE8B8"/><polygon points="10.6,55.5 10.6,67.0 0.6,72.8 -9.3,67.0 -9.3,55.5 0.6,49.8" fill="#BADDA2"/><polygon points="30.5,55.5 30.5,67.0 20.5,72.8 10.6,67.0 10.6,55.5 20.5,49.8" fill="#BADDA2"/><polygon points="50.4,55.5 50.4,67.0 40.4,72.8 30.5,67.0 30.5,55.5 40.4,49.8" fill="#BADDA2"/><polygon points="70.3,55.5 70.3,67.0 60.4,72.8 50.4,67.0 50.4,55.5 60.4,49.8" fill="#BADDA2"/><polygon points="90.2,55.5 90.2,67.0 80.3,72.8 70.3,67.0 70.3,55.5 80.3,49.8" fill="#E3F1D3"/><polygon points="110.2,55.5 110.2,67.0 100.2,72.8 90.2,67.0 90.2,55.5 100.2,49.8" fill="#E3F1D3"/><polygon points="130.1,55.5 130.1,67.0 120.1,72.8 110.2,67.0 110.2,55.5 120.1,49.8" fill="#E3F1D3"/><polygon points="150.0,55.5 150.0,67.0 140.0,72.8 130.1,67.0 130.1,55.5 140.0,49.8" fill="#CFE8B8"/><polygon points="169.9,55.5 169.9,67.0 160.0,72.8 150.0,67.0 150.0,55.5 160.0,49.8" fill="#CFE8B8"/><polygon points="189.8,55.5 189.8,67.0 179.9,72.8 169.9,67.0 169.9,55.5 179.9,49.8" fill="#BADDA2"/><polygon points="209.8,55.5 209.8,67.0 199.8,72.8 189.8,67.0 189.8,55.5 199.8,49.8" fill="#BADDA2"/><polygon points="229.7,55.5 229.7,67.0 219.7,72.8 209.8,67.0 209.8,55.5 219.7,49.8" fill="#BADDA2"/><polygon points="249.6,55.5 249.6,67.0 239.6,72.8 229.7,67.0 229.7,55.5 239.6,49.8" fill="#CFE8B8"/><polygon points="269.5,55.5 269.5,67.0 259.6,72.8 249.6,67.0 249.6,55.5 259.6,49.8" fill="#CFE8B8"/><polygon points="289.4,55.5 289.4,67.0 279.5,72.8 269.5,67.0 269.5,55.5 279.5,49.8" fill="#CFE8B8"/><polygon points="309.3,55.5 309.3,67.0 299.4,72.8 289.4,67.0 289.4,55.5 299.4,49.8" fill="#CFE8B8"/><polygon points="0.6,72.8 0.6,84.2 -9.3,90.0 -19.3,84.2 -19.3,72.8 -9.3,67.0" fill="#BADDA2"/><polygon points="20.5,72.8 20.5,84.2 10.6,90.0 0.6,84.2 0.6,72.8 10.6,67.0" fill="#BADDA2"/><polygon points="40.4,72.8 40.4,84.2 30.5,90.0 20.5,84.2 20.5,72.8 30.5,67.0" fill="#BADDA2"/><polygon points="60.4,72.8 60.4,84.2 50.4,90.0 40.4,84.2 40.4,72.8 50.4,67.0" fill="#BADDA2"/><polygon points="80.3,72.8 80.3,84.2 70.3,90.0 60.4,84.2 60.4,72.8 70.3,67.0" fill="#BADDA2"/><polygon points="100.2,72.8 100.2,84.2 90.2,90.0 80.3,84.2 80.3,72.8 90.2,67.0" fill="#E3F1D3"/><polygon points="120.1,72.8 120.1,84.2 110.2,90.0 100.2,84.2 100.2,72.8 110.2,67.0" fill="#E3F1D3"/><polygon points="140.0,72.8 140.0,84.2 130.1,90.0 120.1,84.2 120.1,72.8 130.1,67.0" fill="#CFE8B8"/><polygon points="160.0,72.8 160.0,84.2 150.0,90.0 140.0,84.2 140.0,72.8 150.0,67.0" fill="#CFE8B8"/><polygon points="179.9,72.8 179.9,84.2 169.9,90.0 160.0,84.2 160.0,72.8 169.9,67.0" fill="#CFE8B8"/><polygon points="199.8,72.8 199.8,84.2 189.8,90.0 179.9,84.2 179.9,72.8 189.8,67.0" fill="#BADDA2"/><polygon points="219.7,72.8 219.7,84.2 209.8,90.0 199.8,84.2 199.8,72.8 209.8,67.0" fill="#BADDA2"/><polygon points="239.6,72.8 239.6,84.2 229.7,90.0 219.7,84.2 219.7,72.8 229.7,67.0" fill="#CFE8B8"/><polygon points="259.6,72.8 259.6,84.2 249.6,90.0 239.6,84.2 239.6,72.8 249.6,67.0" fill="#CFE8B8"/><polygon points="279.5,72.8 279.5,84.2 269.5,90.0 259.6,84.2 259.6,72.8 269.5,67.0" fill="#CFE8B8"/><polygon points="299.4,72.8 299.4,84.2 289.4,90.0 279.5,84.2 279.5,72.8 289.4,67.0" fill="#CFE8B8"/><polygon points="10.6,90.0 10.6,101.5 0.6,107.2 -9.3,101.5 -9.3,90.0 0.6,84.2" fill="#E3F1D3"/><polygon points="30.5,90.0 30.5,101.5 20.5,107.2 10.6,101.5 10.6,90.0 20.5,84.2" fill="#E3F1D3"/><polygon points="50.4,90.0 50.4,101.5 40.4,107.2 30.5,101.5 30.5,90.0 40.4,84.2" fill="#E3F1D3"/><polygon points="70.3,90.0 70.3,101.5 60.4,107.2 50.4,101.5 50.4,90.0 60.4,84.2" fill="#BADDA2"/><polygon points="90.2,90.0 90.2,101.5 80.3,107.2 70.3,101.5 70.3,90.0 80.3,84.2" fill="#E3F1D3"/><polygon points="110.2,90.0 110.2,101.5 100.2,107.2 90.2,101.5 90.2,90.0 100.2,84.2" fill="#E3F1D3"/><polygon points="130.1,90.0 130.1,101.5 120.1,107.2 110.2,101.5 110.2,90.0 120.1,84.2" fill="#CFE8B8"/><polygon points="150.0,90.0 150.0,101.5 140.0,107.2 130.1,101.5 130.1,90.0 140.0,84.2" fill="#CFE8B8"/><polygon points="169.9,90.0 169.9,101.5 160.0,107.2 150.0,101.5 150.0,90.0 160.0,84.2" fill="#CFE8B8"/><polygon points="189.8,90.0 189.8,101.5 179.9,107.2 169.9,101.5 169.9,90.0 179.9,84.2" fill="#BADDA2"/><polygon points="209.8,90.0 209.8,101.5 199.8,107.2 189.8,101.5 189.8,90.0 199.8,84.2" fill="#BADDA2"/><polygon points="229.7,90.0 229.7,101.5 219.7,107.2 209.8,101.5 209.8,90.0 219.7,84.2" fill="#BADDA2"/><polygon points="249.6,90.0 249.6,101.5 239.6,107.2 229.7,101.5 229.7,90.0 239.6,84.2" fill="#CFE8B8"/><polygon points="269.5,90.0 269.5,101.5 259.6,107.2 249.6,101.5 249.6,90.0 259.6,84.2" fill="#CFE8B8"/><polygon points="289.4,90.0 289.4,101.5 279.5,107.2 269.5,101.5 269.5,90.0 279.5,84.2" fill="#CFE8B8"/><polygon points="309.3,90.0 309.3,101.5 299.4,107.2 289.4,101.5 289.4,90.0 299.4,84.2" fill="#CFE8B8"/></g><path d="M-2.4 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M17.5 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M37.4 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M57.4 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M77.3 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M97.2 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M117.1 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M137.0 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M157.0 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M176.9 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M196.8 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M216.7 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M236.6 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M256.6 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M276.5 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M296.4 -5.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M-12.3 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M7.6 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M27.5 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M67.3 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M87.2 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M107.2 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M127.1 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M166.9 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M186.8 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M206.8 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M246.6 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M266.5 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M286.4 11.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M-2.4 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M17.5 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M37.4 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M57.4 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M77.3 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M117.1 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M137.0 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M157.0 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M176.9 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M216.7 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M236.6 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M256.6 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M276.5 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M296.4 28.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M-12.3 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M7.6 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M27.5 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M67.3 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M87.2 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M107.2 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M127.1 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M166.9 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M186.8 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M206.8 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M226.7 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M246.6 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M286.4 46.0v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M-2.4 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M17.5 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M37.4 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M57.4 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M77.3 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M117.1 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M137.0 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M157.0 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M176.9 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M216.7 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M256.6 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M276.5 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M296.4 63.2v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M-12.3 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M7.6 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M27.5 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M67.3 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M87.2 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M107.2 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M127.1 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M166.9 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M186.8 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M206.8 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M226.7 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M246.6 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M266.5 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M286.4 80.5v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M-2.4 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M17.5 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M57.4 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M77.3 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M97.2 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M117.1 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M137.0 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M157.0 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M176.9 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M196.8 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M216.7 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M236.6 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M256.6 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M276.5 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M296.4 97.8v-3l3-2.6 3 2.6v3z" fill="#1B1B2F" fill-opacity=".3"/><path d="M209.8 32.5L209.8 21.0M209.8 21.0L219.7 15.2M219.7 15.2L229.7 21.0M229.7 21.0L239.6 15.2M239.6 15.2L249.6 21.0M269.5 21.0L269.5 32.5M249.6 21.0L259.6 15.2M259.6 15.2L269.5 21.0M199.8 49.8L199.8 38.2M199.8 38.2L209.8 32.5M279.5 38.2L279.5 49.8M269.5 32.5L279.5 38.2M199.8 72.8L189.8 67.0M189.8 67.0L189.8 55.5M189.8 55.5L199.8 49.8M289.4 55.5L289.4 67.0M289.4 67.0L279.5 72.8M279.5 49.8L289.4 55.5M209.8 90.0L199.8 84.2M199.8 84.2L199.8 72.8M279.5 72.8L279.5 84.2M279.5 84.2L269.5 90.0M229.7 101.5L219.7 107.2M219.7 107.2L209.8 101.5M209.8 101.5L209.8 90.0M249.6 101.5L239.6 107.2M239.6 107.2L229.7 101.5M269.5 90.0L269.5 101.5M269.5 101.5L259.6 107.2M259.6 107.2L249.6 101.5" fill="none" stroke="#1FA39A" stroke-width="2.4" stroke-linecap="round"/><path d="M70.3 32.5L70.3 21.0M70.3 21.0L80.3 15.2M80.3 15.2L90.2 21.0M90.2 21.0L100.2 15.2M100.2 15.2L110.2 21.0M130.1 21.0L130.1 32.5M110.2 21.0L120.1 15.2M120.1 15.2L130.1 21.0M60.4 49.8L60.4 38.2M60.4 38.2L70.3 32.5M140.0 38.2L140.0 49.8M130.1 32.5L140.0 38.2M60.4 72.8L50.4 67.0M50.4 67.0L50.4 55.5M50.4 55.5L60.4 49.8M150.0 55.5L150.0 67.0M150.0 67.0L140.0 72.8M140.0 49.8L150.0 55.5M70.3 90.0L60.4 84.2M60.4 84.2L60.4 72.8M140.0 72.8L140.0 84.2M140.0 84.2L130.1 90.0M90.2 101.5L80.3 107.2M80.3 107.2L70.3 101.5M70.3 101.5L70.3 90.0M110.2 101.5L100.2 107.2M100.2 107.2L90.2 101.5M130.1 90.0L130.1 101.5M130.1 101.5L120.1 107.2M120.1 107.2L110.2 101.5" fill="none" stroke="#1FA39A" stroke-width="2.4" stroke-linecap="round"/><path d="M110.2 -2.0L110.2 -13.5M110.2 -13.5L120.1 -19.2M120.1 -19.2L130.1 -13.5M130.1 -13.5L140.0 -19.2M140.0 -19.2L150.0 -13.5M150.0 -13.5L160.0 -19.2M160.0 -19.2L169.9 -13.5M189.8 -13.5L189.8 -2.0M169.9 -13.5L179.9 -19.2M179.9 -19.2L189.8 -13.5M100.2 15.2L100.2 3.7M100.2 3.7L110.2 -2.0M199.8 3.8L199.8 15.2M189.8 -2.0L199.8 3.8M90.2 32.5L90.2 21.0M90.2 21.0L100.2 15.2M209.8 21.0L209.8 32.5M199.8 15.2L209.8 21.0M90.2 55.5L80.3 49.8M80.3 49.8L80.3 38.2M80.3 38.2L90.2 32.5M219.7 38.2L219.7 49.8M219.7 49.8L209.8 55.5M209.8 32.5L219.7 38.2M100.2 72.8L90.2 67.0M90.2 67.0L90.2 55.5M209.8 55.5L209.8 67.0M209.8 67.0L199.8 72.8M110.2 90.0L100.2 84.2M100.2 84.2L100.2 72.8M199.8 72.8L199.8 84.2M199.8 84.2L189.8 90.0M130.1 101.5L120.1 107.2M120.1 107.2L110.2 101.5M110.2 101.5L110.2 90.0M150.0 101.5L140.0 107.2M140.0 107.2L130.1 101.5M169.9 101.5L160.0 107.2M160.0 107.2L150.0 101.5M189.8 90.0L189.8 101.5M189.8 101.5L179.9 107.2M179.9 107.2L169.9 101.5" fill="none" stroke="#7A4FD0" stroke-width="3.4" stroke-linecap="round"/><circle cx="199.8" cy="61.2" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(195.3 56.8) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="150.0" cy="78.5" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(145.5 74.0) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="100.2" cy="61.2" r="8.5" fill="#1FA39A" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(93.8 54.9) scale(0.531)"><path d="M9.8 4h4.4v5.8H20v4.4h-5.8V20H9.8v-5.8H4V9.8h5.8z" fill="#fff"/></g><circle cx="92.2" cy="68.2" r="4.6" fill="#F2A900" stroke="#1B1B2F" stroke-width="1.6"/><g transform="translate(88.8 64.8) scale(0.287)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="100.2" cy="26.8" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(95.7 22.2) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="150.0" cy="9.5" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(145.5 5.0) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="199.8" cy="26.8" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(195.3 22.2) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="229.7" cy="9.5" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(225.2 5.0) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="50.4" cy="78.5" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(45.9 74.0) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="269.5" cy="44.0" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(265.0 39.5) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="50.4" cy="44.0" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(45.9 39.5) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="239.6" cy="61.2" r="8.5" fill="#1FA39A" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(233.3 54.9) scale(0.531)"><path d="M9.8 4h4.4v5.8H20v4.4h-5.8V20H9.8v-5.8H4V9.8h5.8z" fill="#fff"/></g><circle cx="231.6" cy="68.2" r="4.6" fill="#F2A900" stroke="#1B1B2F" stroke-width="1.6"/><g transform="translate(228.2 64.8) scale(0.287)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="50.4" cy="9.5" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(45.9 5.0) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="40.4" cy="95.8" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(35.9 91.2) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="150.0" cy="42.0" r="13.5" fill="#7A4FD0" stroke="#1B1B2F" stroke-width="2.6"/><g transform="translate(139.9 31.9) scale(0.844)"><path d="M12 4.6l10.4 4.8L12 14.2 1.6 9.4z" fill="#fff"/><path d="M6.2 11.9v3.8c0 2.2 11.6 2.2 11.6 0v-3.8L12 14.6z" fill="#fff"/><path d="M20.6 9.8v5.6" stroke="#fff" stroke-width="1.5"/><circle cx="20.6" cy="16.1" r="1.4" fill="#fff"/></g><circle cx="137.0" cy="53.0" r="6" fill="#F2A900" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(132.5 48.5) scale(0.375)"><path d="M3.5 15.6c0-5.2 3.8-8.8 8.5-8.8s8.5 3.6 8.5 8.8c0 1.1-.9 2-2 2h-13c-1.1 0-2-.9-2-2z" fill="#fff"/><path d="M8.4 10.4l-1.5 3.3M12.5 9.6l-1.5 3.8M16.6 10.4l-1.3 3.2" stroke="#F2A900" stroke-width="1.7" stroke-linecap="round" fill="none"/></g><circle cx="163.0" cy="53.0" r="6" fill="#1FA39A" stroke="#1B1B2F" stroke-width="2.2"/><g transform="translate(158.5 48.5) scale(0.375)"><path d="M9.8 4h4.4v5.8H20v4.4h-5.8V20H9.8v-5.8H4V9.8h5.8z" fill="#fff"/></g>
+              <path d="M298 85 V0 H400 V85Z" fill="#F4EBD3"/><path d="M298 0 V85" stroke="#1B1B2F" stroke-width="2.5"/>
+              <g stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"><path d="M349 6 L361 22 H337Z" fill="#7A4FD0"/><path d="M337 22 H361 L373 38 H325Z" fill="#1FA39A"/><path d="M325 38 H373 L385 54 H313Z" fill="#F2A900"/></g>
+              <g transform="translate(309 59)"><rect width="80" height="22" rx="11" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="40" y="16" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".5">k = 3</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Siedlungsgeographie</span>
+            <h3 style="color:#7A4FD0;-webkit-text-stroke:1px #1B1B2F">Christallers Land</h3>
+            <p><b style="color:#1B1B2F">Warum haben viele Dörfer eine Bäckerei, aber nur wenige ein Gymnasium?</b> Ein Planspiel zur Theorie der zentralen Orte: Bäckereien, Arztpraxen und Gymnasien so verteilen, dass alle versorgt sind und sich jede Einrichtung trägt. In fünf Leveln entstehen Sechsecke, eine Ortshierarchie und die Folgen von Landflucht und Auto.</p>
+            <span class="go">Planspiel starten →</span>
+          </div>
+        </a>
+        <a class="app" href="rungholt/rungholt.html">
+          <div class="pic" style="background:#CDEBFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 34c22-6 44-6 66 0s44 6 66 0 44-6 66 0 44 6 66 0 44-6 66 0 44 6 70 0V62H0Z" fill="#3D8FD6" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M0 60c70-8 140-8 210-2s130 6 190-2V85H0Z" fill="#EAD9A8" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/>
+              <g fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-dasharray="5 4" stroke-linejoin="round"><path d="M150 58V42h24v16M150 42l12-10 12 10M182 58V34l7-8 7 8v24M189 26v-7"/></g>
+              <g fill="none" stroke="#B89A5B" stroke-width="2.2" stroke-linecap="round"><path d="M18 74c5-3 10 3 15 0s10-3 15 0M250 76c5-3 10 3 15 0s10-3 15 0"/></g>
+              <path d="M112 80c-3-6-10-9-10-16a10 10 0 0 1 20 0c0 7-7 10-10 16Z" fill="#FF6B3D" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/><circle cx="112" cy="64" r="3.8" fill="#FFFFFF" stroke="#1B1B2F" stroke-width="1.8"/>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><rect x="232" y="8" width="44" height="18" rx="4" fill="#FF6B3D"/><rect x="300" y="8" width="44" height="18" rx="4" fill="#EEF1F6" stroke-dasharray="3 2"/><rect x="300" y="44" width="44" height="18" rx="4" fill="#C2408F"/></g>
+              <g fill="none" stroke="#1B1B2F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M276 17h20"/><path d="M291 12l6 5-6 5"/><path d="M322 44V30"/><path d="M317 34l5-6 5 6"/></g>
+              <g transform="translate(40 24)"><circle r="17" fill="#FFFFFF" stroke="#1B1B2F" stroke-width="2.2"/><path d="M-8-8 6 6" stroke="#C2408F" stroke-width="3.5" stroke-linecap="round"/><path d="M10 10-1 7l8-8Z" fill="#C2408F" stroke="#1B1B2F" stroke-width="1.4" stroke-linejoin="round"/><text y="-8" text-anchor="middle" font-family="Lexend,Arial,sans-serif" font-weight="800" font-size="7" fill="#1B1B2F">N</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Mystery</span>
+            <h3 style="color:#A0673A;-webkit-text-stroke:1px #1B1B2F">Die Legende von Rungholt</h3>
+            <p><b style="color:#1B1B2F">Wo lag Rungholt, und warum versank es 1362 im Meer?</b> 15 Indizien aufdecken und auf einer Karte des Wattenmeers verorten, die Windrose ausrichten, falsche Spuren entlarven und daraus ein Wirkungsgefüge von den Ursachen bis zum Untergang bauen. Naturgefahr oder selbst gemachte Verwundbarkeit?</p>
+            <span class="go">Mystery starten →</span>
+          </div>
+        </a>
+        <a class="app" href="planspiel-kartoffelhof/">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 58 H400 V85 H0Z" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2.5"/>
+              <path d="M0 60 Q22 47 44 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M44 60 Q66 47 88 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M88 60 Q110 47 132 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M132 60 Q154 47 176 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M176 60 Q198 47 220 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M220 60 Q242 47 264 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M264 60 Q286 47 308 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M308 60 Q330 47 352 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/><path d="M352 60 Q374 47 396 60" fill="#9A6A44" stroke="#1B1B2F" stroke-width="2"/>
+              <g stroke="#1B1B2F" stroke-width="1.5"><ellipse cx="16" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="28" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="60" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="72" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="104" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="116" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="148" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="160" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="192" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="204" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="236" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="248" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="280" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="292" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="324" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="336" cy="74" rx="5" ry="4" fill="#E8BE6A"/><ellipse cx="368" cy="71" rx="6" ry="4.5" fill="#E8BE6A"/><ellipse cx="380" cy="74" rx="5" ry="4" fill="#E8BE6A"/></g>
+              <g stroke="#1B1B2F" stroke-width="1.8"><path d="M22 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="22" cy="38" r="7" fill="#4FB24C"/><circle cx="15" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="29" cy="44" r="5.5" fill="#7CD06B"/><path d="M66 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="66" cy="38" r="7" fill="#4FB24C"/><circle cx="59" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="73" cy="44" r="5.5" fill="#7CD06B"/><path d="M110 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="110" cy="38" r="7" fill="#4FB24C"/><circle cx="103" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="117" cy="44" r="5.5" fill="#7CD06B"/><path d="M154 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="154" cy="38" r="7" fill="#4FB24C"/><circle cx="147" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="161" cy="44" r="5.5" fill="#7CD06B"/><path d="M198 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="198" cy="38" r="7" fill="#4FB24C"/><circle cx="191" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="205" cy="44" r="5.5" fill="#7CD06B"/><path d="M242 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="242" cy="38" r="7" fill="#4FB24C"/><circle cx="235" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="249" cy="44" r="5.5" fill="#7CD06B"/><path d="M286 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="286" cy="38" r="7" fill="#4FB24C"/><circle cx="279" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="293" cy="44" r="5.5" fill="#7CD06B"/><path d="M330 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="330" cy="38" r="7" fill="#4FB24C"/><circle cx="323" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="337" cy="44" r="5.5" fill="#7CD06B"/><path d="M374 52 V44" stroke="#1B1B2F" stroke-width="2"/><circle cx="374" cy="38" r="7" fill="#4FB24C"/><circle cx="367" cy="44" r="5.5" fill="#2F8A3B"/><circle cx="381" cy="44" r="5.5" fill="#7CD06B"/></g>
+              <circle cx="372" cy="18" r="11" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.2"/>
+              <g transform="translate(24 6)"><rect width="38" height="20" rx="3" fill="#2FB24C" stroke="#1B1B2F" stroke-width="2.2"/><text x="19" y="15.5" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".5">BIO</text></g>
+              <g transform="translate(140 9)"><rect width="112" height="12" rx="6" fill="#FFFFFF" stroke="#1B1B2F" stroke-width="2.2"/><circle cx="78" cy="6" r="9" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.4"/></g>
+              <g transform="translate(272 6)"><rect width="74" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="37" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".5">16 ct/kg</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Planspiel</span>
+            <h3 style="color:#D9952E;-webkit-text-stroke:1px #1B1B2F">Planspiel Kartoffelhof</h3>
+            <p><b style="color:#1B1B2F">Bio oder konventionell?</b> Einen Kartoffelhof zehn Jahre lang führen: entscheiden, wie viel gespritzt und gedüngt wird, und im Wirkungsnetz sehen, wie Ernte, Kosten, Preis, Nachfrage, Gewinn und Boden folgen. Politik, Discounter und Kundschaft mischen mit. Gold gibt es nur, wenn Hofkasse und Boden stimmen.</p>
+            <span class="go">Planspiel starten →</span>
+          </div>
+        </a>
+        <a class="app" href="kaffee-lieferkette/">
+          <div class="pic" style="background:#CBE9FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 64 Q40 56 78 62 L92 85 H0Z" fill="#F4EBD3" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M300 85 L318 58 Q360 50 400 56 V85Z" fill="#F4EBD3" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M44 60 C110 18 230 10 334 54" fill="none" stroke="#0E9384" stroke-width="3" stroke-dasharray="9 6" stroke-linecap="round"/>
+              <path d="M58 66 C130 36 230 34 322 62" fill="none" stroke="#8A4FD0" stroke-width="3" stroke-dasharray="9 6" stroke-linecap="round"/>
+              <g transform="translate(186,22)"><circle r="12" fill="#fff" stroke="#1B1B2F" stroke-width="2"/><path d="M-8 1h16l-4 5h-8zM-4 1v-5h7v5" fill="#0E9384" stroke="#1B1B2F" stroke-width="1.3" stroke-linejoin="round"/></g>
+              <g stroke="#1B1B2F" stroke-width="1.4"><circle cx="22" cy="52" r="7" fill="#2F7D3B"/><circle cx="34" cy="56" r="6" fill="#2F7D3B"/><circle cx="20" cy="50" r="2" fill="#D7263D"/><circle cx="33" cy="54" r="2" fill="#D7263D"/></g>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round">
+                <path d="M334 44h16l1 28h-18z" fill="#8A4FD0"/><path d="M354 40h16l1 32h-18z" fill="#163A73"/><path d="M374 44h16l1 28h-18z" fill="#F4ECDD"/><path d="M373 44l1.5-5h13l1.5 5z" fill="#0E9384"/>
+              </g>
+              <g transform="translate(232 6)"><rect width="62" height="22" rx="11" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.3"/><text x="31" y="16" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#1B1B2F" letter-spacing=".5">4,49 €?</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Welthandel</span>
+            <h3 style="color:#D0702C;-webkit-text-stroke:1px #1B1B2F">Die Kaffee-Spur</h3>
+            <p><b style="color:#1B1B2F">Drei Päckchen, drei Wege um die Welt.</b> Solino, ein Discounter- und ein Markenkaffee: die Lieferketten als Stationen und Wege auf Weltkarte und Globus verfolgen, die Preisaufteilung prüfen und herausfinden, wie die Kaufentscheidung am Regal mit sozialen, ökonomischen und ökologischen Folgen zusammenhängt. Mit Stresstest, Lösungsplan und Denkwerkstatt.</p>
+            <span class="go">Spur verfolgen →</span>
+          </div>
+        </a>
+        <a class="app" href="mangroven/">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 56 Q60 50 120 56 T240 56 T400 54 V85 H0Z" fill="#7FC4EE" stroke="#1B1B2F" stroke-width="2.2"/>
+              <path d="M0 70 Q80 62 170 70 L190 85 H0Z" fill="#B98A5E" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/>
+              <g fill="none" stroke="#6B3E26" stroke-width="2.2" stroke-linecap="round">
+                <path d="M40 34V60M32 68Q34 52 40 50Q46 52 48 68M26 68Q30 54 40 46"/>
+                <path d="M92 30V58M84 66Q86 50 92 48Q98 50 100 66M106 66Q102 52 92 44"/>
+                <path d="M144 36V60M136 68Q138 54 144 52Q150 54 152 68"/>
+              </g>
+              <g stroke="#1B1B2F" stroke-width="1.8"><ellipse cx="40" cy="28" rx="24" ry="13" fill="#2F7D3B"/><ellipse cx="92" cy="24" rx="26" ry="14" fill="#4FB24C"/><ellipse cx="144" cy="30" rx="22" ry="12" fill="#2F7D3B"/></g>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"><rect x="214" y="58" width="52" height="18" fill="#7FC4EE"/><rect x="272" y="58" width="52" height="18" fill="#B98A5E"/><rect x="330" y="58" width="52" height="18" fill="#B98A5E"/></g>
+              <path d="M150 74q8-6 16 0q-8 6-16 0zM166 74l6-4v8z" fill="#FFD23F" stroke="#1B1B2F" stroke-width="1.5" stroke-linejoin="round"/>
+              <g transform="translate(244 10) rotate(-3)"><rect width="108" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="54" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="17" fill="#fff" letter-spacing=".6">KIPPPUNKT?</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Ökosysteme</span>
+            <h3 style="color:#0E9384;-webkit-text-stroke:1px #1B1B2F">Mangroven</h3>
+            <p><b style="color:#1B1B2F">Sensible Ökosysteme an tropischen Küsten.</b> Einen Wald im Salzwasser erkunden, eine Hypothese zur Rodung für Garnelenteiche aufstellen, ein Wirkungsgefüge mit Rückkopplungen bauen und in einer Simulation über 30 Jahre den Kipppunkt der Küste finden. Zum Schluss Lösungen ökologisch bewerten.</p>
+            <span class="go">Forschung starten →</span>
+          </div>
+        </a>
+        <a class="app" href="fakt-oder-meinung/">
+          <div class="pic" style="background:#CBE9FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 62 Q50 54 100 62 T200 62 T300 62 T400 62 V85 H0Z" fill="#7FC4EE" stroke="#1B1B2F" stroke-width="2.2"/>
+              <g stroke="#1B1B2F" stroke-width="1.8" stroke-linejoin="round"><path d="M40 72q10-8 22 0q-12 8-22 0z" fill="#FFD23F"/><path d="M62 72l7-5v10z" fill="#FFD23F"/><path d="M330 74q10-8 22 0q-12 8-22 0z" fill="#FF6B3D"/><path d="M352 74l7-5v10z" fill="#FF6B3D"/></g>
+              <g transform="translate(36 10) rotate(-4)"><rect width="96" height="28" rx="6" fill="#1E6FD0" stroke="#1B1B2F" stroke-width="2.4"/><text x="48" y="20" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="17" fill="#fff" letter-spacing=".6">TATSACHE</text></g>
+              <g transform="translate(152 14) rotate(2)"><rect width="96" height="28" rx="6" fill="#8A4FD0" stroke="#1B1B2F" stroke-width="2.4"/><text x="48" y="20" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="17" fill="#fff" letter-spacing=".6">MISCHFORM</text></g>
+              <g transform="translate(268 8) rotate(-3)"><rect width="96" height="28" rx="6" fill="#FF6B3D" stroke="#1B1B2F" stroke-width="2.4"/><text x="48" y="20" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="17" fill="#fff" letter-spacing=".6">MEINUNG</text></g>
+              <g transform="translate(196 58)" stroke="#1B1B2F"><circle r="11" fill="rgba(255,255,255,.7)" stroke-width="3"/><path d="M8 8l9 9" stroke-width="4" stroke-linecap="round"/></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Urteilskompetenz</span>
+            <h3 style="color:#1E8FD0;-webkit-text-stroke:1px #1B1B2F">Fakt oder Meinung?</h3>
+            <p><b style="color:#1B1B2F">Streitfall Überfischung.</b> Aussagen nach Tatsache, Meinung oder Mischform sortieren, Fakten mit Quellenkarten prüfen und herausfinden, wer was mit welchem Interesse sagt. Mit Prüfpfad in drei Stufen und eigener, begründeter Position zum Schluss.</p>
+            <span class="go">Prüfen starten →</span>
+          </div>
+        </a>
+        <a class="app" href="DeepDive1/">
+          <div class="pic" style="background:#CBE9FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect y="0" width="400" height="14" fill="#DDF3FF"/><rect y="14" width="400" height="24" fill="#7FC4EE"/><rect y="38" width="400" height="24" fill="#2F6FA8"/><rect y="62" width="400" height="23" fill="#16244A"/>
+              <path d="M0 14 Q25 9 50 14 T100 14 T150 14 T200 14 T250 14 T300 14 T350 14 T400 14" fill="none" stroke="#1B1B2F" stroke-width="2.2"/>
+              <path d="M0 80 Q40 70 80 76 T160 72 T240 78 T320 70 T400 76 V85 H0Z" fill="#6B5843" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M222 47 L290 30 L290 66 Z" fill="rgba(255,240,170,.5)"/>
+              <g transform="translate(150 22)" stroke="#1B1B2F" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M8 46h56M14 40v6M56 40v6" fill="none" stroke-width="2.2"/>
+                <rect x="4" y="10" width="64" height="32" rx="11" fill="#FFD23F" stroke-width="2.4"/>
+                <rect x="18" y="3" width="20" height="9" rx="3" fill="#F4F6FA" stroke-width="2"/>
+                <rect x="-4" y="14" width="9" height="9" rx="2" fill="#59627A" stroke-width="2"/><rect x="-4" y="29" width="9" height="9" rx="2" fill="#59627A" stroke-width="2"/>
+                <circle cx="64" cy="26" r="14" fill="#BFE9FF" stroke-width="2.4"/>
+                <circle cx="60" cy="25" r="2.3" fill="#1B1B2F" stroke="none"/><circle cx="69" cy="25" r="2.3" fill="#1B1B2F" stroke="none"/>
+                <path d="M60 31q4 3 8 0" fill="none" stroke-width="1.8"/>
+                <path d="M54 40l10 7 7-3" fill="none" stroke="#F2A13A" stroke-width="3"/>
+              </g>
+              <g stroke="#1B1B2F" stroke-width="1.6"><path d="M60 28q8-6 16 0q-8 6-16 0z" fill="#FF7A30"/><path d="M60 28l-5-4v8z" fill="#FF7A30"/><path d="M320 54q9-5 18 0q-9 5-18 0z" fill="#4B5568"/></g>
+              <g fill="#7FF3FF"><circle cx="324" cy="56" r="1.4"/><circle cx="329" cy="57" r="1.4"/><circle cx="334" cy="56" r="1.4"/></g>
+              <g transform="translate(26 50)"><rect width="88" height="22" rx="11" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.3"/><text x="44" y="16" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#1B1B2F" letter-spacing=".5">8 Missionen</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Meere und Ozeane</span>
+            <h3 style="color:#1E6FD0;-webkit-text-stroke:1px #1B1B2F">DeepDive1</h3>
+            <p><b style="color:#1B1B2F">Abtauchen bis zum Tiefseeboden.</b> Mit dem Forschungs-U-Boot DeepDive1 Licht, Temperatur und Wasserdruck messen und Lebewesen bestimmen. Erst die fünf Ozeane benennen und nach Größe ordnen, dann acht Missionen auf Weltkarte und Globus: Stockwerke des Atlantiks, Relief des Meeresbodens mit dem Echolot, Great Barrier Reef, Golfstrom, Humboldtstrom, Black Smoker, Nahrungskette in der Arktis und Marianengraben.</p>
+            <span class="go">Abtauchen →</span>
+          </div>
+        </a>
+        <a class="app" href="klima-hotspots/">
+          <div class="pic" style="background:#1D2546">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g fill="#fff" opacity=".7"><circle cx="20" cy="12" r="1.2"/><circle cx="60" cy="70" r="1"/><circle cx="380" cy="18" r="1.2"/><circle cx="350" cy="72" r="1"/><circle cx="250" cy="8" r="1"/></g>
+              <circle cx="96" cy="44" r="52" fill="#7FC4EE" stroke="#1B1B2F" stroke-width="2.5"/>
+              <path d="M60 22c10-6 22-4 26 6s-4 18-12 20-14-4-16-12 0-12 2-14zM100 6c10-2 22 4 24 14s-6 12-12 12-10 6-14 2-8-10-6-16 4-10 8-12zM118 52c8 0 14 8 12 16s-10 12-15 8-5-10-3-15 2-9 6-9z" fill="#9BD18B" stroke="#1B1B2F" stroke-width="2"/>
+              <g stroke="#1B1B2F" stroke-width="1.8"><circle cx="72" cy="34" r="5" fill="#FF7A30"/><circle cx="112" cy="18" r="5" fill="#7FD3F0"/><circle cx="122" cy="62" r="5" fill="#1F9D45"/><circle cx="90" cy="60" r="5" fill="#1E6FD0"/><circle cx="64" cy="54" r="5" fill="#8C5A2B"/></g>
+              <path d="M72 34Q92 20 112 18M112 18Q124 40 122 62" fill="none" stroke="#E0393B" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="180" y="10" width="206" height="66" rx="10" fill="#fff" stroke="#1B1B2F" stroke-width="2.5"/>
+              <path d="M192 64 L210 62 L228 59 L246 55 L264 50 L282 44 L300 37 L318 30 L336 23 L354 17 L372 14" fill="none" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M192 64 l3-3 3 4 3-4 3 3 3-4 3 3 3-4 3 3 3-4 3 3 3-4 3 3 3-5 3 3 3-5 3 3 3-5 3 3 3-5 3 3 3-5 3 3 3-5 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-7 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-6 3 3 3-5" fill="none" stroke="#E0393B" stroke-width="1.6" stroke-linejoin="round"/>
+              <text x="190" y="26" font-family="Bangers,Impact,sans-serif" font-size="13" fill="#1B1B2F" letter-spacing=".5">CO₂ Mauna Loa</text>
+              <g transform="translate(278 52)"><rect width="96" height="22" rx="11" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2.3"/><text x="48" y="16" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#1B1B2F" letter-spacing=".5">25 Hotspots</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Klimawandel</span>
+            <h3 style="color:#FF5A3C;-webkit-text-stroke:1px #1B1B2F">Hotspot-Expedition</h3>
+            <p><b style="color:#1B1B2F">Wo zeigt sich der Klimawandel heute schon?</b> Vom Basislager am Mauna Loa mit der echten Keeling-Kurve auf Entdeckungstour zu 25 Hotspots in Atmosphäre, Hydrosphäre, Kryosphäre, Biosphäre und Pedosphäre – auf Weltkarte und 3D-Globus, mit Fakten aus den IPCC-Berichten, Wechselwirkungen zwischen den Sphären und einem Kipp-Thermometer.</p>
+            <span class="go">Expedition starten →</span>
+          </div>
+        </a>
+        <a class="app" href="sensor-werkstatt/">
+          <div class="pic" style="background:#E6F1FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs><linearGradient id="sw-spec2" x1="0" x2="1"><stop offset="0" stop-color="#7A4FD0"/><stop offset=".2" stop-color="#3E6EC8"/><stop offset=".4" stop-color="#3FA34D"/><stop offset=".55" stop-color="#FFD23F"/><stop offset=".72" stop-color="#FF7A30"/><stop offset="1" stop-color="#E0393B"/></linearGradient>
+                <pattern id="sw-hatch2" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="#D9DCE3"/><path d="M0 0v7" stroke="#9AA3B5" stroke-width="3"/></pattern></defs>
+              <path d="M92 30 H116 L196 62 H12Z" fill="#FFD23F" fill-opacity=".45"/>
+              <g transform="translate(104 18)" stroke="#1B1B2F" stroke-linejoin="round"><rect x="-44" y="-6" width="28" height="12" rx="2" fill="#4FB6E8" stroke-width="2.2"/><rect x="16" y="-6" width="28" height="12" rx="2" fill="#4FB6E8" stroke-width="2.2"/><path d="M-16 0h5M11 0h5" stroke-width="2.4"/><rect x="-11" y="-12" width="22" height="24" rx="4" fill="#FFFFFF" stroke-width="2.4"/><circle cx="-4" cy="-2" r="2" fill="#1B1B2F" stroke="none"/><circle cx="4" cy="-2" r="2" fill="#1B1B2F" stroke="none"/><path d="M-4 5q4 3 8 0" fill="none" stroke-width="1.8"/></g>
+              <g stroke="#1B1B2F" stroke-width="1.6"><rect x="2.0" y="62" width="20.4" height="23" fill="#2E7D32"/><rect x="22.4" y="62" width="20.4" height="23" fill="#2E7D32"/><rect x="42.8" y="62" width="20.4" height="23" fill="#8CCB5E"/><rect x="63.2" y="62" width="20.4" height="23" fill="#E3CF5A"/><rect x="83.6" y="62" width="20.4" height="23" fill="#E3CF5A"/><rect x="104.0" y="62" width="20.4" height="23" fill="#CDAE7A"/><rect x="124.4" y="62" width="20.4" height="23" fill="#E3CF5A"/><rect x="144.8" y="62" width="20.4" height="23" fill="#8CCB5E"/><rect x="165.2" y="62" width="20.4" height="23" fill="#2E7D32"/><rect x="185.6" y="62" width="20.4" height="23" fill="#2E7D32"/></g>
+              <g transform="translate(236 26)"><rect width="110" height="18" fill="url(#sw-spec2)" stroke="#1B1B2F" stroke-width="2.2"/><rect x="110" width="44" height="18" fill="url(#sw-hatch2)" stroke="#1B1B2F" stroke-width="2.2"/>
+                <g font-family="Lexend,sans-serif" font-size="10.5" font-weight="800" fill="#1B1B2F" text-anchor="middle"><text x="26" y="-5">B2</text><text x="46" y="-5">B3</text><text x="80" y="-5">B4</text><text x="126" y="-5">B8</text></g></g>
+              <g transform="translate(246 52)"><rect width="134" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="67" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".5">Harz 2017 · 2023</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Fernerkundung</span>
+            <h3 style="color:#FF7A30;-webkit-text-stroke:1px #1B1B2F">Die Sensor-Werkstatt</h3>
+            <p><b style="color:#1B1B2F">Ein Satellitenbild ist kein Foto.</b> Als Sensor Licht in Bändern messen, Echt- und Falschfarben mischen, eine eigene Farbskala erfinden und damit dem Fichtensterben im Harz auf die Spur kommen.</p>
+            <span class="go">Werkstatt öffnen →</span>
+          </div>
+        </a>
+        <a class="app" href="laendlicher_raum/">
+          <div class="pic" style="background:#EAF4E2">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 70 Q100 60 200 68 T400 64 V85 H0Z" fill="#B7D99C" stroke="#1B1B2F" stroke-width="2"/>
+              <g stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round">
+                <rect x="40" y="38" width="44" height="30" fill="#F4EBD3"/><path d="M34 40 L62 18 L90 40Z" fill="#C9553D"/><rect x="56" y="50" width="12" height="18" fill="#8A93A6"/>
+                <path d="M30 30 L94 62 M94 30 L30 62" stroke="#E0393B" stroke-width="3"/>
+                <rect x="120" y="46" width="26" height="22" fill="#F4EBD3"/><path d="M116 48 L133 34 L150 48Z" fill="#A0673A"/>
+                <rect x="160" y="50" width="22" height="18" fill="#F4EBD3"/><path d="M156 52 L171 40 L186 52Z" fill="#A0673A"/>
+                <rect x="206" y="46" width="62" height="20" rx="5" fill="#FFD23F"/><circle cx="220" cy="68" r="5" fill="#1B1B2F"/><circle cx="254" cy="68" r="5" fill="#1B1B2F"/><rect x="214" y="50" width="12" height="8" fill="#DDEBFB"/><rect x="232" y="50" width="12" height="8" fill="#DDEBFB"/><rect x="250" y="50" width="12" height="8" fill="#DDEBFB"/>
+              </g>
+              <path d="M300 60 C300 30 350 24 360 44 C368 60 340 70 330 56" fill="none" stroke="#2FB24C" stroke-width="3.2"/><path d="M326 50 l4 8 8 -4" fill="none" stroke="#2FB24C" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <g transform="translate(292 6)"><rect width="100" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="50" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".5">2026 → 2046</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Ländliche Räume</span>
+            <h3 style="color:#2FB24C;-webkit-text-stroke:1px #1B1B2F">Rura Viva</h3>
+            <p><b style="color:#1B1B2F">Der Letzte macht das Licht aus?</b> Im Mystery „Das Rätsel von Altenrode“ herausfinden, warum eine Dorfschule schließt, dann in der Simulation „Die Kreistagsrunde“ den Landkreis Harzland bis 2046 steuern und die Abwärtsspirale umkehren.</p>
+            <span class="go">Landkreis steuern →</span>
+          </div>
+        </a>
+        <a class="app geo-m" href="GeoMethode/halbmonde-sahel/">
+          <div class="pic" style="background:#F7F0DC">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 14 C90 6 220 24 400 10" fill="none" stroke="#1E6FD0" stroke-width="2.2"/>
+              <path d="M0 30 C90 22 220 40 400 26" fill="none" stroke="#1E6FD0" stroke-width="2.2"/>
+              <path d="M0 46 C90 38 220 56 400 42" fill="none" stroke="#1E6FD0" stroke-width="2.2"/>
+              <path d="M0 62 C90 54 220 72 400 58" fill="none" stroke="#1E6FD0" stroke-width="2.2"/>
+              <path d="M0 78 C90 70 220 88 400 74" fill="none" stroke="#1E6FD0" stroke-width="2.2"/>
+              <g stroke="#1B1B2F" stroke-width="1.4"><rect x="30" y="22" width="14" height="12" fill="#D9C6A0"/><rect x="44" y="22" width="14" height="12" fill="#7DB860"/><rect x="58" y="22" width="14" height="12" fill="#D9C6A0"/><rect x="72" y="22" width="14" height="12" fill="#7DB860"/><rect x="30" y="34" width="14" height="12" fill="#2E8B3E"/><rect x="44" y="34" width="14" height="12" fill="#BFC97E"/><rect x="58" y="34" width="14" height="12" fill="#2E8B3E"/><rect x="72" y="34" width="14" height="12" fill="#BFC97E"/><rect x="30" y="46" width="14" height="12" fill="#7DB860"/><rect x="44" y="46" width="14" height="12" fill="#D9C6A0"/><rect x="58" y="46" width="14" height="12" fill="#7DB860"/><rect x="72" y="46" width="14" height="12" fill="#D9C6A0"/><rect x="30" y="58" width="14" height="12" fill="#BFC97E"/><rect x="44" y="58" width="14" height="12" fill="#2E8B3E"/><rect x="58" y="58" width="14" height="12" fill="#BFC97E"/><rect x="72" y="58" width="14" height="12" fill="#2E8B3E"/></g>
+              <g stroke="#1B1B2F" stroke-width="1.4"><rect x="110" y="22" width="14" height="12" fill="#D9C6A0"/><rect x="124" y="22" width="14" height="12" fill="#BFC97E"/><rect x="138" y="22" width="14" height="12" fill="#D9C6A0"/><rect x="152" y="22" width="14" height="12" fill="#BFC97E"/><rect x="110" y="34" width="14" height="12" fill="#BFC97E"/><rect x="124" y="34" width="14" height="12" fill="#D9C6A0"/><rect x="138" y="34" width="14" height="12" fill="#BFC97E"/><rect x="152" y="34" width="14" height="12" fill="#D9C6A0"/><rect x="110" y="46" width="14" height="12" fill="#D9C6A0"/><rect x="124" y="46" width="14" height="12" fill="#BFC97E"/><rect x="138" y="46" width="14" height="12" fill="#D9C6A0"/><rect x="152" y="46" width="14" height="12" fill="#BFC97E"/><rect x="110" y="58" width="14" height="12" fill="#BFC97E"/><rect x="124" y="58" width="14" height="12" fill="#D9C6A0"/><rect x="138" y="58" width="14" height="12" fill="#BFC97E"/><rect x="152" y="58" width="14" height="12" fill="#D9C6A0"/></g>
+              <path d="M200 70 a10 10 0 0 0 20 0" fill="none" stroke="#6B4A2B" stroke-width="4"/><circle cx="210" cy="73" r="4" fill="#2FB24C" stroke="#1B1B2F" stroke-width="1"/>
+              <path d="M234 70 a10 10 0 0 0 20 0" fill="none" stroke="#6B4A2B" stroke-width="4"/><circle cx="244" cy="73" r="4" fill="#2FB24C" stroke="#1B1B2F" stroke-width="1"/>
+              <path d="M268 70 a10 10 0 0 0 20 0" fill="none" stroke="#6B4A2B" stroke-width="4"/><circle cx="278" cy="73" r="4" fill="#2FB24C" stroke="#1B1B2F" stroke-width="1"/>
+              <path d="M302 70 a10 10 0 0 0 20 0" fill="none" stroke="#6B4A2B" stroke-width="4"/><circle cx="312" cy="73" r="4" fill="#2FB24C" stroke="#1B1B2F" stroke-width="1"/>
+              <path d="M336 70 a10 10 0 0 0 20 0" fill="none" stroke="#6B4A2B" stroke-width="4"/><circle cx="346" cy="73" r="4" fill="#2FB24C" stroke="#1B1B2F" stroke-width="1"/>
+              <g transform="translate(296 6)"><rect width="96" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="48" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".5">2017 → 2021</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag gm">GeoMethode</span><span class="tag">Kartenkompetenz · Sahel</span></span>
+            <h3 style="color:#2FB24C;-webkit-text-stroke:1px #1B1B2F">Grüne Halbmonde im Sahel</h3>
+            <p><b style="color:#1B1B2F">Wirken die Halbmonde wirklich?</b> Isohyeten und Wanderweide-Pfeile entschlüsseln, Satellitendaten aus Danja vorher und nachher vergleichen und mit einer Kontrollfläche prüfen, ob sich das Programm lohnt. Für Jahrgang 8.</p>
+            <span class="go">Karten prüfen →</span>
+          </div>
+        </a>
+        <a class="app geo-m" href="GeoMethode/strukturwandel-ruhr/">
+          <div class="pic" style="background:#FBF3E6">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect x="0" y="0" width="400" height="21" fill="#C8553D" opacity=".85"/><rect x="0" y="21" width="400" height="21" fill="#E98A5B" opacity=".85"/><rect x="0" y="42" width="400" height="21" fill="#F2B880" opacity=".85"/><rect x="0" y="63" width="400" height="22" fill="#F6D7A7" opacity=".85"/>
+              <g stroke-width="3" fill="none"><path d="M31 84 L40 60 L49 84 M34 76 H46" stroke="#8A93A6"/><path d="M29 64 L51 84 M51 64 L29 84" stroke="#E0393B" stroke-width="2.4"/></g>
+              <g stroke-width="3" fill="none"><path d="M101 64 L110 40 L119 64 M104 56 H116" stroke="#8A93A6"/><path d="M99 44 L121 64 M121 44 L99 64" stroke="#E0393B" stroke-width="2.4"/></g>
+              <g stroke-width="3" fill="none"><path d="M171 44 L180 20 L189 44 M174 36 H186" stroke="#8A93A6"/><path d="M169 24 L191 44 M191 24 L169 44" stroke="#E0393B" stroke-width="2.4"/></g>
+              <g stroke-width="3" fill="none"><path d="M241 26 L250 2 L259 26 M244 18 H256" stroke="#1B1B2F"/></g>
+              <path d="M20 80 L262 6" stroke="#1B1B2F" stroke-width="2.6" stroke-dasharray="8 5"/>
+              <g transform="translate(290 30)" stroke="#1B1B2F" stroke-width="2.4" stroke-linejoin="round"><path d="M0 10 L44 -8 L88 10 L44 28Z" fill="#1E6FD0"/><path d="M18 18 V30 C34 40 54 40 70 30 V18" fill="#fff"/></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag gm">GeoMethode</span><span class="tag">Kartenkompetenz · Ruhrgebiet</span></span>
+            <h3 style="color:#C8553D;-webkit-text-stroke:1px #1B1B2F">Kohle, Kumpel, Campus</h3>
+            <p><b style="color:#1B1B2F">Ist der Strukturwandel gelungen?</b> Mit dem Zeitregler die Nordwanderung des Bergbaus verfolgen, die Arbeitslosigkeit beschreiben und erklären und prüfen, wie Farben und Klassen die Botschaft einer Karte verändern. Für Jahrgang 9.</p>
+            <span class="go">Glück auf →</span>
+          </div>
+        </a>
+        <a class="app geo-m" href="GeoMethode/aletschgletscher/">
+          <div class="pic" style="background:#EAF6FF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M30 8 C110 18 170 30 230 52 C270 66 300 76 340 84" fill="none" stroke="#C2408F" stroke-width="44" opacity=".18"/>
+              <path d="M30 8 C110 18 170 30 230 52 C250 60 262 64 276 70" fill="none" stroke="#9CCBF0" stroke-width="32" stroke-linecap="round"/>
+              <path d="M30 8 C110 18 170 30 230 52 C250 60 262 64 276 70" fill="none" stroke="#1E6FD0" stroke-width="2"/>
+              <path d="M70 0 q8 14 -2 28" fill="none" stroke="#3B8FE0" stroke-width="1.8"/>
+              <path d="M115 12 q8 14 -2 28" fill="none" stroke="#3B8FE0" stroke-width="1.8"/>
+              <path d="M160 24 q8 14 -2 28" fill="none" stroke="#3B8FE0" stroke-width="1.8"/>
+              <path d="M205 36 q8 14 -2 28" fill="none" stroke="#3B8FE0" stroke-width="1.8"/>
+              <path d="M250 48 q8 14 -2 28" fill="none" stroke="#3B8FE0" stroke-width="1.8"/>
+              <path d="M30 8 C110 18 150 26 170 32" fill="none" stroke="#E0393B" stroke-width="2.6" stroke-dasharray="7 4"/>
+              <g transform="translate(296 52)"><rect width="96" height="24" rx="12" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.5"/><text x="48" y="17" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".5">1860 → 2100</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tagrow"><span class="tag gm">GeoMethode</span><span class="tag">Kartenkompetenz · Alpen</span></span>
+            <h3 style="color:#1E6FD0;-webkit-text-stroke:1px #1B1B2F">Der schwindende Riese</h3>
+            <p><b style="color:#1B1B2F">Hat der Aletschgletscher eine Zukunft?</b> Blaue Höhenlinien und Gletscherstände von 1860 bis 2023 lesen, Messreihen auswerten und Szenarienkarten für 2100 kritisch beurteilen. Für Jahrgang 10.</p>
+            <span class="go">Gletscher erkunden →</span>
+          </div>
+        </a>
+        <a class="app" href="plastikmeer/">
+          <div class="pic" style="background:#FFF3D6">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 0H400V30Q300 40 200 32T0 36Z" fill="#C9A06A" stroke="#1B1B2F" stroke-width="2"/>
+              <circle cx="40" cy="16" r="10" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2"/>
+              <g fill="#F4F6FA" stroke="#9AA0A8" stroke-width="1"><rect x="10" y="40" width="22" height="9"/><rect x="10" y="52" width="22" height="9"/><rect x="36" y="40" width="22" height="9"/><rect x="36" y="52" width="22" height="9"/><rect x="62" y="40" width="22" height="9"/><rect x="62" y="52" width="22" height="9"/><rect x="88" y="40" width="22" height="9"/><rect x="88" y="52" width="22" height="9"/><rect x="114" y="40" width="22" height="9"/><rect x="114" y="52" width="22" height="9"/><rect x="140" y="40" width="22" height="9"/><rect x="140" y="52" width="22" height="9"/><rect x="166" y="40" width="22" height="9"/><rect x="166" y="52" width="22" height="9"/><rect x="192" y="40" width="22" height="9"/><rect x="192" y="52" width="22" height="9"/><rect x="218" y="40" width="22" height="9"/><rect x="218" y="52" width="22" height="9"/><rect x="244" y="40" width="22" height="9"/><rect x="244" y="52" width="22" height="9"/><rect x="270" y="40" width="22" height="9"/><rect x="270" y="52" width="22" height="9"/><rect x="296" y="40" width="22" height="9"/><rect x="296" y="52" width="22" height="9"/><rect x="322" y="40" width="22" height="9"/><rect x="322" y="52" width="22" height="9"/><rect x="348" y="40" width="22" height="9"/><rect x="348" y="52" width="22" height="9"/></g>
+              <path d="M0 66Q100 62 200 68T400 64V85H0Z" fill="#7FC4EE" stroke="#1B1B2F" stroke-width="2"/>
+              <g transform="translate(250 6) rotate(-3)"><rect width="136" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="68.0" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="15" fill="#fff" letter-spacing=".6">GRUNDWASSER?</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Ländliche Räume Europas</span>
+            <h3 style="color:#E39A00;-webkit-text-stroke:1px #1B1B2F">Das Plastikmeer</h3>
+            <p><b style="color:#1B1B2F">Woher kommt die Tomate im Februar, und was kostet sie Almería?</b> Ein Mystery um einen Brunnen in El Ejido lösen, das Grundwasser in einer Simulation bis 2045 vor dem Kipppunkt bewahren, Tatsachen von Meinungen trennen und einen Einkaufsratgeber schreiben.</p>
+            <span class="go">Mystery lösen →</span>
+          </div>
+        </a>
+        <a class="app" href="trassenstreit/">
+          <div class="pic" style="background:#DDEBFB">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 0H400V26Q300 36 200 26T0 30Z" fill="#B7BCC6" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M0 85V66Q100 58 200 66T400 62V85Z" fill="#B7BCC6" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M0 46Q100 40 200 48T400 44" fill="none" stroke="#5DA9E9" stroke-width="7"/>
+              <path d="M0 56Q120 54 240 58T400 56" fill="none" stroke="#1B1B2F" stroke-width="3"/>
+              <path d="M40 54Q140 20 260 24T400 50" fill="none" stroke="#2F7D3B" stroke-width="4" stroke-dasharray="9 6"/>
+              <g stroke="#1B1B2F" stroke-width="1.6"><rect x="60" y="48" width="22" height="9" fill="#E0393B"/><rect x="84" y="49" width="20" height="8" fill="#F2A900"/><rect x="106" y="49" width="20" height="8" fill="#2B6CB0"/></g>
+              <g transform="translate(286 54) rotate(-3)"><rect width="100" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="50.0" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">A B C D?</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Verkehr in Europa</span>
+            <h3 style="color:#2B6CB0;-webkit-text-stroke:1px #1B1B2F">Trassenstreit im Inntal</h3>
+            <p><b style="color:#1B1B2F">Wo soll die neue Bahnstrecke zum Brenner verlaufen?</b> Den Korridor München–Verona erkunden, sieben Rollen übernehmen, vier Trassen mit einer Kriterienmatrix vergleichen, in drei Runden einen Kompromiss verhandeln und eine Stellungnahme schreiben.</p>
+            <span class="go">Verhandeln →</span>
+          </div>
+        </a>
+        <a class="app" href="zwei-inseln/">
+          <div class="pic" style="background:#CFE3EA">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="85" fill="#5DA9E9"/>
+              <path d="M30 30Q60 18 120 24Q150 30 170 26L176 34Q130 40 90 36Q50 40 30 30Z" fill="#7FB86A" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M190 40Q220 30 260 36L262 50Q230 54 196 50Z" fill="#7FB86A" stroke="#1B1B2F" stroke-width="2"/>
+              <g fill="none" stroke="#F4F6FA" stroke-linecap="round" opacity=".9"><path d="M206 62Q186 60 186 44Q190 26 214 24" stroke-width="9"/><path d="M214 30Q240 30 244 50Q240 74 212 76" stroke-width="9"/></g>
+              <circle cx="214" cy="50" r="6" fill="#1B1B2F"/>
+              <path d="M60 80Q120 70 180 60Q200 56 214 50" fill="none" stroke="#E0393B" stroke-width="2.6" stroke-dasharray="7 4"/>
+              <g transform="translate(300 10) rotate(-3)"><rect width="86" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="43.0" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">KAT. 4</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Verwundbarkeit und Resilienz</span>
+            <h3 style="color:#0E8A7E;-webkit-text-stroke:1px #1B1B2F">Zwei Inseln, ein Sturm</h3>
+            <p><b style="color:#1B1B2F">Warum richtet derselbe Hurrikan so unterschiedliche Schäden an?</b> Die echte Zugbahn von Hurrikan Matthew auf Karte und Globus verfolgen, Haiti und Kuba vergleichen, ein Mystery um zwei Familien lösen und eine Küstengemeinde fünf Hurrikansaisons lang resilienter machen.</p>
+            <span class="go">Sturm verfolgen →</span>
+          </div>
+        </a>
+        <a class="app" href="kettenreaktion-klima/">
+          <div class="pic" style="background:#FFE8C2">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs><marker id="kk-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1B1B2F"/></marker></defs>
+              <circle cx="372" cy="12" r="22" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2"/>
+              <g stroke="#1B1B2F" stroke-width="2.2" fill="none" marker-end="url(#kk-ar)"><path d="M58 44L92 26"/><path d="M58 50L92 62"/><path d="M140 22L172 16"/><path d="M140 62L172 44"/><path d="M140 66L172 70"/><path d="M220 42L252 46"/><path d="M220 68L252 54"/></g>
+              <rect x="10" y="34" width="48" height="26" rx="6" fill="#DDF4E2" stroke="#1B1B2F" stroke-width="2"/><text x="34" y="51" text-anchor="middle" font-family="Lexend,sans-serif" font-size="9" font-weight="700">Klima</text>
+              <rect x="94" y="12" width="46" height="24" rx="6" fill="#DDEBFB" stroke="#1B1B2F" stroke-width="2"/><rect x="94" y="52" width="46" height="24" rx="6" fill="#DDEBFB" stroke="#1B1B2F" stroke-width="2"/>
+              <rect x="174" y="5" width="46" height="21" rx="6" fill="#FFF0C4" stroke="#1B1B2F" stroke-width="2"/><rect x="174" y="32" width="46" height="21" rx="6" fill="#FFF0C4" stroke="#1B1B2F" stroke-width="2"/><rect x="174" y="59" width="46" height="21" rx="6" fill="#FFEFC7" stroke="#1B1B2F" stroke-width="2"/>
+              <rect x="254" y="34" width="46" height="24" rx="6" fill="#FCE1EB" stroke="#1B1B2F" stroke-width="2"/>
+              <g transform="translate(300 52) rotate(-3)"><rect width="88" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="44" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">M1 → M17</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Klimawandel und Flucht</span>
+            <h3 style="color:#D9480F;-webkit-text-stroke:1px #1B1B2F">Kettenreaktion Klima</h3>
+            <p><b style="color:#1B1B2F">Wie kann der Klimawandel Menschen dazu bringen, ihre Heimat zu verlassen?</b> Aus 17 Datenbelegen eigene Elemente ableiten, ein Wirkungsgefüge bis zu Hunger und Flucht bauen, Kreisläufe und Hebel finden und es im Präsentationsmodus frei vorstellen. Mit Forschertagebuch für GoodNotes.</p>
+            <span class="go">Vernetzt denken →</span>
+          </div>
+        </a>
+        <a class="app" href="volle-netze/">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="85" fill="#BFE0FA"/>
+              <circle cx="36" cy="20" r="12" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M0 52Q30 44 60 52T120 52T180 52T240 52T300 52T360 52T420 52V85H0Z" fill="#1E6FD0" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M110 14V48M110 16L170 34M170 34v8" fill="none" stroke="#1B1B2F" stroke-width="2.6" stroke-linecap="round"/>
+              <rect x="88" y="38" width="16" height="12" rx="2" fill="#fff" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M72 50H150L142 64H80Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M162 42q-4 14 3 22 7 5 14 0 5-10-1-22Z" fill="#FFF3A6" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M163 48l14 10M165 56l10-9M162 50l12-6M168 62l9-9" stroke="#1B1B2F" stroke-width="1.2"/>
+              <path d="M196 58Q222 52 248 58" fill="none" stroke="#fff" stroke-width="2" opacity=".8"/>
+              <g fill="#FFD23F" stroke="#1B1B2F" stroke-width="1.6"><path d="M214 70q6-4 12 0q-6 4-12 0z"/><path d="M240 76q6-4 12 0q-6 4-12 0z"/></g>
+              <g transform="translate(300 10) rotate(-3)"><rect width="86" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="43" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">6 CREWS</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Fischerei und Meere</span>
+            <h3 style="color:#0B6E99;-webkit-text-stroke:1px #1B1B2F">Volle Netze</h3>
+            <p><b style="color:#1B1B2F">Wer bringt den größten Fang nach Hause?</b> Rollenspiel für zwei bis sechs Crews, auch an eigenen Tablets im WLAN: Boote kaufen, auf Hochsee und Küste verteilen, untereinander handeln und Jahr für Jahr Bilanz ziehen. Danach wird ausgewertet, was im Meer geschah.</p>
+            <span class="go">Ausfahren →</span>
+          </div>
+        </a>
+        <!-- Weitere Anwendungen: einen Block kopieren, in die passende Klassenstufe setzen und href, Bild und Texte anpassen. -->
+      </div>
+    </section>
+    <section class="box grade" aria-labelledby="oberstufe">
+      <h2 class="grade-h" id="oberstufe">Oberstufe</h2>
+      <p class="sub">Wählt eine Anwendung – sie öffnet sich direkt im Browser.</p>
+      <div class="apps three">
+        <a class="app" href="schanze/">
+          <div class="pic" style="background:#E3ECF2">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M0 62 Q100 54 200 60 T400 58 V85 H0Z" fill="#7FB8E6" stroke="#1B1B2F" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M332 4 Q354 2 358 20 Q360 36 346 44 Q330 40 328 22Z" fill="#7FB8E6" stroke="#1B1B2F" stroke-width="2.2" stroke-linejoin="round"/>
+              <path d="M10 42 Q120 16 210 22 Q280 26 330 52" fill="none" stroke="#1B1B2F" stroke-width="4.5"/>
+              <path d="M10 42 Q120 16 210 22 Q280 26 330 52" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-dasharray="6 6"/>
+              <path d="M150 31 L196 23 L205 40 L189 52 L153 50Z" fill="#F2B544" stroke="#1B1B2F" stroke-width="2.4" stroke-linejoin="round"/>
+              <g transform="translate(177 40)"><path d="M0 0 C-9 -10 -9 -22 0 -24 C9 -22 9 -10 0 0Z" fill="#E0393B" stroke="#1B1B2F" stroke-width="2"/><circle cy="-15" r="3.5" fill="#FFFFFF" stroke="#1B1B2F" stroke-width="1.5"/></g>
+              <g transform="translate(18 6)"><rect width="92" height="20" rx="10" fill="#2A549E" stroke="#1B1B2F" stroke-width="2.2"/><text x="46" y="15" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="14" fill="#FFFFFF" letter-spacing=".5">GESTALTUNG</text></g>
+              <g transform="translate(228 60)"><rect width="76" height="20" rx="10" fill="#B3175D" stroke="#1B1B2F" stroke-width="2.2"/><text x="38" y="15" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="14" fill="#FFFFFF" letter-spacing=".5">DEUTUNG</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Basiskonzept Macht · Stadtgeographie</span>
+            <h3 style="color:#2A549E;-webkit-text-stroke:1px #1B1B2F">Wer macht die Schanze?</h3>
+            <p><b style="color:#1B1B2F">Gestaltungs- und Deutungsmacht im Hamburger Schanzenviertel.</b> Raumbilder vergleichen, die Geschichte der Roten Flora auswerten, Karten zum Gefahrengebiet 2014 in ihrer Aussageabsicht beurteilen, Pressetexte zu G20 nach Macht und Perspektive befragen und die Akteure zum Schluss auf einer Machtkarte verorten.</p>
+            <span class="go">Stationen starten →</span>
+          </div>
+        </a>
+        <a class="app" href="mitteldeutscherevier/">
+          <div class="pic" style="background:#DCEFFF">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="85" fill="#DCEFFF"/>
+              <circle cx="372" cy="14" r="18" fill="#FFD23F" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M0 58L60 54L96 74L0 85Z" fill="#8A5A36" stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M90 85Q170 60 250 66T400 62V85Z" fill="#5DA9E9" stroke="#1B1B2F" stroke-width="2"/>
+              <path d="M150 76q8-4 16 0t16 0M260 74q8-4 16 0t16 0" fill="none" stroke="#fff" stroke-width="1.8"/>
+              <g stroke="#1B1B2F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+                <rect x="30" y="34" width="40" height="18" rx="3" fill="#E8A600"/><path d="M44 34L40 10M56 34L60 10M40 10H60M60 18L102 40M56 24L98 46" fill="none"/>
+                <circle cx="106" cy="44" r="12" fill="#C9C2B4"/><path d="M106 32v24M94 44h24" fill="none" stroke-width="1.4"/>
+                <path d="M300 64V40l14 22Z" fill="#fff"/><path d="M292 66h28l-4 5h-20Z" fill="#A23E12"/>
+              </g>
+              <g transform="translate(140 10) rotate(-3)"><rect width="150" height="26" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="75" y="19" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">KOHLE → SEENLAND</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Strukturwandel</span>
+            <h3 style="color:#A23E12;-webkit-text-stroke:1px #1B1B2F">Revier im Wandel</h3>
+            <p><b style="color:#1B1B2F">Welche Rolle spielt der Tourismus für den Strukturwandel im Mitteldeutschen Revier?</b> Zwölf Materialien als Chancen und Risiken auswerten, Zukunftsszenarien von „weiter mit Kohle“ bis „Tourismusregion“ mit eigenen Hebeln bis 2045 rechnen und die Hebel nach Kriterien und auf der Argumentationswippe beurteilen.</p>
+            <span class="go">Zukunft rechnen →</span>
+          </div>
+        </a>
+        <a class="app" href="mosaic/">
+          <div class="pic" style="background:#14254A">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="85" fill="#14254A"/>
+              <path d="M0 24Q90 2 190 18T400 10" fill="none" stroke="#5BE3A8" stroke-width="9" opacity=".5"/>
+              <path d="M0 36Q110 16 220 30T400 26" fill="none" stroke="#7FD4FF" stroke-width="5" opacity=".45"/>
+              <g fill="#fff"><circle cx="40" cy="10" r="1.5"/><circle cx="300" cy="44" r="1.3"/><circle cx="370" cy="40" r="1.6"/><circle cx="120" cy="46" r="1.2"/></g>
+              <path d="M0 62Q100 56 200 62T400 60V85H0Z" fill="#EAF4FB" stroke="#1B1B2F" stroke-width="2.2"/>
+              <path d="M60 70l10 6-5 6M140 66l-6 8 7 5M300 70l8 5" fill="none" stroke="#7FA6C8" stroke-width="1.6"/>
+              <g transform="translate(282 61) scale(1.35)" stroke="#1B1B2F" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M-12-1L-16-7H-11" fill="none" stroke="#E0393B" stroke-width="1.8"/>
+      <path d="M-13 0v-3.5h5V0Z" fill="#2F6FD0"/>
+      <path d="M-8-3l-.5-9h5L-3-3Z" fill="#E0393B"/><path d="M-8.4-12l-.2-3h5.2l-.1 3Z" fill="#1E2F6E"/>
+      <path d="M-3 0v-6h5v-4h7V0Z" fill="#fff"/><path d="M2-10h7v1.4H2Z" fill="#E0393B" stroke="none"/><path d="M2.8-8h5.6v1.2H2.8Z" fill="#1B1B2F" stroke="none"/>
+      <path d="M5-10v-6M3.5-14h3" fill="none" stroke="#fff" stroke-width="1.6"/>
+      <path d="M10 0v-5l5 2" fill="none" stroke="#E0393B" stroke-width="1.8"/>
+      <path d="M-17 0h34l3-2.5L16 7h-30l-2.5-4Z" fill="#1E2F6E"/>
+      <path d="M11 0h6l2.2-1.8-8.2.6Z" fill="#2E8B57" stroke="none"/><path d="M-6 3h12v1.2H-6Z" fill="#fff" stroke="none"/>
+    </g>
+              <path d="M150 76Q200 70 254 70" fill="none" stroke="#FFD23F" stroke-width="2.5" stroke-dasharray="5 5"/>
+              <g transform="translate(18 50) rotate(-3)"><rect width="128" height="24" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="64" y="18" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">389 TAGE IM EIS</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Polarräume und Klima</span>
+            <h3 style="color:#1C7ED6;-webkit-text-stroke:1px #1B1B2F">MOSAiC – Ein Jahr im Eis</h3>
+            <p><b style="color:#1B1B2F">Was verrät ein Jahr im Eis über die Arktis im Klimawandel?</b> Die Drift der Polarstern mit Originaldaten auf dem Globus nachfahren, Messreihen auswerten und die Erkenntnisse der fünf Forschungsfelder zu einem Wirkungsgefüge verknüpfen.</p>
+            <span class="go">Expedition starten →</span>
+          </div>
+        </a>
+        <!-- Weitere Anwendungen für die Oberstufe: einen Block kopieren und href, Bild und Texte anpassen. -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Andreas Bauer · Für Unterricht und nicht-kommerzielle Bildungszwecke mit Quellenangabe frei nutzbar · <a href="klimasimulation/impressum.html">Impressum und Datenschutz</a> · <a href="lehrkraefte/">Für Lehrkräfte</a></p>
+    <p>Diese Seite lädt keine Inhalte von fremden Servern und setzt keine Cookies.</p>
+  </footer>
+</div>
+
+<script>
+/* Ticker: neueste Anwendungen zuerst */
+(function(){
+  const NEU=['mitteldeutscherevier/','volle-netze/','kettenreaktion-klima/','GeoMethode/graphen-lesen/','zwei-inseln/','trassenstreit/','plastikmeer/','stadtlabor/','murenalarm/','klima-hotspots/'];
+  const track=document.getElementById('tickerTrack'), box=document.getElementById('ticker'), btn=document.getElementById('tickerPause');
+  if(!track) return;
+  const esc=t=>t.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const items=NEU.map(h=>{
+    const a=document.querySelector('a.app[href="'+h+'"]'); if(!a) return '';
+    const h3=a.querySelector('h3'), q=a.querySelector('p b'), col=(h3&&h3.style.color)||'var(--logo)';
+    return '<span class="it"><span class="dot" style="background:'+col+'"></span><b style="color:'+col+'">'+esc(h3?h3.textContent.trim():h)+'</b>'+(q?'<span class="q">'+esc(q.textContent.trim())+'</span>':'')+'</span>';
+  }).filter(Boolean);
+  if(!items.length){box.hidden=true;return;}
+  const one=items.map(i=>'<li>'+i+'</li><li class="sep" aria-hidden="true">✦</li>').join('');
+  const copy=items.map(i=>'<li aria-hidden="true">'+i+'</li><li class="sep" aria-hidden="true">✦</li>').join('');
+  track.innerHTML=one+copy;
+  requestAnimationFrame(()=>{ track.style.setProperty('--t-dur',Math.max(25,track.scrollWidth/2/70)+'s'); });
+  btn.addEventListener('click',()=>{const p=box.classList.toggle('paused');btn.setAttribute('aria-pressed',p);btn.textContent=p?'Weiter':'Pause';});
+})();
+</script>
+<script src="assets/vendor/d3-array.min.js"></script>
+<script src="assets/vendor/d3-geo.min.js"></script>
+<script src="assets/land110.js"></script>
+<script>
+(function(){
+  const CX=280, CY=180, R=128;                 // Globus
+  const RX=236, RY=62, TILT=-16*Math.PI/180;    // Umlaufbahn (fest, gekippt)
+  const DAY=48000, ORBIT=12000;                 // ms pro Erdumdrehung bzw. Umlauf
+  // Blickrichtung: Grundneigung 18° N. Sie nickt mit der Drehung um NOD Grad nach Süden, wenn der Atlantik
+  // vorne ist (Polarstern-Fahrten bis zur Antarktis), und nach Norden, wenn Sibirien vorne ist (Tara Polar Station).
+  // NOD=0 stellt die feste Neigung wieder her.
+  const VIEW_LAT=18, NOD=30, NOD_LON=-40;       // NOD_LON: Mittellänge, bei der der Blick am weitesten im Süden ist
+  const LAND=window.ERDLABOR_LAND, grat=d3.geoGraticule10();
+  const proj=d3.geoOrthographic().scale(R).translate([CX,CY]).clipAngle(90).precision(.4);
+  const path=d3.geoPath(proj);
+  const elLand=document.getElementById('land'), elGrat=document.getElementById('grat');
+  const back=document.getElementById('back'), front=document.getElementById('front');
+
+  // Expeditionsrouten, vereinfacht als Wegpunkte [Länge, Breite]; Linien laufen als Großkreise dazwischen.
+  // Polarstern, Antarktis-Saison 2026/27 laut AWI-Fahrtplan: PS157 Bremerhaven – Las Palmas – Walvis Bay,
+  // PS158/1 Versorgung Neumayer-Station III, PS158/2 EvoWAIS (Amundsensee) bis Punta Arenas,
+  // PS159/PS160-1 Antarktische Halbinsel, PS160/2 Rückfahrt nach Bremerhaven (Mai 2027).
+  const PS_HIN=[[8.58,53.55],[8,53.95],[6,54],[2.2,51.6],[1.6,51],[-1,50.2],[-5.8,49.2],[-9.8,44],[-10,37.5],[-15.4,28.1],[-18.5,21],[-19,14.5],[-14,5],[3,-8],[14.5,-22.95]];
+  const PS_NEUMAYER=[[14.5,-22.95],[8,-40],[0,-58],[-8.27,-70.4]];
+  const PS_AMUNDSEN=[[14.5,-22.95],[-10,-42],[-40,-55],[-60,-59.5],[-80,-66],[-95,-69.3],[-100,-70.3],[-106,-72.6],[-90,-67.5],[-72,-60],[-63.5,-56],[-65.5,-53],[-68.2,-52.3]];
+  const PS_HALBINSEL=[[-68.2,-52.3],[-65.5,-53],[-63.5,-56],[-60.5,-61.2],[-58.8,-63],[-55.5,-61.8],[-58.5,-57.5],[-63.5,-56]];
+  const PS_RUECK=[[-68.2,-52.3],[-62,-47],[-51,-37],[-38,-22],[-31.5,-8],[-27,2],[-26.5,17],[-21.5,28.5],[-14,38],[-11,44],[-7,48.6],[-1.5,50],[1.6,51],[2.5,51.8],[6,54.1],[8,53.95],[8.58,53.55]];
+  // Tara Polar Station, Expedition Tara Polaris I: ab 19.07.2026 Lorient – Tromsø – Kirkenes – Nordostpassage,
+  // am 09.09.2026 bei 82°24′ N, 155°03′ O an der Eisscholle festgemacht; danach erwartete Transpolardrift zur Framstraße.
+  const TARA_HIN=[[-3.37,47.75],[-4.6,47.4],[-6.2,48.2],[-10.8,51.4],[-10.3,55.6],[-6.5,59],[0,62.3],[8,66.3],[15.5,69.4],[18.96,69.65],[20.5,70.6],[25.8,71.4],[28.5,71.6],[31.8,70.9],[31.3,70.1],[33,70.6],[45,72.8],[58,75.8],[68.5,77.2],[80,76.8],[92,77.4],[96,77.6],[101,77.95],[104.5,78.1],[115,77],[128,78],[140,79],[148,80.6],[155.05,82.4]];
+  const TARA_DRIFT=[[155.05,82.4],[150,84],[140,85.8],[110,87.5],[60,88.5],[20,87],[8,85],[2,82],[-3,79.5]];
+  const ROUTES=[
+    ['r-ps',         {type:'MultiLineString', coordinates:[PS_HIN,PS_NEUMAYER,PS_AMUNDSEN,PS_HALBINSEL]}],
+    ['r-ps-back',    {type:'LineString', coordinates:PS_RUECK}],
+    ['r-tara',       {type:'LineString', coordinates:TARA_HIN}],
+    ['r-tara-drift', {type:'LineString', coordinates:TARA_DRIFT}]
+  ].map(([id,geo])=>[document.getElementById(id),geo]).filter(([el])=>el);
+  const NS='http://www.w3.org/2000/svg';
+  const sat=document.createElementNS(NS,'use'); sat.setAttribute('href','#sat');
+
+  function draw(t){
+    // Die Erde dreht sich von West nach Ost: Kontinente wandern auf der Vorderseite nach rechts.
+    const lam = -10 + 360*(t%DAY)/DAY;
+    const viewLat = VIEW_LAT - NOD*Math.cos((-lam - NOD_LON)*Math.PI/180);
+    proj.rotate([lam, -viewLat, 0]);
+    elLand.setAttribute('d', path(LAND)||'');
+    elGrat.setAttribute('d', path(grat)||'');
+    for(const [el,geo] of ROUTES) el.setAttribute('d', path(geo)||'');
+    // Satellit, ebenfalls ostwärts: vorne von links nach rechts, hinten verdeckt vom Globus.
+    const a = -2*Math.PI*(t%ORBIT)/ORBIT;
+    const ex=RX*Math.cos(a), ey=RY*Math.sin(a);
+    const x=CX+ex*Math.cos(TILT)-ey*Math.sin(TILT), y=CY+ex*Math.sin(TILT)+ey*Math.cos(TILT);
+    const inFront=Math.sin(a)>0, s=1.15+0.3*Math.sin(a);
+    const layer=inFront?front:back; if(sat.parentNode!==layer) layer.appendChild(sat);
+    sat.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(-16) scale(${s.toFixed(3)})`);
+  }
+
+  const still=matchMedia('(prefers-reduced-motion: reduce)');
+  let start=performance.now(), raf=0;
+  function loop(now){ draw(now-start); raf=requestAnimationFrame(loop); }
+  function run(){ cancelAnimationFrame(raf); if(still.matches){ draw(ORBIT*0.3); } else { raf=requestAnimationFrame(loop); } }
+  still.addEventListener?.('change',run);
+  run();
+})();
+</script>
+</body>
+</html>

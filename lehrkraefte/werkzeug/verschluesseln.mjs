@@ -70,6 +70,7 @@ const APPS = [
   { id: 'geomethode-aletsch', pfad: 'GeoMethode/aletschgletscher', titel: 'GeoMethode Kartenkompetenz: Der schwindende Riese (Jahrgang 10)', stufe: 'Klasse 7 bis 10', start: '' },
   { id: 'schanze', titel: 'Wer macht die Schanze?', stufe: 'Oberstufe', start: '' },
   { id: 'mitteldeutscherevier', titel: 'Revier im Wandel', stufe: 'Oberstufe', start: '' },
+  { id: 'mosaic', titel: 'MOSAiC – Ein Jahr im Eis', stufe: 'Oberstufe', start: '' },
 ];
 
 // Welche Dateien geschützt werden

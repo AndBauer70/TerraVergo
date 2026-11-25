@@ -63,6 +63,37 @@ a:focus-visible{outline:3px solid #FF6B3D;outline-offset:3px;border-radius:10px}
 .scene .grat{fill:none;stroke:#8FC2E8;stroke-width:.6}
 .scene .atmo{fill:none;stroke:var(--atmo);stroke-width:9;stroke-opacity:.45}
 .scene .orbit{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:6 7;stroke-linecap:round;opacity:.55}
+/* Expeditionsrouten: unterschiedlich blass gestrichelt (rot = Polarstern, blau = Tara Polar Station) */
+.scene .route{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.scene .route.ps{stroke:#E0393B;stroke-width:1.8;stroke-dasharray:7 4;opacity:.62}
+.scene .route.ps-back{stroke:#E0393B;stroke-width:1.6;stroke-dasharray:4 4;opacity:.32}
+.scene .route.tara{stroke:var(--hydro);stroke-width:1.9;stroke-dasharray:7 4;opacity:.75}
+.scene .route.tara-drift{stroke:var(--hydro);stroke-width:1.9;stroke-dasharray:2.5 4;opacity:.45}
+
+/* Geopins: Stecknadeln für die Raumbeispiele der Anwendungen */
+.scene{position:relative}
+.scene .pin{cursor:pointer}
+.scene .pin .shadow{fill:var(--ink);opacity:.28}
+.scene .pin .needle{fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round}
+.scene .pin .head{stroke:var(--ink);stroke-width:1.4}
+.scene .pin .shine{fill:#fff;opacity:.9}
+.scene .pin .hit{fill:transparent;pointer-events:all}
+.scene .pin.k56 .head{fill:#FFD23F}
+.scene .pin.k710 .head{fill:#FF6B3D}
+.scene .pin.ost .head{fill:#8A4FD0}
+.scene .pin:hover .head,.scene .pin.on .head{stroke-width:2.4}
+.pin-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 10px;margin:4px 0 0;font-size:.72rem;color:var(--muted);line-height:1.3}
+.pin-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink);margin-right:4px;vertical-align:-1px}
+.pin-tip{position:absolute;z-index:6;width:max-content;max-width:250px;background:var(--paper);border:2.5px solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);padding:6px 10px 7px;font-size:.8rem;line-height:1.3;text-align:left}
+.pin-tip[hidden]{display:none}
+.pin-tip .pt-ort{font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.pin-tip a{display:block;color:var(--ink);text-decoration:none;padding:3px 0}
+.pin-tip a+a{border-top:1.5px dashed #C9D3E0}
+.pin-tip a b{font-weight:800}
+.pin-tip a b::after{content:" →"}
+.pin-tip a span{display:block;color:var(--muted);font-size:.76rem}
+.pin-tip a:hover b,.pin-tip a:focus-visible b{text-decoration:underline}
+@media (max-width:560px){.pin-legend{display:none}}
 
 /* Anwendungen */
 .sec-h{font-family:var(--f-comic);font-weight:400;font-size:1.75rem;letter-spacing:.04em;line-height:1;margin:0 0 4px}
@@ -128,7 +159,7 @@ footer a{color:var(--ink);font-weight:700}
     <p class="lead">Interaktive Lernanwendungen für den Erdkundeunterricht – direkt im Browser, ohne Installation und ohne Anmeldung.</p>
     <a class="lk-link" href="lehrkraefte/"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="7" width="11" height="7.5" rx="1.5" fill="#FFD23F" stroke="#1B1B2F" stroke-width="1.6"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="#1B1B2F" stroke-width="1.6"/></svg>Für Lehrkräfte</a>
     <div class="scene">
-      <svg id="scene" viewBox="0 0 560 360" role="img" aria-label="Die Erde dreht sich von West nach Ost, ein Satellit umkreist sie auf einer gestrichelt angedeuteten Umlaufbahn.">
+      <svg id="scene" viewBox="0 0 560 360" role="img" aria-label="Die Erde dreht sich von West nach Ost, ein Satellit umkreist sie auf einer gestrichelt angedeuteten Umlaufbahn. Blass gestrichelte Linien deuten die Fahrten des Forschungseisbrechers Polarstern in die Antarktis sowie Anfahrt und Drift der Tara Polar Station in der Arktis an. Farbige Stecknadeln markieren die Raumbeispiele der Anwendungen.">
         <defs>
           <radialGradient id="g-ocean" cx="38%" cy="32%" r="78%"><stop offset="0" stop-color="#E6F5FF"/><stop offset=".6" stop-color="#C2E4FB"/><stop offset="1" stop-color="#93C9EE"/></radialGradient>
           <radialGradient id="g-shade" cx="40%" cy="34%" r="72%"><stop offset=".55" stop-color="#1B1B2F" stop-opacity="0"/><stop offset="1" stop-color="#1B1B2F" stop-opacity=".2"/></radialGradient>
@@ -152,13 +183,22 @@ footer a{color:var(--ink);font-weight:700}
         <circle cx="280" cy="180" r="128" fill="url(#g-ocean)"/>
         <path id="grat" class="grat"/>
         <path id="land" class="land"/>
+        <g id="routes">
+          <path id="r-tara-drift" class="route tara-drift"><title>Tara Polar Station: erwartete Drift mit dem Meereis (Transpolardrift) bis zur Framstraße, 2026–2027</title></path>
+          <path id="r-ps-back" class="route ps-back"><title>Polarstern: geplante Rückfahrt Punta Arenas – Bremerhaven, Mai 2027</title></path>
+          <path id="r-tara" class="route tara"><title>Tara Polar Station: Anfahrt Lorient – Tromsø – Kirkenes – Nordostpassage – Eisscholle bei 82°24′ N, 155°03′ O (Juli bis September 2026)</title></path>
+          <path id="r-ps" class="route ps"><title>Polarstern, Antarktis-Saison 2026/27: Bremerhaven – Las Palmas – Walvis Bay – Neumayer-Station III – Amundsensee – Punta Arenas – Antarktische Halbinsel</title></path>
+        </g>
         <circle cx="280" cy="180" r="128" fill="url(#g-shade)"/>
         <circle cx="280" cy="180" r="128" fill="none" stroke="#1B1B2F" stroke-width="3"/>
+        <g id="pins" aria-hidden="true"></g>
         <g transform="rotate(-16 280 180)">
           <path class="orbit" d="M44 180 A236 62 0 0 0 516 180"/>
         </g>
         <g id="front"></g>
       </svg>
+      <p class="pin-legend" aria-hidden="true"><span><i style="background:#FFD23F"></i>Klasse 5 und 6</span><span><i style="background:#FF6B3D"></i>Klasse 7 bis 10</span><span><i style="background:#8A4FD0"></i>Oberstufe</span></p>
+      <div class="pin-tip" id="pinTip" hidden></div>
     </div>
   </header>
 
@@ -868,6 +908,36 @@ footer a{color:var(--ink);font-weight:700}
             <span class="go">Zukunft rechnen →</span>
           </div>
         </a>
+        <a class="app" href="mosaic/">
+          <div class="pic" style="background:#14254A">
+            <svg viewBox="0 0 400 85" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="85" fill="#14254A"/>
+              <path d="M0 24Q90 2 190 18T400 10" fill="none" stroke="#5BE3A8" stroke-width="9" opacity=".5"/>
+              <path d="M0 36Q110 16 220 30T400 26" fill="none" stroke="#7FD4FF" stroke-width="5" opacity=".45"/>
+              <g fill="#fff"><circle cx="40" cy="10" r="1.5"/><circle cx="300" cy="44" r="1.3"/><circle cx="370" cy="40" r="1.6"/><circle cx="120" cy="46" r="1.2"/></g>
+              <path d="M0 62Q100 56 200 62T400 60V85H0Z" fill="#EAF4FB" stroke="#1B1B2F" stroke-width="2.2"/>
+              <path d="M60 70l10 6-5 6M140 66l-6 8 7 5M300 70l8 5" fill="none" stroke="#7FA6C8" stroke-width="1.6"/>
+              <g transform="translate(282 61) scale(1.35)" stroke="#1B1B2F" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M-12-1L-16-7H-11" fill="none" stroke="#E0393B" stroke-width="1.8"/>
+      <path d="M-13 0v-3.5h5V0Z" fill="#2F6FD0"/>
+      <path d="M-8-3l-.5-9h5L-3-3Z" fill="#E0393B"/><path d="M-8.4-12l-.2-3h5.2l-.1 3Z" fill="#1E2F6E"/>
+      <path d="M-3 0v-6h5v-4h7V0Z" fill="#fff"/><path d="M2-10h7v1.4H2Z" fill="#E0393B" stroke="none"/><path d="M2.8-8h5.6v1.2H2.8Z" fill="#1B1B2F" stroke="none"/>
+      <path d="M5-10v-6M3.5-14h3" fill="none" stroke="#fff" stroke-width="1.6"/>
+      <path d="M10 0v-5l5 2" fill="none" stroke="#E0393B" stroke-width="1.8"/>
+      <path d="M-17 0h34l3-2.5L16 7h-30l-2.5-4Z" fill="#1E2F6E"/>
+      <path d="M11 0h6l2.2-1.8-8.2.6Z" fill="#2E8B57" stroke="none"/><path d="M-6 3h12v1.2H-6Z" fill="#fff" stroke="none"/>
+    </g>
+              <path d="M150 76Q200 70 254 70" fill="none" stroke="#FFD23F" stroke-width="2.5" stroke-dasharray="5 5"/>
+              <g transform="translate(18 50) rotate(-3)"><rect width="128" height="24" rx="6" fill="#E0393B" stroke="#1B1B2F" stroke-width="2.3"/><text x="64" y="18" text-anchor="middle" font-family="Bangers,Impact,sans-serif" font-size="16" fill="#fff" letter-spacing=".6">389 TAGE IM EIS</text></g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="tag">Terra Vergo · Polarräume und Klima</span>
+            <h3 style="color:#1C7ED6;-webkit-text-stroke:1px #1B1B2F">MOSAiC – Ein Jahr im Eis</h3>
+            <p><b style="color:#1B1B2F">Was verrät ein Jahr im Eis über die Arktis im Klimawandel?</b> Die Drift der Polarstern mit Originaldaten auf dem Globus nachfahren, Messreihen auswerten und die Erkenntnisse der fünf Forschungsfelder zu einem Wirkungsgefüge verknüpfen.</p>
+            <span class="go">Expedition starten →</span>
+          </div>
+        </a>
         <!-- Weitere Anwendungen für die Oberstufe: einen Block kopieren und href, Bild und Texte anpassen. -->
       </div>
     </section>
@@ -907,19 +977,162 @@ footer a{color:var(--ink);font-weight:700}
   const CX=280, CY=180, R=128;                 // Globus
   const RX=236, RY=62, TILT=-16*Math.PI/180;    // Umlaufbahn (fest, gekippt)
   const DAY=48000, ORBIT=12000;                 // ms pro Erdumdrehung bzw. Umlauf
+  // Blickrichtung: Grundneigung 18° N. Sie nickt mit der Drehung um NOD Grad nach Süden, wenn der Atlantik
+  // vorne ist (Polarstern-Fahrten bis zur Antarktis), und nach Norden, wenn Sibirien vorne ist (Tara Polar Station).
+  // NOD=0 stellt die feste Neigung wieder her.
+  const VIEW_LAT=18, NOD=30, NOD_LON=-80;       // NOD_LON: Mittellänge, bei der der Blick am weitesten im Süden ist
   const LAND=window.ERDLABOR_LAND, grat=d3.geoGraticule10();
   const proj=d3.geoOrthographic().scale(R).translate([CX,CY]).clipAngle(90).precision(.4);
   const path=d3.geoPath(proj);
   const elLand=document.getElementById('land'), elGrat=document.getElementById('grat');
   const back=document.getElementById('back'), front=document.getElementById('front');
+
+  // Expeditionsrouten, vereinfacht als Wegpunkte [Länge, Breite]; Linien laufen als Großkreise dazwischen.
+  // Polarstern, Antarktis-Saison 2026/27 laut AWI-Fahrtplan: PS157 Bremerhaven – Las Palmas – Walvis Bay,
+  // PS158/1 Versorgung Neumayer-Station III, PS158/2 EvoWAIS (Amundsensee) bis Punta Arenas,
+  // PS159/PS160-1 Antarktische Halbinsel, PS160/2 Rückfahrt nach Bremerhaven (Mai 2027).
+  const PS_HIN=[[8.58,53.55],[8,53.95],[6,54],[2.2,51.6],[1.6,51],[-1,50.2],[-5.8,49.2],[-9.8,44],[-10,37.5],[-15.4,28.1],[-18.5,21],[-19,14.5],[-14,5],[3,-8],[14.5,-22.95]];
+  const PS_NEUMAYER=[[14.5,-22.95],[8,-40],[0,-58],[-8.27,-70.4]];
+  const PS_AMUNDSEN=[[14.5,-22.95],[-10,-42],[-40,-55],[-60,-59.5],[-80,-66],[-95,-69.3],[-100,-70.3],[-106,-72.6],[-90,-67.5],[-72,-60],[-63.5,-56],[-65.5,-53],[-68.2,-52.3]];
+  const PS_HALBINSEL=[[-68.2,-52.3],[-65.5,-53],[-63.5,-56],[-60.5,-61.2],[-58.8,-63],[-55.5,-61.8],[-58.5,-57.5],[-63.5,-56]];
+  const PS_RUECK=[[-68.2,-52.3],[-62,-47],[-51,-37],[-38,-22],[-31.5,-8],[-27,2],[-26.5,17],[-21.5,28.5],[-14,38],[-11,44],[-7,48.6],[-1.5,50],[1.6,51],[2.5,51.8],[6,54.1],[8,53.95],[8.58,53.55]];
+  // Tara Polar Station, Expedition Tara Polaris I: ab 19.07.2026 Lorient – Tromsø – Kirkenes – Nordostpassage,
+  // am 09.09.2026 bei 82°24′ N, 155°03′ O an der Eisscholle festgemacht; danach erwartete Transpolardrift zur Framstraße.
+  const TARA_HIN=[[-3.37,47.75],[-4.6,47.4],[-6.2,48.2],[-10.8,51.4],[-10.3,55.6],[-6.5,59],[0,62.3],[8,66.3],[15.5,69.4],[18.96,69.65],[20.5,70.6],[25.8,71.4],[28.5,71.6],[31.8,70.9],[31.3,70.1],[33,70.6],[45,72.8],[58,75.8],[68.5,77.2],[80,76.8],[92,77.4],[96,77.6],[101,77.95],[104.5,78.1],[115,77],[128,78],[140,79],[148,80.6],[155.05,82.4]];
+  const TARA_DRIFT=[[155.05,82.4],[150,84],[140,85.8],[110,87.5],[60,88.5],[20,87],[8,85],[2,82],[-3,79.5]];
+  const ROUTES=[
+    ['r-ps',         {type:'MultiLineString', coordinates:[PS_HIN,PS_NEUMAYER,PS_AMUNDSEN,PS_HALBINSEL]}],
+    ['r-ps-back',    {type:'LineString', coordinates:PS_RUECK}],
+    ['r-tara',       {type:'LineString', coordinates:TARA_HIN}],
+    ['r-tara-drift', {type:'LineString', coordinates:TARA_DRIFT}]
+  ].map(([id,geo])=>[document.getElementById(id),geo]).filter(([el])=>el);
+
+  // Geopins: Raumbeispiele der Anwendungen. APPS: Pfad -> [Titel, Stufe 1 = Klasse 5/6, 2 = Klasse 7–10, 3 = Oberstufe].
+  // Ohne Pin bleiben Anwendungen mit erfundenen oder abstrakten Räumen (Sogapalag, Talbruck, Christallers Land,
+  // Kartoffelhof, Volle Netze) und solche mit weltweiten Datensätzen (Erdbeben, Klimasimulation, 25 Hotspots).
+  const APPS={
+    'klimazonen/':['Klimazonen der Erde',1], 'sachtext-auswerten/':['Sachtexte auswerten',1],
+    'GeoMethode/brocken-expedition/':['Die Brocken-Expedition',1], 'GeoMethode/graphen-lesen/':['Graphen lesen',1],
+    'murenalarm/':['Murenalarm in Bergried',1],
+    'klimasimulation/mystery.html':['Das Rätsel vom Deich',2], 'rungholt/rungholt.html':['Die Legende von Rungholt',2],
+    'kaffee-lieferkette/':['Die Kaffee-Spur',2], 'mangroven/':['Mangroven',2], 'fakt-oder-meinung/':['Fakt oder Meinung?',2],
+    'DeepDive1/':['DeepDive1',2], 'klima-hotspots/':['Hotspot-Expedition',2], 'sensor-werkstatt/':['Die Sensor-Werkstatt',2],
+    'laendlicher_raum/':['Rura Viva',2], 'GeoMethode/halbmonde-sahel/':['Grüne Halbmonde im Sahel',2],
+    'GeoMethode/strukturwandel-ruhr/':['Kohle, Kumpel, Campus',2], 'GeoMethode/aletschgletscher/':['Der schwindende Riese',2],
+    'plastikmeer/':['Das Plastikmeer',2], 'trassenstreit/':['Trassenstreit im Inntal',2], 'zwei-inseln/':['Zwei Inseln, ein Sturm',2],
+    'kettenreaktion-klima/':['Kettenreaktion Klima',2],
+    'schanze/':['Wer macht die Schanze?',3], 'mitteldeutscherevier/':['Revier im Wandel',3], 'mosaic/':['MOSAiC – Ein Jahr im Eis',3]
+  };
+  // [Länge, Breite, Ort, [[Anwendung, Thema], …]]; von Nord nach Süd, damit südlichere Nadeln vorn stehen.
+  const PINS=[
+    [0,87,'Nordpolarmeer',[['GeoMethode/graphen-lesen/','Das Eis der Arktis']]],
+    [134,85,'MOSAiC-Scholle, 85° N 134° O',[['mosaic/','Start der Drift im Oktober 2019']]],
+    [4,79,'Framstraße westlich von Spitzbergen',[['DeepDive1/','Die Nahrungskette unter dem Eis']]],
+    [-51.1,69.22,'Ilulissat, Grönland',[['klimasimulation/mystery.html','Hier schmilzt das Eis']]],
+    [11.5,54.6,'Westliche Ostsee',[['fakt-oder-meinung/','Streitfall Dorsch und Überfischung']]],
+    [8.55,54.57,'Hallig Hooge',[['sachtext-auswerten/','Landunter auf der Hallig']]],
+    [8.68,54.48,'Wattenmeer bei Hallig Südfall',[['rungholt/rungholt.html','Rungholt, versunken 1362']]],
+    [8.7,53.87,'Cuxhaven, Nordsee',[['GeoMethode/graphen-lesen/','Ebbe und Flut']]],
+    [7.3,53.6,'Ostfriesische Nordseeküste',[['klimasimulation/mystery.html','Der Deich soll wachsen']]],
+    [9.965,53.563,'Hamburg, Sternschanze',[['schanze/','Rote Flora, Gefahrengebiet und G20']]],
+    [13.4,52.52,'Berlin',[['GeoMethode/graphen-lesen/','Ein Jahr in Berlin']]],
+    [9.73,52.37,'Hannover',[['GeoMethode/graphen-lesen/','Lange Tage, kurze Tage'],['laendlicher_raum/','Die Region Hannover wächst']]],
+    [10.43,51.9,'Landkreis Goslar',[['laendlicher_raum/','Schrumpfen im Harz: Altenrode und Harzland']]],
+    [10.62,51.8,'Brocken, Harz',[['GeoMethode/brocken-expedition/','Höhenlinien und Wanderwege'],['GeoMethode/graphen-lesen/','Rauf auf den Brocken']]],
+    [10.45,51.72,'Nationalpark Harz',[['sensor-werkstatt/','Fichtensterben im Satellitenbild']]],
+    [7.2,51.48,'Ruhrgebiet',[['GeoMethode/strukturwandel-ruhr/','Nordwanderung des Bergbaus']]],
+    [12.35,51.27,'Mitteldeutsches Revier, Leipziger Neuseenland',[['mitteldeutscherevier/','Tourismus im Strukturwandel']]],
+    [6.96,50.94,'Köln',[['GeoMethode/graphen-lesen/','Hochwasser am Rhein 2018']]],
+    [12.12,47.7,'Inntal zwischen Rosenheim und Kufstein',[['trassenstreit/','Brenner-Nordzulauf']]],
+    [11.3,47.58,'Bayerische Alpen',[['murenalarm/','Bergried (erfunden): Muren am Wildbach']]],
+    [10.98,47.42,'Zugspitze',[['klimazonen/','Ausreißer im Hochgebirge'],['GeoMethode/graphen-lesen/','Je höher, desto kälter']]],
+    [8.03,46.45,'Aletschgletscher, Schweiz',[['GeoMethode/aletschgletscher/','Gletscherstände 1860 bis 2100']]],
+    [-2.82,36.78,'El Ejido, Almería',[['plastikmeer/','Gemüse aus dem Plastikmeer']]],
+    [-33.9,36.2,'Rainbow-Feld, Mittelatlantischer Rücken',[['DeepDive1/','Black Smoker']]],
+    [-74.5,35.5,'Vor Kap Hatteras',[['DeepDive1/','Golfstrom']]],
+    [-40,27,'Offener Atlantik, Subtropen',[['DeepDive1/','Die Stockwerke des Meeres']]],
+    [68.5,26.5,'Sindh, Pakistan',[['kettenreaktion-klima/','Die Flut von 2022']]],
+    [5.5,23.5,'Sahara',[['GeoMethode/graphen-lesen/','Ein Tag in der Wüste']]],
+    [-74.5,20.35,'Baracoa, Kuba',[['zwei-inseln/','Hurrikan Matthew 2016']]],
+    [-155.58,19.54,'Mauna Loa, Hawaii',[['klima-hotspots/','Basislager mit der Keeling-Kurve'],['GeoMethode/graphen-lesen/','Die Kurve vom Mauna Loa']]],
+    [-74.12,18.65,'Jérémie, Südwest-Haiti',[['zwei-inseln/','Hurrikan Matthew 2016']]],
+    [-88.78,14.77,'Copán, Honduras',[['kaffee-lieferkette/','Kaffeegarten (Markenkaffee)']]],
+    [-1.5,14.5,'Sahel',[['kettenreaktion-klima/','Der Boden verschwindet']]],
+    [7.19,13.39,'Danja, Niger',[['GeoMethode/halbmonde-sahel/','Halbmonde im Satellitenbild']]],
+    [108.04,12.67,'Đắk Lắk, Vietnam',[['kaffee-lieferkette/','Robusta-Garten (Discounterkaffee)']]],
+    [142.2,11.35,'Challenger-Tief, Marianengraben',[['DeepDive1/','Zum tiefsten Punkt der Erde']]],
+    [35.7,8.2,'Illubabor, Äthiopien',[['kaffee-lieferkette/','Kaffeegärten im Bergland (Solino)']]],
+    [38.55,6.75,'Sidama, Äthiopien',[['kaffee-lieferkette/','Gartenkaffee (Markenkaffee)']]],
+    [-74.07,4.71,'Bogotá, Kolumbien',[['klimazonen/','Ausreißer: kühl trotz Äquatornähe']]],
+    [41,4,'Horn von Afrika',[['kettenreaktion-klima/','Dürre in Äthiopien, Kenia und Somalia']]],
+    [73.5,3.2,'Malediven',[['kettenreaktion-klima/','Wenn das Zuhause unbewohnbar wird']]],
+    [-76.05,1.85,'Huila, Kolumbien',[['kaffee-lieferkette/','Kaffeefinca in den Anden (Markenkaffee)']]],
+    [110.4,-6.9,'Küsten Südostasiens',[['mangroven/','Beispielraum: Mangroven und Garnelenteiche']]],
+    [-78,-12.5,'Vor der Küste Perus',[['DeepDive1/','Humboldtstrom']]],
+    [147,-18.3,'Great Barrier Reef',[['DeepDive1/','Das Riff in der Hitzewelle']]],
+    [-45.43,-21.55,'Süden von Minas Gerais, Brasilien',[['kaffee-lieferkette/','Kaffeefarm (Discounterkaffee)']]],
+    [-13.5,-23,'Südatlantik, 23° S',[['DeepDive1/','Echolot-Profil Brasilien – Namibia']]]
+  ];
+  const still=matchMedia('(prefers-reduced-motion: reduce)');
+  const GRADE=['','k56','k710','ost'];
+  const elPins=document.getElementById('pins'), tip=document.getElementById('pinTip');
+  const svgEl=document.getElementById('scene'), sceneEl=svgEl.closest('.scene');
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const pins=PINS.filter(p=>p[3].every(a=>APPS[a[0]])).map(p=>{
+    const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class','pin '+GRADE[Math.min(...p[3].map(a=>APPS[a[0]][1]))]);
+    g.innerHTML='<ellipse class="shadow"/><line class="needle"/><circle class="head"/><circle class="shine"/><circle class="hit"/>';
+    g.style.display='none'; elPins.appendChild(g);
+    const [sh,nd,hd,sn,ht]=g.children;
+    return {g, sh, nd, hd, sn, ht, ll:[p[0],p[1]], ort:p[2], apps:p[3], tx:0, ty:0, hx:0, hy:0, ox:0, oy:0, s:1, vis:false};
+  });
+  const NEEDLE=11.6, HEAD=4;                    // Nadellänge und Kopfradius in SVG-Einheiten
+  const set=(el,o)=>{ for(const k in o) el.setAttribute(k, typeof o[k]==='number'? o[k].toFixed(2) : o[k]); };
   const NS='http://www.w3.org/2000/svg';
   const sat=document.createElementNS(NS,'use'); sat.setAttribute('href','#sat');
 
   function draw(t){
     // Die Erde dreht sich von West nach Ost: Kontinente wandern auf der Vorderseite nach rechts.
-    proj.rotate([-10 + 360*(t%DAY)/DAY, -18, 0]);
+    const lam = -10 + 360*(t%DAY)/DAY;
+    const viewLat = VIEW_LAT - NOD*Math.cos((-lam - NOD_LON)*Math.PI/180);
+    proj.rotate([lam, -viewLat, 0]);
     elLand.setAttribute('d', path(LAND)||'');
     elGrat.setAttribute('d', path(grat)||'');
+    for(const [el,geo] of ROUTES) el.setAttribute('d', path(geo)||'');
+    // Geopins: nur auf der Vorderseite, zum Rand hin kleiner und blasser
+    const center=[-lam, viewLat], shown=[];
+    for(const p of pins){
+      const d=d3.geoDistance(p.ll, center), vis=d<1.5;
+      if(vis!==p.vis){ p.vis=vis; p.g.style.display=vis?'':'none'; p.ox=p.oy=0; if(!vis && tipPin===p) hideTip(); }
+      if(!vis) continue;
+      const xy=proj(p.ll); p.tx=xy[0]; p.ty=xy[1]; p.s=0.6+0.5*Math.cos(d); p.op=Math.min(1,(1.5-d)/0.25);
+      p.ox*=0.92; p.oy*=0.92;                    // Feder: Kopf zurück über den Einstichpunkt
+      shown.push(p);
+    }
+    // Entzerren: Köpfe, die sich überdecken, schieben sich auseinander; die Nadel zeigt weiter auf den Ort.
+    const iter = still.matches ? 120 : 6;
+    for(let it=0; it<iter; it++){
+      for(let i=0;i<shown.length;i++){ const a=shown[i];
+        for(let j=i+1;j<shown.length;j++){ const b=shown[j];
+          let dx=(b.tx+b.ox)-(a.tx+a.ox), dy=(b.ty-NEEDLE*b.s+b.oy)-(a.ty-NEEDLE*a.s+a.oy);
+          const min=HEAD*(a.s+b.s)*1.08+0.8, dd=dx*dx+dy*dy;
+          if(dd>=min*min) continue;
+          let dist=Math.sqrt(dd);
+          if(dist<0.01){ const w=(i*37+j*61)%360*Math.PI/180; dx=Math.cos(w); dy=Math.sin(w); dist=1; }
+          const push=(min-dist)*0.3, ux=dx/dist, uy=dy/dist;
+          a.ox-=ux*push; a.oy-=uy*push; b.ox+=ux*push; b.oy+=uy*push;
+        }
+      }
+    }
+    for(const p of shown){
+      const k=p.s; p.hx=p.tx+p.ox; p.hy=p.ty-NEEDLE*k+p.oy;
+      set(p.sh,{cx:p.tx, cy:p.ty, rx:2.8*k, ry:1.1*k});
+      set(p.nd,{x1:p.tx, y1:p.ty, x2:p.hx, y2:p.hy});
+      set(p.hd,{cx:p.hx, cy:p.hy, r:HEAD*k});
+      set(p.sn,{cx:p.hx-1.4*k, cy:p.hy-1.4*k, r:1.15*k});
+      set(p.ht,{cx:p.hx, cy:p.hy, r:(HEAD+1.6)*k});
+      p.g.style.opacity=p.op.toFixed(2);
+    }
     // Satellit, ebenfalls ostwärts: vorne von links nach rechts, hinten verdeckt vom Globus.
     const a = -2*Math.PI*(t%ORBIT)/ORBIT;
     const ex=RX*Math.cos(a), ey=RY*Math.sin(a);
@@ -929,10 +1142,44 @@ footer a{color:var(--ink);font-weight:700}
     sat.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(-16) scale(${s.toFixed(3)})`);
   }
 
-  const still=matchMedia('(prefers-reduced-motion: reduce)');
-  let start=performance.now(), raf=0;
-  function loop(now){ draw(now-start); raf=requestAnimationFrame(loop); }
-  function run(){ cancelAnimationFrame(raf); if(still.matches){ draw(ORBIT*0.3); } else { raf=requestAnimationFrame(loop); } }
+  // Infokasten zur Stecknadel; solange die Maus auf dem Globus ist oder ein Kasten offen ist, hält der Globus an.
+  let tipPin=null, hideT=0, overGlobe=false, ptype='mouse';
+  function placeTip(p){
+    const r=svgEl.getBoundingClientRect(), sr=sceneEl.getBoundingClientRect(), k=r.width/560;
+    const hx=r.left-sr.left+p.hx*k, headY=r.top-sr.top+(p.hy-(HEAD+2)*p.s)*k, tipY=r.top-sr.top+(p.ty+3)*k;
+    tip.style.left='0px'; tip.style.top='0px'; tip.hidden=false;
+    const w=tip.offsetWidth, h=tip.offsetHeight, vw=document.documentElement.clientWidth;
+    const left=Math.max(8-sr.left, Math.min(vw-8-sr.left-w, hx-w/2));
+    const top=(sr.top+headY-h-6 < 8) ? tipY+6 : headY-h-6;
+    tip.style.left=left+'px'; tip.style.top=top+'px';
+  }
+  function showTip(p){
+    clearTimeout(hideT);
+    if(tipPin) tipPin.g.classList.remove('on');
+    tipPin=p; p.g.classList.add('on');
+    tip.innerHTML='<div class="pt-ort">'+esc(p.ort)+'</div>'+p.apps.map(([h,t])=>'<a href="'+esc(h)+'"><b>'+esc(APPS[h][0])+'</b><span>'+esc(t)+'</span></a>').join('');
+    placeTip(p);
+  }
+  function hideTip(){ clearTimeout(hideT); if(tipPin) tipPin.g.classList.remove('on'); tipPin=null; tip.hidden=true; }
+  const hideSoon=()=>{ clearTimeout(hideT); hideT=setTimeout(hideTip,350); };
+  pins.forEach(p=>{
+    p.g.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse') showTip(p); });
+    p.g.addEventListener('pointerdown',e=>{ ptype=e.pointerType||'mouse'; });
+    p.g.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(ptype==='mouse' && p.apps.length===1){ location.href=p.apps[0][0]; return; }
+      if(tipPin===p && ptype!=='mouse') hideTip(); else showTip(p);
+    });
+  });
+  svgEl.addEventListener('pointerenter',e=>{ if(e.pointerType==='mouse') overGlobe=true; });
+  sceneEl.addEventListener('pointerleave',()=>{ overGlobe=false; if(tipPin) hideSoon(); });
+  tip.addEventListener('pointerenter',()=>clearTimeout(hideT));
+  document.addEventListener('pointerdown',e=>{ if(tipPin && !tip.contains(e.target) && !e.target.closest('.pin')) hideTip(); });
+  addEventListener('resize',()=>{ if(tipPin) placeTip(tipPin); });
+
+  let vt=0, last=0, raf=0;
+  function loop(now){ if(last && !overGlobe && !tipPin) vt+=Math.min(now-last,100); last=now; draw(vt); raf=requestAnimationFrame(loop); }
+  function run(){ cancelAnimationFrame(raf); last=0; if(still.matches){ draw(ORBIT*0.3); } else { raf=requestAnimationFrame(loop); } }
   still.addEventListener?.('change',run);
   run();
 })();

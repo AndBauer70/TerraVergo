@@ -25,6 +25,7 @@ Startseite für die interaktiven Lernanwendungen von **Terra Vergo** im Erdkunde
 | `kettenreaktion-klima/` | **Kettenreaktion Klima**: vernetzt denken für Jahrgang 8 bis 10. Aus 17 Datenbelegen (M1–M17) eigene Elemente ableiten, ein Wirkungsgefüge vom Klimawandel bis zu Hunger und Flucht bauen, Rückkopplungen und sechs Hebel finden, roten Faden, Sprechzettel und Präsentationsmodus für den freien Vortrag, Grenzen des Modells; Forschertagebuch als PDF für GoodNotes |
 | `volle-netze/` | **Volle Netze**: Fischerei-Rollenspiel für 2 bis 6 Crews, Jahrgang 7 bis 10, an einem Gerät oder mit je einem Tablet pro Crew (direkte WLAN-Verbindung per QR-Kopplung, ohne Server). Boote kaufen, auf Hochsee, Küste und Hafen verteilen, handeln und Bilanz ziehen; der Fischbestand bleibt bis zur Auswertung verborgen. Auswertung mit Bestandskurven, Rangliste und Wirkungsgefüge, Aufgaben zu Allmende, Regeln und Transfer aufs Klima; Spielleitung mit Fangquote; eigenständig, angelehnt an die Spielidee von Fish Banks, Ltd.; Begleitheft |
 | `mitteldeutscherevier/` | **Revier im Wandel**: Strukturwandel im Mitteldeutschen Braunkohlerevier für die Oberstufe (KC Niedersachsen FM 2, RM 1). Einstieg „Party im Tagebau“, 12 Materialien als Chancen und Risiken, offengelegtes Szenario-Modell 2026–2045 mit sechs einstellbaren Hebeln („weiter mit Kohle“, „Tourismusregion“, „neue Industrie“, „Mix“), Kipppunkten und Hebeltest, Kriterien-Matrix und Argumentationswippe, Präsentationsmodus, Urteilsbildung zur Rolle des Tourismus. Forschertagebuch und Materialheft als PDF; Begleitheft und Wissensbasis im Bereich für Lehrkräfte. |
+| `mosaic/` | **MOSAiC – Ein Jahr im Eis**: die MOSAiC-Expedition des AWI (2019/20) mit Originaldaten für die Oberstufe. Interaktiver Globus mit der gemessenen Route (389 Tagespositionen, PANGAEA) und Tageswetterdaten der Polarstern, 15 Stationen mit Erkenntnissen, Datenlabor mit Diagrammen, Streudiagramm und Driftrechner, Gruppenpuzzle zu den fünf Forschungsfeldern, Wirkungsgefüge des arktischen Klimasystems, Fakt oder Meinung und FAIR-Datenregeln. |
 
 Die einzelnen Geo-Anwendungen liegen in ihren jeweiligen Ordnern; ihre eigenen README-Dateien beschreiben Inhalt und Quellen.
 
@@ -52,6 +53,7 @@ zwei-inseln/                   Zwei Inseln, ein Sturm
 kettenreaktion-klima/          Kettenreaktion Klima (Wirkungsgefüge Klimawandel und Flucht, Forschertagebuch)
 volle-netze/                   Volle Netze (Fischerei-Rollenspiel zur Allmende)
 mitteldeutscherevier/          Revier im Wandel (Strukturwandel Mitteldeutsches Revier, Zukunftsszenarien und Hebel)
+mosaic/                        MOSAiC – Ein Jahr im Eis (Polarstern-Drift mit Originaldaten, Globus, Datenlabor, Wirkungsgefüge)
 GeoMethode/                    GeoMethode Kartenkompetenz: vier Anwendungen für Jahrgang 5, 8, 9 und 10; dazu GeoMethode/graphen-lesen/ (Graphen lesen, Jahrgang 5 bis 7)
 .github/workflows/             tägliche Aktualisierung der Erdbebendaten
 .nojekyll                      GitHub Pages liefert alle Dateien unverändert aus

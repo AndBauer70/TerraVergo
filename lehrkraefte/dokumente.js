@@ -1,5 +1,5 @@
 // Automatisch erzeugt von lehrkraefte/werkzeug/verschluesseln.mjs am 2026-11-25. Nicht von Hand ändern.
-window.TV_LK={"salz":"VEb8THRcrFOhBdebNs55tQ==","iter":600000,"id":"d4f405a596a4","pruef":{"iv":"9NjmpEkjHpJeWuqt","ct":"Ca16tm25J5fWm6EwzyLlKq3e4vqzQAbuLWcCU8G5eHBokzzTG88="}};
+window.TV_LK={"salz":"iXTXDESbLlqw14P+gd6ELw==","iter":600000,"id":"ea89b95314c2","pruef":{"iv":"4v7/UVnwjnfMiPJ/","ct":"LDveNRqmguI1OygL46scG6s7TT/aZMMmrb5bjntl5ymB7lVpPqM="}};
 window.TV_DOKUMENTE=[
  {
   "id": "erdbeben",
@@ -693,5 +693,21 @@ window.TV_DOKUMENTE=[
     "href": "../mitteldeutscherevier/forschertagebuch.pdf"
    }
   ]
+ },
+ {
+  "id": "mosaic",
+  "titel": "MOSAiC – Ein Jahr im Eis",
+  "stufe": "Oberstufe",
+  "start": "../mosaic/",
+  "dokumente": [
+   {
+    "art": "Begleitheft",
+    "titel": "Begleitheft MOSAiC – Ein Jahr im Eis",
+    "href": "mosaic/begleitheft.html",
+    "typ": "html",
+    "kb": 143
+   }
+  ],
+  "offen": []
  }
 ];

@@ -14,11 +14,11 @@ Die Unterrichtsidee greift Ulbricht und Lindau (Praxis Geographie 11/2024) auf: 
 | 4 Hebel beurteilen | acht Hebelkarten mit Daten, Hebeltest im Modell (je ein Hebel verändert), Kriterien-Matrix mit eigenem Kriterium, Argumentationswippe für drei Strategien mit eigenen Argumenten |
 | 5 Vorstellen | Sprechzettel, Redemittel, Checkliste, Timer, Präsentationsmodus mit sechs Folien (Vollbild, Pfeiltasten/Presenter, Escape) |
 | 6 Urteilen | sieben Aussagen zu Modellgrenzen, Sachurteil, Perspektiven, Werturteil, Regler vorher/nachher |
-| Forschungsbericht | alle Arbeitsergebnisse formatiert (Hypothese, Datenbelege, Szenario-Diagramm und -Tabelle, Hebel-Rangfolge, Wippe, Urteil); als PDF für GoodNotes sichern oder als Text kopieren; Quellenliste |
+| Forschungsbericht | alle Arbeitsergebnisse formatiert (Hypothese, Datenbelege, Szenario-Diagramm und -Tabelle, Hebel-Rangfolge, Wippe, Urteil); als PDF drucken oder als Text kopieren; Quellenliste |
 
 **Material für Lehrkräfte** (nur über den Bereich für Lehrkräfte verlinkt, nicht in der Anwendung):
 
-- `forschertagebuch.pdf`: 8 Seiten A4 zum Import in GoodNotes; Vorlage `forschertagebuch.html`
+- `forschertagebuch.pdf`: 8 Seiten A4 zum Ausdrucken oder digitalen Bearbeiten; Vorlage `forschertagebuch.html`
 - `materialien.html` und `materialien.pdf`: Materialheft M1–M12, Hebelkarten, Argumentkarten für drei Strategien, Vorlage Argumentationswippe
 - Begleitheft und Wissensbasis: verschlüsselt unter `lehrkraefte/mitteldeutscherevier/`, Originale in `_lehrkraefte-originale/mitteldeutscherevier/`
 

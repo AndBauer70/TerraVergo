@@ -477,6 +477,9 @@ section.view>*{min-width:0}
 .mapcard h3{margin:0}
 .mapcard svg{width:100%;height:auto;display:block;border:2.5px solid var(--ink);border-radius:12px;background:#DCEFFF}
 .mapcard svg text{font-family:inherit;fill-opacity:1}
+
+textarea.why{min-height:0;line-height:1.45}
+.wcount{display:block;text-align:right;color:var(--muted,#555);margin-top:2px}
 </style>
 </head>
 <body>
@@ -1519,15 +1522,26 @@ if (!S.st.sc || !S.st.sc.alloc) S.st.sc = {exit:2035, alloc:{T:30, I:30, B:20, W
 if (!S.st.sc.tried) S.st.sc.tried = {};
 
 const TIPS = {
-  start:'Willkommen im Revier! Heute beratet ihr eine Region im Umbruch. Legt euer Forschertagebuch bereit.',
+  start:'Willkommen im Revier! Heute beratet ihr eine Region im Umbruch.',
   einstieg:'Hier gibt es kein Richtig oder Falsch. Haltet fest, was ihr jetzt denkt, dann seht ihr am Ende, was ihr dazugelernt habt.',
   archiv:'Jede Zahl braucht ihre Einheit. Und fast jede Chance hat auch ein Risiko: Notiert beides, wenn es passt.',
   szenarien:'Ein Modell ist so gut wie seine Annahmen. Schaut in die Tabelle der Stellschrauben, bevor ihr Zahlen verkündet.',
   hebel:'Das Geld ist begrenzt: Mehr für einen Hebel heißt weniger für die anderen. Starke Argumente gehören auf der Wippe nach außen.',
   vortrag:'Erzählt eine Geschichte, keine Liste: Rückblick, zwei Szenarien, ein starker Hebel, ein klares Urteil.',
   urteil:'Trennt Sach- und Werturteil. Ein gutes Urteil nennt seine Kriterien und seine Grenzen.',
-  ergebnis:'Stark geforscht! Sichert euren Forschungsbericht als PDF und legt ihn in GoodNotes neben euer Forschertagebuch.'
+  ergebnis:'Stark geforscht! Druckt euren Forschungsbericht als PDF oder kopiert ihn als Text.'
 };
+
+
+/* Begründungsfeld: so viele Zeilen, wie 480 Zeichen bei der aktuellen Breite brauchen */
+function fitWhy(){
+  const el = document.getElementById('dWhy'); if (!el || !el.clientWidth) return;
+  const cs = getComputedStyle(el);
+  const w = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const cpl = Math.max(20, Math.floor(w / (parseFloat(cs.fontSize) * 0.56)));
+  el.rows = Math.ceil(el.maxLength / cpl) + 1;
+}
+window.addEventListener('resize', fitWhy);
 
 /* ---------- Hilfen ---------- */
 const mat = id => (S.st.mat[id] = S.st.mat[id] || {});
@@ -1617,14 +1631,14 @@ function renderArchiv(){
       <h3>Material auswerten</h3>
       <div class="step"><label><b class="sn">1</b>Wichtigste Zahl mit Einheit und ihre Bedeutung<textarea id="dBeleg" placeholder="Die wichtigste Zahl: … Das bedeutet: …">${esc(d.beleg || '')}</textarea></label></div>
       <div class="step"><b><b class="sn">2</b>Einordnung für die Zukunft des Reviers</b><div class="catpick" id="dCr">${Object.entries(CR).map(([k, l]) => `<button type="button" class="cat crb ${k}" data-c="${k}" aria-pressed="${d.cr === k}">${l}</button>`).join('')}</div></div>
-      <div class="step"><label><b class="sn">3</b>Begründung in einem Satz<input type="text" id="dWhy" maxlength="160" placeholder="… ist eine Chance/ein Risiko, weil …" value="${esc(d.why || '')}"></label></div>
+      <div class="step"><label><b class="sn">3</b>Begründung in wenigen Sätzen<textarea id="dWhy" class="why" maxlength="480" rows="6" placeholder="… ist eine Chance/ein Risiko, weil …">${esc(d.why || '')}</textarea></label><span class="small wcount" id="dWhyN" aria-live="polite">${(d.why || '').length} / 480 Zeichen</span></div>
       <div id="dOut"></div>
     </div>
   </div>
   <div class="mnav">${prev ? `<button class="btn" type="button" data-go="${prev.id}">← M${prev.nr}</button>` : '<span></span>'}${next ? `<button class="btn primary" type="button" data-go="${next.id}">M${next.nr} →</button>` : `<a class="btn primary" href="#szenarien">Zu den Zukunftsszenarien →</a>`}</div>`;
   const out = () => { $('#dOut').innerHTML = d.cr && (d.beleg || '').trim() ? `<div class="reveal"><b>Prof. Geo: Hier setzt Hebel ${esc(h.id)} an.</b><span>„${esc(h.label)}“${h.model ? ' · im Szenario-Modell einstellbar' : ' · im Modell nicht abgebildet, nur in der Kriterien-Matrix'}</span></div>` : '<div class="helpbox">Notiert die Zahl und ordnet das Material ein, dann zeigt Prof. Geo den passenden Hebel.</div>'; };
   $('#dBeleg').addEventListener('input', e => { d.beleg = e.target.value; S.save(); renderList(); out(); });
-  $('#dWhy').addEventListener('input', e => { d.why = e.target.value; S.save(); });
+  fitWhy(); $('#dWhy').addEventListener('input', e => { d.why = e.target.value; $('#dWhyN').textContent = d.why.length + ' / 480 Zeichen'; S.save(); });
   $$('#dCr button').forEach(b => b.addEventListener('click', () => { d.cr = b.dataset.c; S.save(); $$('#dCr button').forEach(x => x.setAttribute('aria-pressed', x === b)); renderList(); out(); }));
   $$('[data-go]', $('#mcard')).forEach(b => b.addEventListener('click', () => { S.st.cur = b.dataset.go; S.save(); renderArchiv(); $('#mcard').scrollIntoView({behavior:'smooth', block:'start'}); }));
   out();
@@ -1899,7 +1913,7 @@ document.addEventListener('keydown', e => {
 /* ---------- 8 Urteilen ---------- */
 TV.sorter($('#grenzen'), {items:GRENZEN, cats:[{id:'ja', label:'stimmt'}, {id:'nein', label:'stimmt nicht'}], data:S.st.grenzen, save:() => S.save()});
 
-/* ---------- Forschungsbericht (HTML, druckbar für GoodNotes) ---------- */
+/* ---------- Forschungsbericht (HTML, druckbar) ---------- */
 function renderReport(){
   const sc = scenText(), r = lastRun || simulate(params()), th = topHebel(), q = k => esc(TV.txt(S, k) || '–');
   const runs = PRESETS.map(p => ({p, e:simulate(params(p)).end}));
