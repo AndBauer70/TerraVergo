@@ -1,0 +1,30 @@
+# Aktualisiert bei jedem Push die Liste der neuesten Anwendungen für den Ticker der Startseite.
+# Das Datum stammt aus dem Git-Verlauf (erster Commit je Anwendungsordner).
+name: Neueste Anwendungen
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['assets/neueste.js']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ticker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # ganzer Verlauf, sonst fehlen die Daten der ersten Commits
+      - name: Liste erzeugen
+        run: node .github/scripts/neueste-anwendungen.mjs
+      - name: Änderung einchecken
+        run: |
+          if git diff --quiet -- assets/neueste.js; then echo "Keine Änderung."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add assets/neueste.js
+          git commit -m "Ticker: neueste Anwendungen aktualisiert"
+          git push
