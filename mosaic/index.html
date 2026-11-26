@@ -251,8 +251,8 @@ label{font-weight:700;font-size:.92rem}
 section.view>*{min-width:0}
 .view .card{align-content:start}
 /* Globus */
-.globe-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
-@media (max-width:980px){.globe-grid{grid-template-columns:1fr}}
+.globe-col{display:grid;gap:12px}
+.gstage{position:relative}
 .globe-wrap{position:relative;border:3px solid var(--ink);border-radius:16px;background:radial-gradient(circle at 50% 45%,#1B2D52 0%,#0B1528 70%);box-shadow:4px 4px 0 var(--ink);overflow:hidden;touch-action:none}
 .globe-wrap canvas{display:block;width:100%;height:auto;cursor:grab}
 .globe-wrap canvas:active{cursor:grabbing}
@@ -262,23 +262,26 @@ section.view>*{min-width:0}
 .gstamp .d{font-family:var(--f-comic);font-size:1.6rem;letter-spacing:.04em;font-weight:400;line-height:1}
 .glegend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:.78rem;font-weight:700}
 .glegend i{display:inline-block;width:18px;height:5px;border-radius:3px;border:1px solid var(--ink);vertical-align:middle;margin-right:4px}
-.timebar{display:grid;gap:6px}
-.timebar input[type=range]{width:100%;accent-color:var(--logo);height:28px}
-.timebar .row .btn{min-height:36px}
+.timebar .btn{min-height:36px}
+/* Zeitleiste am unteren Rand des Globus */
+.tl{position:relative;border-top:3px solid var(--ink);background:#FFFDF6;touch-action:none;cursor:pointer;user-select:none;-webkit-user-select:none}
+.tl svg{display:block;width:100%;height:auto}
+.tl:focus-visible{outline:4px solid var(--action);outline-offset:-4px}
+.tl .st{cursor:pointer}
+.tl .st:hover circle{stroke-width:3.2}
+.tl .bub text{font-variant-numeric:tabular-nums}
 .daycard{border:3px solid var(--ink);border-radius:14px;background:#fff;padding:12px 14px;display:grid;gap:10px;box-shadow:4px 4px 0 var(--ink)}
 .daycard h3{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .legchip{display:inline-block;border:2px solid var(--ink);border-radius:999px;padding:0 8px;font-size:.72rem;font-weight:800;color:#fff}
-.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.daycard .dmain{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:12px;align-items:start}
+@media (max-width:860px){.daycard .dmain{grid-template-columns:1fr}}
 .dval{border:2px solid var(--ink);border-radius:10px;padding:5px 8px;background:#FFFDF6;display:grid;gap:1px}
 .dval .l{overflow-wrap:anywhere;hyphens:auto;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
 .dval .v{font-weight:800;font-size:1.02rem;font-variant-numeric:tabular-nums}
 .dval .s{font-size:.72rem;color:var(--muted)}
 .dval.cold{background:#DDEBFB}.dval.warm{background:#FFE3D6}.dval.dark{background:#1B2D52;color:#fff}.dval.dark .l,.dval.dark .s{color:#C9D6EA}.dval.light{background:#FFF3A6}
 .spark svg{width:100%;height:auto;display:block}
-.stations{display:flex;flex-wrap:wrap;gap:6px}
-.stations button{border:2.5px solid var(--ink);border-radius:999px;background:#fff;font-weight:800;font-size:.8rem;padding:3px 10px;cursor:pointer;box-shadow:2px 2px 0 var(--ink);min-height:34px}
-.stations button.seen{background:var(--good-t)}
-.stations button[aria-current="true"]{background:var(--action)}
 .evcard{border:3px solid var(--ink);border-radius:14px;background:var(--narr);padding:12px 14px;display:grid;gap:8px;box-shadow:4px 4px 0 var(--ink)}
 .evcard .when{font-size:.8rem;font-weight:800;color:var(--muted)}
 .evcard .src{font-size:.72rem;color:var(--muted)}
@@ -336,7 +339,7 @@ input[type=number],input[type=datetime-local]{width:100%;background:var(--paper)
 .sg.m{background:var(--bad-t)}
 .aisbox{border:2.5px solid var(--ink);border-radius:12px;background:#E9F7EC;padding:10px 12px;display:grid;gap:6px;font-size:.88rem}
 .aisbox .tag2{display:inline-block;border:2px solid var(--ink);border-radius:6px;background:#3BB273;color:#fff;font-weight:800;font-size:.72rem;padding:0 6px;margin-right:4px}
-.auftrag{position:absolute;left:12px;right:12px;bottom:12px;max-height:calc(100% - 90px);overflow:auto;background:rgba(255,253,246,.97);border:3px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);padding:12px 14px;display:grid;gap:8px;font-size:.92rem;z-index:2}
+.auftrag{position:absolute;left:12px;right:12px;bottom:12px;max-height:calc(100% - 90px);max-width:520px;overflow:auto;background:rgba(255,253,246,.97);border:3px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);padding:12px 14px;display:grid;gap:8px;font-size:.92rem;z-index:2}
 .auftrag[hidden]{display:none}
 .auftrag h3{color:var(--logo)}
 .auftrag .btn{justify-self:start}
@@ -357,7 +360,7 @@ input[type=number],input[type=datetime-local]{width:100%;background:var(--paper)
 .soltab .ok{background:var(--good-t)}.soltab .warn{background:#FFF1C2}.soltab .miss{background:var(--bad-t)}
 .loopbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
 .loopbox div{border:2.5px solid var(--ink);border-radius:12px;padding:8px 10px;background:#fff;font-size:.88rem}
-@media print{.chap,.hbtns,.tv-el-row,.next,.gtools,.timebar,.livebox iframe{display:none!important}body{background:#fff}.box{box-shadow:none}}
+@media print{.chap,.hbtns,.tv-el-row,.next,.gtools,.timebar,.tl,.livebox iframe{display:none!important}body{background:#fff}.box{box-shadow:none}}
 </style>
 
 </head>
@@ -431,7 +434,7 @@ input[type=number],input[type=datetime-local]{width:100%;background:var(--paper)
 <!-- 1 EXPEDITIONSGLOBUS (Start) -->
 <section class="box view" id="v-globus" hidden>
   <h2><span class="cn">1</span>Expeditionsglobus: Tag für Tag durch das Eis</h2>
-  <p class="lead">Der Globus zeigt die <b>gemessene Route</b> der Polarstern: eine Position pro Tag, jeweils gegen 12 Uhr UTC. Zieht am Globus, um ihn zu drehen, und schiebt den Zeitregler. Die gelben Nummern sind <b>Stationen</b>, an denen etwas Wichtiges passierte. Die Schattierung zeigt, wo am gewählten Tag Sonne ist, und zwar zu dem Zeitpunkt, an dem an der Position der Polarstern Mittag ist (berechnet).</p>
+  <p class="lead">Der Globus zeigt die <b>gemessene Route</b> der Polarstern: eine Position pro Tag, jeweils gegen 12 Uhr UTC. Zieht am Globus, um ihn zu drehen. Auf der <b>Zeitleiste</b> am unteren Rand wählt ihr einen Tag: antippen oder ziehen. Die gelben Nummern auf Globus und Zeitleiste sind <b>Stationen</b>, an denen etwas Wichtiges passierte. Die Schattierung zeigt, wo am gewählten Tag Sonne ist, und zwar zu dem Zeitpunkt, an dem an der Position der Polarstern Mittag ist (berechnet).</p>
   <div class="task">
     <h3>Aufgaben</h3>
     <ol>
@@ -440,10 +443,10 @@ input[type=number],input[type=datetime-local]{width:100%;background:var(--paper)
       <li><span class="op">Erklärt</span> mithilfe des Sonnenhöchststands die Polarnacht von Oktober bis März. <span class="afb">AFB II</span></li>
     </ol>
   </div>
-  <div class="globe-grid">
-    <div style="display:grid;gap:10px">
-      <div class="globe-wrap" id="globeWrap">
-        <canvas id="globe" width="700" height="700" tabindex="0" aria-label="Interaktiver Globus mit der MOSAiC-Route. Mit den Pfeiltasten drehen, mit Plus und Minus zoomen."></canvas>
+  <div class="globe-col">
+    <div class="globe-wrap" id="globeWrap">
+      <div class="gstage">
+        <canvas id="globe" width="1100" height="620" tabindex="0" aria-label="Interaktiver Globus mit der MOSAiC-Route. Mit den Pfeiltasten drehen, mit Plus und Minus zoomen."></canvas>
         <div class="auftrag" id="auftrag" hidden>
           <h3>Euer Auftrag</h3>
           <p>Im September 2019 legt der Forschungseisbrecher <b>Polarstern</b> in Tromsø ab. Wenige Tage später friert er an einer Eisscholle fest und lässt sich ein Jahr lang mit dem Eis durch das Nordpolarmeer treiben. An Bord und auf dem Eis arbeiten Teams von Institutionen aus 20 Ländern. Das ist <b>MOSAiC</b>, die größte Arktisexpedition der Geschichte.</p>
@@ -459,25 +462,20 @@ input[type=number],input[type=datetime-local]{width:100%;background:var(--paper)
           <button class="btn small" type="button" id="gFollow" aria-pressed="true">Folgen</button>
         </div>
       </div>
-      <div class="glegend" id="gLegend"></div>
-      <div class="timebar">
-        <input type="range" id="tSlider" min="0" max="388" value="14" aria-label="Tag der Expedition">
-        <div class="row">
-          <button class="btn small" type="button" id="tBack7">−7</button>
-          <button class="btn small" type="button" id="tBack">−1</button>
-          <button class="btn small primary" type="button" id="tPlay">▶ Abspielen</button>
-          <button class="btn small" type="button" id="tFwd">+1</button>
-          <button class="btn small" type="button" id="tFwd7">+7</button>
-          <span class="spacer"></span>
-          <label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="gNight" checked style="width:18px;height:18px"> Tag/Nacht</label>
-        </div>
-      </div>
-      <div><b>Stationen</b><div class="stations" id="stations"></div></div>
+      <div class="tl" id="tl" role="slider" tabindex="0" aria-label="Zeitleiste der Expedition: Tag wählen mit den Pfeiltasten, Eingabetaste öffnet die Station am gewählten Tag" aria-valuemin="1" aria-valuemax="389" aria-valuenow="1"></div>
     </div>
-    <div style="display:grid;gap:12px">
-      <div class="daycard" id="dayCard"></div>
-      <div class="evcard" id="evCard"></div>
+    <div class="timebar row">
+      <button class="btn small" type="button" id="tBack7">−7</button>
+      <button class="btn small" type="button" id="tBack">−1</button>
+      <button class="btn small primary" type="button" id="tPlay">▶ Abspielen</button>
+      <button class="btn small" type="button" id="tFwd">+1</button>
+      <button class="btn small" type="button" id="tFwd7">+7</button>
+      <span class="spacer"></span>
+      <label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="gNight" checked style="width:18px;height:18px"> Tag/Nacht</label>
     </div>
+    <div class="glegend" id="gLegend"></div>
+    <div class="daycard" id="dayCard"></div>
+    <div class="evcard" id="evCard"></div>
   </div>
   <label>Notizen: Beobachtungen zu den Jahreszeiten (Herbst, Polarnacht, Frühjahr, Sommer)<textarea data-bind="globusNotiz" placeholder="Herbst 2019: … Polarnacht: … Frühjahr 2020: … Sommer 2020: …"></textarea></label>
   <div class="fair">
@@ -1251,11 +1249,11 @@ const PLACES = [
   ['Franz-Josef-Land', 81, 55, 3.2], ['Kanada', 64, -100, 1.3], ['Europa', 50, 15, 1.0], ['Alaska', 64, -152, 1.6],
   ['Atlantik', 30, -40, 1.0], ['Antarktis', -80, 30, 1.0], ['Afrika', 8, 20, 1.0], ['Island', 64.9, -18.6, 2.2]
 ];
-const G = {lon0:120, lat0:78, k:2.4, W:700, dpr:1, ctx:null, cv:null, anim:null, play:null};
+const G = {lon0:120, lat0:78, k:2.4, W:1100, H:620, dpr:1, ctx:null, cv:null, anim:null, play:null};
 const LANDGEO = {type:'MultiPolygon', coordinates:LAND.map(r => [r])};
 const GRAT = d3.geoGraticule10();
 const PROJ = d3.geoOrthographic().clipAngle(90).precision(0.3);
-function setProj(){ PROJ.rotate([-G.lon0, -G.lat0]).scale(G.W/2*0.94*G.k).translate([G.W/2, G.W/2]); }
+function setProj(){ PROJ.rotate([-G.lon0, -G.lat0]).scale(Math.min(G.W, G.H)/2*0.94*G.k).translate([G.W/2, G.H/2]); }
 function vis(lon, lat){ return d3.geoDistance([lon, lat], [G.lon0, G.lat0]) < Math.PI/2 - 0.01; }
 function pt(lon, lat){ return vis(lon, lat) ? PROJ([lon, lat]) : null; }
 function drawNight(ctx, path, date, sub){
@@ -1268,13 +1266,13 @@ function drawNight(ctx, path, date, sub){
 function drawGlobe(){
   if (!G.ctx) return;
   setProj();
-  const ctx = G.ctx, W = G.W, R = W/2*0.94*G.k, cur = DAYS[S.st.day];
+  const ctx = G.ctx, W = G.W, H = G.H, R = Math.min(W, H)/2*0.94*G.k, cur = DAYS[S.st.day];
   const path = d3.geoPath(PROJ, ctx);
   ctx.setTransform(G.dpr, 0, 0, G.dpr, 0, 0);
-  ctx.clearRect(0, 0, W, W);
+  ctx.clearRect(0, 0, W, H);
   ctx.save();
   ctx.beginPath(); path({type:'Sphere'});
-  const g = ctx.createRadialGradient(W/2 - R*.3, W/2 - R*.3, R*.1, W/2, W/2, R);
+  const g = ctx.createRadialGradient(W/2 - R*.3, H/2 - R*.3, R*.1, W/2, H/2, R);
   g.addColorStop(0, '#3E86C9'); g.addColorStop(1, '#1A4F86');
   ctx.fillStyle = g; ctx.fill(); ctx.clip();
   // Land
@@ -1357,23 +1355,23 @@ function animateTo(lon, lat, k){
 function followShip(){ const d = DAYS[S.st.day]; if (S.st.follow) animateTo(d.lon, Math.max(-60, Math.min(84, d.lat)), null); else drawGlobe(); }
 function resizeGlobe(){
   if (!G.cv) return;
-  const w = Math.min(G.cv.parentElement.clientWidth, 760); if (!w) return;
-  G.W = w; G.dpr = window.devicePixelRatio || 1; G.cv.width = Math.round(w*G.dpr); G.cv.height = Math.round(w*G.dpr); G.cv.style.height = w + 'px';
-  drawGlobe();
+  const w = G.cv.parentElement.clientWidth; if (!w) return;
+  const h = Math.round(w < 600 ? Math.max(340, w*0.9) : Math.min(640, Math.max(420, w*0.56)));
+  G.W = w; G.H = h; G.dpr = window.devicePixelRatio || 1; G.cv.width = Math.round(w*G.dpr); G.cv.height = Math.round(h*G.dpr); G.cv.style.height = h + 'px';
+  drawGlobe(); buildTimeline();
 }
 function setDay(i, fromUser){
   S.st.day = Math.max(0, Math.min(N-1, i)); S.save();
-  $('#tSlider').value = S.st.day; renderDay(); followShip();
+  renderDay(); updateTimeline(); followShip();
 }
 function initGlobe(){
-  if (globeReady) { $('#tSlider').value = S.st.day; renderDay(); renderEvent(); renderStations(); followShip(); return; }
+  if (globeReady) { renderDay(); buildTimeline(); renderEvent(); followShip(); return; }
   globeReady = true;
   G.cv = $('#globe'); G.ctx = G.cv.getContext('2d');
   const d0 = DAYS[S.st.day]; G.lon0 = d0.lon; G.lat0 = Math.min(84, d0.lat);
   $('#gLegend').innerHTML = LEGS.slice(1).map(l => `<span><i style="background:${l.c}"></i>${l.name}</span>`).join('') + '<span><i style="background:#FFD23F"></i>Polarkreis</span>';
   $('#gNight').checked = S.st.night; $('#gFollow').setAttribute('aria-pressed', S.st.follow);
-  $('#tSlider').max = N - 1; $('#tSlider').value = S.st.day;
-  $('#tSlider').addEventListener('input', e => setDay(+e.target.value, true));
+  initTimeline();
   $('#tBack').addEventListener('click', () => setDay(S.st.day - 1));
   $('#tFwd').addEventListener('click', () => setDay(S.st.day + 1));
   $('#tBack7').addEventListener('click', () => setDay(S.st.day - 7));
@@ -1392,11 +1390,11 @@ function initGlobe(){
     if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, [e.clientX, e.clientY]);
     if (pts.size === 2 && pinch) { const [a, b] = [...pts.values()]; G.k = Math.max(0.9, Math.min(8, pinch.k * Math.hypot(a[0]-b[0], a[1]-b[1]) / pinch.d)); moved = true; drawGlobe(); return; }
     const dx = e.clientX - start.x, dy = e.clientY - start.y; if (Math.abs(dx) + Math.abs(dy) > 5) moved = true;
-    if (moved) { const s = 57.3 / (G.cv.clientWidth * 0.47 * G.k); G.lon0 = start.lon - dx * s; G.lat0 = Math.max(-89.9, Math.min(89.9, start.lat + dy * s)); if (S.st.follow) { S.st.follow = false; $('#gFollow').setAttribute('aria-pressed', 'false'); } drawGlobe(); }
+    if (moved) { const s = 57.3 / (Math.min(G.W, G.H) * 0.47 * G.k); G.lon0 = start.lon - dx * s; G.lat0 = Math.max(-89.9, Math.min(89.9, start.lat + dy * s)); if (S.st.follow) { S.st.follow = false; $('#gFollow').setAttribute('aria-pressed', 'false'); } drawGlobe(); }
   });
   const up = e => {
     if (!pts.has(e.pointerId)) return; pts.delete(e.pointerId); if (pts.size < 2) pinch = null;
-    if (!moved && pts.size === 0) { const r = G.cv.getBoundingClientRect(), x = (e.clientX - r.left) * G.W / r.width, y = (e.clientY - r.top) * G.W / r.height; const hit = EVENTS.find(ev => ev._xy && Math.hypot(ev._xy[0] - x, ev._xy[1] - y) < 16); if (hit) pickEvent(hit.id); }
+    if (!moved && pts.size === 0) { const r = G.cv.getBoundingClientRect(), x = (e.clientX - r.left) * G.W / r.width, y = (e.clientY - r.top) * G.H / r.height; const hit = EVENTS.find(ev => ev._xy && Math.hypot(ev._xy[0] - x, ev._xy[1] - y) < 16); if (hit) pickEvent(hit.id); }
     if (pts.size === 0) start = null; else { const v = [...pts.values()][0]; start = {x:v[0], y:v[1], lon:G.lon0, lat:G.lat0}; }
   };
   G.cv.addEventListener('pointerup', up); G.cv.addEventListener('pointercancel', up);
@@ -1407,12 +1405,115 @@ function initGlobe(){
     if (h) { e.preventDefault(); drawGlobe(); }
   });
   window.addEventListener('resize', () => { if (!$('#v-globus').hidden) resizeGlobe(); });
-  // Stationen-Leiste
-  renderStations();
   // Auftrag an der Startposition
   $('#auftragGo').addEventListener('click', () => pickEvent(EVENTS[0].id === S.st.ev && S.st.day === 0 ? EVENTS[1].id : EVENTS[0].id, false, true));
   renderDay(); renderEvent();
   resizeGlobe();
+}
+
+/* ---------- Zeitleiste am unteren Rand des Globus ---------- */
+const MON = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+const MONLANG = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const WTAG = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+const TLG = {W:1000, pad:16, rows:1, hover:-1};
+const tlx = i => TLG.pad + (TLG.W - 2*TLG.pad) * (i + .5) / N;
+const tlcw = () => (TLG.W - 2*TLG.pad) / N;
+function tlLayout(){
+  // Stationen auf Reihen verteilen, damit sich nahe Termine nicht überdecken
+  const gap = 24, last = [];
+  EVENTS.forEach(e => { const x = tlx(e.i); let r = 0; while (last[r] != null && x - last[r] < gap) r++; last[r] = x; e._row = r; });
+  TLG.rows = Math.max(1, last.length);
+}
+function buildTimeline(){
+  const host = $('#tl'); if (!host || !host.clientWidth) return;
+  TLG.W = host.clientWidth; tlLayout();
+  const W = TLG.W, cw = tlcw(), narrow = W < 640;
+  const yS = 8, rowH = 24, ySun = yS + TLG.rows * rowH + 4, hSun = 16, yLeg = ySun + hSun + 3, hLeg = 14, yM = yLeg + hLeg, H = yM + 27;
+  TLG.y = {ySun, yLeg, hLeg, yM, H, yS, rowH};
+  let o = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true" font-family="Lexend, sans-serif">`;
+  // Sonne: Polarnacht und Polartag (berechnet)
+  const runs = (test) => { const r = []; let a = -1; DAYS.forEach((d, i) => { if (test(d) && a < 0) a = i; if ((!test(d) || i === N-1) && a >= 0) { r.push([a, test(d) ? i : i - 1]); a = -1; } }); return r; };
+  runs(d => d.sun < HZ).forEach(([a, b]) => { const x = tlx(a) - cw/2, w = tlx(b) + cw/2 - x; o += `<rect x="${x.toFixed(1)}" y="${ySun}" width="${w.toFixed(1)}" height="${hSun}" rx="4" fill="#1B2D52"/>`; const lab = w > 360 ? 'Polarnacht (Sonne immer unter dem Horizont, berechnet)' : w > 150 ? 'Polarnacht (berechnet)' : w > 70 ? 'Polarnacht' : ''; if (lab) o += `<text x="${(x + w/2).toFixed(1)}" y="${ySun + 12}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#fff">${lab}</text>`; });
+  runs(d => d.sunmin > HZ).forEach(([a, b]) => { const x = tlx(a) - cw/2, w = tlx(b) + cw/2 - x; o += `<rect x="${x.toFixed(1)}" y="${ySun}" width="${w.toFixed(1)}" height="${hSun}" rx="4" fill="#FFD23F" stroke="#1B1B2F" stroke-width="1"/>`; if (w > 50) o += `<text x="${(x + w/2).toFixed(1)}" y="${ySun + 12}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1B1B2F">Polartag</text>`; });
+  // Fahrtabschnitte
+  let a = 0; for (let i = 1; i <= N; i++) { if (i === N || DAYS[i].leg !== DAYS[a].leg) { const x = tlx(a) - cw/2, w = tlx(i - 1) + cw/2 - x; o += `<rect x="${x.toFixed(1)}" y="${yLeg}" width="${w.toFixed(1)}" height="${hLeg}" fill="${LEGS[DAYS[a].leg].c}"/>`; if (w > 26) o += `<text x="${(x + w/2).toFixed(1)}" y="${yLeg + 10.5}" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fff">${narrow ? DAYS[a].leg : 'Abschnitt ' + DAYS[a].leg}</text>`; a = i; } }
+  o += `<rect x="${TLG.pad - .5}" y="${yLeg}" width="${(W - 2*TLG.pad + 1).toFixed(1)}" height="${hLeg}" fill="none" stroke="#1B1B2F" stroke-width="1.5"/>`;
+  // Monate
+  DAYS.forEach((d, i) => {
+    if (d.d !== 1 && i !== 0) return;
+    let j = i + 1; while (j < N && DAYS[j].d !== 1) j++;
+    const x0 = tlx(i) - cw/2, x1 = tlx(j - 1) + cw/2;
+    if (d.d === 1) o += `<line x1="${x0.toFixed(1)}" x2="${x0.toFixed(1)}" y1="${yLeg + hLeg}" y2="${yM + (d.mo === 1 ? 20 : 7)}" stroke="#1B1B2F" stroke-width="${d.mo === 1 ? 2 : 1}"/>`;
+    const span = x1 - x0, yr = d.mo === 1 || i === 0;
+    const lab = yr && span > 62 ? MON[d.mo - 1] + ' ' + d.y : yr && span > 30 ? String(d.y) : span > 30 ? MON[d.mo - 1] : span > 11 ? MON[d.mo - 1][0] : '';
+    if (lab) o += `<text x="${((x0 + x1)/2).toFixed(1)}" y="${yM + 15}" text-anchor="middle" font-size="10.5" font-weight="${yr ? 800 : 700}" fill="${yr ? '#1B1B2F' : '#4A4A5E'}">${lab}</text>`;
+  });
+  // Hover- und Tagesmarke
+  const bub = (fill, ink) => `<g class="bub"><rect y="${yM + 1}" height="20" rx="7" fill="${fill}" stroke="#1B1B2F" stroke-width="2"/><text y="${yM + 15.5}" text-anchor="middle" font-size="12" font-weight="800" fill="${ink}"></text></g>`;
+  o += `<g id="tlCur" pointer-events="none"><line y1="4" y2="${yM}" stroke="#FF6B3D" stroke-width="3"/><circle cy="${yLeg + hLeg/2}" r="8" fill="#FF6B3D" stroke="#1B1B2F" stroke-width="2.2"/>${bub('#FF6B3D', '#1B1B2F')}</g>`;
+  // Stationen
+  EVENTS.forEach((e, n) => {
+    const x = tlx(e.i), cy = yS + e._row * rowH + 10, on = S.st.ev === e.id, seen = S.st.seen.includes(e.id);
+    o += `<g class="st" data-ev="${e.id}"><line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${cy + 10}" y2="${yLeg}" stroke="#1B1B2F" stroke-width="1" opacity=".55" pointer-events="none"/><circle cx="${x.toFixed(1)}" cy="${cy}" r="${on ? 11 : 10}" fill="${on ? '#FF6B3D' : seen ? '#1F9D45' : '#FFD23F'}" stroke="#1B1B2F" stroke-width="2"/><text x="${x.toFixed(1)}" y="${cy + 4}" text-anchor="middle" pointer-events="none" font-size="11" font-weight="800" fill="${on || seen ? '#fff' : '#1B1B2F'}">${n + 1}</text></g>`;
+  });
+  o += `<g id="tlHover" style="display:none" pointer-events="none"><line y1="${ySun - 3}" y2="${yM}" stroke="#1B1B2F" stroke-width="2" stroke-dasharray="4 3"/>${bub('#1B1B2F', '#FFFFFF')}</g>`;
+  o += '</svg>';
+  host.innerHTML = o;
+  updateTimeline();
+}
+function updateTimeline(){
+  const host = $('#tl'), c = host && host.querySelector('#tlCur'); if (!c) return;
+  const d = DAYS[S.st.day], x = tlx(d.i).toFixed(1);
+  c.querySelector('line').setAttribute('x1', x); c.querySelector('line').setAttribute('x2', x); c.querySelector('circle').setAttribute('cx', x);
+  setBubble(c, tlx(d.i), dstr(d, true));
+  host.setAttribute('aria-valuenow', d.i + 1);
+  const ev = EVENTS.find(x => x.i === d.i);
+  host.setAttribute('aria-valuetext', `Tag ${d.i + 1}: ${d.d}. ${MONLANG[d.mo - 1]} ${d.y}` + (ev ? `, Station ${EVENTS.indexOf(ev) + 1}: ${ev.title}` : ''));
+}
+function tlIndex(clientX){
+  const r = $('#tl').getBoundingClientRect(), x = (clientX - r.left) * TLG.W / r.width;
+  return Math.max(0, Math.min(N - 1, Math.floor((x - TLG.pad) / tlcw())));
+}
+function setBubble(g, x, txt, short){
+  // Datumsschild: Text setzen, Breite messen, im sichtbaren Bereich halten
+  const t = g.querySelector('.bub text'), r = g.querySelector('.bub rect');
+  t.textContent = txt; let w = t.getComputedTextLength() + 16;
+  if (short && w > TLG.W - 8) { t.textContent = short; w = t.getComputedTextLength() + 16; }
+  const cx = Math.max(4 + w/2, Math.min(TLG.W - 4 - w/2, x));
+  t.setAttribute('x', cx.toFixed(1)); r.setAttribute('x', (cx - w/2).toFixed(1)); r.setAttribute('width', w.toFixed(1));
+}
+function tlHover(i, ev){
+  const g = $('#tlHover'), c = $('#tlCur'); if (!g) return;
+  if (i < 0) { g.style.display = 'none'; c.querySelector('.bub').style.display = ''; return; }
+  const d = DAYS[i], x = tlx(i), l = g.querySelector('line');
+  l.setAttribute('x1', x); l.setAttribute('x2', x);
+  g.style.display = ''; c.querySelector('.bub').style.display = 'none';
+  const tag = `${WTAG[d.date.getUTCDay()]} ${dstr(d, true)}`;
+  if (ev) { const n = EVENTS.indexOf(ev) + 1; setBubble(g, x, `Station ${n} · ${tag} · ${ev.title}`, `Station ${n} · ${tag}`); }
+  else setBubble(g, x, `${tag} · Tag ${d.i + 1}`);
+}
+function initTimeline(){
+  const tl = $('#tl'); let drag = null;
+  tl.addEventListener('pointerdown', e => {
+    const st = e.target.closest('.st');
+    if (st) { drag = {ev:st.dataset.ev, x:e.clientX, moved:false}; } else { drag = {x:e.clientX, moved:true}; setDay(tlIndex(e.clientX), true); }
+    tl.setPointerCapture(e.pointerId); tl.focus({preventScroll:true});
+  });
+  tl.addEventListener('pointermove', e => {
+    const i = tlIndex(e.clientX);
+    if (drag) { if (Math.abs(e.clientX - drag.x) > 6) drag.moved = true; if (drag.moved) { if (i !== S.st.day) setDay(i, true); if (e.pointerType === 'mouse') tlHover(i); return; } }
+    if (e.pointerType === 'mouse') { const st = e.target.closest('.st'), ev = st && EVMAP[st.dataset.ev]; tlHover(ev ? ev.i : i, ev); }
+  });
+  const end = e => { if (drag && drag.ev && !drag.moved) pickEvent(drag.ev); drag = null; };
+  tl.addEventListener('pointerup', end); tl.addEventListener('pointercancel', () => { drag = null; });
+  tl.addEventListener('pointerleave', () => tlHover(-1));
+  tl.addEventListener('keydown', e => {
+    const m = {ArrowLeft:-1, ArrowDown:-1, ArrowRight:1, ArrowUp:1, PageDown:-7, PageUp:7}[e.key];
+    if (m) { e.preventDefault(); setDay(S.st.day + m, true); }
+    else if (e.key === 'Home') { e.preventDefault(); setDay(0, true); }
+    else if (e.key === 'End') { e.preventDefault(); setDay(N - 1, true); }
+    else if (e.key === 'Enter' || e.key === ' ') { const ev = EVENTS.find(x => x.i === S.st.day); if (ev) { e.preventDefault(); pickEvent(ev.id); } }
+  });
 }
 function togglePlay(){
   const b = $('#tPlay');
@@ -1421,18 +1522,14 @@ function togglePlay(){
   b.textContent = '❚❚ Pause';
   G.play = setInterval(() => { if (S.st.day >= N - 1 || $('#v-globus').hidden) { togglePlay(); return; } setDay(S.st.day + 1); const e = EVENTS.find(x => x.i === S.st.day); if (e) pickEvent(e.id, true); }, 160);
 }
-function renderStations(){
-  $('#stations').innerHTML = EVENTS.map((e, n) => `<button type="button" data-ev="${e.id}" class="${S.st.seen.includes(e.id) ? 'seen' : ''}" aria-current="${S.st.ev === e.id}" title="${esc(e.title)}">${n+1} · ${esc(dstr(DAYS[e.i]))}</button>`).join('');
-  $$('#stations button').forEach(b => b.addEventListener('click', () => pickEvent(b.dataset.ev)));
-}
 function pickEvent(id, keepDay, go){
   const e = EVMAP[id]; S.st.ev = id; if (go) G.auftragOff = true; if (!S.st.seen.includes(id)) S.st.seen.push(id); S.save();
   if (!keepDay) setDay(e.i); else drawGlobe();
-  renderEvent(); renderStations(); R.updateNav();
+  renderEvent(); buildTimeline(); R.updateNav();
 }
 function renderEvent(){
   const e = EVMAP[S.st.ev], host = $('#evCard');
-  if (!e) { host.innerHTML = '<h3>Stationen der Expedition</h3><p>Tippt auf eine gelbe Nummer auf dem Globus oder in der Leiste. Oder spielt die ganze Expedition ab.</p>'; return; }
+  if (!e) { host.innerHTML = '<h3>Stationen der Expedition</h3><p>Tippt auf eine gelbe Nummer auf dem Globus oder auf der Zeitleiste. Oder spielt die ganze Expedition ab. Grün sind die Stationen, die ihr schon geöffnet habt.</p>'; return; }
   const n = EVENTS.indexOf(e) + 1, d = DAYS[e.i];
   host.innerHTML = `<span class="when">Station ${n} von ${EVENTS.length} · ${dstr(d, true)} · ${latS(d.lat)}, ${lonS(d.lon)}</span>
     <h3>${esc(e.title)}</h3><p>${esc(e.text)}</p>
@@ -1458,7 +1555,7 @@ function renderDay(){
   const dv = (l, v, s, cls='') => `<div class="dval ${cls}"><span class="l">${l}</span><span class="v">${v}</span>${s ? `<span class="s">${s}</span>` : ''}</div>`;
   $('#dayCard').innerHTML = `<h3>Tag ${d.i + 1} von ${N}: ${dstr(d, true)} <span class="legchip" style="background:${L.c}">${L.name}</span></h3>
     <p class="small" style="color:var(--ink)">${esc(L.txt)}. ${moving ? '<b>Das Schiff fährt</b> (über 2 Knoten).' : (d.i >= DRIFT_START && d.i <= KEYIDX['201001'] ? 'Das Schiff treibt mit dem Eis oder liegt still.' : '')}</p>
-    <div class="dgrid">
+    <div class="dmain"><div class="dgrid">
       ${dv('Position', latS(d.lat), lonS(d.lon))}
       ${dv('Abstand zum Nordpol', nf(d.pole, 0) + ' km', 'berechnet')}
       ${dv('Geschwindigkeit', nf(d.kn, 2) + ' kn', nf(kmh, 1) + ' km/h (10-min-Mittel)')}
@@ -1471,8 +1568,8 @@ function renderDay(){
       ${dv('Rel. Feuchte', nf(d.rh, 0) + ' %', d.rh > 100 ? 'über 100 %: kritisch prüfen' : '')}
       ${dv('Sonnenhöchststand', nf(d.sun) + '°', 'mittags, berechnet; sichtbar ab −0,8°', d.sun < HZ ? 'dark' : d.sunmin > HZ ? 'light' : '')}
     </div>
-    <p class="small" style="color:var(--ink)"><b>${sunTxt}</b></p>
-    <div class="spark">${sparkTemp(d.i)}</div>
+    <div style="display:grid;gap:8px"><p class="small" style="color:var(--ink)"><b>${sunTxt}</b></p>
+    <div class="spark">${sparkTemp(d.i)}</div><span class="small">Lufttemperatur (Tagesmittel) über die ganze Expedition, orange: gewählter Tag</span></div></div>
     <span class="small">Quellen: Positionen und Geschwindigkeit aus den PANGAEA-Mastertracks (Rex 2020, 2021; Haas 2020; Kanzow 2020), Wetterwerte aus Schmithüsen (2021). Tageswerte von der Anwendung berechnet.</span>`;
 }
 /* ---------- 3 Datenlabor ---------- */

@@ -81,3 +81,7 @@ footer{text-align:center;color:var(--muted);font-size:.85rem}
 footer a{color:var(--ink);font-weight:700}
 @media (max-width:560px){.box{padding:14px}.logo{-webkit-text-stroke:1.5px var(--ink);text-shadow:3px 3px 0 var(--ink)}}
 @media (prefers-reduced-motion:reduce){.go:hover,.go:active{transform:none}}
+.prose h3{font-size:1.02rem;font-weight:800;margin:1.2em 0 .35em}
+.prose h3:first-child{margin-top:0}
+.prose ul.bk{margin:0 0 .9em;padding-left:1.2em;hyphens:auto;-webkit-hyphens:auto}
+.prose ul.bk li{margin:0 0 .35em}
